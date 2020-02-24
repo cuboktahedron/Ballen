@@ -6,12 +6,12 @@ import Filler from "./tool/Filler";
 
 const ToolBar: React.FC = () => {
   return (
-    <Grid container alignItems="center">
-      <Grid item xs={12}>
+    <Grid container alignItems="flex-start">
+      <Grid item xs={6}>
         <Pencil />
         <Filler />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={6}>
         <ColorPalettes />
       </Grid>
     </Grid>

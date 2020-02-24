@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Box, makeStyles, createStyles } from "@material-ui/core";
 import React from "react";
 import {
   amber,
@@ -15,6 +15,14 @@ import {
   yellow
 } from "@material-ui/core/colors";
 import { ColorPalette } from "./ColorPalette";
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    box: {
+      paddingTop: 8
+    }
+  })
+);
 
 export const ColorPalettes: React.FC = () => {
   const colors = [
@@ -40,9 +48,7 @@ export const ColorPalettes: React.FC = () => {
     return <ColorPalette key={index} color={color} />;
   });
 
-  return (
-    <Grid item xs={12}>
-      {palettes}
-    </Grid>
-  );
+  const classes = useStyles();
+
+  return <Box className={classes.box}>{palettes}</Box>;
 };
