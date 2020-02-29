@@ -1,8 +1,8 @@
-import { ToolState } from "../store/toolState";
-import { PENCIL, drawBeginPencil, drawEndPencil, drawMiddlePencil } from "./tool/pencil";
-import { LayersState } from "../store/layersState";
 import { Vector2D } from "ballen-core";
-import { FILLER, drawEndFiller, drawMiddleFiller, drawBeginFiller } from "./tool/filler";
+import { LayersState } from "../store/layersState";
+import { ToolsState } from "../store/toolsState";
+import { drawBeginFiller, drawEndFiller, drawMiddleFiller, FILLER } from "./tool/filler";
+import { drawBeginPencil, drawEndPencil, drawMiddlePencil, PENCIL } from "./tool/pencil";
 
 export type LayerActions = SetColorAction | SetNameAction | ToggleVisibleAction | DrawAction;
 
@@ -64,7 +64,7 @@ export type DrawAction = {
 };
 
 export type DrawBeginProps = {
-  tool: ToolState;
+  tools: ToolsState;
   layers: LayersState;
   event: {
     coords: Vector2D;
@@ -72,18 +72,18 @@ export type DrawBeginProps = {
 };
 
 export const drawBegin = (props: DrawBeginProps): DrawAction => {
-  switch (props.tool.type) {
+  switch (props.tools.selectedType) {
     case PENCIL:
       return drawBeginPencil(props);
     case FILLER:
       return drawBeginFiller(props);
     default:
-      throw new Error(`undefined tool type specified ${props.tool.type}`);
+      throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
 };
 
 export type DrawMiddleProps = {
-  tool: ToolState;
+  tools: ToolsState;
   layers: LayersState;
   event: {
     coords: Vector2D;
@@ -91,18 +91,18 @@ export type DrawMiddleProps = {
 };
 
 export const drawMiddle = (props: DrawMiddleProps): DrawAction => {
-  switch (props.tool.type) {
+  switch (props.tools.selectedType) {
     case PENCIL:
       return drawMiddlePencil(props);
     case FILLER:
       return drawMiddleFiller(props);
     default:
-      throw new Error(`undefined tool type specified ${props.tool.type}`);
+      throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
 };
 
 export type DrawEndProps = {
-  tool: ToolState;
+  tools: ToolsState;
   layers: LayersState;
   event: {
     coords: Vector2D;
@@ -110,12 +110,12 @@ export type DrawEndProps = {
 };
 
 export const drawEnd = (props: DrawEndProps): DrawAction => {
-  switch (props.tool.type) {
+  switch (props.tools.selectedType) {
     case PENCIL:
       return drawEndPencil(props);
     case FILLER:
       return drawEndFiller(props);
     default:
-      throw new Error(`undefined tool type specified ${props.tool.type}`);
+      throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
 };

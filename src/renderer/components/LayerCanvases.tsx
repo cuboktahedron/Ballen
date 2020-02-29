@@ -1,14 +1,14 @@
-import React, { useState, createRef, RefObject } from "react";
-import { RootState } from "../../store/store";
-import { useSelector, useDispatch } from "react-redux";
-import LayerCanvas, { LayerCanvasMethods } from "./LayerCanvas";
-import { useActiveLayer } from "./Layers";
-import { drawBegin, drawMiddle, drawEnd } from "../../actions/layerAction";
+import React, { createRef, RefObject, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { drawBegin, drawEnd, drawMiddle } from "../../actions/layerAction";
 import {
   setDrawStateBegin,
-  setDrawStateMiddle,
-  setDrawStateEnd
-} from "../../actions/toolAction";
+  setDrawStateEnd,
+  setDrawStateMiddle
+} from "../../actions/toolsAction";
+import { RootState } from "../../store/store";
+import LayerCanvas, { LayerCanvasMethods } from "./LayerCanvas";
+import { useActiveLayer } from "./Layers";
 
 const LayerCanvases: React.FC = () => {
   const state = useSelector((state: RootState) => state);
@@ -53,7 +53,7 @@ const LayerCanvases: React.FC = () => {
 
     dispatch(
       drawBegin({
-        tool: state.tool,
+        tools: state.tools,
         layers: state.layers,
         event: {
           coords: {
@@ -66,7 +66,7 @@ const LayerCanvases: React.FC = () => {
 
     dispatch(
       setDrawStateBegin({
-        tool: state.tool,
+        tools: state.tools,
         coords: {
           x: e.nativeEvent.offsetX,
           y: e.nativeEvent.offsetY
@@ -84,7 +84,7 @@ const LayerCanvases: React.FC = () => {
 
     dispatch(
       drawMiddle({
-        tool: state.tool,
+        tools: state.tools,
         layers: state.layers,
         event: {
           coords: {
@@ -97,7 +97,7 @@ const LayerCanvases: React.FC = () => {
 
     dispatch(
       setDrawStateMiddle({
-        tool: state.tool,
+        tools: state.tools,
         coords: {
           x: e.nativeEvent.offsetX,
           y: e.nativeEvent.offsetY
@@ -113,7 +113,7 @@ const LayerCanvases: React.FC = () => {
 
     dispatch(
       drawEnd({
-        tool: state.tool,
+        tools: state.tools,
         layers: state.layers,
         event: {
           coords: {
@@ -126,7 +126,7 @@ const LayerCanvases: React.FC = () => {
 
     dispatch(
       setDrawStateEnd({
-        tool: state.tool,
+        tools: state.tools,
         coords: {
           x: e.nativeEvent.offsetX,
           y: e.nativeEvent.offsetY

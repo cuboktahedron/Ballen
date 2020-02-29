@@ -1,13 +1,13 @@
-import { DrawBeginProps, DrawMiddleProps, DrawEndProps, DRAW, DrawAction } from "../layerAction";
+import { ToolDrawStatePencil } from "../../store/tool/pencilState";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "../layerAction";
+import Graphics from "../lib/Graphics";
 import {
   SetDrawStateBeginProps,
-  SetDrawsStateAction,
-  SET_DRAW_STATE,
+  SetDrawStateEndProps,
   SetDrawStateMiddleProps,
-  SetDrawStateEndProps
-} from "../toolAction";
-import { ToolDrawStatePencil } from "../../store/tool/pencilState";
-import Graphics from "../lib/Graphics";
+  SET_DRAW_STATE,
+  SetDrawStateAction
+} from "../toolsAction";
 
 export const PENCIL = "tool/pencil";
 
@@ -42,7 +42,7 @@ export const drawMiddlePencil = (props: DrawMiddleProps): DrawAction => {
     throw new Error("can't find activeLayer");
   }
 
-  const drawState = props.tool.drawState as ToolDrawStatePencil;
+  const drawState = props.tools.drawState as ToolDrawStatePencil;
   let prevCoords = drawState.prevCoords;
   if (prevCoords === undefined) {
     prevCoords = props.event.coords;
@@ -85,14 +85,13 @@ export const drawEndPencil = (props: DrawEndProps): DrawAction => {
 };
 
 export type SetDrawStatePencilAction = {
-  type: typeof SET_DRAW_STATE;
   payload: {
     type: typeof PENCIL;
     state: ToolDrawStatePencil;
   };
 };
 
-export const setDrawStateBeginPencil = (props: SetDrawStateBeginProps): SetDrawsStateAction => {
+export const setDrawStateBeginPencil = (props: SetDrawStateBeginProps): SetDrawStateAction => {
   const drawState: ToolDrawStatePencil = {
     prevCoords: props.coords
   };
@@ -106,8 +105,8 @@ export const setDrawStateBeginPencil = (props: SetDrawStateBeginProps): SetDraws
   };
 };
 
-export const setDrawStateMiddlePencil = (props: SetDrawStateMiddleProps): SetDrawsStateAction => {
-  const drawState = { ...(props.tool.drawState as ToolDrawStatePencil) };
+export const setDrawStateMiddlePencil = (props: SetDrawStateMiddleProps): SetDrawStateAction => {
+  const drawState = { ...(props.tools.drawState as ToolDrawStatePencil) };
   drawState.prevCoords = props.coords;
 
   return {
@@ -120,7 +119,7 @@ export const setDrawStateMiddlePencil = (props: SetDrawStateMiddleProps): SetDra
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const setDrawStateEndPencil = (_props: SetDrawStateEndProps): SetDrawsStateAction => ({
+export const setDrawStateEndPencil = (_props: SetDrawStateEndProps): SetDrawStateAction => ({
   type: SET_DRAW_STATE,
   payload: {
     type: PENCIL,

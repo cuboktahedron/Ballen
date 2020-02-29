@@ -1,11 +1,11 @@
 import { DrawBeginProps, DrawMiddleProps, DrawEndProps, DRAW, DrawAction } from "../layerAction";
 import {
   SetDrawStateBeginProps,
-  SetDrawsStateAction,
+  SetDrawStateAction,
   SET_DRAW_STATE,
   SetDrawStateMiddleProps,
   SetDrawStateEndProps
-} from "../toolAction";
+} from "../toolsAction";
 import Graphics from "../lib/Graphics";
 import { ToolDrawStateFiller } from "../../store/tool/fillerState";
 
@@ -25,7 +25,6 @@ export const drawBeginFiller = (props: DrawBeginProps): DrawAction => {
   const { x, y } = props.event.coords;
   g.fill(x, y);
 
-  // TODO: 塗りつぶしを実装
   return {
     type: DRAW,
     payload: {
@@ -79,7 +78,6 @@ export const drawEndFiller = (props: DrawEndProps): DrawAction => {
 };
 
 export type SetDrawStateFillerAction = {
-  type: typeof SET_DRAW_STATE;
   payload: {
     type: typeof FILLER;
     state: ToolDrawStateFiller;
@@ -87,7 +85,7 @@ export type SetDrawStateFillerAction = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const setDrawStateBeginFiller = (_props: SetDrawStateBeginProps): SetDrawsStateAction => {
+export const setDrawStateBeginFiller = (_props: SetDrawStateBeginProps): SetDrawStateAction => {
   return {
     type: SET_DRAW_STATE,
     payload: {
@@ -98,7 +96,7 @@ export const setDrawStateBeginFiller = (_props: SetDrawStateBeginProps): SetDraw
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const setDrawStateMiddleFiller = (_props: SetDrawStateMiddleProps): SetDrawsStateAction => {
+export const setDrawStateMiddleFiller = (_props: SetDrawStateMiddleProps): SetDrawStateAction => {
   return {
     type: SET_DRAW_STATE,
     payload: {
@@ -109,7 +107,7 @@ export const setDrawStateMiddleFiller = (_props: SetDrawStateMiddleProps): SetDr
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const setDrawStateEndFiller = (_props: SetDrawStateEndProps): SetDrawsStateAction => ({
+export const setDrawStateEndFiller = (_props: SetDrawStateEndProps): SetDrawStateAction => ({
   type: SET_DRAW_STATE,
   payload: {
     type: FILLER,

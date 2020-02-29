@@ -1,9 +1,9 @@
-import { IconButton, makeStyles, createStyles, Theme } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import { createStyles, IconButton, makeStyles, Theme } from "@material-ui/core";
 import CreateIcon from "@material-ui/icons/Create";
-import { setTool } from "../../../actions/toolAction";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PENCIL as ToolTypePencil } from "../../../actions/tool/pencil";
+import { selectTool } from "../../../actions/toolsAction";
 import { RootState } from "../../../store/store";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -19,17 +19,17 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Pencil: React.FC = () => {
-  const tool = useSelector((state: RootState) => state.tool);
+  const tools = useSelector((state: RootState) => state.tools);
   const dispatch = useDispatch();
 
   const onClickHandler = (): void => {
-    dispatch(setTool(ToolTypePencil));
+    dispatch(selectTool(ToolTypePencil));
   };
 
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
-    setSelected(tool.type === ToolTypePencil);
+    setSelected(tools.selectedType === ToolTypePencil);
   });
 
   const classes = useStyles();

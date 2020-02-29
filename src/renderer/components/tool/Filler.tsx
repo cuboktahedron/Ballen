@@ -1,10 +1,10 @@
 import { IconButton, makeStyles, createStyles, Theme } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import FormatColorFillIcon from "@material-ui/icons/FormatColorFill";
-import { setTool } from "../../../actions/toolAction";
 import { useDispatch, useSelector } from "react-redux";
 import { FILLER as ToolTypeFiller } from "../../../actions/tool/filler";
 import { RootState } from "../../../store/store";
+import { selectTool } from "../../../actions/toolsAction";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,17 +19,17 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Filler: React.FC = () => {
-  const tool = useSelector((state: RootState) => state.tool);
+  const tools = useSelector((state: RootState) => state.tools);
   const dispatch = useDispatch();
 
   const onClickHandler = (): void => {
-    dispatch(setTool(ToolTypeFiller));
+    dispatch(selectTool(ToolTypeFiller));
   };
 
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
-    setSelected(tool.type === ToolTypeFiller);
+    setSelected(tools.selectedType === ToolTypeFiller);
   });
 
   const classes = useStyles();
