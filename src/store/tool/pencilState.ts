@@ -2,12 +2,14 @@ import { Vector2D } from "ballen-core";
 
 import { PENCIL } from "../../actions/tool/pencil";
 
-export type PencilParam = {
+export type PencilProperty = {
   thickness: number;
+  positive: boolean;
 };
 
-export const InitialPencilParam: PencilParam = {
-  thickness: 1
+export const InitialPencilProperty: PencilProperty = {
+  thickness: 1,
+  positive: false
 };
 
 export type ToolDrawStatePencil = {
@@ -16,10 +18,10 @@ export type ToolDrawStatePencil = {
 
 export type ToolStatePencil = {
   type: typeof PENCIL;
-  param: PencilParam;
+  property: PencilProperty;
 };
 
 export const InitialPencilState: ToolStatePencil = {
   type: PENCIL,
-  param: InitialPencilParam
+  property: InitialPencilProperty
 };

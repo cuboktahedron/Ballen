@@ -7,7 +7,8 @@ import {
   SetDrawStateEndProps
 } from "../toolsAction";
 import Graphics from "../lib/Graphics";
-import { ToolDrawStateFiller } from "../../store/tool/fillerState";
+import { ToolDrawStateFiller, FillerProperty } from "../../store/tool/fillerState";
+import Color from "../lib/Color";
 
 export const FILLER = "tool/filler";
 
@@ -23,7 +24,13 @@ export const drawBeginFiller = (props: DrawBeginProps): DrawAction => {
 
   const g = new Graphics(newImageData);
   const { x, y } = props.event.coords;
-  g.fill(x, y);
+  const toolProperty = props.tools.properties.get(FILLER) as FillerProperty;
+
+  if (toolProperty.positive) {
+    g.fill(x, y, Color.Transparent);
+  } else {
+    g.fill(x, y, Color.Black);
+  }
 
   return {
     type: DRAW,

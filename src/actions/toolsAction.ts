@@ -1,25 +1,25 @@
 import { Vector2D } from "ballen-core";
-import { ToolsState, ToolParam } from "../store/toolsState";
+import { ToolProperty, ToolsState } from "../store/toolsState";
 import {
-  SetDrawStatePencilAction,
-  PENCIL,
-  setDrawStateBeginPencil,
-  setDrawStateMiddlePencil,
-  setDrawStateEndPencil
-} from "./tool/pencil";
-import {
-  SetDrawStateFillerAction,
   FILLER,
   setDrawStateBeginFiller,
-  setDrawStateMiddleFiller,
-  setDrawStateEndFiller
+  setDrawStateEndFiller,
+  SetDrawStateFillerAction,
+  setDrawStateMiddleFiller
 } from "./tool/filler";
+import {
+  PENCIL,
+  setDrawStateBeginPencil,
+  setDrawStateEndPencil,
+  setDrawStateMiddlePencil,
+  SetDrawStatePencilAction
+} from "./tool/pencil";
 
-export type ToolsActions = SelectToolAction | SetToolParamAction | SetDrawStateAction;
+export type ToolsActions = SelectToolAction | SetToolPropertyAction | SetDrawStateAction;
 
 export const SELECT_TOOL = "tools/selectTool";
 export const SET_DRAW_STATE = "tools/setDrawState";
-export const SET_TOOL_PARAM = "tools/setToolParam";
+export const SET_TOOL_PROPERTY = "tools/setToolProperty";
 
 export type ToolType = string;
 
@@ -37,19 +37,19 @@ export const selectTool = (type: ToolType): SelectToolAction => ({
   }
 });
 
-export type SetToolParamAction = {
-  type: typeof SET_TOOL_PARAM;
+export type SetToolPropertyAction = {
+  type: typeof SET_TOOL_PROPERTY;
   payload: {
     type: ToolType;
-    param: ToolParam;
+    property: ToolProperty;
   };
 };
 
-export const setToolParam = (type: ToolType, param: ToolParam): SetToolParamAction => ({
-  type: SET_TOOL_PARAM,
+export const setToolProperty = (type: ToolType, property: ToolProperty): SetToolPropertyAction => ({
+  type: SET_TOOL_PROPERTY,
   payload: {
     type,
-    param
+    property
   }
 });
 

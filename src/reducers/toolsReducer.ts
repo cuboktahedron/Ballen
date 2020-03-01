@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { SELECT_TOOL, SET_DRAW_STATE, SET_TOOL_PARAM, ToolsActions } from "../actions/toolsAction";
+import { SELECT_TOOL, SET_DRAW_STATE, ToolsActions, SET_TOOL_PROPERTY } from "../actions/toolsAction";
 import { InitialToolsState, ToolsState } from "../store/toolsState";
 
 export default function reducer(state: ToolsState = InitialToolsState, anyAction: AnyAction): ToolsState {
@@ -16,9 +16,9 @@ export default function reducer(state: ToolsState = InitialToolsState, anyAction
         ...state,
         drawState: { ...action.payload.state }
       };
-    case SET_TOOL_PARAM: {
+    case SET_TOOL_PROPERTY: {
       const newState = { ...state };
-      newState.params[action.payload.type] = action.payload.param;
+      newState.properties.set(action.payload.type, action.payload.property);
       return newState;
     }
     default:

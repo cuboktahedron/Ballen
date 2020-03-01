@@ -1,12 +1,13 @@
-import { ToolDrawStatePencil } from "../../store/tool/pencilState";
+import { PencilProperty, ToolDrawStatePencil } from "../../store/tool/pencilState";
 import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "../layerAction";
+import Color from "../lib/Color";
 import Graphics from "../lib/Graphics";
 import {
+  SetDrawStateAction,
   SetDrawStateBeginProps,
   SetDrawStateEndProps,
   SetDrawStateMiddleProps,
-  SET_DRAW_STATE,
-  SetDrawStateAction
+  SET_DRAW_STATE
 } from "../toolsAction";
 
 export const PENCIL = "tool/pencil";
@@ -23,7 +24,13 @@ export const drawBeginPencil = (props: DrawBeginProps): DrawAction => {
 
   const g = new Graphics(newImageData);
   const { x, y } = props.event.coords;
-  g.dot(x, y);
+  const toolProperty = props.tools.properties.get(PENCIL) as PencilProperty;
+
+  if (toolProperty.positive) {
+    g.dot(x, y, Color.Transparent);
+  } else {
+    g.dot(x, y, Color.Black);
+  }
 
   return {
     type: DRAW,
@@ -54,7 +61,13 @@ export const drawMiddlePencil = (props: DrawMiddleProps): DrawAction => {
   const g = new Graphics(newImageData);
   const { x: x1, y: y1 } = prevCoords;
   const { x: x2, y: y2 } = props.event.coords;
-  g.line(x1, y1, x2, y2);
+  const toolProperty = props.tools.properties.get(PENCIL) as PencilProperty;
+
+  if (toolProperty.positive) {
+    g.line(x1, y1, x2, y2, Color.Transparent);
+  } else {
+    g.line(x1, y1, x2, y2, Color.Black);
+  }
 
   return {
     type: DRAW,

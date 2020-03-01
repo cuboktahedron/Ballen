@@ -36,16 +36,16 @@ export default class Graphics {
     return color;
   }
 
-  dot(x: number, y: number): void {
+  dot(x: number, y: number, paintColor: Color): void {
     const data = this.imageData.data;
     const imgIndex = y * (this.imageData.width * 4) + x * 4;
-    data[imgIndex] = 0x00;
-    data[imgIndex + 1] = 0x00;
-    data[imgIndex + 2] = 0x00;
-    data[imgIndex + 3] = 0xff;
+    data[imgIndex] = paintColor.r;
+    data[imgIndex + 1] = paintColor.g;
+    data[imgIndex + 2] = paintColor.b;
+    data[imgIndex + 3] = paintColor.a;
   }
 
-  line(x1: number, y1: number, x2: number, y2: number): void {
+  line(x1: number, y1: number, x2: number, y2: number, paintColor: Color): void {
     // Bresenham's line algorithm
     const dx = x1 < x2 ? x2 - x1 : x1 - x2;
     const dy = y1 < y2 ? y2 - y1 : y1 - y2;
@@ -57,7 +57,7 @@ export default class Graphics {
     if (dx > dy) {
       let e = -dx;
       for (let i = 0; i <= dx; i++) {
-        this.dot(xx, yy);
+        this.dot(xx, yy, paintColor);
         xx += sx;
         e += 2 * dy;
         if (e >= 0) {
@@ -68,7 +68,7 @@ export default class Graphics {
     } else {
       let e = -dy;
       for (let i = 0; i <= dy; i++) {
-        this.dot(xx, yy);
+        this.dot(xx, yy, paintColor);
         yy += sy;
         e += 2 * dx;
         if (e >= 0) {
@@ -79,12 +79,11 @@ export default class Graphics {
     }
   }
 
-  fill(x: number, y: number): void {
+  fill(x: number, y: number, paintColor: Color): void {
     const fillTargetColor = this.color(x, y);
     const seedBuff: Vector2D[] = [];
-    const wall = new Color("000000");
 
-    if (Color.equalsColor(fillTargetColor, wall)) {
+    if (Color.equalsColor(fillTargetColor, paintColor)) {
       return;
     }
 
@@ -119,7 +118,7 @@ export default class Graphics {
         lx--;
       }
 
-      this.line(lx, sy, rx, sy);
+      this.line(lx, sy, rx, sy, paintColor);
 
       const scanLine = (lx: number, rx: number, y: number): void => {
         while (lx <= rx) {

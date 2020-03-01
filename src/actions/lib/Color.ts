@@ -9,9 +9,16 @@ export default class Color {
       this.r = parseInt(color.substr(0, 2), 16);
       this.g = parseInt(color.substr(2, 2), 16);
       this.b = parseInt(color.substr(4, 2), 16);
-      this.a = 0xff;
+      if (color.length === 8) {
+        this.a = parseInt(color.substr(6, 2), 16);
+      } else {
+        this.a = 0xff;
+      }
     }
   }
+
+  static Black = new Color("000000");
+  static Transparent = new Color("00000000");
 
   set r(value: number) {
     this._r = value;

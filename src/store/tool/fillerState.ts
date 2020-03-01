@@ -1,17 +1,21 @@
 import { FILLER } from "../../actions/tool/filler";
 
-export type FillerParam = {};
+export type FillerProperty = {
+  positive: boolean;
+};
 
 export type ToolDrawStateFiller = {};
 
-export const InitialFillerParam: FillerParam = {};
+export const InitialFillerProperty: FillerProperty = {
+  positive: false
+};
 
 export type ToolStateFiller = {
   type: typeof FILLER;
-  param: FillerParam;
+  property: FillerProperty;
 };
 
 export const InitialFillerState: ToolStateFiller = {
   type: FILLER,
-  param: InitialFillerParam
+  property: InitialFillerProperty
 };
