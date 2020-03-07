@@ -1,6 +1,13 @@
 import { Vector2D } from "ballen-core";
 import { ToolProperty, ToolsState } from "../store/toolsState";
 import {
+  ELLIPSE,
+  setDrawStateBeginEllipse,
+  SetDrawStateEllipseAction,
+  setDrawStateEndEllipse,
+  setDrawStateMiddleEllipse
+} from "./tool/ellipse";
+import {
   FILLER,
   setDrawStateBeginFiller,
   setDrawStateEndFiller,
@@ -71,6 +78,7 @@ export type SetDrawStateEndProps = {
 export type SetDrawStateAction = { type: typeof SET_DRAW_STATE } & (
   | SetDrawStatePencilAction
   | SetDrawStateFillerAction
+  | SetDrawStateEllipseAction
 );
 
 export const setDrawStateBegin = (props: SetDrawStateBeginProps): SetDrawStateAction => {
@@ -79,6 +87,8 @@ export const setDrawStateBegin = (props: SetDrawStateBeginProps): SetDrawStateAc
       return setDrawStateBeginPencil(props);
     case FILLER:
       return setDrawStateBeginFiller(props);
+    case ELLIPSE:
+      return setDrawStateBeginEllipse(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
@@ -90,6 +100,8 @@ export const setDrawStateMiddle = (props: SetDrawStateMiddleProps): SetDrawState
       return setDrawStateMiddlePencil(props);
     case FILLER:
       return setDrawStateMiddleFiller(props);
+    case ELLIPSE:
+      return setDrawStateMiddleEllipse(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
@@ -101,6 +113,8 @@ export const setDrawStateEnd = (props: SetDrawStateEndProps): SetDrawStateAction
       return setDrawStateEndPencil(props);
     case FILLER:
       return setDrawStateEndFiller(props);
+    case ELLIPSE:
+      return setDrawStateEndEllipse(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }

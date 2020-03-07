@@ -1,11 +1,13 @@
+import { ELLIPSE } from "../actions/tool/ellipse";
 import { FILLER } from "../actions/tool/filler";
 import { PENCIL } from "../actions/tool/pencil";
 import { ToolType } from "../actions/toolsAction";
 import { FillerProperty, InitialFillerProperty, ToolDrawStateFiller } from "./tool/fillerState";
 import { InitialPencilProperty, PencilProperty, ToolDrawStatePencil } from "./tool/pencilState";
+import { InitialEllipseProperty, ToolDrawStateEllipse, EllipseProperty } from "./tool/ellipseState";
 
-export type ToolProperty = PencilProperty | FillerProperty;
-export type ToolDrawState = ToolDrawStatePencil | ToolDrawStateFiller;
+export type ToolProperty = PencilProperty | FillerProperty | EllipseProperty;
+export type ToolDrawState = ToolDrawStatePencil | ToolDrawStateFiller | ToolDrawStateEllipse;
 
 export type ToolsState = {
   selectedType: ToolType;
@@ -18,6 +20,7 @@ export const InitialToolsState: ToolsState = {
   drawState: {},
   properties: new Map([
     [PENCIL, InitialPencilProperty],
-    [FILLER, InitialFillerProperty]
+    [FILLER, InitialFillerProperty],
+    [ELLIPSE, InitialEllipseProperty]
   ])
 };

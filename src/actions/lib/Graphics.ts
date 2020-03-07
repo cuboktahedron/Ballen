@@ -154,4 +154,60 @@ export default class Graphics {
       }
     }
   }
+
+  ellipse(x1: number, y1: number, x2: number, y2: number, paintColor: Color): void {
+    if (x1 > x2) {
+      [x1, x2] = [x2, x1];
+    }
+
+    if (y1 > y2) {
+      [y1, y2] = [y2, y1];
+    }
+
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const a = Math.round(dx / 2);
+    const b = Math.round(dy / 2);
+    if (a === 0) {
+      return;
+    }
+
+    if (b === 0) {
+      return;
+    }
+
+    const cx = x1 + a;
+    const cy = y1 + b;
+    let x = a;
+    let y = 0;
+    const a2 = a * a;
+    const b2 = b * b;
+
+    while (x >= 0) {
+      this.dot(cx + x, cy + y, paintColor);
+      this.dot(cx - x, cy + y, paintColor);
+      this.dot(cx + x, cy - y, paintColor);
+      this.dot(cx - x, cy - y, paintColor);
+
+      if (x === 0) {
+        break;
+      }
+
+      const mx = x - 1;
+      const my = y - 1;
+      const l = Math.abs((mx * mx) / a2 + (y * y) / b2 - 1);
+      const d = Math.abs((x * x) / a2 + (my * my) / b2 - 1);
+      const dl = Math.abs((mx * mx) / a2 + (my * my) / b2 - 1);
+
+      console.log(x, y, l, d, dl);
+      if (l < d && l < dl) {
+        x--;
+      } else if (l < d && l >= dl) {
+        x--;
+        y--;
+      } else {
+        y--;
+      }
+    }
+  }
 }
