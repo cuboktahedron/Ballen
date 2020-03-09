@@ -37,7 +37,6 @@ export const ToolPropertyFiller: React.FC = () => {
               defaultChecked={property.positive}
               value="secondary"
               color="primary"
-              inputProps={{ "aria-label": "secondary checkbox" }}
               onChange={handleChangePositive}
             />
           }

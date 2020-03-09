@@ -73,9 +73,9 @@ export const drawEndEllipse = (props: DrawEndProps): DrawAction => {
   const g = new Graphics(newImageData);
 
   if (toolProperty.positive) {
-    g.ellipse(x1, y1, x2, y2, Color.Transparent);
+    g.ellipse(x1, y1, x2, y2, Color.Transparent, { fill: toolProperty.fill });
   } else {
-    g.ellipse(x1, y1, x2, y2, Color.Black);
+    g.ellipse(x1, y1, x2, y2, Color.Black, { fill: toolProperty.fill });
   }
 
   return {

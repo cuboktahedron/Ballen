@@ -3,6 +3,7 @@ import { Vector2D } from "ballen-core";
 
 export type EllipseProperty = {
   positive: boolean;
+  fill: boolean;
 };
 
 export type ToolDrawStateEllipse = {
@@ -10,7 +11,8 @@ export type ToolDrawStateEllipse = {
 };
 
 export const InitialEllipseProperty: EllipseProperty = {
-  positive: false
+  positive: false,
+  fill: false
 };
 
 export type ToolStateEllipse = {

@@ -18,17 +18,20 @@ export const ToolPropertyEllipse: React.FC = () => {
     return propertyState || InitialEllipseProperty;
   });
 
-  const handleChangePositive = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    const value = e.currentTarget.checked;
-    dispatch(
-      setToolProperty(ELLIPSE, {
-        ...property,
-        positive: value
-      })
-    );
+  const handleChangeCheckBox = (
+    propName: string
+  ): ((e: React.ChangeEvent<HTMLInputElement>) => void) => {
+    return (e: React.ChangeEvent<HTMLInputElement>): void => {
+      const value = e.currentTarget.checked;
+      const props = { ...property };
+      props[propName] = value;
+
+      dispatch(setToolProperty(ELLIPSE, props));
+    };
   };
+
+  const handleChangePositive = handleChangeCheckBox("positive");
+  const handleChangeFill = handleChangeCheckBox("fill");
 
   return (
     <Box>
@@ -39,11 +42,21 @@ export const ToolPropertyEllipse: React.FC = () => {
               defaultChecked={property.positive}
               value="secondary"
               color="primary"
-              inputProps={{ "aria-label": "secondary checkbox" }}
               onChange={handleChangePositive}
             />
           }
           label="positive"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              defaultChecked={property.fill}
+              value="secondary"
+              color="primary"
+              onChange={handleChangeFill}
+            />
+          }
+          label="fill"
         />
       </FormGroup>
     </Box>

@@ -57,7 +57,6 @@ export const ToolPropertyPencil: React.FC = () => {
             <Checkbox
               defaultChecked={property.positive}
               color="primary"
-              inputProps={{ "aria-label": "secondary checkbox" }}
               onChange={handleChangePositive}
             />
           }
