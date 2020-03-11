@@ -5,6 +5,7 @@ import { ColorPalettes } from "./ColorPalettes";
 import Filler from "./tool/Filler";
 import { ToolProperty } from "./ToolProperty";
 import Ellipse from "./tool/Ellipse";
+import Rectangle from "./tool/Rectangle";
 
 const ToolBar: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const ToolBar: React.FC = () => {
           <Pencil />
           <Filler />
           <Ellipse />
+          <Rectangle />
         </Box>
         <Box>
           <ToolProperty />

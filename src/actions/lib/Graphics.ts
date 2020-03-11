@@ -223,4 +223,30 @@ export default class Graphics {
       }
     }
   }
+
+  rectangle(
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
+    paintColor: Color,
+    option: {
+      fill: boolean;
+    }
+  ): void {
+    if (y1 > y2) {
+      [y1, y2] = [y2, y1];
+    }
+
+    if (option.fill) {
+      for (let y = y1; y <= y2; y++) {
+        this.line(x1, y, x2, y, paintColor);
+      }
+    } else {
+      this.line(x1, y1, x2, y1, paintColor);
+      this.line(x1, y2, x2, y2, paintColor);
+      this.line(x1, y1, x1, y2, paintColor);
+      this.line(x2, y1, x2, y2, paintColor);
+    }
+  }
 }

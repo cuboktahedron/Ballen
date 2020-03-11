@@ -4,6 +4,7 @@ import { ToolsState } from "../store/toolsState";
 import { drawBeginFiller, drawEndFiller, drawMiddleFiller, FILLER } from "./tool/filler";
 import { drawBeginPencil, drawEndPencil, drawMiddlePencil, PENCIL } from "./tool/pencil";
 import { drawBeginEllipse, drawMiddleEllipse, drawEndEllipse, ELLIPSE } from "./tool/ellipse";
+import { drawBeginRectangle, drawMiddleRectangle, drawEndRectangle, RECTANGLE } from "./tool/rectangle";
 
 export type LayerActions = SetColorAction | SetNameAction | ToggleVisibleAction | DrawAction;
 
@@ -80,6 +81,8 @@ export const drawBegin = (props: DrawBeginProps): DrawAction => {
       return drawBeginFiller(props);
     case ELLIPSE:
       return drawBeginEllipse(props);
+    case RECTANGLE:
+      return drawBeginRectangle(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
@@ -101,6 +104,8 @@ export const drawMiddle = (props: DrawMiddleProps): DrawAction => {
       return drawMiddleFiller(props);
     case ELLIPSE:
       return drawMiddleEllipse(props);
+    case RECTANGLE:
+      return drawMiddleRectangle(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
@@ -122,6 +127,8 @@ export const drawEnd = (props: DrawEndProps): DrawAction => {
       return drawEndFiller(props);
     case ELLIPSE:
       return drawEndEllipse(props);
+    case RECTANGLE:
+      return drawEndRectangle(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }

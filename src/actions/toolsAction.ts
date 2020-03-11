@@ -21,6 +21,13 @@ import {
   setDrawStateMiddlePencil,
   SetDrawStatePencilAction
 } from "./tool/pencil";
+import {
+  RECTANGLE,
+  setDrawStateBeginRectangle,
+  SetDrawStateRectangleAction,
+  setDrawStateEndRectangle,
+  setDrawStateMiddleRectangle
+} from "./tool/rectangle";
 
 export type ToolsActions = SelectToolAction | SetToolPropertyAction | SetDrawStateAction;
 
@@ -79,6 +86,7 @@ export type SetDrawStateAction = { type: typeof SET_DRAW_STATE } & (
   | SetDrawStatePencilAction
   | SetDrawStateFillerAction
   | SetDrawStateEllipseAction
+  | SetDrawStateRectangleAction
 );
 
 export const setDrawStateBegin = (props: SetDrawStateBeginProps): SetDrawStateAction => {
@@ -89,6 +97,8 @@ export const setDrawStateBegin = (props: SetDrawStateBeginProps): SetDrawStateAc
       return setDrawStateBeginFiller(props);
     case ELLIPSE:
       return setDrawStateBeginEllipse(props);
+    case RECTANGLE:
+      return setDrawStateBeginRectangle(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
@@ -102,6 +112,8 @@ export const setDrawStateMiddle = (props: SetDrawStateMiddleProps): SetDrawState
       return setDrawStateMiddleFiller(props);
     case ELLIPSE:
       return setDrawStateMiddleEllipse(props);
+    case RECTANGLE:
+      return setDrawStateMiddleRectangle(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
@@ -115,6 +127,8 @@ export const setDrawStateEnd = (props: SetDrawStateEndProps): SetDrawStateAction
       return setDrawStateEndFiller(props);
     case ELLIPSE:
       return setDrawStateEndEllipse(props);
+    case RECTANGLE:
+      return setDrawStateEndRectangle(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }

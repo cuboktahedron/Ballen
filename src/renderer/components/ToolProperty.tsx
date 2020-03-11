@@ -4,10 +4,12 @@ import { useSelector } from "react-redux";
 import { ELLIPSE } from "../../actions/tool/ellipse";
 import { FILLER } from "../../actions/tool/filler";
 import { PENCIL } from "../../actions/tool/pencil";
+import { RECTANGLE } from "../../actions/tool/rectangle";
 import { RootState } from "../../store/store";
 import { ToolPropertyEllipse } from "./toolProperty/ToolPropertyEllipse";
 import { ToolPropertyFiller } from "./toolProperty/ToolPropertyFiller";
 import { ToolPropertyPencil } from "./toolProperty/ToolPropertyPencil";
+import { ToolPropertyRectangle } from "./toolProperty/ToolPropertyRectangle";
 
 export const ToolProperty: React.FC = () => {
   const tools = useSelector((state: RootState) => state.tools);
@@ -19,6 +21,8 @@ export const ToolProperty: React.FC = () => {
       return <ToolPropertyFiller />;
     case ELLIPSE:
       return <ToolPropertyEllipse />;
+    case RECTANGLE:
+      return <ToolPropertyRectangle />;
     default:
       return <Box />;
   }
