@@ -1,11 +1,12 @@
-import { Grid, Box } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 import React from "react";
-import Pencil from "./tool/Pencil";
 import { ColorPalettes } from "./ColorPalettes";
-import Filler from "./tool/Filler";
-import { ToolProperty } from "./ToolProperty";
 import Ellipse from "./tool/Ellipse";
+import Filler from "./tool/Filler";
+import Line from "./tool/Line";
+import Pencil from "./tool/Pencil";
 import Rectangle from "./tool/Rectangle";
+import { ToolProperty } from "./ToolProperty";
 
 const ToolBar: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const ToolBar: React.FC = () => {
           <Filler />
           <Ellipse />
           <Rectangle />
+          <Line />
         </Box>
         <Box>
           <ToolProperty />

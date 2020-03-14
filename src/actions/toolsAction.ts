@@ -15,6 +15,13 @@ import {
   setDrawStateMiddleFiller
 } from "./tool/filler";
 import {
+  LINE,
+  setDrawStateBeginLine,
+  setDrawStateEndLine,
+  SetDrawStateLineAction,
+  setDrawStateMiddleLine
+} from "./tool/line";
+import {
   PENCIL,
   setDrawStateBeginPencil,
   setDrawStateEndPencil,
@@ -24,9 +31,9 @@ import {
 import {
   RECTANGLE,
   setDrawStateBeginRectangle,
-  SetDrawStateRectangleAction,
   setDrawStateEndRectangle,
-  setDrawStateMiddleRectangle
+  setDrawStateMiddleRectangle,
+  SetDrawStateRectangleAction
 } from "./tool/rectangle";
 
 export type ToolsActions = SelectToolAction | SetToolPropertyAction | SetDrawStateAction;
@@ -87,6 +94,7 @@ export type SetDrawStateAction = { type: typeof SET_DRAW_STATE } & (
   | SetDrawStateFillerAction
   | SetDrawStateEllipseAction
   | SetDrawStateRectangleAction
+  | SetDrawStateLineAction
 );
 
 export const setDrawStateBegin = (props: SetDrawStateBeginProps): SetDrawStateAction => {
@@ -99,6 +107,8 @@ export const setDrawStateBegin = (props: SetDrawStateBeginProps): SetDrawStateAc
       return setDrawStateBeginEllipse(props);
     case RECTANGLE:
       return setDrawStateBeginRectangle(props);
+    case LINE:
+      return setDrawStateBeginLine(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
@@ -114,6 +124,8 @@ export const setDrawStateMiddle = (props: SetDrawStateMiddleProps): SetDrawState
       return setDrawStateMiddleEllipse(props);
     case RECTANGLE:
       return setDrawStateMiddleRectangle(props);
+    case LINE:
+      return setDrawStateMiddleLine(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
@@ -129,6 +141,8 @@ export const setDrawStateEnd = (props: SetDrawStateEndProps): SetDrawStateAction
       return setDrawStateEndEllipse(props);
     case RECTANGLE:
       return setDrawStateEndRectangle(props);
+    case LINE:
+      return setDrawStateEndLine(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }

@@ -1,10 +1,11 @@
 import { Vector2D } from "ballen-core";
 import { LayersState } from "../store/layersState";
 import { ToolsState } from "../store/toolsState";
+import { drawBeginEllipse, drawEndEllipse, drawMiddleEllipse, ELLIPSE } from "./tool/ellipse";
 import { drawBeginFiller, drawEndFiller, drawMiddleFiller, FILLER } from "./tool/filler";
+import { drawBeginLine, drawEndLine, drawMiddleLine, LINE } from "./tool/line";
 import { drawBeginPencil, drawEndPencil, drawMiddlePencil, PENCIL } from "./tool/pencil";
-import { drawBeginEllipse, drawMiddleEllipse, drawEndEllipse, ELLIPSE } from "./tool/ellipse";
-import { drawBeginRectangle, drawMiddleRectangle, drawEndRectangle, RECTANGLE } from "./tool/rectangle";
+import { drawBeginRectangle, drawEndRectangle, drawMiddleRectangle, RECTANGLE } from "./tool/rectangle";
 
 export type LayerActions = SetColorAction | SetNameAction | ToggleVisibleAction | DrawAction;
 
@@ -83,6 +84,8 @@ export const drawBegin = (props: DrawBeginProps): DrawAction => {
       return drawBeginEllipse(props);
     case RECTANGLE:
       return drawBeginRectangle(props);
+    case LINE:
+      return drawBeginLine(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
@@ -106,6 +109,8 @@ export const drawMiddle = (props: DrawMiddleProps): DrawAction => {
       return drawMiddleEllipse(props);
     case RECTANGLE:
       return drawMiddleRectangle(props);
+    case LINE:
+      return drawMiddleLine(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
@@ -129,6 +134,8 @@ export const drawEnd = (props: DrawEndProps): DrawAction => {
       return drawEndEllipse(props);
     case RECTANGLE:
       return drawEndRectangle(props);
+    case LINE:
+      return drawEndLine(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
