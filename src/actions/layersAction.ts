@@ -55,7 +55,7 @@ export type DrawAction = {
   payload: {
     layer: {
       layerId: number;
-      imageData: ImageData;
+      imageData: ImageData | null;
     };
   };
 };

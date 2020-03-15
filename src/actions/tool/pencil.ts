@@ -141,15 +141,12 @@ export const setDrawStateEndPencil = (_props: SetDrawStateEndProps): SetDrawStat
   }
 });
 
-export const drawGuidePencil = (props: DrawGuideProps): DrawGuideAction => {
-  const guideLayer = props.guideLayer;
-  const newImageData = new ImageData(guideLayer.imageData.width, guideLayer.imageData.height);
-
-  // TODO: 何もしないアクションを渡す
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const drawGuidePencil = (_props: DrawGuideProps): DrawGuideAction => {
   return {
     type: DRAW_GUIDE,
     payload: {
-      imageData: newImageData
+      imageData: null
     }
   };
 };

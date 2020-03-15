@@ -53,14 +53,12 @@ export const drawMiddleFiller = (props: DrawMiddleProps): DrawAction => {
   const newImageData = new ImageData(activeLayer.imageData.width, activeLayer.imageData.height);
   newImageData.data.set(activeLayer.imageData.data);
 
-  // TODO: 何もしないアクションを返す
-
   return {
     type: DRAW,
     payload: {
       layer: {
         layerId: activeLayer.id,
-        imageData: newImageData
+        imageData: null
       }
     }
   };
@@ -72,14 +70,12 @@ export const drawEndFiller = (props: DrawEndProps): DrawAction => {
     throw new Error("can't find activeLayer");
   }
 
-  // TODO: 何もしないアクションを返す
-
   return {
     type: DRAW,
     payload: {
       layer: {
         layerId: activeLayer.id,
-        imageData: activeLayer.imageData
+        imageData: null
       }
     }
   };
@@ -123,15 +119,12 @@ export const setDrawStateEndFiller = (_props: SetDrawStateEndProps): SetDrawStat
   }
 });
 
-export const drawGuideFiller = (props: DrawGuideProps): DrawGuideAction => {
-  const guideLayer = props.guideLayer;
-  const newImageData = new ImageData(guideLayer.imageData.width, guideLayer.imageData.height);
-
-  // TODO: 何もしないアクションを渡す
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const drawGuideFiller = (_props: DrawGuideProps): DrawGuideAction => {
   return {
     type: DRAW_GUIDE,
     payload: {
-      imageData: newImageData
+      imageData: null
     }
   };
 };

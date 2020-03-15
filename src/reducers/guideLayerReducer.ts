@@ -15,10 +15,14 @@ export default function reducer(
         imageData: new ImageData(state.imageData.width, state.imageData.height)
       };
     case DRAW_GUIDE:
-      return {
-        ...state,
-        imageData: action.payload.imageData
-      };
+      if (action.payload.imageData == null) {
+        return state;
+      } else {
+        return {
+          ...state,
+          imageData: action.payload.imageData
+        };
+      }
     default:
       return state;
   }

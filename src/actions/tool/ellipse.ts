@@ -20,14 +20,13 @@ export const drawBeginEllipse = (props: DrawBeginProps): DrawAction => {
   if (activeLayer === undefined) {
     throw new Error("can't find activeLayer");
   }
-  // TODO: 何もしないアクションを返す
 
   return {
     type: DRAW,
     payload: {
       layer: {
         layerId: activeLayer.id,
-        imageData: activeLayer.imageData
+        imageData: null
       }
     }
   };
@@ -39,14 +38,12 @@ export const drawMiddleEllipse = (props: DrawMiddleProps): DrawAction => {
     throw new Error("can't find activeLayer");
   }
 
-  // TODO: 何もしないアクションを返す
-
   return {
     type: DRAW,
     payload: {
       layer: {
         layerId: activeLayer.id,
-        imageData: activeLayer.imageData
+        imageData: null
       }
     }
   };

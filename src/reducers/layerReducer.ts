@@ -17,10 +17,14 @@ export default function reducer(state: LayerState, anyAction: AnyAction): LayerS
         visible: !state.visible
       };
     case DRAW:
-      return {
-        ...state,
-        imageData: action.payload.imageData
-      };
+      if (action.payload.imageData === null) {
+        return state;
+      } else {
+        return {
+          ...state,
+          imageData: action.payload.imageData
+        };
+      }
     default:
       return state;
   }

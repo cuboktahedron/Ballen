@@ -24,7 +24,7 @@ export const clear = (): ClearAction => {
 export type DrawGuideAction = {
   type: typeof DRAW_GUIDE;
   payload: {
-    imageData: ImageData;
+    imageData: ImageData | null;
   };
 };
 
