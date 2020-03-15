@@ -35,8 +35,11 @@ import {
   setDrawStateMiddleRectangle,
   SetDrawStateRectangleAction
 } from "./tool/rectangle";
+import Color from "./lib/Color";
 
 export type ToolsActions = SelectToolAction | SetToolPropertyAction | SetDrawStateAction;
+
+export const GUIDE_LINE_COLOR = new Color("ff000080");
 
 export const SELECT_TOOL = "tools/selectTool";
 export const SET_DRAW_STATE = "tools/setDrawState";

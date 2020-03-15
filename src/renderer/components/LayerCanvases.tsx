@@ -1,6 +1,6 @@
 import React, { createRef, RefObject, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { drawBegin, drawEnd, drawMiddle } from "../../actions/layerAction";
+import { drawBegin, drawEnd, drawMiddle } from "../../actions/layersAction";
 import {
   setDrawStateBegin,
   setDrawStateEnd,
@@ -9,10 +9,12 @@ import {
 import { RootState } from "../../store/store";
 import LayerCanvas, { LayerCanvasMethods } from "./LayerCanvas";
 import { useActiveLayer } from "./Layers";
+import GuideLayerCanvas from "./GuideLayerCanvas";
 
 const LayerCanvases: React.FC = () => {
   const state = useSelector((state: RootState) => state);
-  const layers = useSelector((state: RootState) => state.layers);
+  const layers = state.layers;
+  const guideLayer = state.guideLayer;
   const activeLayer = useActiveLayer(layers);
   const dispatch = useDispatch();
 
@@ -141,6 +143,7 @@ const LayerCanvases: React.FC = () => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
+      <GuideLayerCanvas zIndex={layers.layers.length + 1} {...guideLayer} />
       {layerCanvasItems}
     </div>
   );

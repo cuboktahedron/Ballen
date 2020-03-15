@@ -15,10 +15,10 @@ const Layers: React.FC = () => {
     return state.layers;
   });
 
-  const layerItems = layers.layers.map((layer, key) => {
+  const layerItems = layers.layers.map(layer => {
     return (
       <Layer
-        key={key}
+        key={layer.id}
         active={layer.id === layers.activeLayerId}
         {...layer}
       ></Layer>

@@ -1,14 +1,15 @@
-import { DrawBeginProps, DrawMiddleProps, DrawEndProps, DRAW, DrawAction } from "../layerAction";
-import {
-  SetDrawStateBeginProps,
-  SetDrawStateAction,
-  SET_DRAW_STATE,
-  SetDrawStateMiddleProps,
-  SetDrawStateEndProps
-} from "../toolsAction";
-import Graphics from "../lib/Graphics";
-import { ToolDrawStateFiller, FillerProperty } from "../../store/tool/fillerState";
+import { FillerProperty, ToolDrawStateFiller } from "../../store/tool/fillerState";
+import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "../guideLayerAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "../layersAction";
 import Color from "../lib/Color";
+import Graphics from "../lib/Graphics";
+import {
+  SetDrawStateAction,
+  SetDrawStateBeginProps,
+  SetDrawStateEndProps,
+  SetDrawStateMiddleProps,
+  SET_DRAW_STATE
+} from "../toolsAction";
 
 export const FILLER = "tool/filler";
 
@@ -121,3 +122,16 @@ export const setDrawStateEndFiller = (_props: SetDrawStateEndProps): SetDrawStat
     state: {}
   }
 });
+
+export const drawGuideFiller = (props: DrawGuideProps): DrawGuideAction => {
+  const guideLayer = props.guideLayer;
+  const newImageData = new ImageData(guideLayer.imageData.width, guideLayer.imageData.height);
+
+  // TODO: 何もしないアクションを渡す
+  return {
+    type: DRAW_GUIDE,
+    payload: {
+      imageData: newImageData
+    }
+  };
+};

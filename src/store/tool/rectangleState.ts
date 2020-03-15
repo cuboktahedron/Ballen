@@ -8,6 +8,7 @@ export type RectangleProperty = {
 
 export type ToolDrawStateRectangle = {
   origin?: Vector2D;
+  to?: Vector2D;
 };
 
 export const InitialRectangleProperty: RectangleProperty = {

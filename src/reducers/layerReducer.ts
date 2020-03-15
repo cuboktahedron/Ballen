@@ -19,7 +19,7 @@ export default function reducer(state: LayerState, anyAction: AnyAction): LayerS
     case DRAW:
       return {
         ...state,
-        imageData: action.payload.layer.imageData
+        imageData: action.payload.imageData
       };
     default:
       return state;

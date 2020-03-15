@@ -1,14 +1,16 @@
-import { DrawBeginProps, DrawMiddleProps, DrawEndProps, DRAW, DrawAction } from "../layerAction";
-import {
-  SetDrawStateBeginProps,
-  SetDrawStateAction,
-  SET_DRAW_STATE,
-  SetDrawStateMiddleProps,
-  SetDrawStateEndProps
-} from "../toolsAction";
-import Graphics from "../lib/Graphics";
-import { ToolDrawStateLine, LineProperty } from "../../store/tool/lineState";
+import { LineProperty, ToolDrawStateLine } from "../../store/tool/lineState";
+import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "../guideLayerAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "../layersAction";
 import Color from "../lib/Color";
+import Graphics from "../lib/Graphics";
+import {
+  SetDrawStateAction,
+  SetDrawStateBeginProps,
+  SetDrawStateEndProps,
+  SetDrawStateMiddleProps,
+  SET_DRAW_STATE,
+  GUIDE_LINE_COLOR
+} from "../toolsAction";
 
 export const LINE = "tool/line";
 
@@ -117,7 +119,10 @@ export const setDrawStateMiddleLine = (props: SetDrawStateMiddleProps): SetDrawS
     type: SET_DRAW_STATE,
     payload: {
       type: LINE,
-      state
+      state: {
+        ...state,
+        to: props.coords
+      }
     }
   };
 };
@@ -130,3 +135,25 @@ export const setDrawStateEndLine = (_props: SetDrawStateEndProps): SetDrawStateA
     state: {}
   }
 });
+
+export const drawGuideLine = (props: DrawGuideProps): DrawGuideAction => {
+  const guideLayer = props.guideLayer;
+  const newImageData = new ImageData(guideLayer.imageData.width, guideLayer.imageData.height);
+
+  const drawState = props.tools.drawState as ToolDrawStateLine;
+
+  const g = new Graphics(newImageData);
+
+  const origin = drawState.origin;
+  const to = drawState.to;
+  if (origin !== undefined && to !== undefined) {
+    g.line(origin.x, origin.y, to.x, to.y, GUIDE_LINE_COLOR);
+  }
+
+  return {
+    type: DRAW_GUIDE,
+    payload: {
+      imageData: newImageData
+    }
+  };
+};

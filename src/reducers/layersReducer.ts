@@ -1,8 +1,8 @@
 import { AnyAction } from "redux";
-import { LayersActions, SET_ACTIVE_LAYER, ADD_LAYER, DELETE_LAYER } from "../actions/layersAction";
+import { LayersActions, SET_ACTIVE_LAYER, ADD_LAYER, DELETE_LAYER, DRAW } from "../actions/layersAction";
+import { DRAW as LAYER_DRAW } from "../actions/layerAction";
 import { InitialLayersState, LayersState } from "../store/layersState";
 import layerReducer from "./layerReducer";
-import { TOGGLE_VISIBLE } from "../actions/layerAction";
 
 export default function reducer(state: LayersState = InitialLayersState, anyAction: AnyAction): LayersState {
   const action = anyAction as LayersActions;
@@ -38,15 +38,22 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
         return { ...state, activeLayerId };
       }
     }
-    case TOGGLE_VISIBLE:
+    case DRAW: {
       state.layers = state.layers.map(layer => {
-        if (layer.id === action.payload.layerId) {
-          return layerReducer(layer, action);
+        if (layer.id === state.activeLayerId) {
+          return layerReducer(layer, {
+            type: LAYER_DRAW,
+            payload: {
+              imageData: action.payload.layer.imageData
+            }
+          });
         } else {
           return layer;
         }
       });
+
       return { ...state };
+    }
     default: {
       let stateChanged = false;
       state.layers = state.layers.map(layer => {

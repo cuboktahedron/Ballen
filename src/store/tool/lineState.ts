@@ -8,6 +8,7 @@ export type LineProperty = {
 
 export type ToolDrawStateLine = {
   origin?: Vector2D;
+  to?: Vector2D;
 };
 
 export const InitialLineProperty: LineProperty = {

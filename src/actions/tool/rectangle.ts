@@ -1,14 +1,16 @@
-import { DrawBeginProps, DrawMiddleProps, DrawEndProps, DRAW, DrawAction } from "../layerAction";
-import {
-  SetDrawStateBeginProps,
-  SetDrawStateAction,
-  SET_DRAW_STATE,
-  SetDrawStateMiddleProps,
-  SetDrawStateEndProps
-} from "../toolsAction";
-import Graphics from "../lib/Graphics";
-import { ToolDrawStateRectangle, RectangleProperty } from "../../store/tool/rectangleState";
+import { RectangleProperty, ToolDrawStateRectangle } from "../../store/tool/rectangleState";
+import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "../guideLayerAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "../layersAction";
 import Color from "../lib/Color";
+import Graphics from "../lib/Graphics";
+import {
+  SetDrawStateAction,
+  SetDrawStateBeginProps,
+  SetDrawStateEndProps,
+  SetDrawStateMiddleProps,
+  SET_DRAW_STATE,
+  GUIDE_LINE_COLOR
+} from "../toolsAction";
 
 export const RECTANGLE = "tool/rectangle";
 
@@ -117,7 +119,10 @@ export const setDrawStateMiddleRectangle = (props: SetDrawStateMiddleProps): Set
     type: SET_DRAW_STATE,
     payload: {
       type: RECTANGLE,
-      state
+      state: {
+        ...state,
+        to: props.coords
+      }
     }
   };
 };
@@ -130,3 +135,26 @@ export const setDrawStateEndRectangle = (_props: SetDrawStateEndProps): SetDrawS
     state: {}
   }
 });
+
+export const drawGuideRectangle = (props: DrawGuideProps): DrawGuideAction => {
+  const guideLayer = props.guideLayer;
+  const newImageData = new ImageData(guideLayer.imageData.width, guideLayer.imageData.height);
+
+  const drawState = props.tools.drawState as ToolDrawStateRectangle;
+  const toolProperty = props.tools.properties.get(RECTANGLE) as RectangleProperty;
+
+  const g = new Graphics(newImageData);
+
+  const origin = drawState.origin;
+  const to = drawState.to;
+  if (origin !== undefined && to !== undefined) {
+    g.rectangle(origin.x, origin.y, to.x, to.y, GUIDE_LINE_COLOR, { fill: toolProperty.fill });
+  }
+
+  return {
+    type: DRAW_GUIDE,
+    payload: {
+      imageData: newImageData
+    }
+  };
+};

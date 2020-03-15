@@ -1,14 +1,16 @@
-import { DrawBeginProps, DrawMiddleProps, DrawEndProps, DRAW, DrawAction } from "../layerAction";
-import {
-  SetDrawStateBeginProps,
-  SetDrawStateAction,
-  SET_DRAW_STATE,
-  SetDrawStateMiddleProps,
-  SetDrawStateEndProps
-} from "../toolsAction";
-import Graphics from "../lib/Graphics";
-import { ToolDrawStateEllipse, EllipseProperty } from "../../store/tool/ellipseState";
+import { EllipseProperty, ToolDrawStateEllipse } from "../../store/tool/ellipseState";
+import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "../guideLayerAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "../layersAction";
 import Color from "../lib/Color";
+import Graphics from "../lib/Graphics";
+import {
+  SetDrawStateAction,
+  SetDrawStateBeginProps,
+  SetDrawStateEndProps,
+  SetDrawStateMiddleProps,
+  SET_DRAW_STATE,
+  GUIDE_LINE_COLOR
+} from "../toolsAction";
 
 export const ELLIPSE = "tool/ellipse";
 
@@ -117,7 +119,10 @@ export const setDrawStateMiddleEllipse = (props: SetDrawStateMiddleProps): SetDr
     type: SET_DRAW_STATE,
     payload: {
       type: ELLIPSE,
-      state
+      state: {
+        ...state,
+        to: props.coords
+      }
     }
   };
 };
@@ -130,3 +135,27 @@ export const setDrawStateEndEllipse = (_props: SetDrawStateEndProps): SetDrawSta
     state: {}
   }
 });
+
+export const drawGuideEllipse = (props: DrawGuideProps): DrawGuideAction => {
+  const guideLayer = props.guideLayer;
+  const newImageData = new ImageData(guideLayer.imageData.width, guideLayer.imageData.height);
+
+  const drawState = props.tools.drawState as ToolDrawStateEllipse;
+  const toolProperty = props.tools.properties.get(ELLIPSE) as EllipseProperty;
+
+  const g = new Graphics(newImageData);
+
+  const origin = drawState.origin;
+  const to = drawState.to;
+  if (origin !== undefined && to !== undefined) {
+    g.rectangle(origin.x, origin.y, to.x, to.y, GUIDE_LINE_COLOR, { fill: false });
+    g.ellipse(origin.x, origin.y, to.x, to.y, GUIDE_LINE_COLOR, { fill: toolProperty.fill });
+  }
+
+  return {
+    type: DRAW_GUIDE,
+    payload: {
+      imageData: newImageData
+    }
+  };
+};

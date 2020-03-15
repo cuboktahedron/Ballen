@@ -1,5 +1,6 @@
 import { PencilProperty, ToolDrawStatePencil } from "../../store/tool/pencilState";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "../layerAction";
+import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "../guideLayerAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "../layersAction";
 import Color from "../lib/Color";
 import Graphics from "../lib/Graphics";
 import {
@@ -139,3 +140,16 @@ export const setDrawStateEndPencil = (_props: SetDrawStateEndProps): SetDrawStat
     state: {}
   }
 });
+
+export const drawGuidePencil = (props: DrawGuideProps): DrawGuideAction => {
+  const guideLayer = props.guideLayer;
+  const newImageData = new ImageData(guideLayer.imageData.width, guideLayer.imageData.height);
+
+  // TODO: 何もしないアクションを渡す
+  return {
+    type: DRAW_GUIDE,
+    payload: {
+      imageData: newImageData
+    }
+  };
+};

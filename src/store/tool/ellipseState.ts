@@ -8,6 +8,7 @@ export type EllipseProperty = {
 
 export type ToolDrawStateEllipse = {
   origin?: Vector2D;
+  to?: Vector2D;
 };
 
 export const InitialEllipseProperty: EllipseProperty = {
