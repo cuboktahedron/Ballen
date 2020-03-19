@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { LayerState } from "../../store/layerState";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { setActiveLayer } from "../../actions/layersAction";
+import { changeActiveLayer } from "../../actions/layersAction";
 import { toggleVisible } from "../../actions/layerAction";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -44,7 +44,7 @@ const Layer: React.FC<LayerProps> = props => {
   const dispatch = useDispatch();
 
   const selectLayerHandler = (): void => {
-    dispatch(setActiveLayer(props.id));
+    dispatch(changeActiveLayer(props.id));
   };
 
   const toggleVisibleHandler = (): void => {

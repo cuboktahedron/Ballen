@@ -4,11 +4,11 @@ import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from 
 import Color from "../lib/Color";
 import Graphics from "../lib/Graphics";
 import {
-  SetDrawStateAction,
-  SetDrawStateBeginProps,
-  SetDrawStateEndProps,
-  SetDrawStateMiddleProps,
-  SET_DRAW_STATE,
+  ChangeDrawStateAction,
+  ChangeDrawStateBeginProps,
+  ChangeDrawStateEndProps,
+  ChangeDrawStateMiddleProps,
+  CHANGE_DRAW_STATE,
   GUIDE_LINE_COLOR
 } from "../toolsAction";
 
@@ -88,20 +88,20 @@ export const drawEndLine = (props: DrawEndProps): DrawAction => {
   };
 };
 
-export type SetDrawStateLineAction = {
+export type ChangeDrawStateLineAction = {
   payload: {
     type: typeof LINE;
     state: ToolDrawStateLine;
   };
 };
 
-export const setDrawStateBeginLine = (props: SetDrawStateBeginProps): SetDrawStateAction => {
+export const changeDrawStateBeginLine = (props: ChangeDrawStateBeginProps): ChangeDrawStateAction => {
   const drawState: ToolDrawStateLine = {
     origin: props.coords
   };
 
   return {
-    type: SET_DRAW_STATE,
+    type: CHANGE_DRAW_STATE,
     payload: {
       type: LINE,
       state: drawState
@@ -109,11 +109,11 @@ export const setDrawStateBeginLine = (props: SetDrawStateBeginProps): SetDrawSta
   };
 };
 
-export const setDrawStateMiddleLine = (props: SetDrawStateMiddleProps): SetDrawStateAction => {
+export const changeDrawStateMiddleLine = (props: ChangeDrawStateMiddleProps): ChangeDrawStateAction => {
   const state = props.tools.drawState as ToolDrawStateLine;
 
   return {
-    type: SET_DRAW_STATE,
+    type: CHANGE_DRAW_STATE,
     payload: {
       type: LINE,
       state: {
@@ -125,8 +125,8 @@ export const setDrawStateMiddleLine = (props: SetDrawStateMiddleProps): SetDrawS
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const setDrawStateEndLine = (_props: SetDrawStateEndProps): SetDrawStateAction => ({
-  type: SET_DRAW_STATE,
+export const changeDrawStateEndLine = (_props: ChangeDrawStateEndProps): ChangeDrawStateAction => ({
+  type: CHANGE_DRAW_STATE,
   payload: {
     type: LINE,
     state: {}

@@ -4,7 +4,7 @@ import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import { useDispatch, useSelector } from "react-redux";
 import { ELLIPSE as ToolTypeEllipse } from "../../../actions/tool/ellipse";
 import { RootState } from "../../../store/store";
-import { selectTool } from "../../../actions/toolsAction";
+import { changeTool } from "../../../actions/toolsAction";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +23,7 @@ const Ellipse: React.FC = () => {
   const dispatch = useDispatch();
 
   const onClickHandler = (): void => {
-    dispatch(selectTool(ToolTypeEllipse));
+    dispatch(changeTool(ToolTypeEllipse));
   };
 
   const [selected, setSelected] = useState(false);

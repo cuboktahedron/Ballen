@@ -7,22 +7,22 @@ import { drawBeginLine, drawEndLine, drawMiddleLine, LINE } from "./tool/line";
 import { drawBeginPencil, drawEndPencil, drawMiddlePencil, PENCIL } from "./tool/pencil";
 import { drawBeginRectangle, drawEndRectangle, drawMiddleRectangle, RECTANGLE } from "./tool/rectangle";
 
-export type LayersActions = SetActiveLayerAction | AddLayerAction | DeleteLayerAction | DrawAction;
+export type LayersActions = ChangeActiveLayerAction | AddLayerAction | DeleteLayerAction | DrawAction;
 
-export const SET_ACTIVE_LAYER = "layers/setActiveLayer";
+export const CHANGE_ACTIVE_LAYER = "layers/changeActiveLayer";
 export const ADD_LAYER = "layers/addLayer";
 export const DELETE_LAYER = "layers/deleteLayer";
 export const DRAW = "layers/draw";
 
-export type SetActiveLayerAction = {
-  type: typeof SET_ACTIVE_LAYER;
+export type ChangeActiveLayerAction = {
+  type: typeof CHANGE_ACTIVE_LAYER;
   payload: {
     layerId: number;
   };
 };
 
-export const setActiveLayer = (layerId: number): SetActiveLayerAction => ({
-  type: SET_ACTIVE_LAYER,
+export const changeActiveLayer = (layerId: number): ChangeActiveLayerAction => ({
+  type: CHANGE_ACTIVE_LAYER,
   payload: {
     layerId
   }

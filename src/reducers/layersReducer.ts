@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { LayersActions, SET_ACTIVE_LAYER, ADD_LAYER, DELETE_LAYER, DRAW } from "../actions/layersAction";
+import { LayersActions, CHANGE_ACTIVE_LAYER, ADD_LAYER, DELETE_LAYER, DRAW } from "../actions/layersAction";
 import { DRAW as LAYER_DRAW } from "../actions/layerAction";
 import { InitialLayersState, LayersState } from "../store/layersState";
 import layerReducer from "./layerReducer";
@@ -8,7 +8,7 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
   const action = anyAction as LayersActions;
 
   switch (action.type) {
-    case SET_ACTIVE_LAYER:
+    case CHANGE_ACTIVE_LAYER:
       return { ...state, activeLayerId: action.payload.layerId };
     case ADD_LAYER:
       state.layerIdSequence++;

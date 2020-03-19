@@ -4,7 +4,7 @@ import FormatColorFillIcon from "@material-ui/icons/FormatColorFill";
 import { useDispatch, useSelector } from "react-redux";
 import { FILLER as ToolTypeFiller } from "../../../actions/tool/filler";
 import { RootState } from "../../../store/store";
-import { selectTool } from "../../../actions/toolsAction";
+import { changeTool } from "../../../actions/toolsAction";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +23,7 @@ const Filler: React.FC = () => {
   const dispatch = useDispatch();
 
   const onClickHandler = (): void => {
-    dispatch(selectTool(ToolTypeFiller));
+    dispatch(changeTool(ToolTypeFiller));
   };
 
   const [selected, setSelected] = useState(false);

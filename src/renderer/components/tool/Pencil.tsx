@@ -3,7 +3,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PENCIL as ToolTypePencil } from "../../../actions/tool/pencil";
-import { selectTool } from "../../../actions/toolsAction";
+import { changeTool } from "../../../actions/toolsAction";
 import { RootState } from "../../../store/store";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,7 +23,7 @@ const Pencil: React.FC = () => {
   const dispatch = useDispatch();
 
   const onClickHandler = (): void => {
-    dispatch(selectTool(ToolTypePencil));
+    dispatch(changeTool(ToolTypePencil));
   };
 
   const [selected, setSelected] = useState(false);

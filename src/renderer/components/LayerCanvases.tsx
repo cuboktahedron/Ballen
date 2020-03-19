@@ -2,9 +2,9 @@ import React, { createRef, RefObject, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { drawBegin, drawEnd, drawMiddle } from "../../actions/layersAction";
 import {
-  setDrawStateBegin,
-  setDrawStateEnd,
-  setDrawStateMiddle
+  changeDrawStateBegin,
+  changeDrawStateEnd,
+  changeDrawStateMiddle
 } from "../../actions/toolsAction";
 import { RootState } from "../../store/store";
 import LayerCanvas, { LayerCanvasMethods } from "./LayerCanvas";
@@ -67,7 +67,7 @@ const LayerCanvases: React.FC = () => {
     );
 
     dispatch(
-      setDrawStateBegin({
+      changeDrawStateBegin({
         tools: state.tools,
         coords: {
           x: e.nativeEvent.offsetX,
@@ -98,7 +98,7 @@ const LayerCanvases: React.FC = () => {
     );
 
     dispatch(
-      setDrawStateMiddle({
+      changeDrawStateMiddle({
         tools: state.tools,
         coords: {
           x: e.nativeEvent.offsetX,
@@ -127,7 +127,7 @@ const LayerCanvases: React.FC = () => {
     );
 
     dispatch(
-      setDrawStateEnd({
+      changeDrawStateEnd({
         tools: state.tools,
         coords: {
           x: e.nativeEvent.offsetX,

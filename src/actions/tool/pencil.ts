@@ -4,11 +4,11 @@ import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from 
 import Color from "../lib/Color";
 import Graphics from "../lib/Graphics";
 import {
-  SetDrawStateAction,
-  SetDrawStateBeginProps,
-  SetDrawStateEndProps,
-  SetDrawStateMiddleProps,
-  SET_DRAW_STATE
+  ChangeDrawStateAction,
+  ChangeDrawStateBeginProps,
+  ChangeDrawStateEndProps,
+  ChangeDrawStateMiddleProps,
+  CHANGE_DRAW_STATE
 } from "../toolsAction";
 
 export const PENCIL = "tool/pencil";
@@ -98,20 +98,20 @@ export const drawEndPencil = (props: DrawEndProps): DrawAction => {
   };
 };
 
-export type SetDrawStatePencilAction = {
+export type ChangeDrawStatePencilAction = {
   payload: {
     type: typeof PENCIL;
     state: ToolDrawStatePencil;
   };
 };
 
-export const setDrawStateBeginPencil = (props: SetDrawStateBeginProps): SetDrawStateAction => {
+export const changeDrawStateBeginPencil = (props: ChangeDrawStateBeginProps): ChangeDrawStateAction => {
   const drawState: ToolDrawStatePencil = {
     prevCoords: props.coords
   };
 
   return {
-    type: SET_DRAW_STATE,
+    type: CHANGE_DRAW_STATE,
     payload: {
       type: PENCIL,
       state: drawState
@@ -119,12 +119,12 @@ export const setDrawStateBeginPencil = (props: SetDrawStateBeginProps): SetDrawS
   };
 };
 
-export const setDrawStateMiddlePencil = (props: SetDrawStateMiddleProps): SetDrawStateAction => {
+export const changeDrawStateMiddlePencil = (props: ChangeDrawStateMiddleProps): ChangeDrawStateAction => {
   const drawState = { ...(props.tools.drawState as ToolDrawStatePencil) };
   drawState.prevCoords = props.coords;
 
   return {
-    type: SET_DRAW_STATE,
+    type: CHANGE_DRAW_STATE,
     payload: {
       type: PENCIL,
       state: drawState
@@ -133,8 +133,8 @@ export const setDrawStateMiddlePencil = (props: SetDrawStateMiddleProps): SetDra
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const setDrawStateEndPencil = (_props: SetDrawStateEndProps): SetDrawStateAction => ({
-  type: SET_DRAW_STATE,
+export const changeDrawStateEndPencil = (_props: ChangeDrawStateEndProps): ChangeDrawStateAction => ({
+  type: CHANGE_DRAW_STATE,
   payload: {
     type: PENCIL,
     state: {}

@@ -1,7 +1,7 @@
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setToolProperty } from "../../../actions/toolsAction";
+import { changeToolProperty } from "../../../actions/toolsAction";
 import { ELLIPSE } from "../../../actions/tool/ellipse";
 import { RootState } from "../../../store/store";
 import {
@@ -26,7 +26,7 @@ export const ToolPropertyEllipse: React.FC = () => {
       const props = { ...property };
       props[propName] = value;
 
-      dispatch(setToolProperty(ELLIPSE, props));
+      dispatch(changeToolProperty(ELLIPSE, props));
     };
   };
 

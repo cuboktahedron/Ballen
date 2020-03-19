@@ -4,11 +4,11 @@ import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from 
 import Color from "../lib/Color";
 import Graphics from "../lib/Graphics";
 import {
-  SetDrawStateAction,
-  SetDrawStateBeginProps,
-  SetDrawStateEndProps,
-  SetDrawStateMiddleProps,
-  SET_DRAW_STATE
+  ChangeDrawStateAction,
+  ChangeDrawStateBeginProps,
+  ChangeDrawStateEndProps,
+  ChangeDrawStateMiddleProps,
+  CHANGE_DRAW_STATE
 } from "../toolsAction";
 
 export const FILLER = "tool/filler";
@@ -81,7 +81,7 @@ export const drawEndFiller = (props: DrawEndProps): DrawAction => {
   };
 };
 
-export type SetDrawStateFillerAction = {
+export type ChangeDrawStateFillerAction = {
   payload: {
     type: typeof FILLER;
     state: ToolDrawStateFiller;
@@ -89,9 +89,9 @@ export type SetDrawStateFillerAction = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const setDrawStateBeginFiller = (_props: SetDrawStateBeginProps): SetDrawStateAction => {
+export const changeDrawStateBeginFiller = (_props: ChangeDrawStateBeginProps): ChangeDrawStateAction => {
   return {
-    type: SET_DRAW_STATE,
+    type: CHANGE_DRAW_STATE,
     payload: {
       type: FILLER,
       state: {}
@@ -100,9 +100,9 @@ export const setDrawStateBeginFiller = (_props: SetDrawStateBeginProps): SetDraw
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const setDrawStateMiddleFiller = (_props: SetDrawStateMiddleProps): SetDrawStateAction => {
+export const changeDrawStateMiddleFiller = (_props: ChangeDrawStateMiddleProps): ChangeDrawStateAction => {
   return {
-    type: SET_DRAW_STATE,
+    type: CHANGE_DRAW_STATE,
     payload: {
       type: FILLER,
       state: {}
@@ -111,8 +111,8 @@ export const setDrawStateMiddleFiller = (_props: SetDrawStateMiddleProps): SetDr
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const setDrawStateEndFiller = (_props: SetDrawStateEndProps): SetDrawStateAction => ({
-  type: SET_DRAW_STATE,
+export const changeDrawStateEndFiller = (_props: ChangeDrawStateEndProps): ChangeDrawStateAction => ({
+  type: CHANGE_DRAW_STATE,
   payload: {
     type: FILLER,
     state: {}

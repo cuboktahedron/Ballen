@@ -4,11 +4,11 @@ import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from 
 import Color from "../lib/Color";
 import Graphics from "../lib/Graphics";
 import {
-  SetDrawStateAction,
-  SetDrawStateBeginProps,
-  SetDrawStateEndProps,
-  SetDrawStateMiddleProps,
-  SET_DRAW_STATE,
+  ChangeDrawStateAction,
+  ChangeDrawStateBeginProps,
+  ChangeDrawStateEndProps,
+  ChangeDrawStateMiddleProps,
+  CHANGE_DRAW_STATE,
   GUIDE_LINE_COLOR
 } from "../toolsAction";
 
@@ -88,20 +88,20 @@ export const drawEndEllipse = (props: DrawEndProps): DrawAction => {
   };
 };
 
-export type SetDrawStateEllipseAction = {
+export type ChangeDrawStateEllipseAction = {
   payload: {
     type: typeof ELLIPSE;
     state: ToolDrawStateEllipse;
   };
 };
 
-export const setDrawStateBeginEllipse = (props: SetDrawStateBeginProps): SetDrawStateAction => {
+export const changeDrawStateBeginEllipse = (props: ChangeDrawStateBeginProps): ChangeDrawStateAction => {
   const drawState: ToolDrawStateEllipse = {
     origin: props.coords
   };
 
   return {
-    type: SET_DRAW_STATE,
+    type: CHANGE_DRAW_STATE,
     payload: {
       type: ELLIPSE,
       state: drawState
@@ -109,11 +109,11 @@ export const setDrawStateBeginEllipse = (props: SetDrawStateBeginProps): SetDraw
   };
 };
 
-export const setDrawStateMiddleEllipse = (props: SetDrawStateMiddleProps): SetDrawStateAction => {
+export const changeDrawStateMiddleEllipse = (props: ChangeDrawStateMiddleProps): ChangeDrawStateAction => {
   const state = props.tools.drawState as ToolDrawStateEllipse;
 
   return {
-    type: SET_DRAW_STATE,
+    type: CHANGE_DRAW_STATE,
     payload: {
       type: ELLIPSE,
       state: {
@@ -125,8 +125,8 @@ export const setDrawStateMiddleEllipse = (props: SetDrawStateMiddleProps): SetDr
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const setDrawStateEndEllipse = (_props: SetDrawStateEndProps): SetDrawStateAction => ({
-  type: SET_DRAW_STATE,
+export const changeDrawStateEndEllipse = (_props: ChangeDrawStateEndProps): ChangeDrawStateAction => ({
+  type: CHANGE_DRAW_STATE,
   payload: {
     type: ELLIPSE,
     state: {}

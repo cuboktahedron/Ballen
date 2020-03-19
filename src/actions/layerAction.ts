@@ -1,33 +1,33 @@
-export type LayerActions = SetColorAction | SetNameAction | ToggleVisibleAction | DrawAction;
+export type LayerActions = ChangeColorAction | ChangeNameAction | ToggleVisibleAction | DrawAction;
 
-export const SET_COLOR = "layer/setColor";
-export const SET_NAME = "layer/setName";
+export const CHANGE_COLOR = "layer/changeColor";
+export const CHANGE_NAME = "layer/changeName";
 export const TOGGLE_VISIBLE = "layer/toggleVisible";
 export const DRAW = "layer/draw";
 
-export type SetColorAction = {
-  type: typeof SET_COLOR;
+export type ChangeColorAction = {
+  type: typeof CHANGE_COLOR;
   payload: {
     color: string;
   };
 };
 
-export const setColor = (color: string): SetColorAction => ({
-  type: SET_COLOR,
+export const changeColor = (color: string): ChangeColorAction => ({
+  type: CHANGE_COLOR,
   payload: {
     color
   }
 });
 
-export type SetNameAction = {
-  type: typeof SET_NAME;
+export type ChangeNameAction = {
+  type: typeof CHANGE_NAME;
   payload: {
     name: string;
   };
 };
 
-export const setName = (name: string): SetNameAction => ({
-  type: SET_NAME,
+export const changeName = (name: string): ChangeNameAction => ({
+  type: CHANGE_NAME,
   payload: {
     name
   }

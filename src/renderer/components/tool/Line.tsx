@@ -3,7 +3,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LINE as ToolTypeLine } from "../../../actions/tool/line";
-import { selectTool } from "../../../actions/toolsAction";
+import { changeTool } from "../../../actions/toolsAction";
 import { RootState } from "../../../store/store";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,7 +23,7 @@ const Line: React.FC = () => {
   const dispatch = useDispatch();
 
   const onClickHandler = (): void => {
-    dispatch(selectTool(ToolTypeLine));
+    dispatch(changeTool(ToolTypeLine));
   };
 
   const [selected, setSelected] = useState(false);

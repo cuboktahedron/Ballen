@@ -1,7 +1,7 @@
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setToolProperty } from "../../../actions/toolsAction";
+import { changeToolProperty } from "../../../actions/toolsAction";
 import { FILLER } from "../../../actions/tool/filler";
 import { RootState } from "../../../store/store";
 import {
@@ -21,7 +21,7 @@ export const ToolPropertyFiller: React.FC = () => {
   ): void => {
     const value = e.currentTarget.checked;
     dispatch(
-      setToolProperty(FILLER, {
+      changeToolProperty(FILLER, {
         ...property,
         positive: value
       })

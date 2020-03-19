@@ -8,7 +8,7 @@ import {
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PENCIL } from "../../../actions/tool/pencil";
-import { setToolProperty } from "../../../actions/toolsAction";
+import { changeToolProperty } from "../../../actions/toolsAction";
 import { RootState } from "../../../store/store";
 import {
   InitialPencilProperty,
@@ -29,7 +29,7 @@ export const ToolPropertyPencil: React.FC = () => {
     const value = e.currentTarget.value;
     if (validateNumber(value, { required: true, min: 1, max: 100 })) {
       dispatch(
-        setToolProperty(PENCIL, {
+        changeToolProperty(PENCIL, {
           ...property,
           thickness: parseInt(value)
         })
@@ -42,7 +42,7 @@ export const ToolPropertyPencil: React.FC = () => {
   ): void => {
     const value = e.currentTarget.checked;
     dispatch(
-      setToolProperty(PENCIL, {
+      changeToolProperty(PENCIL, {
         ...property,
         positive: value
       })

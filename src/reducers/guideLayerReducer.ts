@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { GuideLayerState, InitialGuideLayerState } from "../store/guideLayerState";
-import { GuideLayerActions, DRAW_GUIDE, CLEAR } from "../actions/guideLayerAction";
+import { GuideLayerActions, DRAW_GUIDE, CLEAR_GUIDE } from "../actions/guideLayerAction";
 
 export default function reducer(
   state: GuideLayerState = InitialGuideLayerState,
@@ -9,7 +9,7 @@ export default function reducer(
   const action = anyAction as GuideLayerActions;
 
   switch (action.type) {
-    case CLEAR:
+    case CLEAR_GUIDE:
       return {
         ...state,
         imageData: new ImageData(state.imageData.width, state.imageData.height)

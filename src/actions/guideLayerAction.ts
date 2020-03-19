@@ -6,18 +6,18 @@ import { RECTANGLE, drawGuideRectangle } from "./tool/rectangle";
 import { LINE, drawGuideLine } from "./tool/line";
 import { GuideLayerState } from "../store/guideLayerState";
 
-export type GuideLayerActions = ClearAction | DrawGuideAction;
+export type GuideLayerActions = ClearGuideAction | DrawGuideAction;
 
-export const CLEAR = "guideLayer/clear";
-export const DRAW_GUIDE = "guideLayer/draw";
+export const CLEAR_GUIDE = "guideLayer/clearGuide";
+export const DRAW_GUIDE = "guideLayer/drawGuide";
 
-export type ClearAction = {
-  type: typeof CLEAR;
+export type ClearGuideAction = {
+  type: typeof CLEAR_GUIDE;
 };
 
-export const clear = (): ClearAction => {
+export const clearGuide = (): ClearGuideAction => {
   return {
-    type: CLEAR
+    type: CLEAR_GUIDE
   };
 };
 

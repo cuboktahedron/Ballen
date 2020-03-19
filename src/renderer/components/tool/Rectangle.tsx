@@ -4,7 +4,7 @@ import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import { useDispatch, useSelector } from "react-redux";
 import { RECTANGLE as ToolTypeRectangle } from "../../../actions/tool/rectangle";
 import { RootState } from "../../../store/store";
-import { selectTool } from "../../../actions/toolsAction";
+import { changeTool } from "../../../actions/toolsAction";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +23,7 @@ const Rectangle: React.FC = () => {
   const dispatch = useDispatch();
 
   const onClickHandler = (): void => {
-    dispatch(selectTool(ToolTypeRectangle));
+    dispatch(changeTool(ToolTypeRectangle));
   };
 
   const [selected, setSelected] = useState(false);
