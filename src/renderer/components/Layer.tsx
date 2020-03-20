@@ -1,20 +1,22 @@
-import React from "react";
 import {
+  Box,
+  Button,
+  createStyles,
+  IconButton,
   ListItem,
   ListItemText,
-  Box,
-  createStyles,
   makeStyles,
-  Button,
-  Theme,
-  IconButton
+  Theme
 } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { LayerState } from "../../store/layerState";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { changeActiveLayer } from "../../actions/layersAction";
+import React, { SyntheticEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleVisible } from "../../actions/layerAction";
+import { changeActiveLayer } from "../../actions/layersAction";
+import { LayerState } from "../../store/layerState";
+import { RootState } from "../../store/store";
+import { useActiveLayer } from "./Layers";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,14 +43,23 @@ type LayerProps = LayerState & {
 };
 
 const Layer: React.FC<LayerProps> = props => {
+  const layers = useSelector((state: RootState) => state.layers);
+  const activeLayer = useActiveLayer(layers);
   const dispatch = useDispatch();
 
   const selectLayerHandler = (): void => {
+    if (props.id === activeLayer.id) {
+      return;
+    }
+
     dispatch(changeActiveLayer(props.id));
   };
 
-  const toggleVisibleHandler = (): void => {
+  const toggleVisibleHandler = (e: SyntheticEvent<HTMLElement>): void => {
+    selectLayerHandler();
     dispatch(toggleVisible(props.id));
+
+    e.stopPropagation();
   };
 
   const classes = useStyles(props);
