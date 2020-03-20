@@ -1,11 +1,11 @@
+import { createStyles, makeStyles } from "@material-ui/core";
 import React, {
-  useRef,
-  useImperativeHandle,
   forwardRef,
-  useEffect
+  useEffect,
+  useImperativeHandle,
+  useRef
 } from "react";
 import { LayerState } from "../../store/layerState";
-import { createStyles, makeStyles } from "@material-ui/core";
 
 type LayerCanvasProps = LayerState & {
   zIndex: number;
@@ -58,6 +58,10 @@ const LayerCanvasBase: React.RefForwardingComponent<
   useEffect(() => {
     const ctx = getContext();
     ctx.putImageData(props.imageData, 0, 0);
+
+    ctx.globalCompositeOperation = "source-in";
+    ctx.fillStyle = props.color + "80";
+    ctx.fillRect(0, 0, props.imageData.width, props.imageData.height);
   }, [props]);
 
   const classes = useStyles(props);
