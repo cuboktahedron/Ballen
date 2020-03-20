@@ -1,7 +1,6 @@
 import React from "react";
 import Layer from "./Layer";
 import { List, IconButton } from "@material-ui/core";
-import { LayersState } from "../../store/layersState";
 import { LayerState } from "../../store/layerState";
 import { RootState } from "../../store/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -49,7 +48,9 @@ const Layers: React.FC = () => {
   );
 };
 
-export const useActiveLayer = (layers: LayersState): LayerState => {
+export const useActiveLayer = (): LayerState => {
+  const layers = useSelector((state: RootState) => state.layers);
+
   const activeLayer = layers.layers.find(
     layer => layer.id === layers.activeLayerId
   );

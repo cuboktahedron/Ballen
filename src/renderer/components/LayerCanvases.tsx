@@ -15,7 +15,7 @@ const LayerCanvases: React.FC = () => {
   const state = useSelector((state: RootState) => state);
   const layers = state.layers;
   const guideLayer = state.guideLayer;
-  const activeLayer = useActiveLayer(layers);
+  const activeLayer = useActiveLayer();
   const dispatch = useDispatch();
 
   const refs: { [key: number]: RefObject<LayerCanvasMethods> } = {};
