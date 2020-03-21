@@ -4,6 +4,10 @@ import { Vector2D } from "ballen-core";
 export default class Graphics {
   constructor(private imageData: ImageData) {}
 
+  isInBounds(x: number, y: number): boolean {
+    return 0 <= x && x < this.imageData.width && 0 <= y && y < this.imageData.height;
+  }
+
   indexOf(x: number, y: number): number {
     return y * (this.imageData.width * 4) + x * 4;
   }
@@ -20,10 +24,6 @@ export default class Graphics {
   }
 
   color(x: number, y: number): Color | null {
-    if (x >= this.imageData.width || y >= this.imageData.height) {
-      return null;
-    }
-
     const data = this.imageData.data;
 
     const index = this.colorIndexOf(x, y);
@@ -37,12 +37,16 @@ export default class Graphics {
   }
 
   dot(x: number, y: number, paintColor: Color): void {
+    if (!this.isInBounds(x, y)) {
+      return;
+    }
+
     const data = this.imageData.data;
-    const imgIndex = y * (this.imageData.width * 4) + x * 4;
-    data[imgIndex] = paintColor.r;
-    data[imgIndex + 1] = paintColor.g;
-    data[imgIndex + 2] = paintColor.b;
-    data[imgIndex + 3] = paintColor.a;
+    const index = this.colorIndexOf(x, y);
+    data[index.ri] = paintColor.r;
+    data[index.gi] = paintColor.g;
+    data[index.bi] = paintColor.b;
+    data[index.ai] = paintColor.a;
   }
 
   line(x1: number, y1: number, x2: number, y2: number, paintColor: Color): void {
@@ -80,6 +84,10 @@ export default class Graphics {
   }
 
   fill(x: number, y: number, paintColor: Color): void {
+    if (!this.isInBounds(x, y)) {
+      return;
+    }
+
     const fillTargetColor = this.color(x, y);
     const seedBuff: Vector2D[] = [];
 
@@ -102,7 +110,7 @@ export default class Graphics {
         continue;
       }
 
-      while (rx < this.imageData.width) {
+      while (rx < this.imageData.width - 1) {
         // search right boundary
         if (!Color.equalsColor(this.color(rx + 1, sy), fillTargetColor)) {
           break;

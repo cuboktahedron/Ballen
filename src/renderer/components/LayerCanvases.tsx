@@ -1,4 +1,10 @@
-import React, { createRef, RefObject, useState } from "react";
+import React, {
+  createRef,
+  RefObject,
+  useState,
+  useRef,
+  useEffect
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { drawBegin, drawEnd, drawMiddle } from "../../actions/layersAction";
 import {
@@ -18,6 +24,7 @@ const LayerCanvases: React.FC = () => {
   const activeLayer = useActiveLayer();
   const dispatch = useDispatch();
 
+  const divRef = useRef<HTMLDivElement>(null);
   const refs: { [key: number]: RefObject<LayerCanvasMethods> } = {};
   layers.layers.forEach(layer => {
     refs[layer.id] = createRef<LayerCanvasMethods>();
@@ -37,9 +44,7 @@ const LayerCanvases: React.FC = () => {
     );
   });
 
-  const [beginPoint, setBeginPoint] = useState<{ x: number; y: number } | null>(
-    null
-  );
+  const [mouseDowned, setMouseDowned] = useState<boolean>(false);
 
   const handleMouseDown = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -48,10 +53,17 @@ const LayerCanvases: React.FC = () => {
       return;
     }
 
-    setBeginPoint({
-      x: e.nativeEvent.offsetX,
-      y: e.nativeEvent.offsetY
-    });
+    setMouseDowned(true);
+
+    dispatch(
+      changeDrawStateBegin({
+        tools: state.tools,
+        coords: {
+          x: e.nativeEvent.offsetX,
+          y: e.nativeEvent.offsetY
+        }
+      })
+    );
 
     dispatch(
       drawBegin({
@@ -65,84 +77,90 @@ const LayerCanvases: React.FC = () => {
         }
       })
     );
-
-    dispatch(
-      changeDrawStateBegin({
-        tools: state.tools,
-        coords: {
-          x: e.nativeEvent.offsetX,
-          y: e.nativeEvent.offsetY
-        }
-      })
-    );
   };
 
-  const handleMouseMove = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ): void => {
-    if (beginPoint == null) {
+  const handleMouseMove = (e: MouseEvent): void => {
+    if (!mouseDowned) {
       return;
     }
+
+    console.log("handleMouseMove");
+
+    const div = divRef.current;
+    if (div === null) {
+      return;
+    }
+    const rect = div.getBoundingClientRect();
+    const coords = {
+      x: e.pageX - rect.left,
+      y: e.pageY - rect.top
+    };
+
+    dispatch(
+      changeDrawStateMiddle({
+        tools: state.tools,
+        coords
+      })
+    );
 
     dispatch(
       drawMiddle({
         tools: state.tools,
         layers: state.layers,
         event: {
-          coords: {
-            x: e.nativeEvent.offsetX,
-            y: e.nativeEvent.offsetY
-          }
-        }
-      })
-    );
-
-    dispatch(
-      changeDrawStateMiddle({
-        tools: state.tools,
-        coords: {
-          x: e.nativeEvent.offsetX,
-          y: e.nativeEvent.offsetY
+          coords
         }
       })
     );
   };
 
-  const handleMouseUp = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ): void => {
-    setBeginPoint(null);
+  const handleMouseUp = (e: MouseEvent): void => {
+    setMouseDowned(false);
+
+    const div = divRef.current;
+    if (div === null) {
+      return;
+    }
+    const rect = div.getBoundingClientRect();
+    const coords = {
+      x: e.pageX - rect.left,
+      y: e.pageY - rect.top
+    };
+
+    dispatch(
+      changeDrawStateEnd({
+        tools: state.tools,
+        coords
+      })
+    );
 
     dispatch(
       drawEnd({
         tools: state.tools,
         layers: state.layers,
         event: {
-          coords: {
-            x: e.nativeEvent.offsetX,
-            y: e.nativeEvent.offsetY
-          }
-        }
-      })
-    );
-
-    dispatch(
-      changeDrawStateEnd({
-        tools: state.tools,
-        coords: {
-          x: e.nativeEvent.offsetX,
-          y: e.nativeEvent.offsetY
+          coords
         }
       })
     );
   };
 
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    return (): void => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [handleMouseMove]);
+
+  useEffect(() => {
+    window.addEventListener("mouseup", handleMouseUp);
+    return (): void => {
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [handleMouseUp]);
+
   return (
-    <div
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-    >
+    <div ref={divRef} onMouseDown={handleMouseDown}>
       <GuideLayerCanvas zIndex={layers.layers.length + 1} {...guideLayer} />
       {layerCanvasItems}
     </div>
