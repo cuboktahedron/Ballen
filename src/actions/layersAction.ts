@@ -1,6 +1,6 @@
 import { Vector2D } from "ballen-core";
-import { LayersState } from "../store/layersState";
-import { ToolsState } from "../store/toolsState";
+import { LayersState } from "stores/layersState";
+import { ToolsState } from "stores/toolsState";
 import { drawBeginEllipse, drawEndEllipse, drawMiddleEllipse, ELLIPSE } from "./tool/ellipse";
 import { drawBeginFiller, drawEndFiller, drawMiddleFiller, FILLER } from "./tool/filler";
 import { drawBeginLine, drawEndLine, drawMiddleLine, LINE } from "./tool/line";

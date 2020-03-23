@@ -1,7 +1,7 @@
+import { ADD_LAYER, CHANGE_ACTIVE_LAYER, DELETE_LAYER, DRAW, LayersActions } from "actions/layersAction";
 import { AnyAction } from "redux";
-import { LayersActions, CHANGE_ACTIVE_LAYER, ADD_LAYER, DELETE_LAYER, DRAW } from "../actions/layersAction";
-import { DRAW as LAYER_DRAW } from "../actions/layerAction";
-import { InitialLayersState, LayersState } from "../store/layersState";
+import { InitialLayersState, LayersState } from "stores/layersState";
+import { DRAW as LAYER_DRAW } from "actions/layerAction";
 import layerReducer from "./layerReducer";
 
 export default function reducer(state: LayersState = InitialLayersState, anyAction: AnyAction): LayersState {

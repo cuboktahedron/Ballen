@@ -1,6 +1,6 @@
+import { CHANGE_DRAW_STATE, CHANGE_TOOL, CHANGE_TOOL_PROPERTY, ToolsActions } from "actions/toolsAction";
 import { AnyAction } from "redux";
-import { CHANGE_TOOL, CHANGE_DRAW_STATE, ToolsActions, CHANGE_TOOL_PROPERTY } from "../actions/toolsAction";
-import { InitialToolsState, ToolsState } from "../store/toolsState";
+import { InitialToolsState, ToolsState } from "stores/toolsState";
 
 export default function reducer(state: ToolsState = InitialToolsState, anyAction: AnyAction): ToolsState {
   const action = anyAction as ToolsActions;

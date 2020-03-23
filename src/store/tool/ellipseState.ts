@@ -1,4 +1,4 @@
-import { ELLIPSE } from "../../actions/tool/ellipse";
+import { ELLIPSE } from "actions/tool/ellipse";
 import { Vector2D } from "ballen-core";
 
 export type EllipseProperty = {

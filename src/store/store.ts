@@ -1,6 +1,6 @@
+import Reducers from "reducers/rootReducer";
 import { applyMiddleware, createStore } from "redux";
 import logger from "redux-logger";
-import Reducers from "../reducers/rootReducer";
 import { BuildState } from "./buildState";
 import { GuideLayerState } from "./guideLayerState";
 import { LayersState } from "./layersState";

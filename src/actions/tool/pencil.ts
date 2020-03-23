@@ -1,15 +1,15 @@
-import { PencilProperty, ToolDrawStatePencil } from "../../store/tool/pencilState";
-import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "../guideLayerAction";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "../layersAction";
-import Color from "../lib/Color";
-import Graphics from "../lib/Graphics";
+import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layersAction";
+import Color from "actions/lib/Color";
+import Graphics from "actions/lib/Graphics";
 import {
   ChangeDrawStateAction,
   ChangeDrawStateBeginProps,
   ChangeDrawStateEndProps,
   ChangeDrawStateMiddleProps,
   CHANGE_DRAW_STATE
-} from "../toolsAction";
+} from "actions/toolsAction";
+import { PencilProperty, ToolDrawStatePencil } from "stores/tool/pencilState";
 
 export const PENCIL = "tool/pencil";
 

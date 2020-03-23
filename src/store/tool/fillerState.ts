@@ -1,4 +1,4 @@
-import { FILLER } from "../../actions/tool/filler";
+import { FILLER } from "actions/tool/filler";
 
 export type FillerProperty = {
   positive: boolean;

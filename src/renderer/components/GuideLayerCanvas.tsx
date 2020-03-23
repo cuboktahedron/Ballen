@@ -1,9 +1,9 @@
 import { createStyles, makeStyles } from "@material-ui/core";
+import { drawGuide } from "actions/guideLayerAction";
 import React, { useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { GuideLayerState } from "../../store/guideLayerState";
-import { RootState } from "../../store/store";
-import { drawGuide } from "../../actions/guideLayerAction";
+import { useDispatch, useSelector } from "react-redux";
+import { GuideLayerState } from "stores/guideLayerState";
+import { RootState } from "stores/store";
 
 type GuideLayerCanvasProps = GuideLayerState & {
   zIndex: number;

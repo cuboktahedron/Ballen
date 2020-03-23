@@ -1,7 +1,7 @@
-import { Button, makeStyles, createStyles } from "@material-ui/core";
+import { Button, createStyles, makeStyles } from "@material-ui/core";
+import { changeColor } from "actions/layerAction";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { changeColor } from "../../actions/layerAction";
 
 const useStyles = makeStyles(() =>
   createStyles({

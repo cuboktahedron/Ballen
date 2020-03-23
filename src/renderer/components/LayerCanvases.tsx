@@ -1,21 +1,21 @@
-import React, {
-  createRef,
-  RefObject,
-  useState,
-  useRef,
-  useEffect
-} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { drawBegin, drawEnd, drawMiddle } from "../../actions/layersAction";
+import { drawBegin, drawEnd, drawMiddle } from "actions/layersAction";
 import {
   changeDrawStateBegin,
   changeDrawStateEnd,
   changeDrawStateMiddle
-} from "../../actions/toolsAction";
-import { RootState } from "../../store/store";
+} from "actions/toolsAction";
+import React, {
+  createRef,
+  RefObject,
+  useEffect,
+  useRef,
+  useState
+} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "stores/store";
+import GuideLayerCanvas from "./GuideLayerCanvas";
 import LayerCanvas, { LayerCanvasMethods } from "./LayerCanvas";
 import { useActiveLayer } from "./Layers";
-import GuideLayerCanvas from "./GuideLayerCanvas";
 
 const LayerCanvases: React.FC = () => {
   const state = useSelector((state: RootState) => state);

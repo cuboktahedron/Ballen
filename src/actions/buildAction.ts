@@ -1,4 +1,4 @@
-import { LayersState } from "../store/layersState";
+import { LayersState } from "stores/layersState";
 import Color from "./lib/Color";
 
 export type BuildActions = BuildAction;

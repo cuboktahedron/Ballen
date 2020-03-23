@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from "react";
 import { createStyles, makeStyles } from "@material-ui/core";
-import { RootState } from "../../store/store";
-import { useSelector, useDispatch } from "react-redux";
-import { build as doBuild } from "../../actions/buildAction";
+import { build as doBuild } from "actions/buildAction";
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "stores/store";
 
 const useStyles = makeStyles(() =>
   createStyles({

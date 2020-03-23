@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import layers from "./layersReducer";
-import tools from "./toolsReducer";
+import { RootState } from "stores/store";
 import build from "./buildReducer";
 import guideLayer from "./guideLayerReducer";
-import { RootState } from "../store/store";
+import layers from "./layersReducer";
+import tools from "./toolsReducer";
 
 const rootReducer = combineReducers<RootState>({
   layers,

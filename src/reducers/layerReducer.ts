@@ -1,6 +1,6 @@
+import { CHANGE_COLOR, DRAW, LayerActions, TOGGLE_VISIBLE } from "actions/layerAction";
 import { AnyAction } from "redux";
-import { LayerActions, CHANGE_COLOR, TOGGLE_VISIBLE, DRAW } from "../actions/layerAction";
-import { LayerState } from "../store/layerState";
+import { LayerState } from "stores/layerState";
 
 export default function reducer(state: LayerState, anyAction: AnyAction): LayerState {
   const action = anyAction as LayerActions;

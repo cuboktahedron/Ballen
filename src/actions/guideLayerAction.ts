@@ -1,10 +1,10 @@
-import { ToolsState } from "../store/toolsState";
-import { PENCIL, drawGuidePencil } from "./tool/pencil";
-import { FILLER, drawGuideFiller } from "./tool/filler";
-import { ELLIPSE, drawGuideEllipse } from "./tool/ellipse";
-import { RECTANGLE, drawGuideRectangle } from "./tool/rectangle";
-import { LINE, drawGuideLine } from "./tool/line";
-import { GuideLayerState } from "../store/guideLayerState";
+import { GuideLayerState } from "stores/guideLayerState";
+import { ToolsState } from "stores/toolsState";
+import { drawGuideEllipse, ELLIPSE } from "./tool/ellipse";
+import { drawGuideFiller, FILLER } from "./tool/filler";
+import { drawGuideLine, LINE } from "./tool/line";
+import { drawGuidePencil, PENCIL } from "./tool/pencil";
+import { drawGuideRectangle, RECTANGLE } from "./tool/rectangle";
 
 export type GuideLayerActions = ClearGuideAction | DrawGuideAction;
 

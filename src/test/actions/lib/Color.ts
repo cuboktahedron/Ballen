@@ -1,4 +1,4 @@
-import Color from "../../../actions/lib/Color";
+import Color from "actions/lib/Color";
 
 describe("Color", () => {
   describe("Constructor", () => {

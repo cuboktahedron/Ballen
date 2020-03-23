@@ -44,6 +44,12 @@ const renderer = {
     path: path.resolve(__dirname, "dist", "scripts")
   },
   resolve: {
+    alias: {
+      actions: path.resolve(__dirname, "src", "actions"),
+      reducers: path.resolve(__dirname, "src", "reducers"),
+      renderer: path.resolve(__dirname, "src", "renderer"),
+      stores: path.resolve(__dirname, "src", "store")
+    },
     extensions: [".json", ".js", ".jsx", ".css", ".ts", ".tsx"]
   },
   module: {

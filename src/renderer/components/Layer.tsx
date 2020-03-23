@@ -10,11 +10,11 @@ import {
 } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import { toggleVisible } from "actions/layerAction";
+import { changeActiveLayer } from "actions/layersAction";
 import React, { SyntheticEvent } from "react";
 import { useDispatch } from "react-redux";
-import { toggleVisible } from "../../actions/layerAction";
-import { changeActiveLayer } from "../../actions/layersAction";
-import { LayerState } from "../../store/layerState";
+import { LayerState } from "stores/layerState";
 import { useActiveLayer } from "./Layers";
 
 const useStyles = makeStyles((theme: Theme) =>

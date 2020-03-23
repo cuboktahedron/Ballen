@@ -1,12 +1,12 @@
 import { Box } from "@material-ui/core";
+import { ELLIPSE } from "actions/tool/ellipse";
+import { FILLER } from "actions/tool/filler";
+import { LINE } from "actions/tool/line";
+import { PENCIL } from "actions/tool/pencil";
+import { RECTANGLE } from "actions/tool/rectangle";
 import React from "react";
 import { useSelector } from "react-redux";
-import { ELLIPSE } from "../../actions/tool/ellipse";
-import { FILLER } from "../../actions/tool/filler";
-import { LINE } from "../../actions/tool/line";
-import { PENCIL } from "../../actions/tool/pencil";
-import { RECTANGLE } from "../../actions/tool/rectangle";
-import { RootState } from "../../store/store";
+import { RootState } from "stores/store";
 import { ToolPropertyEllipse } from "./toolProperty/ToolPropertyEllipse";
 import { ToolPropertyFiller } from "./toolProperty/ToolPropertyFiller";
 import { ToolPropertyLine } from "./toolProperty/ToolPropertyLine";

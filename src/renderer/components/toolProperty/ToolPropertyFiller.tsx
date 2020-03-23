@@ -1,13 +1,10 @@
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
+import { FILLER } from "actions/tool/filler";
+import { changeToolProperty } from "actions/toolsAction";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeToolProperty } from "../../../actions/toolsAction";
-import { FILLER } from "../../../actions/tool/filler";
-import { RootState } from "../../../store/store";
-import {
-  FillerProperty,
-  InitialFillerProperty
-} from "../../../store/tool/fillerState";
+import { RootState } from "stores/store";
+import { FillerProperty, InitialFillerProperty } from "stores/tool/fillerState";
 
 export const ToolPropertyFiller: React.FC = () => {
   const dispatch = useDispatch();

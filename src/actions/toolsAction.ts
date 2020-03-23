@@ -1,41 +1,41 @@
 import { Vector2D } from "ballen-core";
-import { ToolProperty, ToolsState } from "../store/toolsState";
+import { ToolProperty, ToolsState } from "stores/toolsState";
+import Color from "./lib/Color";
 import {
-  ELLIPSE,
   changeDrawStateBeginEllipse,
   ChangeDrawStateEllipseAction,
   changeDrawStateEndEllipse,
-  changeDrawStateMiddleEllipse
+  changeDrawStateMiddleEllipse,
+  ELLIPSE
 } from "./tool/ellipse";
 import {
-  FILLER,
   changeDrawStateBeginFiller,
   changeDrawStateEndFiller,
   ChangeDrawStateFillerAction,
-  changeDrawStateMiddleFiller
+  changeDrawStateMiddleFiller,
+  FILLER
 } from "./tool/filler";
 import {
-  LINE,
   changeDrawStateBeginLine,
   changeDrawStateEndLine,
   ChangeDrawStateLineAction,
-  changeDrawStateMiddleLine
+  changeDrawStateMiddleLine,
+  LINE
 } from "./tool/line";
 import {
-  PENCIL,
   changeDrawStateBeginPencil,
   changeDrawStateEndPencil,
   changeDrawStateMiddlePencil,
-  ChangeDrawStatePencilAction
+  ChangeDrawStatePencilAction,
+  PENCIL
 } from "./tool/pencil";
 import {
-  RECTANGLE,
   changeDrawStateBeginRectangle,
   changeDrawStateEndRectangle,
   changeDrawStateMiddleRectangle,
-  ChangeDrawStateRectangleAction
+  ChangeDrawStateRectangleAction,
+  RECTANGLE
 } from "./tool/rectangle";
-import Color from "./lib/Color";
 
 export type ToolsActions = ChangeToolAction | ChangeToolPropertyAction | ChangeDrawStateAction;
 

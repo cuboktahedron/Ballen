@@ -1,15 +1,15 @@
-import { FillerProperty, ToolDrawStateFiller } from "../../store/tool/fillerState";
-import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "../guideLayerAction";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "../layersAction";
-import Color from "../lib/Color";
-import Graphics from "../lib/Graphics";
+import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layersAction";
+import Color from "actions/lib/Color";
+import Graphics from "actions/lib/Graphics";
 import {
   ChangeDrawStateAction,
   ChangeDrawStateBeginProps,
   ChangeDrawStateEndProps,
   ChangeDrawStateMiddleProps,
   CHANGE_DRAW_STATE
-} from "../toolsAction";
+} from "actions/toolsAction";
+import { FillerProperty, ToolDrawStateFiller } from "stores/tool/fillerState";
 
 export const FILLER = "tool/filler";
 

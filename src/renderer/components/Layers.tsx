@@ -1,12 +1,12 @@
-import React from "react";
-import Layer from "./Layer";
-import { List, IconButton } from "@material-ui/core";
-import { LayerState } from "../../store/layerState";
-import { RootState } from "../../store/store";
-import { useSelector, useDispatch } from "react-redux";
+import { IconButton, List } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { addLayer, deleteLayer } from "../../actions/layersAction";
+import { addLayer, deleteLayer } from "actions/layersAction";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { LayerState } from "stores/layerState";
+import { RootState } from "stores/store";
+import Layer from "./Layer";
 
 const Layers: React.FC = () => {
   const dispatch = useDispatch();

@@ -1,20 +1,17 @@
 import {
   Box,
   Checkbox,
-  TextField,
   FormControlLabel,
-  FormGroup
+  FormGroup,
+  TextField
 } from "@material-ui/core";
+import { PENCIL } from "actions/tool/pencil";
+import { changeToolProperty } from "actions/toolsAction";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PENCIL } from "../../../actions/tool/pencil";
-import { changeToolProperty } from "../../../actions/toolsAction";
-import { RootState } from "../../../store/store";
-import {
-  InitialPencilProperty,
-  PencilProperty
-} from "../../../store/tool/pencilState";
-import { validateNumber } from "../../lib/validator";
+import { RootState } from "stores/store";
+import { InitialPencilProperty, PencilProperty } from "stores/tool/pencilState";
+import { validateNumber } from "renderer/lib/validator";
 
 export const ToolPropertyPencil: React.FC = () => {
   const dispatch = useDispatch();

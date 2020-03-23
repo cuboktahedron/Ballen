@@ -1,9 +1,9 @@
-import { ELLIPSE } from "../actions/tool/ellipse";
-import { FILLER } from "../actions/tool/filler";
-import { LINE } from "../actions/tool/line";
-import { PENCIL } from "../actions/tool/pencil";
-import { RECTANGLE } from "../actions/tool/rectangle";
-import { ToolType } from "../actions/toolsAction";
+import { ELLIPSE } from "actions/tool/ellipse";
+import { FILLER } from "actions/tool/filler";
+import { LINE } from "actions/tool/line";
+import { PENCIL } from "actions/tool/pencil";
+import { RECTANGLE } from "actions/tool/rectangle";
+import { ToolType } from "actions/toolsAction";
 import { EllipseProperty, InitialEllipseProperty, ToolDrawStateEllipse } from "./tool/ellipseState";
 import { FillerProperty, InitialFillerProperty, ToolDrawStateFiller } from "./tool/fillerState";
 import { InitialLineProperty, LineProperty, ToolDrawStateLine } from "./tool/lineState";

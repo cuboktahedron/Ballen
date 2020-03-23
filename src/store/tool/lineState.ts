@@ -1,4 +1,4 @@
-import { LINE } from "../../actions/tool/line";
+import { LINE } from "actions/tool/line";
 import { Vector2D } from "ballen-core";
 
 export type LineProperty = {

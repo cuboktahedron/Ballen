@@ -1,6 +1,5 @@
+import { PENCIL } from "actions/tool/pencil";
 import { Vector2D } from "ballen-core";
-
-import { PENCIL } from "../../actions/tool/pencil";
 
 export type PencilProperty = {
   thickness: number;

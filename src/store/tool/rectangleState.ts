@@ -1,4 +1,4 @@
-import { RECTANGLE } from "../../actions/tool/rectangle";
+import { RECTANGLE } from "actions/tool/rectangle";
 import { Vector2D } from "ballen-core";
 
 export type RectangleProperty = {

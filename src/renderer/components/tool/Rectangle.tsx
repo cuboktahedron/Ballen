@@ -1,10 +1,10 @@
-import { IconButton, makeStyles, createStyles, Theme } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import { createStyles, IconButton, makeStyles, Theme } from "@material-ui/core";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import { RECTANGLE as ToolTypeRectangle } from "actions/tool/rectangle";
+import { changeTool } from "actions/toolsAction";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RECTANGLE as ToolTypeRectangle } from "../../../actions/tool/rectangle";
-import { RootState } from "../../../store/store";
-import { changeTool } from "../../../actions/toolsAction";
+import { RootState } from "stores/store";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

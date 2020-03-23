@@ -1,6 +1,6 @@
+import { CLEAR_GUIDE, DRAW_GUIDE, GuideLayerActions } from "actions/guideLayerAction";
 import { AnyAction } from "redux";
-import { GuideLayerState, InitialGuideLayerState } from "../store/guideLayerState";
-import { GuideLayerActions, DRAW_GUIDE, CLEAR_GUIDE } from "../actions/guideLayerAction";
+import { GuideLayerState, InitialGuideLayerState } from "stores/guideLayerState";
 
 export default function reducer(
   state: GuideLayerState = InitialGuideLayerState,

@@ -1,10 +1,10 @@
 import { createStyles, IconButton, makeStyles, Theme } from "@material-ui/core";
 import RemoveIcon from "@material-ui/icons/Remove";
+import { LINE as ToolTypeLine } from "actions/tool/line";
+import { changeTool } from "actions/toolsAction";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LINE as ToolTypeLine } from "../../../actions/tool/line";
-import { changeTool } from "../../../actions/toolsAction";
-import { RootState } from "../../../store/store";
+import { RootState } from "stores/store";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

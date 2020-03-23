@@ -5,7 +5,7 @@ import React, {
   useImperativeHandle,
   useRef
 } from "react";
-import { LayerState } from "../../store/layerState";
+import { LayerState } from "stores/layerState";
 
 type LayerCanvasProps = LayerState & {
   zIndex: number;

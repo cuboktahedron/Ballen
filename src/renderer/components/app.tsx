@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
 import {
   Container,
-  Paper,
   createStyles,
+  Grid,
   makeStyles,
-  Grid
+  Paper
 } from "@material-ui/core";
-import ToolBar from "./ToolBar";
-import Layers from "./Layers";
-import LayerCanvases from "./LayerCanvases";
+import { addLayer } from "actions/layersAction";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "stores/store";
 import BuildCanvas from "./BuildCanvas";
-import { addLayer } from "../../actions/layersAction";
-import { RootState } from "../../store/store";
-import { useSelector, useDispatch } from "react-redux";
+import LayerCanvases from "./LayerCanvases";
+import Layers from "./Layers";
+import ToolBar from "./ToolBar";
 
 const useStyles = makeStyles(() =>
   createStyles({

@@ -18,7 +18,7 @@
   "license": "MIT",
   "jest": {
     "transform": {
-      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/test/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
     "moduleFileExtensions": [
@@ -28,7 +28,13 @@
       "json",
       "jsx"
     ],
-    "modulePathIgnorePatterns": ["build"]
+    "modulePathIgnorePatterns": ["build"],
+    "moduleNameMapper": {
+      "actions/(.*)": "<rootDir>/src/actions/$1",
+      "reducers/(.*)": "<rootDir>/src/reducers/$1",
+      "renderer/(.*)": "<rootDir>/src/renderer/$1",
+      "stores/(.*)": "<rootDir>/src/store/$1"
+    }
   },
   "devDependencies": {
     "@material-ui/core": "^4.8.3",

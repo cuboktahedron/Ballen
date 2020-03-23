@@ -1,8 +1,7 @@
-import { RectangleProperty, ToolDrawStateRectangle } from "../../store/tool/rectangleState";
-import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "../guideLayerAction";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "../layersAction";
-import Color from "../lib/Color";
-import Graphics from "../lib/Graphics";
+import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layersAction";
+import Color from "actions/lib/Color";
+import Graphics from "actions/lib/Graphics";
 import {
   ChangeDrawStateAction,
   ChangeDrawStateBeginProps,
@@ -10,7 +9,8 @@ import {
   ChangeDrawStateMiddleProps,
   CHANGE_DRAW_STATE,
   GUIDE_LINE_COLOR
-} from "../toolsAction";
+} from "actions/toolsAction";
+import { RectangleProperty, ToolDrawStateRectangle } from "stores/tool/rectangleState";
 
 export const RECTANGLE = "tool/rectangle";
 
