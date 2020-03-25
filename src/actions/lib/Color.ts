@@ -6,13 +6,20 @@ export default class Color {
 
   constructor(color?: string) {
     if (color !== undefined) {
+      const len = color.length;
+
+      if (len !== 6 && len !== 8) {
+        throw new Error(`unexpected color value(${color}) specified.`);
+      }
+
       this.r = parseInt(color.substr(0, 2), 16);
       this.g = parseInt(color.substr(2, 2), 16);
       this.b = parseInt(color.substr(4, 2), 16);
-      if (color.length === 8) {
-        this.a = parseInt(color.substr(6, 2), 16);
-      } else {
+
+      if (len === 6) {
         this.a = 0xff;
+      } else {
+        this.a = parseInt(color.substr(6, 2), 16);
       }
     }
   }
@@ -53,11 +60,15 @@ export default class Color {
   }
 
   get rgb(): string {
-    return `${this.r.toString(16)}${this.g.toString(16)}${this.b.toString(16)}`;
+    const r = ("00" + this.r.toString(16)).slice(-2);
+    const g = ("00" + this.g.toString(16)).slice(-2);
+    const b = ("00" + this.b.toString(16)).slice(-2);
+    return r + g + b;
   }
 
   get rgba(): string {
-    return `${this.rgb}${this.a.toString(16)}`;
+    const a = ("00" + this.a.toString(16)).slice(-2);
+    return this.rgb + a;
   }
 
   equals(colorToCompare: Color): boolean {
