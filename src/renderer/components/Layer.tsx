@@ -4,13 +4,13 @@ import {
   createStyles,
   IconButton,
   ListItem,
-  ListItemText,
   makeStyles,
+  TextField,
   Theme
 } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { toggleVisible } from "actions/layerAction";
+import { changeName, toggleVisible } from "actions/layerAction";
 import { changeActiveLayer } from "actions/layersAction";
 import React, { SyntheticEvent } from "react";
 import { useDispatch } from "react-redux";
@@ -60,6 +60,11 @@ const Layer: React.FC<LayerProps> = props => {
     e.stopPropagation();
   };
 
+  const handleBlurName = (e: React.FocusEvent<HTMLInputElement>): void => {
+    const value = e.currentTarget.value;
+    dispatch(changeName(value));
+  };
+
   const classes = useStyles(props);
 
   let visibilityButton: JSX.Element;
@@ -86,7 +91,11 @@ const Layer: React.FC<LayerProps> = props => {
         {visibilityButton}
         <Button className={classes.btnColor}>{""}</Button>
       </Box>
-      <ListItemText primary={props.name} />
+      <TextField
+        defaultValue={props.name}
+        inputProps={{ maxLength: 32 }}
+        onBlur={handleBlurName}
+      />
     </ListItem>
   );
 };

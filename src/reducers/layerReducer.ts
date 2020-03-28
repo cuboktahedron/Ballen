@@ -1,4 +1,4 @@
-import { CHANGE_COLOR, DRAW, LayerActions, TOGGLE_VISIBLE } from "actions/layerAction";
+import { CHANGE_COLOR, DRAW, LayerActions, TOGGLE_VISIBLE, CHANGE_NAME } from "actions/layerAction";
 import { AnyAction } from "redux";
 import { LayerState } from "stores/layerState";
 
@@ -10,6 +10,11 @@ export default function reducer(state: LayerState, anyAction: AnyAction): LayerS
       return {
         ...state,
         color: action.payload.color
+      };
+    case CHANGE_NAME:
+      return {
+        ...state,
+        name: action.payload.name
       };
     case TOGGLE_VISIBLE:
       return {
