@@ -1,4 +1,4 @@
-import { ADD_LAYER, CHANGE_ACTIVE_LAYER, DELETE_LAYER, DRAW, LayersActions } from "actions/layersAction";
+import { ADD_LAYER, CHANGE_ACTIVE_LAYER, DELETE_LAYER, DRAW, LayersActions, MOVE_LAYER } from "actions/layersAction";
 import { AnyAction } from "redux";
 import { InitialLayersState, LayersState } from "stores/layersState";
 import { DRAW as LAYER_DRAW } from "actions/layerAction";
@@ -53,6 +53,9 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
       });
 
       return { ...state };
+    }
+    case MOVE_LAYER: {
+      return { ...state, layers: [...action.payload.layers] };
     }
     default: {
       let stateChanged = false;

@@ -11,11 +11,14 @@ import {
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { changeName, toggleVisible } from "actions/layerAction";
-import { changeActiveLayer } from "actions/layersAction";
-import React, { SyntheticEvent } from "react";
-import { useDispatch } from "react-redux";
+import { changeActiveLayer, moveLayer } from "actions/layersAction";
+import React, { SyntheticEvent, useRef } from "react";
+import { DragObjectWithType, useDrag, useDrop } from "react-dnd";
+import { useDispatch, useSelector } from "react-redux";
+import { DndItemTypes } from "renderer/lib/dndTypes";
 import { LayerState } from "stores/layerState";
 import { useActiveLayer } from "./Layers";
+import { RootState } from "stores/store";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,11 +42,69 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type LayerProps = LayerState & {
   active: boolean;
+  index: number;
+};
+
+type DragItem = DragObjectWithType & {
+  layerId: number;
+  index: number;
 };
 
 const Layer: React.FC<LayerProps> = props => {
+  const ref = useRef<HTMLDivElement>(null);
+  const layers = useSelector((state: RootState) => state.layers);
   const activeLayer = useActiveLayer();
   const dispatch = useDispatch();
+
+  const [, drop] = useDrop({
+    accept: DndItemTypes.LAYER,
+    hover(item: DragItem, monitor) {
+      if (!ref.current) {
+        return;
+      }
+
+      const dragIndex = item.index;
+      const hoverIndex = props.index;
+
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+
+      const hoverBoundingRect = ref.current.getBoundingClientRect();
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const clientOffset = monitor.getClientOffset();
+      if (clientOffset === null) {
+        return;
+      }
+
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+
+      dispatch(moveLayer(dragIndex, hoverIndex, layers.layers));
+
+      item.index = hoverIndex;
+    }
+  });
+  const [{ isDragging }, drag] = useDrag({
+    item: {
+      type: DndItemTypes.LAYER,
+      layerId: props.id,
+      index: props.index
+    },
+    collect: monitor => ({
+      isDragging: !!monitor.isDragging()
+    })
+  });
+
+  const dragStyle = {
+    opacity: isDragging ? 0.5 : 1
+  };
 
   const selectLayerHandler = (): void => {
     if (props.id === activeLayer.id) {
@@ -82,21 +143,26 @@ const Layer: React.FC<LayerProps> = props => {
     );
   }
 
+  drag(drop(ref));
+
   return (
-    <ListItem
-      className={props.active ? classes.active : ""}
-      onClick={selectLayerHandler}
-    >
-      <Box>
-        {visibilityButton}
-        <Button className={classes.btnColor}>{""}</Button>
-      </Box>
-      <TextField
-        defaultValue={props.name}
-        inputProps={{ maxLength: 32 }}
-        onBlur={handleBlurName}
-      />
-    </ListItem>
+    <div ref={ref}>
+      <ListItem
+        className={props.active ? classes.active : ""}
+        onClick={selectLayerHandler}
+        style={dragStyle}
+      >
+        <Box>
+          {visibilityButton}
+          <Button className={classes.btnColor}>{""}</Button>
+        </Box>
+        <TextField
+          defaultValue={props.name}
+          inputProps={{ maxLength: 32 }}
+          onBlur={handleBlurName}
+        />
+      </ListItem>
+    </div>
   );
 };
 

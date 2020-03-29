@@ -6,13 +6,15 @@ import { drawBeginFiller, drawEndFiller, drawMiddleFiller, FILLER } from "./tool
 import { drawBeginLine, drawEndLine, drawMiddleLine, LINE } from "./tool/line";
 import { drawBeginPencil, drawEndPencil, drawMiddlePencil, PENCIL } from "./tool/pencil";
 import { drawBeginRectangle, drawEndRectangle, drawMiddleRectangle, RECTANGLE } from "./tool/rectangle";
+import { LayerState } from "stores/layerState";
 
-export type LayersActions = ChangeActiveLayerAction | AddLayerAction | DeleteLayerAction | DrawAction;
+export type LayersActions = ChangeActiveLayerAction | AddLayerAction | DeleteLayerAction | DrawAction | MoveLayerAction;
 
 export const CHANGE_ACTIVE_LAYER = "layers/changeActiveLayer";
 export const ADD_LAYER = "layers/addLayer";
 export const DELETE_LAYER = "layers/deleteLayer";
 export const DRAW = "layers/draw";
+export const MOVE_LAYER = "layers/moveLayer";
 
 export type ChangeActiveLayerAction = {
   type: typeof CHANGE_ACTIVE_LAYER;
@@ -133,4 +135,26 @@ export const drawEnd = (props: DrawEndProps): DrawAction => {
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
+};
+
+export const moveLayer = (fromIndex: number, toIndex: number, layers: LayerState[]): MoveLayerAction => {
+  const newLayers: LayerState[] = [...layers];
+
+  const fromLayer = layers[fromIndex];
+  newLayers.splice(fromIndex, 1);
+  newLayers.splice(toIndex, 0, fromLayer);
+
+  return {
+    type: MOVE_LAYER,
+    payload: {
+      layers: newLayers
+    }
+  };
+};
+
+export type MoveLayerAction = {
+  type: typeof MOVE_LAYER;
+  payload: {
+    layers: LayerState[];
+  };
 };

@@ -14,11 +14,12 @@ const Layers: React.FC = () => {
     return state.layers;
   });
 
-  const layerItems = layers.layers.map(layer => {
+  const layerItems = layers.layers.map((layer, index) => {
     return (
       <Layer
         key={layer.id}
         active={layer.id === layers.activeLayerId}
+        index={index}
         {...layer}
       ></Layer>
     );
