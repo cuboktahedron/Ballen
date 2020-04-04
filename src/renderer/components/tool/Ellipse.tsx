@@ -4,7 +4,7 @@ import { ELLIPSE as ToolTypeEllipse } from "actions/tool/ellipse";
 import { changeTool } from "actions/toolsAction";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "stores/store";
+import { RootState } from "stores/rootState";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

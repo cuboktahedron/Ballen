@@ -9,7 +9,7 @@ import { PENCIL } from "actions/tool/pencil";
 import { changeToolProperty } from "actions/toolsAction";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "stores/store";
+import { RootState } from "stores/rootState";
 import { InitialPencilProperty, PencilProperty } from "stores/tool/pencilState";
 import { validateNumber } from "renderer/lib/validator";
 

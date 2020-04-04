@@ -1,5 +1,5 @@
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layersAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layerAction";
 import Color from "actions/lib/Color";
 import Graphics from "actions/lib/Graphics";
 import {
@@ -24,10 +24,9 @@ export const drawBeginRectangle = (props: DrawBeginProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: null
-      }
+      layerId: activeLayer.id,
+      imageData: null,
+      record: false
     }
   };
 };
@@ -41,10 +40,9 @@ export const drawMiddleRectangle = (props: DrawMiddleProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: null
-      }
+      layerId: activeLayer.id,
+      imageData: null,
+      record: false
     }
   };
 };
@@ -80,10 +78,9 @@ export const drawEndRectangle = (props: DrawEndProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: newImageData
-      }
+      layerId: activeLayer.id,
+      imageData: newImageData,
+      record: true
     }
   };
 };
@@ -104,7 +101,8 @@ export const changeDrawStateBeginRectangle = (props: ChangeDrawStateBeginProps):
     type: CHANGE_DRAW_STATE,
     payload: {
       type: RECTANGLE,
-      state: drawState
+      state: drawState,
+      record: false
     }
   };
 };
@@ -119,7 +117,8 @@ export const changeDrawStateMiddleRectangle = (props: ChangeDrawStateMiddleProps
       state: {
         ...state,
         to: props.coords
-      }
+      },
+      record: false
     }
   };
 };
@@ -129,7 +128,8 @@ export const changeDrawStateEndRectangle = (_props: ChangeDrawStateEndProps): Ch
   type: CHANGE_DRAW_STATE,
   payload: {
     type: RECTANGLE,
-    state: {}
+    state: {},
+    record: false
   }
 });
 
@@ -151,7 +151,8 @@ export const drawGuideRectangle = (props: DrawGuideProps): DrawGuideAction => {
   return {
     type: DRAW_GUIDE,
     payload: {
-      imageData: newImageData
+      imageData: newImageData,
+      record: false
     }
   };
 };

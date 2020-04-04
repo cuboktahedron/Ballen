@@ -1,10 +1,10 @@
+import { BallenAction } from "actions/actionTypes";
 import { CLEAR_GUIDE, DRAW_GUIDE, GuideLayerActions } from "actions/guideLayerAction";
-import { AnyAction } from "redux";
 import { GuideLayerState, InitialGuideLayerState } from "stores/guideLayerState";
 
 export default function reducer(
   state: GuideLayerState = InitialGuideLayerState,
-  anyAction: AnyAction
+  anyAction: BallenAction
 ): GuideLayerState {
   const action = anyAction as GuideLayerActions;
 

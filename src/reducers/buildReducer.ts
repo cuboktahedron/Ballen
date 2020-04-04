@@ -1,8 +1,8 @@
+import { BallenAction } from "actions/actionTypes";
 import { BUILD, BuildActions } from "actions/buildAction";
-import { AnyAction } from "redux";
 import { BuildState, InitialBuildState } from "stores/buildState";
 
-export default function reducer(state: BuildState = InitialBuildState, anyAction: AnyAction): BuildState {
+export default function reducer(state: BuildState = InitialBuildState, anyAction: BallenAction): BuildState {
   const action = anyAction as BuildActions;
 
   switch (action.type) {

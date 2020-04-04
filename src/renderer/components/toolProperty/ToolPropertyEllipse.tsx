@@ -3,7 +3,7 @@ import { ELLIPSE } from "actions/tool/ellipse";
 import { changeToolProperty } from "actions/toolsAction";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "stores/store";
+import { RootState } from "stores/rootState";
 import {
   EllipseProperty,
   InitialEllipseProperty

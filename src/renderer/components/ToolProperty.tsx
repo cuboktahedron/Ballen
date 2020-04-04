@@ -6,7 +6,7 @@ import { PENCIL } from "actions/tool/pencil";
 import { RECTANGLE } from "actions/tool/rectangle";
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "stores/store";
+import { RootState } from "stores/rootState";
 import { ToolPropertyEllipse } from "./toolProperty/ToolPropertyEllipse";
 import { ToolPropertyFiller } from "./toolProperty/ToolPropertyFiller";
 import { ToolPropertyLine } from "./toolProperty/ToolPropertyLine";

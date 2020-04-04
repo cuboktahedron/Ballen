@@ -3,7 +3,7 @@ import { drawGuide } from "actions/guideLayerAction";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GuideLayerState } from "stores/guideLayerState";
-import { RootState } from "stores/store";
+import { RootState } from "stores/rootState";
 
 type GuideLayerCanvasProps = GuideLayerState & {
   zIndex: number;

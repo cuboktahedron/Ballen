@@ -17,8 +17,8 @@ import { DragObjectWithType, useDrag, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { DndItemTypes } from "renderer/lib/dndTypes";
 import { LayerState } from "stores/layerState";
+import { RootState } from "stores/rootState";
 import { useActiveLayer } from "./Layers";
-import { RootState } from "stores/store";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -123,7 +123,7 @@ const Layer: React.FC<LayerProps> = props => {
 
   const handleBlurName = (e: React.FocusEvent<HTMLInputElement>): void => {
     const value = e.currentTarget.value;
-    dispatch(changeName(value));
+    dispatch(changeName(activeLayer.id, value));
   };
 
   const classes = useStyles(props);

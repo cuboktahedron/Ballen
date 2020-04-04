@@ -36,6 +36,7 @@ import {
   ChangeDrawStateRectangleAction,
   RECTANGLE
 } from "./tool/rectangle";
+import { BallenAction } from "./actionTypes";
 
 export type ToolsActions = ChangeToolAction | ChangeToolPropertyAction | ChangeDrawStateAction;
 
@@ -52,11 +53,12 @@ export type ChangeToolAction = {
   payload: {
     type: ToolType;
   };
-};
+} & BallenAction;
 
 export const changeTool = (type: ToolType): ChangeToolAction => ({
   type: CHANGE_TOOL,
   payload: {
+    record: false,
     type
   }
 });
@@ -67,11 +69,12 @@ export type ChangeToolPropertyAction = {
     type: ToolType;
     property: ToolProperty;
   };
-};
+} & BallenAction;
 
 export const changeToolProperty = (type: ToolType, property: ToolProperty): ChangeToolPropertyAction => ({
   type: CHANGE_TOOL_PROPERTY,
   payload: {
+    record: false,
     type,
     property
   }
@@ -98,7 +101,8 @@ export type ChangeDrawStateAction = { type: typeof CHANGE_DRAW_STATE } & (
   | ChangeDrawStateEllipseAction
   | ChangeDrawStateRectangleAction
   | ChangeDrawStateLineAction
-);
+) &
+  BallenAction;
 
 export const changeDrawStateBegin = (props: ChangeDrawStateBeginProps): ChangeDrawStateAction => {
   switch (props.tools.selectedType) {

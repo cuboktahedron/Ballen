@@ -1,9 +1,13 @@
-import { CHANGE_COLOR, DRAW, LayerActions, TOGGLE_VISIBLE, CHANGE_NAME } from "actions/layerAction";
-import { AnyAction } from "redux";
+import { BallenAction } from "actions/actionTypes";
+import { CHANGE_COLOR, CHANGE_NAME, DRAW, LayerActions, TOGGLE_VISIBLE } from "actions/layerAction";
 import { LayerState } from "stores/layerState";
 
-export default function reducer(state: LayerState, anyAction: AnyAction): LayerState {
+export default function reducer(state: LayerState, anyAction: BallenAction): LayerState {
   const action = anyAction as LayerActions;
+
+  if (state.id !== action.payload.layerId) {
+    return state;
+  }
 
   switch (action.type) {
     case CHANGE_COLOR:

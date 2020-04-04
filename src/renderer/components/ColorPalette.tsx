@@ -2,6 +2,7 @@ import { Button, createStyles, makeStyles } from "@material-ui/core";
 import { changeColor } from "actions/layerAction";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useActiveLayer } from "./Layers";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,8 +25,10 @@ type ColorPaletteProps = {
 
 export const ColorPalette: React.FC<ColorPaletteProps> = props => {
   const dispatch = useDispatch();
+  const activeLayer = useActiveLayer();
+
   const handleOnClick = (): void => {
-    dispatch(changeColor(props.color));
+    dispatch(changeColor(activeLayer.id, props.color));
   };
 
   const classes = useStyles(props);

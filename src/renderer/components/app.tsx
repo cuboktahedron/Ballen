@@ -8,12 +8,12 @@ import {
 import { addLayer } from "actions/layersAction";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "stores/store";
+import { RootState } from "stores/rootState";
 import BuildCanvas from "./BuildCanvas";
+import KeyShortcut from "./KeyShortcut";
 import LayerCanvases from "./LayerCanvases";
 import Layers from "./Layers";
 import ToolBar from "./ToolBar";
-import KeyShortcut from "./KeyShortcut";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -37,40 +37,43 @@ const App: React.FC = () => {
 
   const classes = useStyles();
 
-  let canvas;
-  if (layers.layers.length > 0) {
-    canvas = (
-      <Grid container>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            <LayerCanvases />
-          </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            <BuildCanvas />
-          </Paper>
-        </Grid>
+  const canvas = (
+    <Grid container>
+      <Grid item xs={6}>
+        <Paper className={classes.paper}>
+          <LayerCanvases />
+        </Paper>
       </Grid>
+      <Grid item xs={6}>
+        <Paper className={classes.paper}>
+          <BuildCanvas />
+        </Paper>
+      </Grid>
+    </Grid>
+  );
+
+  if (layers.layers.length > 0) {
+    return (
+      <Container>
+        {canvas}
+        <Grid container>
+          <Grid item xs={6}>
+            <ToolBar />
+          </Grid>
+          <Grid item xs={6}>
+            <Layers />
+          </Grid>
+        </Grid>
+        <KeyShortcut />
+      </Container>
     );
   } else {
-    canvas = <Grid container />;
+    return (
+      <Container>
+        <KeyShortcut />
+      </Container>
+    );
   }
-
-  return (
-    <Container>
-      {canvas}
-      <Grid container>
-        <Grid item xs={6}>
-          <ToolBar />
-        </Grid>
-        <Grid item xs={6}>
-          <Layers />
-        </Grid>
-      </Grid>
-      <KeyShortcut />
-    </Container>
-  );
 };
 
 export default App;

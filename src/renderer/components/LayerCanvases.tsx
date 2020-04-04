@@ -1,4 +1,4 @@
-import { drawBegin, drawEnd, drawMiddle } from "actions/layersAction";
+import { drawBegin, drawEnd, drawMiddle } from "actions/layerAction";
 import {
   changeDrawStateBegin,
   changeDrawStateEnd,
@@ -12,7 +12,7 @@ import React, {
   useState
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "stores/store";
+import { RootState } from "stores/rootState";
 import GuideLayerCanvas from "./GuideLayerCanvas";
 import LayerCanvas, { LayerCanvasMethods } from "./LayerCanvas";
 import { useActiveLayer } from "./Layers";

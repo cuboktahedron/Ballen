@@ -1,5 +1,6 @@
 import { LayersState } from "stores/layersState";
 import Color from "./lib/Color";
+import { BallenAction } from "./actionTypes";
 
 export type BuildActions = BuildAction;
 
@@ -10,7 +11,7 @@ export type BuildAction = {
   payload: {
     imageData: ImageData;
   };
-};
+} & BallenAction;
 
 export const build = (layers: LayersState): BuildAction => {
   const buildImageData = new ImageData(layers.size.x, layers.size.y);
@@ -42,6 +43,7 @@ export const build = (layers: LayersState): BuildAction => {
   return {
     type: BUILD,
     payload: {
+      record: false,
       imageData: buildImageData
     }
   };

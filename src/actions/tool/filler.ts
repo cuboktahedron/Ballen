@@ -1,5 +1,5 @@
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layersAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layerAction";
 import Color from "actions/lib/Color";
 import Graphics from "actions/lib/Graphics";
 import {
@@ -36,10 +36,9 @@ export const drawBeginFiller = (props: DrawBeginProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: newImageData
-      }
+      layerId: activeLayer.id,
+      imageData: newImageData,
+      record: false
     }
   };
 };
@@ -56,10 +55,9 @@ export const drawMiddleFiller = (props: DrawMiddleProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: null
-      }
+      layerId: activeLayer.id,
+      imageData: null,
+      record: false
     }
   };
 };
@@ -73,10 +71,9 @@ export const drawEndFiller = (props: DrawEndProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: null
-      }
+      layerId: activeLayer.id,
+      imageData: null,
+      record: true
     }
   };
 };
@@ -94,7 +91,8 @@ export const changeDrawStateBeginFiller = (_props: ChangeDrawStateBeginProps): C
     type: CHANGE_DRAW_STATE,
     payload: {
       type: FILLER,
-      state: {}
+      state: {},
+      record: false
     }
   };
 };
@@ -105,7 +103,8 @@ export const changeDrawStateMiddleFiller = (_props: ChangeDrawStateMiddleProps):
     type: CHANGE_DRAW_STATE,
     payload: {
       type: FILLER,
-      state: {}
+      state: {},
+      record: false
     }
   };
 };
@@ -115,7 +114,8 @@ export const changeDrawStateEndFiller = (_props: ChangeDrawStateEndProps): Chang
   type: CHANGE_DRAW_STATE,
   payload: {
     type: FILLER,
-    state: {}
+    state: {},
+    record: false
   }
 });
 
@@ -124,7 +124,8 @@ export const drawGuideFiller = (_props: DrawGuideProps): DrawGuideAction => {
   return {
     type: DRAW_GUIDE,
     payload: {
-      imageData: null
+      imageData: null,
+      record: false
     }
   };
 };

@@ -5,6 +5,7 @@ import { drawGuideFiller, FILLER } from "./tool/filler";
 import { drawGuideLine, LINE } from "./tool/line";
 import { drawGuidePencil, PENCIL } from "./tool/pencil";
 import { drawGuideRectangle, RECTANGLE } from "./tool/rectangle";
+import { BallenAction } from "./actionTypes";
 
 export type GuideLayerActions = ClearGuideAction | DrawGuideAction;
 
@@ -13,11 +14,14 @@ export const DRAW_GUIDE = "guideLayer/drawGuide";
 
 export type ClearGuideAction = {
   type: typeof CLEAR_GUIDE;
-};
+} & BallenAction;
 
 export const clearGuide = (): ClearGuideAction => {
   return {
-    type: CLEAR_GUIDE
+    type: CLEAR_GUIDE,
+    payload: {
+      record: false
+    }
   };
 };
 
@@ -26,7 +30,7 @@ export type DrawGuideAction = {
   payload: {
     imageData: ImageData | null;
   };
-};
+} & BallenAction;
 
 export type DrawGuideProps = {
   tools: ToolsState;

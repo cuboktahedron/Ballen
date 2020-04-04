@@ -1,5 +1,5 @@
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layersAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layerAction";
 import Color from "actions/lib/Color";
 import Graphics from "actions/lib/Graphics";
 import {
@@ -36,10 +36,9 @@ export const drawBeginPencil = (props: DrawBeginProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: newImageData
-      }
+      layerId: activeLayer.id,
+      imageData: newImageData,
+      record: false
     }
   };
 };
@@ -73,10 +72,9 @@ export const drawMiddlePencil = (props: DrawMiddleProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: newImageData
-      }
+      layerId: activeLayer.id,
+      imageData: newImageData,
+      record: false
     }
   };
 };
@@ -90,10 +88,9 @@ export const drawEndPencil = (props: DrawEndProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: activeLayer.imageData
-      }
+      layerId: activeLayer.id,
+      imageData: activeLayer.imageData,
+      record: true
     }
   };
 };
@@ -114,7 +111,8 @@ export const changeDrawStateBeginPencil = (props: ChangeDrawStateBeginProps): Ch
     type: CHANGE_DRAW_STATE,
     payload: {
       type: PENCIL,
-      state: drawState
+      state: drawState,
+      record: false
     }
   };
 };
@@ -127,7 +125,8 @@ export const changeDrawStateMiddlePencil = (props: ChangeDrawStateMiddleProps): 
     type: CHANGE_DRAW_STATE,
     payload: {
       type: PENCIL,
-      state: drawState
+      state: drawState,
+      record: false
     }
   };
 };
@@ -137,7 +136,8 @@ export const changeDrawStateEndPencil = (_props: ChangeDrawStateEndProps): Chang
   type: CHANGE_DRAW_STATE,
   payload: {
     type: PENCIL,
-    state: {}
+    state: {},
+    record: false
   }
 });
 
@@ -146,7 +146,8 @@ export const drawGuidePencil = (_props: DrawGuideProps): DrawGuideAction => {
   return {
     type: DRAW_GUIDE,
     payload: {
-      imageData: null
+      imageData: null,
+      record: false
     }
   };
 };

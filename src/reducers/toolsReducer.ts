@@ -1,8 +1,8 @@
+import { BallenAction } from "actions/actionTypes";
 import { CHANGE_DRAW_STATE, CHANGE_TOOL, CHANGE_TOOL_PROPERTY, ToolsActions } from "actions/toolsAction";
-import { AnyAction } from "redux";
 import { InitialToolsState, ToolsState } from "stores/toolsState";
 
-export default function reducer(state: ToolsState = InitialToolsState, anyAction: AnyAction): ToolsState {
+export default function reducer(state: ToolsState = InitialToolsState, anyAction: BallenAction): ToolsState {
   const action = anyAction as ToolsActions;
 
   switch (action.type) {

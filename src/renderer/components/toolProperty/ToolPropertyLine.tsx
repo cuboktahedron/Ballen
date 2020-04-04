@@ -3,7 +3,7 @@ import { LINE } from "actions/tool/line";
 import { changeToolProperty } from "actions/toolsAction";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "stores/store";
+import { RootState } from "stores/rootState";
 import { InitialLineProperty, LineProperty } from "stores/tool/lineState";
 
 export const ToolPropertyLine: React.FC = () => {

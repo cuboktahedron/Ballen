@@ -1,5 +1,5 @@
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layersAction";
+import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layerAction";
 import Color from "actions/lib/Color";
 import Graphics from "actions/lib/Graphics";
 import {
@@ -24,10 +24,9 @@ export const drawBeginLine = (props: DrawBeginProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: null
-      }
+      layerId: activeLayer.id,
+      imageData: null,
+      record: false,
     }
   };
 };
@@ -41,10 +40,9 @@ export const drawMiddleLine = (props: DrawMiddleProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: null
-      }
+      layerId: activeLayer.id,
+      imageData: null,
+      record: false
     }
   };
 };
@@ -80,10 +78,9 @@ export const drawEndLine = (props: DrawEndProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layer: {
-        layerId: activeLayer.id,
-        imageData: newImageData
-      }
+      layerId: activeLayer.id,
+      imageData: newImageData,
+      record: true
     }
   };
 };
@@ -104,7 +101,8 @@ export const changeDrawStateBeginLine = (props: ChangeDrawStateBeginProps): Chan
     type: CHANGE_DRAW_STATE,
     payload: {
       type: LINE,
-      state: drawState
+      state: drawState,
+      record: false
     }
   };
 };
@@ -115,6 +113,7 @@ export const changeDrawStateMiddleLine = (props: ChangeDrawStateMiddleProps): Ch
   return {
     type: CHANGE_DRAW_STATE,
     payload: {
+      record: false,
       type: LINE,
       state: {
         ...state,
@@ -129,7 +128,8 @@ export const changeDrawStateEndLine = (_props: ChangeDrawStateEndProps): ChangeD
   type: CHANGE_DRAW_STATE,
   payload: {
     type: LINE,
-    state: {}
+    state: {},
+    record: false
   }
 });
 
@@ -150,7 +150,8 @@ export const drawGuideLine = (props: DrawGuideProps): DrawGuideAction => {
   return {
     type: DRAW_GUIDE,
     payload: {
-      imageData: newImageData
+      imageData: newImageData,
+      record: false
     }
   };
 };

@@ -1,11 +1,30 @@
-import { ADD_LAYER, CHANGE_ACTIVE_LAYER, DELETE_LAYER, DRAW, LayersActions, MOVE_LAYER } from "actions/layersAction";
-import { AnyAction } from "redux";
+import { BallenAction } from "actions/actionTypes";
+import { ADD_LAYER, CHANGE_ACTIVE_LAYER, DELETE_LAYER, LayersActions, MOVE_LAYER } from "actions/layersAction";
 import { InitialLayersState, LayersState } from "stores/layersState";
-import { DRAW as LAYER_DRAW } from "actions/layerAction";
 import layerReducer from "./layerReducer";
 
-export default function reducer(state: LayersState = InitialLayersState, anyAction: AnyAction): LayersState {
+export default function reducer(state: LayersState = InitialLayersState, anyAction: BallenAction): LayersState {
   const action = anyAction as LayersActions;
+
+  const reducerName = action.type.split("/")[1];
+  if (reducerName === "layer") {
+    let changed = false;
+    const newState = state.layers.map(layer => {
+      const newLayer = layerReducer(layer, action);
+      if (newLayer !== layer) {
+        changed = true;
+        return newLayer;
+      } else {
+        return layer;
+      }
+    });
+
+    if (changed) {
+      return { ...state, layers: newState };
+    } else {
+      return state;
+    }
+  }
 
   switch (action.type) {
     case CHANGE_ACTIVE_LAYER:
@@ -37,22 +56,6 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
         const activeLayerId = state.layers[nextLayerIndex].id;
         return { ...state, activeLayerId };
       }
-    }
-    case DRAW: {
-      state.layers = state.layers.map(layer => {
-        if (layer.id === state.activeLayerId) {
-          return layerReducer(layer, {
-            type: LAYER_DRAW,
-            payload: {
-              imageData: action.payload.layer.imageData
-            }
-          });
-        } else {
-          return layer;
-        }
-      });
-
-      return { ...state };
     }
     case MOVE_LAYER: {
       return { ...state, layers: [...action.payload.layers] };

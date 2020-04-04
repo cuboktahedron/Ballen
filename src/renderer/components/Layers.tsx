@@ -5,7 +5,7 @@ import { addLayer, deleteLayer } from "actions/layersAction";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LayerState } from "stores/layerState";
-import { RootState } from "stores/store";
+import { RootState } from "stores/rootState";
 import Layer from "./Layer";
 
 const Layers: React.FC = () => {
