@@ -71,6 +71,7 @@
   "dependencies": {
     "react-dnd": "^10.0.2",
     "react-dnd-html5-backend": "^10.0.2",
+    "react-hotkeys-hook": "^1.6.1",
     "redux-logger": "^3.0.6",
     "tslib": "^1.10.0"
   }

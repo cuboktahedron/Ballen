@@ -13,6 +13,7 @@ import BuildCanvas from "./BuildCanvas";
 import LayerCanvases from "./LayerCanvases";
 import Layers from "./Layers";
 import ToolBar from "./ToolBar";
+import KeyShortcut from "./KeyShortcut";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -67,6 +68,7 @@ const App: React.FC = () => {
           <Layers />
         </Grid>
       </Grid>
+      <KeyShortcut />
     </Container>
   );
 };
