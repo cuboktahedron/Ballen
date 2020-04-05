@@ -1,4 +1,5 @@
 import { addLayer } from "actions/layersAction";
+import { redo, undo } from "actions/rootAction";
 import { ELLIPSE } from "actions/tool/ellipse";
 import { FILLER } from "actions/tool/filler";
 import { LINE } from "actions/tool/line";
@@ -34,6 +35,14 @@ const KeyShortcut: React.FC = () => {
 
   useHotkeys("ctrl + shift + N", () => {
     dispatch(addLayer());
+  });
+
+  useHotkeys("ctrl + Z", () => {
+    dispatch(undo());
+  });
+
+  useHotkeys("ctrl + shift + Z", () => {
+    dispatch(redo());
   });
 
   return <div />;

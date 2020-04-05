@@ -30,7 +30,7 @@ export type AddLayerAction = {
 export const addLayer = (): AddLayerAction => ({
   type: ADD_LAYER,
   payload: {
-    record: false
+    record: true
   }
 });
 

@@ -29,19 +29,21 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
   switch (action.type) {
     case CHANGE_ACTIVE_LAYER:
       return { ...state, activeLayerId: action.payload.layerId };
-    case ADD_LAYER:
-      state.layerIdSequence++;
-      state.layers.push({
+    case ADD_LAYER: {
+      const newState = { ...state };
+      newState.layerIdSequence++;
+      newState.layers.push({
         id: state.layerIdSequence,
         color: "#000000",
         name: `layer-${state.layerIdSequence}`,
         visible: true,
         imageData: new ImageData(state.size.x, state.size.y)
       });
-      if (state.activeLayerId === -1) {
-        state.activeLayerId = state.layers[0].id;
+      if (newState.activeLayerId === -1) {
+        newState.activeLayerId = newState.layers[0].id;
       }
-      return { ...state };
+      return newState;
+    }
     case DELETE_LAYER: {
       if (state.layers.length === 1) {
         return state;
