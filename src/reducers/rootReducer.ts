@@ -6,9 +6,18 @@ import historyReducer from "./historyReducer";
 import layersReducer from "./layersReducer";
 import toolsReducer from "./toolsReducer";
 import { push, forward, backward } from "actions/historyAction";
-import { REDO, UNDO } from "actions/rootAction";
+import { REDO, UNDO, BATCH, RootActions } from "actions/rootAction";
 
 export default function reducer(state: RootState = InitialRootState, action: BallenAction): RootState {
+  const rootAction = action as RootActions;
+  if (rootAction.type === BATCH) {
+    let currentState = state;
+    rootAction.payload.actions.forEach(action => {
+      currentState = reducer(currentState, action);
+    });
+    return currentState;
+  }
+
   if (action.type === UNDO) {
     const newState = historyReducer(state.history, backward());
     if (newState !== state.history) {

@@ -16,6 +16,7 @@ import { RootState } from "stores/rootState";
 import GuideLayerCanvas from "./GuideLayerCanvas";
 import LayerCanvas, { LayerCanvasMethods } from "./LayerCanvas";
 import { useActiveLayer } from "./Layers";
+import { batch } from "actions/rootAction";
 
 const LayerCanvases: React.FC = () => {
   const state = useSelector((state: RootState) => state);
@@ -56,26 +57,25 @@ const LayerCanvases: React.FC = () => {
     setMouseDowned(true);
 
     dispatch(
-      changeDrawStateBegin({
-        tools: state.tools,
-        coords: {
-          x: e.nativeEvent.offsetX,
-          y: e.nativeEvent.offsetY
-        }
-      })
-    );
-
-    dispatch(
-      drawBegin({
-        tools: state.tools,
-        layers: state.layers,
-        event: {
+      batch(
+        drawBegin({
+          tools: state.tools,
+          layers: state.layers,
+          event: {
+            coords: {
+              x: e.nativeEvent.offsetX,
+              y: e.nativeEvent.offsetY
+            }
+          }
+        }),
+        changeDrawStateBegin({
+          tools: state.tools,
           coords: {
             x: e.nativeEvent.offsetX,
             y: e.nativeEvent.offsetY
           }
-        }
-      })
+        })
+      )
     );
   };
 
@@ -83,8 +83,6 @@ const LayerCanvases: React.FC = () => {
     if (!mouseDowned) {
       return;
     }
-
-    console.log("handleMouseMove");
 
     const div = divRef.current;
     if (div === null) {
@@ -97,20 +95,19 @@ const LayerCanvases: React.FC = () => {
     };
 
     dispatch(
-      changeDrawStateMiddle({
-        tools: state.tools,
-        coords
-      })
-    );
-
-    dispatch(
-      drawMiddle({
-        tools: state.tools,
-        layers: state.layers,
-        event: {
+      batch(
+        drawMiddle({
+          tools: state.tools,
+          layers: state.layers,
+          event: {
+            coords
+          }
+        }),
+        changeDrawStateMiddle({
+          tools: state.tools,
           coords
-        }
-      })
+        })
+      )
     );
   };
 
@@ -128,20 +125,19 @@ const LayerCanvases: React.FC = () => {
     };
 
     dispatch(
-      changeDrawStateEnd({
-        tools: state.tools,
-        coords
-      })
-    );
-
-    dispatch(
-      drawEnd({
-        tools: state.tools,
-        layers: state.layers,
-        event: {
+      batch(
+        drawEnd({
+          tools: state.tools,
+          layers: state.layers,
+          event: {
+            coords
+          }
+        }),
+        changeDrawStateEnd({
+          tools: state.tools,
           coords
-        }
-      })
+        })
+      )
     );
   };
 
