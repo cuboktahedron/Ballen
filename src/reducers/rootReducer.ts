@@ -56,7 +56,7 @@ export default function reducer(state: RootState = InitialRootState, action: Bal
       }
     }
     case "guideLayer": {
-      const newState = guideLayerReducer(state.build, action);
+      const newState = guideLayerReducer(state.guideLayer, action);
       if (newState !== state.guideLayer) {
         if (action.payload.record) {
           return {
