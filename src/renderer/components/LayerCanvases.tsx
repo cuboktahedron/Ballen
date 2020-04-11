@@ -112,6 +112,10 @@ const LayerCanvases: React.FC = () => {
   };
 
   const handleMouseUp = (e: MouseEvent): void => {
+    if (!mouseDowned) {
+      return;
+    }
+
     setMouseDowned(false);
 
     const div = divRef.current;
