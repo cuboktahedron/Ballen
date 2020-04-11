@@ -4,18 +4,25 @@ import { LayersState } from "./layersState";
 import { ToolsState } from "./toolsState";
 
 export type HistoriesState = {
-  no: number;
   histories: HistoryState[];
+  historyIdSequence: number;
+  no: number;
 };
 
-export type HistoryState = {
+export type StatesOfHistory = {
   layers?: LayersState;
   tools?: ToolsState;
   build?: BuildState;
   guideLayer?: GuideLayerState;
 };
 
+export type HistoryState = {
+  id: number;
+  description: string;
+} & StatesOfHistory;
+
 export const InitialHistoryState: HistoriesState = {
-  no: -1,
-  histories: []
+  histories: [],
+  historyIdSequence: 0,
+  no: -1
 };

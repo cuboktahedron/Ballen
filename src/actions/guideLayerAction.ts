@@ -19,9 +19,7 @@ export type ClearGuideAction = {
 export const clearGuide = (): ClearGuideAction => {
   return {
     type: CLEAR_GUIDE,
-    payload: {
-      record: false
-    }
+    payload: {}
   };
 };
 

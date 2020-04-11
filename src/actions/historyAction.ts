@@ -1,11 +1,12 @@
 import { Action } from "redux";
-import { HistoryState } from "stores/historyState";
+import { StatesOfHistory } from "stores/historyState";
 
-export type HistoryActions = ForwardAction | BackwardAction | PushAction;
+export type HistoryActions = ForwardAction | BackwardAction | PushAction | ChangeAction;
 
 export const FORWARD = "history/forward";
 export const BACKWARD = "history/backward";
 export const PUSH = "history/push";
+export const CHANGE = "history/change";
 
 export type ForwardAction = {
   type: typeof FORWARD;
@@ -30,15 +31,33 @@ export const backward = (): BackwardAction => {
 export type PushAction = {
   type: typeof PUSH;
   payload: {
-    history: HistoryState;
+    recordDescription: string;
+    statesOfHistory: StatesOfHistory;
   };
 } & Action<string>;
 
-export const push = (history: HistoryState): PushAction => {
+export const push = (statesOfHistory: StatesOfHistory, recordDescription: string): PushAction => {
   return {
     type: PUSH,
     payload: {
-      history
+      recordDescription,
+      statesOfHistory
+    }
+  };
+};
+
+export type ChangeAction = {
+  type: typeof CHANGE;
+  payload: {
+    no: number;
+  };
+} & Action<string>;
+
+export const changeHistory = (no: number): ChangeAction => {
+  return {
+    type: CHANGE,
+    payload: {
+      no
     }
   };
 };

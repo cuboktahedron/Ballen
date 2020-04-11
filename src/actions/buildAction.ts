@@ -43,7 +43,6 @@ export const build = (layers: LayersState): BuildAction => {
   return {
     type: BUILD,
     payload: {
-      record: false,
       imageData: buildImageData
     }
   };

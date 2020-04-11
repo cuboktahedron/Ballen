@@ -1,6 +1,6 @@
 import { BACKWARD, FORWARD, HistoryActions, PUSH } from "actions/historyAction";
 import { AnyAction } from "redux";
-import { HistoriesState, InitialHistoryState } from "stores/historyState";
+import { HistoriesState, InitialHistoryState, HistoryState } from "stores/historyState";
 
 export default function reducer(state: HistoriesState = InitialHistoryState, anyAction: AnyAction): HistoriesState {
   const action = anyAction as HistoryActions;
@@ -25,10 +25,19 @@ export default function reducer(state: HistoriesState = InitialHistoryState, any
     case PUSH: {
       const histories = state.histories.concat();
       const no = state.no + 1;
+      const historyIdSequence = state.historyIdSequence + 1;
       histories.length = no;
+
+      const history: HistoryState = {
+        ...action.payload.statesOfHistory,
+        id: historyIdSequence,
+        description: action.payload.recordDescription
+      };
+
       return {
-        no,
-        histories: [...histories, action.payload.history]
+        histories: [...histories, history],
+        historyIdSequence,
+        no
       };
     }
     default:

@@ -14,6 +14,7 @@ import KeyShortcut from "./KeyShortcut";
 import LayerCanvases from "./LayerCanvases";
 import Layers from "./Layers";
 import ToolBar from "./ToolBar";
+import Histories from "./Histories";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -62,6 +63,7 @@ const App: React.FC = () => {
           </Grid>
           <Grid item xs={6}>
             <Layers />
+            <Histories />
           </Grid>
         </Grid>
         <KeyShortcut />

@@ -32,7 +32,7 @@ export const changeColor = (layerId: number, color: string): ChangeColorAction =
   type: CHANGE_COLOR,
   payload: {
     layerId,
-    record: false,
+    recordDescription: "Change layer color",
     color
   }
 });
@@ -48,8 +48,8 @@ export const changeName = (layerId: number, name: string): ChangeNameAction => (
   type: CHANGE_NAME,
   payload: {
     layerId,
-    record: true,
-    name
+    name,
+    recordDescription: "Change layer name"
   }
 });
 
@@ -63,8 +63,8 @@ export type ToggleVisibleAction = {
 export const toggleVisible = (layerId: number): ToggleVisibleAction => ({
   type: TOGGLE_VISIBLE,
   payload: {
-    record: true,
-    layerId
+    layerId,
+    recordDescription: "Toggle layer visible"
   }
 });
 

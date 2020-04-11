@@ -25,8 +25,7 @@ export const drawBeginEllipse = (props: DrawBeginProps): DrawAction => {
     type: DRAW,
     payload: {
       layerId: activeLayer.id,
-      imageData: null,
-      record: false
+      imageData: null
     }
   };
 };
@@ -41,8 +40,7 @@ export const drawMiddleEllipse = (props: DrawMiddleProps): DrawAction => {
     type: DRAW,
     payload: {
       layerId: activeLayer.id,
-      imageData: null,
-      record: false
+      imageData: null
     }
   };
 };
@@ -80,7 +78,7 @@ export const drawEndEllipse = (props: DrawEndProps): DrawAction => {
     payload: {
       layerId: activeLayer.id,
       imageData: newImageData,
-      record: true
+      recordDescription: "Draw ellipse"
     }
   };
 };
@@ -101,8 +99,7 @@ export const changeDrawStateBeginEllipse = (props: ChangeDrawStateBeginProps): C
     type: CHANGE_DRAW_STATE,
     payload: {
       type: ELLIPSE,
-      state: drawState,
-      record: false
+      state: drawState
     }
   };
 };
@@ -117,8 +114,7 @@ export const changeDrawStateMiddleEllipse = (props: ChangeDrawStateMiddleProps):
       state: {
         ...state,
         to: props.coords
-      },
-      record: false
+      }
     }
   };
 };
@@ -128,8 +124,7 @@ export const changeDrawStateEndEllipse = (_props: ChangeDrawStateEndProps): Chan
   type: CHANGE_DRAW_STATE,
   payload: {
     type: ELLIPSE,
-    state: {},
-    record: false
+    state: {}
   }
 });
 
@@ -152,8 +147,7 @@ export const drawGuideEllipse = (props: DrawGuideProps): DrawGuideAction => {
   return {
     type: DRAW_GUIDE,
     payload: {
-      imageData: newImageData,
-      record: false
+      imageData: newImageData
     }
   };
 };

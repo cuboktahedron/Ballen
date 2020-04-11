@@ -25,8 +25,7 @@ export const drawBeginLine = (props: DrawBeginProps): DrawAction => {
     type: DRAW,
     payload: {
       layerId: activeLayer.id,
-      imageData: null,
-      record: false,
+      imageData: null
     }
   };
 };
@@ -41,8 +40,7 @@ export const drawMiddleLine = (props: DrawMiddleProps): DrawAction => {
     type: DRAW,
     payload: {
       layerId: activeLayer.id,
-      imageData: null,
-      record: false
+      imageData: null
     }
   };
 };
@@ -80,7 +78,7 @@ export const drawEndLine = (props: DrawEndProps): DrawAction => {
     payload: {
       layerId: activeLayer.id,
       imageData: newImageData,
-      record: true
+      recordDescription: "Draw line"
     }
   };
 };
@@ -101,8 +99,7 @@ export const changeDrawStateBeginLine = (props: ChangeDrawStateBeginProps): Chan
     type: CHANGE_DRAW_STATE,
     payload: {
       type: LINE,
-      state: drawState,
-      record: false
+      state: drawState
     }
   };
 };
@@ -113,7 +110,6 @@ export const changeDrawStateMiddleLine = (props: ChangeDrawStateMiddleProps): Ch
   return {
     type: CHANGE_DRAW_STATE,
     payload: {
-      record: false,
       type: LINE,
       state: {
         ...state,
@@ -128,8 +124,7 @@ export const changeDrawStateEndLine = (_props: ChangeDrawStateEndProps): ChangeD
   type: CHANGE_DRAW_STATE,
   payload: {
     type: LINE,
-    state: {},
-    record: false
+    state: {}
   }
 });
 
@@ -150,8 +145,7 @@ export const drawGuideLine = (props: DrawGuideProps): DrawGuideAction => {
   return {
     type: DRAW_GUIDE,
     payload: {
-      imageData: newImageData,
-      record: false
+      imageData: newImageData
     }
   };
 };

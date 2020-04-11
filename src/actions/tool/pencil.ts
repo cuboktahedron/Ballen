@@ -37,8 +37,7 @@ export const drawBeginPencil = (props: DrawBeginProps): DrawAction => {
     type: DRAW,
     payload: {
       layerId: activeLayer.id,
-      imageData: newImageData,
-      record: false
+      imageData: newImageData
     }
   };
 };
@@ -73,8 +72,7 @@ export const drawMiddlePencil = (props: DrawMiddleProps): DrawAction => {
     type: DRAW,
     payload: {
       layerId: activeLayer.id,
-      imageData: newImageData,
-      record: false
+      imageData: newImageData
     }
   };
 };
@@ -90,7 +88,7 @@ export const drawEndPencil = (props: DrawEndProps): DrawAction => {
     payload: {
       layerId: activeLayer.id,
       imageData: activeLayer.imageData,
-      record: true
+      recordDescription: "Draw by pencil"
     }
   };
 };
@@ -111,8 +109,7 @@ export const changeDrawStateBeginPencil = (props: ChangeDrawStateBeginProps): Ch
     type: CHANGE_DRAW_STATE,
     payload: {
       type: PENCIL,
-      state: drawState,
-      record: false
+      state: drawState
     }
   };
 };
@@ -125,8 +122,7 @@ export const changeDrawStateMiddlePencil = (props: ChangeDrawStateMiddleProps): 
     type: CHANGE_DRAW_STATE,
     payload: {
       type: PENCIL,
-      state: drawState,
-      record: false
+      state: drawState
     }
   };
 };
@@ -136,8 +132,7 @@ export const changeDrawStateEndPencil = (_props: ChangeDrawStateEndProps): Chang
   type: CHANGE_DRAW_STATE,
   payload: {
     type: PENCIL,
-    state: {},
-    record: false
+    state: {}
   }
 });
 
@@ -146,8 +141,7 @@ export const drawGuidePencil = (_props: DrawGuideProps): DrawGuideAction => {
   return {
     type: DRAW_GUIDE,
     payload: {
-      imageData: null,
-      record: false
+      imageData: null
     }
   };
 };

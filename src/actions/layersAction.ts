@@ -18,7 +18,6 @@ export type ChangeActiveLayerAction = {
 export const changeActiveLayer = (layerId: number): ChangeActiveLayerAction => ({
   type: CHANGE_ACTIVE_LAYER,
   payload: {
-    record: false,
     layerId
   }
 });
@@ -30,7 +29,7 @@ export type AddLayerAction = {
 export const addLayer = (): AddLayerAction => ({
   type: ADD_LAYER,
   payload: {
-    record: true
+    recordDescription: "Add layer"
   }
 });
 
@@ -44,7 +43,7 @@ export type DeleteLayerAction = {
 export const deleteLayer = (layerId: number): DeleteLayerAction => ({
   type: DELETE_LAYER,
   payload: {
-    record: true,
+    recordDescription: "Delete layer",
     layerId
   }
 });
@@ -59,7 +58,7 @@ export const moveLayer = (fromIndex: number, toIndex: number, layers: LayerState
   return {
     type: MOVE_LAYER,
     payload: {
-      record: true,
+      recordDescription: "Change layer order", // TODO: record only move completed
       layers: newLayers
     }
   };

@@ -25,8 +25,7 @@ export const drawBeginRectangle = (props: DrawBeginProps): DrawAction => {
     type: DRAW,
     payload: {
       layerId: activeLayer.id,
-      imageData: null,
-      record: false
+      imageData: null
     }
   };
 };
@@ -41,8 +40,7 @@ export const drawMiddleRectangle = (props: DrawMiddleProps): DrawAction => {
     type: DRAW,
     payload: {
       layerId: activeLayer.id,
-      imageData: null,
-      record: false
+      imageData: null
     }
   };
 };
@@ -80,7 +78,7 @@ export const drawEndRectangle = (props: DrawEndProps): DrawAction => {
     payload: {
       layerId: activeLayer.id,
       imageData: newImageData,
-      record: true
+      recordDescription: "Draw rectangle"
     }
   };
 };
@@ -101,8 +99,7 @@ export const changeDrawStateBeginRectangle = (props: ChangeDrawStateBeginProps):
     type: CHANGE_DRAW_STATE,
     payload: {
       type: RECTANGLE,
-      state: drawState,
-      record: false
+      state: drawState
     }
   };
 };
@@ -117,8 +114,7 @@ export const changeDrawStateMiddleRectangle = (props: ChangeDrawStateMiddleProps
       state: {
         ...state,
         to: props.coords
-      },
-      record: false
+      }
     }
   };
 };
@@ -128,8 +124,7 @@ export const changeDrawStateEndRectangle = (_props: ChangeDrawStateEndProps): Ch
   type: CHANGE_DRAW_STATE,
   payload: {
     type: RECTANGLE,
-    state: {},
-    record: false
+    state: {}
   }
 });
 
@@ -151,8 +146,7 @@ export const drawGuideRectangle = (props: DrawGuideProps): DrawGuideAction => {
   return {
     type: DRAW_GUIDE,
     payload: {
-      imageData: newImageData,
-      record: false
+      imageData: newImageData
     }
   };
 };

@@ -17,8 +17,7 @@ export const batch = (...actions: BallenAction[]): BatchAction => {
   return {
     type: BATCH,
     payload: {
-      actions,
-      record: false
+      actions
     }
   };
 };
@@ -30,9 +29,7 @@ export type UndoAction = {
 export const undo = (): UndoAction => {
   return {
     type: UNDO,
-    payload: {
-      record: false
-    }
+    payload: {}
   };
 };
 
@@ -43,8 +40,6 @@ export type RedoAction = {
 export const redo = (): RedoAction => {
   return {
     type: REDO,
-    payload: {
-      record: false
-    }
+    payload: {}
   };
 };

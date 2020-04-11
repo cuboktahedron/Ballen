@@ -58,7 +58,6 @@ export type ChangeToolAction = {
 export const changeTool = (type: ToolType): ChangeToolAction => ({
   type: CHANGE_TOOL,
   payload: {
-    record: false,
     type
   }
 });
@@ -74,7 +73,6 @@ export type ChangeToolPropertyAction = {
 export const changeToolProperty = (type: ToolType, property: ToolProperty): ChangeToolPropertyAction => ({
   type: CHANGE_TOOL_PROPERTY,
   payload: {
-    record: false,
     type,
     property
   }

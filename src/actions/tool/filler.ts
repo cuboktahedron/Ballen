@@ -38,7 +38,7 @@ export const drawBeginFiller = (props: DrawBeginProps): DrawAction => {
     payload: {
       layerId: activeLayer.id,
       imageData: newImageData,
-      record: false
+      recordDescription: "Draw by filler"
     }
   };
 };
@@ -56,8 +56,7 @@ export const drawMiddleFiller = (props: DrawMiddleProps): DrawAction => {
     type: DRAW,
     payload: {
       layerId: activeLayer.id,
-      imageData: null,
-      record: false
+      imageData: null
     }
   };
 };
@@ -72,8 +71,7 @@ export const drawEndFiller = (props: DrawEndProps): DrawAction => {
     type: DRAW,
     payload: {
       layerId: activeLayer.id,
-      imageData: null,
-      record: true
+      imageData: null
     }
   };
 };
@@ -91,8 +89,7 @@ export const changeDrawStateBeginFiller = (_props: ChangeDrawStateBeginProps): C
     type: CHANGE_DRAW_STATE,
     payload: {
       type: FILLER,
-      state: {},
-      record: false
+      state: {}
     }
   };
 };
@@ -103,8 +100,7 @@ export const changeDrawStateMiddleFiller = (_props: ChangeDrawStateMiddleProps):
     type: CHANGE_DRAW_STATE,
     payload: {
       type: FILLER,
-      state: {},
-      record: false
+      state: {}
     }
   };
 };
@@ -114,8 +110,7 @@ export const changeDrawStateEndFiller = (_props: ChangeDrawStateEndProps): Chang
   type: CHANGE_DRAW_STATE,
   payload: {
     type: FILLER,
-    state: {},
-    record: false
+    state: {}
   }
 });
 
@@ -124,8 +119,7 @@ export const drawGuideFiller = (_props: DrawGuideProps): DrawGuideAction => {
   return {
     type: DRAW_GUIDE,
     payload: {
-      imageData: null,
-      record: false
+      imageData: null
     }
   };
 };
