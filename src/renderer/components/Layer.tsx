@@ -167,7 +167,10 @@ const Layer: React.FC<LayerProps> = props => {
 
   const handleBlurName = (e: React.FocusEvent<HTMLInputElement>): void => {
     const value = e.currentTarget.value;
-    dispatch(changeName(activeLayer.id, value));
+
+    if (props.name !== value) {
+      dispatch(changeName(activeLayer.id, value));
+    }
   };
 
   const classes = useStyles(props);
