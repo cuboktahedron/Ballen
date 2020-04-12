@@ -11,9 +11,20 @@ import {
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { changeName, toggleVisible } from "actions/layerAction";
-import { changeActiveLayer, moveLayer } from "actions/layersAction";
+import {
+  beginMovingLayer,
+  changeActiveLayer,
+  completeMovingLayer,
+  endMovingLayer,
+  moveLayer
+} from "actions/layersAction";
 import React, { SyntheticEvent, useRef } from "react";
-import { DragObjectWithType, useDrag, useDrop } from "react-dnd";
+import {
+  DragObjectWithType,
+  DropTargetMonitor,
+  useDrag,
+  useDrop
+} from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { DndItemTypes } from "renderer/lib/dndTypes";
 import { LayerState } from "stores/layerState";
@@ -46,8 +57,9 @@ type LayerProps = LayerState & {
 };
 
 type DragItem = DragObjectWithType & {
-  layerId: number;
+  fromIndex: number;
   index: number;
+  layerId: number;
 };
 
 const Layer: React.FC<LayerProps> = props => {
@@ -56,37 +68,62 @@ const Layer: React.FC<LayerProps> = props => {
   const activeLayer = useActiveLayer();
   const dispatch = useDispatch();
 
+  const checkWhetherMoveOrNotMove = (
+    item: DragItem,
+    monitor: DropTargetMonitor
+  ): boolean => {
+    if (!ref.current) {
+      return false;
+    }
+
+    const dragIndex = item.index;
+    const hoverIndex = props.index;
+
+    if (dragIndex === hoverIndex) {
+      return false;
+    }
+
+    const hoverBoundingRect = ref.current.getBoundingClientRect();
+    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+    const clientOffset = monitor.getClientOffset();
+    if (clientOffset === null) {
+      return false;
+    }
+
+    const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+      return false;
+    }
+    if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+      return false;
+    }
+
+    return true;
+  };
+
   const [, drop] = useDrop({
     accept: DndItemTypes.LAYER,
+    drop(item: DragItem) {
+      if (item.fromIndex === item.index) {
+        return;
+      }
+
+      dispatch(completeMovingLayer(item.fromIndex, item.index, layers.layers));
+    },
+
     hover(item: DragItem, monitor) {
-      if (!ref.current) {
+      if (layers.unsettledLayers === null) {
+        return;
+      }
+
+      if (!checkWhetherMoveOrNotMove(item, monitor)) {
         return;
       }
 
       const dragIndex = item.index;
       const hoverIndex = props.index;
 
-      if (dragIndex === hoverIndex) {
-        return;
-      }
-
-      const hoverBoundingRect = ref.current.getBoundingClientRect();
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      const clientOffset = monitor.getClientOffset();
-      if (clientOffset === null) {
-        return;
-      }
-
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
-      }
-
-      dispatch(moveLayer(dragIndex, hoverIndex, layers.layers));
+      dispatch(moveLayer(dragIndex, hoverIndex, layers.unsettledLayers));
 
       item.index = hoverIndex;
     }
@@ -94,8 +131,15 @@ const Layer: React.FC<LayerProps> = props => {
   const [{ isDragging }, drag] = useDrag({
     item: {
       type: DndItemTypes.LAYER,
-      layerId: props.id,
-      index: props.index
+      fromIndex: props.index,
+      index: props.index,
+      layerId: props.id
+    },
+    begin: () => {
+      dispatch(beginMovingLayer(layers.layers));
+    },
+    end: () => {
+      dispatch(endMovingLayer());
     },
     collect: monitor => ({
       isDragging: !!monitor.isDragging()

@@ -1,12 +1,22 @@
 import { LayerState } from "stores/layerState";
 import { BallenAction } from "./actionTypes";
 
-export type LayersActions = ChangeActiveLayerAction | AddLayerAction | DeleteLayerAction | MoveLayerAction;
+export type LayersActions =
+  | ChangeActiveLayerAction
+  | AddLayerAction
+  | DeleteLayerAction
+  | BeginMovingLayerAction
+  | MoveLayerAction
+  | CompleteMovingLayerAction
+  | EndMovingLayerAction;
 
 export const CHANGE_ACTIVE_LAYER = "layers/changeActiveLayer";
 export const ADD_LAYER = "layers/addLayer";
 export const DELETE_LAYER = "layers/deleteLayer";
+export const BEGIN_MOVING_LAYER = "layers/beginMovigLayer";
 export const MOVE_LAYER = "layers/moveLayer";
+export const COMPLETE_MOVING_LAYER = "layers/endMovigLayer";
+export const END_MOVING_LAYER = "layers/endMovingLayer";
 
 export type ChangeActiveLayerAction = {
   type: typeof CHANGE_ACTIVE_LAYER;
@@ -48,6 +58,27 @@ export const deleteLayer = (layerId: number): DeleteLayerAction => ({
   }
 });
 
+export type BeginMovingLayerAction = {
+  type: typeof BEGIN_MOVING_LAYER;
+  payload: {
+    layers: LayerState[];
+  };
+} & BallenAction;
+
+export const beginMovingLayer = (layers: LayerState[]): BeginMovingLayerAction => ({
+  type: BEGIN_MOVING_LAYER,
+  payload: {
+    layers: [...layers]
+  }
+});
+
+export type MoveLayerAction = {
+  type: typeof MOVE_LAYER;
+  payload: {
+    layers: LayerState[];
+  };
+} & BallenAction;
+
 export const moveLayer = (fromIndex: number, toIndex: number, layers: LayerState[]): MoveLayerAction => {
   const newLayers: LayerState[] = [...layers];
 
@@ -58,15 +89,44 @@ export const moveLayer = (fromIndex: number, toIndex: number, layers: LayerState
   return {
     type: MOVE_LAYER,
     payload: {
-      recordDescription: "Change layer order", // TODO: record only move completed
       layers: newLayers
     }
   };
 };
 
-export type MoveLayerAction = {
-  type: typeof MOVE_LAYER;
+export type CompleteMovingLayerAction = {
+  type: typeof COMPLETE_MOVING_LAYER;
   payload: {
     layers: LayerState[];
   };
 } & BallenAction;
+
+export const completeMovingLayer = (
+  fromIndex: number,
+  toIndex: number,
+  layers: LayerState[]
+): CompleteMovingLayerAction => {
+  const newLayers: LayerState[] = [...layers];
+
+  const fromLayer = layers[fromIndex];
+  newLayers.splice(fromIndex, 1);
+  newLayers.splice(toIndex, 0, fromLayer);
+
+  return {
+    type: COMPLETE_MOVING_LAYER,
+    payload: {
+      recordDescription: "Change layer order",
+      layers: newLayers
+    }
+  };
+};
+
+export type EndMovingLayerAction = {
+  type: typeof END_MOVING_LAYER;
+  payload: {};
+} & BallenAction;
+
+export const endMovingLayer = (): EndMovingLayerAction => ({
+  type: END_MOVING_LAYER,
+  payload: {}
+});

@@ -14,7 +14,8 @@ const Layers: React.FC = () => {
     return state.layers;
   });
 
-  const layerItems = layers.layers.map((layer, index) => {
+  const renderLayers: LayerState[] = layers.unsettledLayers ?? layers.layers;
+  const layerItems = renderLayers.map((layer, index) => {
     return (
       <Layer
         key={layer.id}

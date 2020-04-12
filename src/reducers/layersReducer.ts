@@ -1,5 +1,14 @@
 import { BallenAction } from "actions/actionTypes";
-import { ADD_LAYER, CHANGE_ACTIVE_LAYER, DELETE_LAYER, LayersActions, MOVE_LAYER } from "actions/layersAction";
+import {
+  ADD_LAYER,
+  CHANGE_ACTIVE_LAYER,
+  DELETE_LAYER,
+  LayersActions,
+  MOVE_LAYER,
+  END_MOVING_LAYER,
+  BEGIN_MOVING_LAYER,
+  COMPLETE_MOVING_LAYER
+} from "actions/layersAction";
 import { InitialLayersState, LayersState } from "stores/layersState";
 import layerReducer from "./layerReducer";
 
@@ -59,8 +68,17 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
         return { ...state, activeLayerId };
       }
     }
+    case BEGIN_MOVING_LAYER: {
+      return { ...state, unsettledLayers: [...action.payload.layers] };
+    }
     case MOVE_LAYER: {
-      return { ...state, layers: [...action.payload.layers] };
+      return { ...state, unsettledLayers: [...action.payload.layers] };
+    }
+    case COMPLETE_MOVING_LAYER: {
+      return { ...state, layers: [...action.payload.layers], unsettledLayers: null };
+    }
+    case END_MOVING_LAYER: {
+      return { ...state, unsettledLayers: null };
     }
     default: {
       let stateChanged = false;

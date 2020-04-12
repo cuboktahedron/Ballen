@@ -1,4 +1,5 @@
 import { drawBegin, drawEnd, drawMiddle } from "actions/layerAction";
+import { batch } from "actions/rootAction";
 import {
   changeDrawStateBegin,
   changeDrawStateEnd,
@@ -12,11 +13,11 @@ import React, {
   useState
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { LayerState } from "stores/layerState";
 import { RootState } from "stores/rootState";
 import GuideLayerCanvas from "./GuideLayerCanvas";
 import LayerCanvas, { LayerCanvasMethods } from "./LayerCanvas";
 import { useActiveLayer } from "./Layers";
-import { batch } from "actions/rootAction";
 
 const LayerCanvases: React.FC = () => {
   const state = useSelector((state: RootState) => state);
@@ -31,7 +32,8 @@ const LayerCanvases: React.FC = () => {
     refs[layer.id] = createRef<LayerCanvasMethods>();
   });
 
-  const layerCanvasItems = layers.layers.map((layer, index) => {
+  const renderLayers: LayerState[] = layers.unsettledLayers ?? layers.layers;
+  const layerCanvasItems = renderLayers.map((layer, index) => {
     const zIndex = layers.layers.length - index;
     const ref = refs[layer.id];
 
