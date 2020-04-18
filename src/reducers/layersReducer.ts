@@ -18,7 +18,7 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
   const reducerName = action.type.split("/")[1];
   if (reducerName === "layer") {
     let changed = false;
-    const newState = state.layers.map(layer => {
+    const newLayers = state.layers.map(layer => {
       const newLayer = layerReducer(layer, action);
       if (newLayer !== layer) {
         changed = true;
@@ -29,7 +29,7 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
     });
 
     if (changed) {
-      return { ...state, layers: newState };
+      return { ...state, layers: newLayers };
     } else {
       return state;
     }
@@ -41,13 +41,17 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
     case ADD_LAYER: {
       const newState = { ...state };
       newState.layerIdSequence++;
-      newState.layers.push({
-        id: state.layerIdSequence,
-        color: "#000000",
-        name: `layer-${state.layerIdSequence}`,
-        visible: true,
-        imageData: new ImageData(state.size.x, state.size.y)
-      });
+      newState.layers = [
+        ...newState.layers,
+        {
+          id: state.layerIdSequence,
+          color: "#000000",
+          name: `layer-${state.layerIdSequence}`,
+          visible: true,
+          imageData: new ImageData(state.size.x, state.size.y)
+        }
+      ];
+
       if (newState.activeLayerId === -1) {
         newState.activeLayerId = newState.layers[0].id;
       }
@@ -62,10 +66,13 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
       if (index === -1) {
         return state;
       } else {
-        state.layers.splice(index, 1);
-        const nextLayerIndex = state.layers.length === index ? index - 1 : index;
-        const activeLayerId = state.layers[nextLayerIndex].id;
-        return { ...state, activeLayerId };
+        const newState = { ...state };
+
+        newState.layers = [...newState.layers];
+        newState.layers.splice(index, 1);
+        const nextLayerIndex = newState.layers.length === index ? index - 1 : index;
+        newState.activeLayerId = newState.layers[nextLayerIndex].id;
+        return newState;
       }
     }
     case BEGIN_MOVING_LAYER: {
@@ -81,24 +88,7 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
       return { ...state, unsettledLayers: null };
     }
     default: {
-      let stateChanged = false;
-      state.layers = state.layers.map(layer => {
-        if (layer.id === state.activeLayerId) {
-          const newLayer = layerReducer(layer, action);
-          if (layer !== newLayer) {
-            stateChanged = true;
-          }
-          return newLayer;
-        } else {
-          return layer;
-        }
-      });
-
-      if (stateChanged) {
-        return { ...state };
-      } else {
-        return state;
-      }
+      return state;
     }
   }
 }
