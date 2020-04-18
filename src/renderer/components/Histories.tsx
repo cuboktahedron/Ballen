@@ -13,7 +13,7 @@ const Histories: React.FC = () => {
     .map((history, index) => {
       return (
         <History
-          key={history.id} // TODO: idを使う
+          key={history.id}
           active={histories.no === index}
           no={index}
           {...history}
