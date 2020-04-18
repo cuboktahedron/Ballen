@@ -35,7 +35,7 @@ const Layers: React.FC = () => {
   };
 
   return (
-    <div>
+    <div style={{ maxHeight: "300px", overflow: "auto" }}>
       <List>{layerItems}</List>
       <IconButton onClick={addLayerHander}>
         <AddCircleOutlineIcon />
