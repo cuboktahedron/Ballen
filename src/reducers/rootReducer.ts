@@ -1,14 +1,16 @@
 import { BallenAction } from "actions/actionTypes";
+import { backward, forward, push } from "actions/historyAction";
+import { BATCH, REDO, RootActions, UNDO } from "actions/rootAction";
+import { Action } from "redux";
 import { InitialRootState, RootState } from "stores/rootState";
 import buildReducer from "./buildReducer";
 import guideLayerReducer from "./guideLayerReducer";
 import historyReducer from "./historyReducer";
 import layersReducer from "./layersReducer";
+import processReducer from "./processReducer";
 import toolsReducer from "./toolsReducer";
-import { push, forward, backward } from "actions/historyAction";
-import { REDO, UNDO, BATCH, RootActions } from "actions/rootAction";
 
-export default function reducer(state: RootState = InitialRootState, action: BallenAction): RootState {
+export default function reducer(state: RootState = InitialRootState, action: Action): RootState {
   const rootAction = action as RootActions;
   if (rootAction.type === BATCH) {
     let currentState = state;
@@ -37,18 +39,38 @@ export default function reducer(state: RootState = InitialRootState, action: Bal
   }
 
   const reducerName = action.type.split("/")[0];
+  const bAction = action as BallenAction;
 
   switch (reducerName) {
+    case "process": {
+      const newState = processReducer(state.process, bAction);
+      if (newState !== state.process) {
+        if (bAction.payload.recordDescription) {
+          return {
+            ...state,
+            process: newState,
+            history: historyReducer(
+              state.history,
+              push({ ...state, process: newState }, bAction.payload.recordDescription)
+            )
+          };
+        } else {
+          return { ...state, process: newState };
+        }
+      } else {
+        return state;
+      }
+    }
     case "build": {
-      const newState = buildReducer(state.build, action);
+      const newState = buildReducer(state.build, bAction);
       if (newState !== state.build) {
-        if (action.payload.recordDescription) {
+        if (bAction.payload.recordDescription) {
           return {
             ...state,
             build: newState,
             history: historyReducer(
               state.history,
-              push({ ...state, build: newState }, action.payload.recordDescription)
+              push({ ...state, build: newState }, bAction.payload.recordDescription)
             )
           };
         } else {
@@ -59,15 +81,15 @@ export default function reducer(state: RootState = InitialRootState, action: Bal
       }
     }
     case "guideLayer": {
-      const newState = guideLayerReducer(state.guideLayer, action);
+      const newState = guideLayerReducer(state.guideLayer, bAction);
       if (newState !== state.guideLayer) {
-        if (action.payload.recordDescription) {
+        if (bAction.payload.recordDescription) {
           return {
             ...state,
             guideLayer: newState,
             history: historyReducer(
               state.history,
-              push({ ...state, guideLayer: newState }, action.payload.recordDescription)
+              push({ ...state, guideLayer: newState }, bAction.payload.recordDescription)
             )
           };
         } else {
@@ -78,15 +100,15 @@ export default function reducer(state: RootState = InitialRootState, action: Bal
       }
     }
     case "layers": {
-      const newState = layersReducer(state.layers, action);
+      const newState = layersReducer(state.layers, bAction);
       if (newState !== state.layers) {
-        if (action.payload.recordDescription) {
+        if (bAction.payload.recordDescription) {
           return {
             ...state,
             layers: newState,
             history: historyReducer(
               state.history,
-              push({ ...state, layers: newState }, action.payload.recordDescription)
+              push({ ...state, layers: newState }, bAction.payload.recordDescription)
             )
           };
         } else {
@@ -97,15 +119,15 @@ export default function reducer(state: RootState = InitialRootState, action: Bal
       }
     }
     case "tools": {
-      const newState = toolsReducer(state.tools, action);
+      const newState = toolsReducer(state.tools, bAction);
       if (newState !== state.tools) {
-        if (action.payload.recordDescription) {
+        if (bAction.payload.recordDescription) {
           return {
             ...state,
             tools: newState,
             history: historyReducer(
               state.history,
-              push({ ...state, tools: newState }, action.payload.recordDescription)
+              push({ ...state, tools: newState }, bAction.payload.recordDescription)
             )
           };
         } else {
@@ -116,7 +138,7 @@ export default function reducer(state: RootState = InitialRootState, action: Bal
       }
     }
     case "history": {
-      const newState = historyReducer(state.history, action);
+      const newState = historyReducer(state.history, bAction);
       if (newState !== state.history) {
         return { ...state, history: newState };
       } else {

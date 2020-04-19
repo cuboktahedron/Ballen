@@ -3,7 +3,8 @@ import {
   createStyles,
   Grid,
   makeStyles,
-  Paper
+  Paper,
+  Box
 } from "@material-ui/core";
 import { addLayer } from "actions/layersAction";
 import React, { useEffect } from "react";
@@ -15,6 +16,8 @@ import LayerCanvases from "./LayerCanvases";
 import Layers from "./Layers";
 import ToolBar from "./ToolBar";
 import Histories from "./Histories";
+import MainMenu from "./MainMenu";
+import Process from "./Process";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -55,24 +58,29 @@ const App: React.FC = () => {
 
   if (layers.layers.length > 0) {
     return (
-      <Container>
-        {canvas}
-        <Grid container>
-          <Grid item xs={6}>
-            <ToolBar />
+      <div>
+        <MainMenu />
+        <Box style={{ marginTop: "44px" }}>
+          {canvas}
+          <Grid container>
+            <Grid item xs={6}>
+              <ToolBar />
+            </Grid>
+            <Grid item xs={6}>
+              <Layers />
+              <Histories />
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Layers />
-            <Histories />
-          </Grid>
-        </Grid>
-        <KeyShortcut />
-      </Container>
+          <KeyShortcut />
+          <Process />
+        </Box>
+      </div>
     );
   } else {
     return (
       <Container>
         <KeyShortcut />
+        <Process />
       </Container>
     );
   }

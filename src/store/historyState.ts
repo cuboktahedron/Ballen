@@ -1,6 +1,7 @@
 import { BuildState } from "./buildState";
 import { GuideLayerState } from "./guideLayerState";
 import { LayersState } from "./layersState";
+import { ProcessState } from "./processState";
 import { ToolsState } from "./toolsState";
 
 export type HistoriesState = {
@@ -14,6 +15,7 @@ export type StatesOfHistory = {
   tools?: ToolsState;
   build?: BuildState;
   guideLayer?: GuideLayerState;
+  process?: ProcessState;
 };
 
 export type HistoryState = {

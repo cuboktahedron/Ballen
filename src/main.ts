@@ -1,6 +1,5 @@
-import { BrowserWindow, app } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import { client } from "electron-connect";
-
 import os from "os";
 import path from "path";
 
@@ -41,5 +40,11 @@ app.on("activate", () => {
         "/AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.2.0_0"
       )
     );
+  }
+});
+
+ipcMain.on("quit", (): void => {
+  if (mainWindow) {
+    app.quit();
   }
 });
