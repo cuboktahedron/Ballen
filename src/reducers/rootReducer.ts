@@ -4,6 +4,7 @@ import { BATCH, REDO, RootActions, UNDO } from "actions/rootAction";
 import { Action } from "redux";
 import { InitialRootState, RootState } from "stores/rootState";
 import buildReducer from "./buildReducer";
+import fileReducer from "./fileReducer";
 import guideLayerReducer from "./guideLayerReducer";
 import historyReducer from "./historyReducer";
 import layersReducer from "./layersReducer";
@@ -94,6 +95,25 @@ export default function reducer(state: RootState = InitialRootState, action: Act
           };
         } else {
           return { ...state, guideLayer: newState };
+        }
+      } else {
+        return state;
+      }
+    }
+    case "file": {
+      const newState = fileReducer(state.file, bAction);
+      if (newState !== state.file) {
+        if (bAction.payload.recordDescription) {
+          return {
+            ...state,
+            file: newState,
+            history: historyReducer(
+              state.history,
+              push({ ...state, file: newState }, bAction.payload.recordDescription)
+            )
+          };
+        } else {
+          return { ...state, file: newState };
         }
       } else {
         return state;

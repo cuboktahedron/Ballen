@@ -3,6 +3,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { quit } from "actions/processAction";
+import { save } from "actions/fileAction";
 
 const MainMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,11 @@ const MainMenu: React.FC = () => {
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleSave = (): void => {
+    dispatch(save());
+    setAnchorEl(null);
   };
 
   const handleQuit = (): void => {
@@ -33,7 +39,7 @@ const MainMenu: React.FC = () => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Save(not implemented)</MenuItem>
+          <MenuItem onClick={handleSave}>Save</MenuItem>
           <MenuItem onClick={handleClose}>Load(not implemented)</MenuItem>
           <MenuItem onClick={handleQuit}>Quit</MenuItem>
         </Menu>

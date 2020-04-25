@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
 import BuildCanvas from "./BuildCanvas";
 import KeyShortcut from "./KeyShortcut";
+import File from "./File";
 import LayerCanvases from "./LayerCanvases";
 import Layers from "./Layers";
 import ToolBar from "./ToolBar";
@@ -56,6 +57,14 @@ const App: React.FC = () => {
     </Grid>
   );
 
+  const controllers = (
+    <Container>
+      <KeyShortcut />
+      <File />
+      <Process />
+    </Container>
+  );
+
   if (layers.layers.length > 0) {
     return (
       <div>
@@ -71,18 +80,12 @@ const App: React.FC = () => {
               <Histories />
             </Grid>
           </Grid>
-          <KeyShortcut />
-          <Process />
+          {controllers}
         </Box>
       </div>
     );
   } else {
-    return (
-      <Container>
-        <KeyShortcut />
-        <Process />
-      </Container>
-    );
+    return <div>{controllers}</div>;
   }
 };
 
