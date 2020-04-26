@@ -1,9 +1,25 @@
 import { BallenAction } from "./actionTypes";
+import { LayersSaveData } from "./layersAction";
 
-export type FileActions = SaveAction | SaveCompletedAction;
+export type FileActions = LoadAction | SaveAction;
 
+export const LOAD = "file/load";
 export const SAVE = "file/save";
-export const SAVE_COMPLETED = "file/saveCompleted";
+
+export type SaveData = {
+  layers: LayersSaveData;
+};
+
+export type LoadAction = {
+  type: typeof LOAD;
+} & BallenAction;
+
+export const load = (): LoadAction => {
+  return {
+    type: LOAD,
+    payload: {}
+  };
+};
 
 export type SaveAction = {
   type: typeof SAVE;
@@ -12,17 +28,6 @@ export type SaveAction = {
 export const save = (): SaveAction => {
   return {
     type: SAVE,
-    payload: {}
-  };
-};
-
-export type SaveCompletedAction = {
-  type: typeof SAVE_COMPLETED;
-} & BallenAction;
-
-export const saveCompleted = (): SaveCompletedAction => {
-  return {
-    type: SAVE_COMPLETED,
     payload: {}
   };
 };

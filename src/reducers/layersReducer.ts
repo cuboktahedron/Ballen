@@ -7,7 +7,8 @@ import {
   MOVE_LAYER,
   END_MOVING_LAYER,
   BEGIN_MOVING_LAYER,
-  COMPLETE_MOVING_LAYER
+  COMPLETE_MOVING_LAYER,
+  LOAD_LAYERS
 } from "actions/layersAction";
 import { InitialLayersState, LayersState } from "stores/layersState";
 import layerReducer from "./layerReducer";
@@ -44,11 +45,11 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
       newState.layers = [
         ...newState.layers,
         {
-          id: state.layerIdSequence,
+          id: newState.layerIdSequence,
           color: "#000000",
-          name: `layer-${state.layerIdSequence}`,
+          name: `layer-${newState.layerIdSequence}`,
           visible: true,
-          imageData: new ImageData(state.size.x, state.size.y)
+          imageData: new ImageData(newState.size.x, newState.size.y)
         }
       ];
 
@@ -86,6 +87,22 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
     }
     case END_MOVING_LAYER: {
       return { ...state, unsettledLayers: null };
+    }
+    case LOAD_LAYERS: {
+      const newState = { ...state, size: { ...action.payload.size } };
+      newState.layerIdSequence = -1;
+      newState.layers = action.payload.layers.map(layer => {
+        newState.layerIdSequence++;
+
+        return {
+          ...layer,
+          id: newState.layerIdSequence,
+          visible: true
+        };
+      });
+
+      newState.activeLayerId = newState.layers[0].id;
+      return newState;
     }
     default: {
       return state;

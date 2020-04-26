@@ -1,19 +1,6 @@
+import { SaveData } from "actions/fileAction";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
-
-export type SaveData = {
-  layers: LayersSaveData;
-};
-
-export type LayersSaveData = {
-  layers: LayerSaveData[];
-};
-
-export type LayerSaveData = {
-  color: string;
-  imageDataBase64: string;
-  name: string;
-};
 
 const useSave = (): string => {
   const state = useSelector((state: RootState) => state);
@@ -29,6 +16,7 @@ const useSave = (): string => {
 
   const saveData: SaveData = {
     layers: {
+      size: state.layers.size,
       layers: state.layers.layers.map(layer => {
         const base64String = btoa(fromCharCode(layer.imageData.data));
 

@@ -1,6 +1,6 @@
 import { BallenAction } from "actions/actionTypes";
 import { backward, forward, push } from "actions/historyAction";
-import { BATCH, REDO, RootActions, UNDO } from "actions/rootAction";
+import { BATCH, REDO, RootActions, UNDO, CLEAR_HISTORY } from "actions/rootAction";
 import { Action } from "redux";
 import { InitialRootState, RootState } from "stores/rootState";
 import buildReducer from "./buildReducer";
@@ -10,6 +10,8 @@ import historyReducer from "./historyReducer";
 import layersReducer from "./layersReducer";
 import processReducer from "./processReducer";
 import toolsReducer from "./toolsReducer";
+import { InitialHistoryState } from "stores/historyState";
+import { InitialFileState } from "stores/fileState";
 
 export default function reducer(state: RootState = InitialRootState, action: Action): RootState {
   const rootAction = action as RootActions;
@@ -21,7 +23,7 @@ export default function reducer(state: RootState = InitialRootState, action: Act
     return currentState;
   }
 
-  if (action.type === UNDO) {
+  if (rootAction.type === UNDO) {
     const newState = historyReducer(state.history, backward());
     if (newState !== state.history) {
       return { ...state, ...newState.histories[newState.no], history: newState };
@@ -30,8 +32,20 @@ export default function reducer(state: RootState = InitialRootState, action: Act
     }
   }
 
-  if (action.type === REDO) {
+  if (rootAction.type === REDO) {
     const newState = historyReducer(state.history, forward());
+    if (newState !== state.history) {
+      return { ...state, ...newState.histories[newState.no], history: newState };
+    } else {
+      return state;
+    }
+  }
+
+  if (rootAction.type === CLEAR_HISTORY) {
+    const newState = historyReducer(
+      InitialHistoryState,
+      push({ ...state, file: { ...InitialFileState } }, rootAction.payload.reason)
+    );
     if (newState !== state.history) {
       return { ...state, ...newState.histories[newState.no], history: newState };
     } else {

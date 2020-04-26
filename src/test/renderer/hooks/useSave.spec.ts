@@ -30,8 +30,8 @@ describe("useSave", () => {
         ],
         unsettledLayers: null,
         size: {
-          x: 2,
-          y: 2
+          x: 1,
+          y: 1
         }
       }
     });
@@ -42,9 +42,9 @@ describe("useSave", () => {
   });
 
   it("should make json", () => {
-    const saveData: string = useSave();
     const expected = {
       layers: {
+        size: { x: 1, y: 1 },
         layers: [
           {
             color: "010203",
@@ -60,6 +60,7 @@ describe("useSave", () => {
       }
     };
 
-    expect(saveData).toBe(JSON.stringify(expected));
+    const actual: string = useSave();
+    expect(actual).toBe(JSON.stringify(expected));
   });
 });

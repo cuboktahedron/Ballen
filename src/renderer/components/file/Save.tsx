@@ -1,11 +1,11 @@
-import { saveCompleted } from "actions/fileAction";
 import React, { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import useSave from "renderer/hooks/useSave";
+import { RootState } from "stores/rootState";
 
 const Save: React.FC = () => {
+  const file = useSelector((state: RootState) => state.file);
   const ref = useRef<HTMLAnchorElement>(null);
-  const dispatch = useDispatch();
 
   const saveData = useSave();
   const href = URL.createObjectURL(new Blob([saveData], { type: "text/json" }));
@@ -13,8 +13,7 @@ const Save: React.FC = () => {
 
   useEffect(() => {
     ref?.current?.click();
-    dispatch(saveCompleted());
-  }, []);
+  }, [file]);
 
   return <a ref={ref} download={download} href={href} />;
 };

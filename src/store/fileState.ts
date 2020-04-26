@@ -1,7 +1,13 @@
+export const FS_NONE = "none";
+export const FS_LOAD = "load";
+export const FS_SAVE = "save";
+
+export type FileStateType = typeof FS_NONE | typeof FS_LOAD | typeof FS_SAVE;
+
 export type FileState = {
-  save: boolean;
+  type: FileStateType;
 };
 
 export const InitialFileState: FileState = {
-  save: false
+  type: FS_NONE
 };

@@ -1,5 +1,6 @@
 import { LayerState } from "stores/layerState";
 import { BallenAction } from "./actionTypes";
+import { Vector2D } from "ballen-core";
 
 export type LayersActions =
   | ChangeActiveLayerAction
@@ -8,7 +9,8 @@ export type LayersActions =
   | BeginMovingLayerAction
   | MoveLayerAction
   | CompleteMovingLayerAction
-  | EndMovingLayerAction;
+  | EndMovingLayerAction
+  | LoadLayersAction;
 
 export const CHANGE_ACTIVE_LAYER = "layers/changeActiveLayer";
 export const ADD_LAYER = "layers/addLayer";
@@ -17,6 +19,18 @@ export const BEGIN_MOVING_LAYER = "layers/beginMovigLayer";
 export const MOVE_LAYER = "layers/moveLayer";
 export const COMPLETE_MOVING_LAYER = "layers/endMovigLayer";
 export const END_MOVING_LAYER = "layers/endMovingLayer";
+export const LOAD_LAYERS = "layers/loadLayers";
+
+export type LayersSaveData = {
+  layers: LayerSaveData[];
+  size: Vector2D;
+};
+
+export type LayerSaveData = {
+  color: string;
+  imageDataBase64: string;
+  name: string;
+};
 
 export type ChangeActiveLayerAction = {
   type: typeof CHANGE_ACTIVE_LAYER;
@@ -130,3 +144,44 @@ export const endMovingLayer = (): EndMovingLayerAction => ({
   type: END_MOVING_LAYER,
   payload: {}
 });
+
+export type LoadLayersAction = {
+  type: typeof LOAD_LAYERS;
+  payload: {
+    layers: {
+      color: string;
+      name: string;
+      imageData: ImageData;
+    }[];
+    size: Vector2D;
+  };
+} & BallenAction;
+
+export const loadLayers = (layers: LayersSaveData): LoadLayersAction => {
+  const loadLayers = layers.layers.map(layer => {
+    const imageData = new ImageData(layers.size.x, layers.size.y);
+    const raw = atob(layer.imageDataBase64);
+    const rawImageData = new Uint8ClampedArray(new ArrayBuffer(raw.length));
+
+    for (let i = 0; i < raw.length; i++) {
+      rawImageData[i] = raw.charCodeAt(i);
+    }
+    imageData.data.set(rawImageData);
+
+    const data = {
+      color: layer.color,
+      name: layer.name,
+      imageData
+    };
+
+    return data;
+  });
+
+  return {
+    type: LOAD_LAYERS,
+    payload: {
+      layers: loadLayers,
+      size: layers.size
+    }
+  };
+};
