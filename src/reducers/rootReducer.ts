@@ -64,10 +64,7 @@ export default function reducer(state: RootState = InitialRootState, action: Act
           return {
             ...state,
             process: newState,
-            history: historyReducer(
-              state.history,
-              push({ ...state, process: newState }, bAction.payload.recordDescription)
-            )
+            history: historyReducer(state.history, push({ process: newState }, bAction.payload.recordDescription))
           };
         } else {
           return { ...state, process: newState };
@@ -83,10 +80,7 @@ export default function reducer(state: RootState = InitialRootState, action: Act
           return {
             ...state,
             build: newState,
-            history: historyReducer(
-              state.history,
-              push({ ...state, build: newState }, bAction.payload.recordDescription)
-            )
+            history: historyReducer(state.history, push({ build: newState }, bAction.payload.recordDescription))
           };
         } else {
           return { ...state, build: newState };
@@ -102,10 +96,7 @@ export default function reducer(state: RootState = InitialRootState, action: Act
           return {
             ...state,
             guideLayer: newState,
-            history: historyReducer(
-              state.history,
-              push({ ...state, guideLayer: newState }, bAction.payload.recordDescription)
-            )
+            history: historyReducer(state.history, push({ guideLayer: newState }, bAction.payload.recordDescription))
           };
         } else {
           return { ...state, guideLayer: newState };
@@ -121,10 +112,7 @@ export default function reducer(state: RootState = InitialRootState, action: Act
           return {
             ...state,
             file: newState,
-            history: historyReducer(
-              state.history,
-              push({ ...state, file: newState }, bAction.payload.recordDescription)
-            )
+            history: historyReducer(state.history, push({ file: newState }, bAction.payload.recordDescription))
           };
         } else {
           return { ...state, file: newState };
@@ -140,10 +128,7 @@ export default function reducer(state: RootState = InitialRootState, action: Act
           return {
             ...state,
             layers: newState,
-            history: historyReducer(
-              state.history,
-              push({ ...state, layers: newState }, bAction.payload.recordDescription)
-            )
+            history: historyReducer(state.history, push({ layers: newState }, bAction.payload.recordDescription))
           };
         } else {
           return { ...state, layers: newState };
@@ -159,10 +144,7 @@ export default function reducer(state: RootState = InitialRootState, action: Act
           return {
             ...state,
             tools: newState,
-            history: historyReducer(
-              state.history,
-              push({ ...state, tools: newState }, bAction.payload.recordDescription)
-            )
+            history: historyReducer(state.history, push({ tools: newState }, bAction.payload.recordDescription))
           };
         } else {
           return { ...state, tools: newState };
