@@ -4,7 +4,7 @@ import { ToolsState } from "stores/toolsState";
 import { BallenAction } from "./actionTypes";
 import { SaveData } from "./fileAction";
 import { drawBegin, drawEnd, drawMiddle } from "./layerAction";
-import { loadLayers } from "./layersAction";
+import { loadLayers, initLayers } from "./layersAction";
 import { clearHistory } from "./rootAction";
 import { changeDrawStateBegin, changeDrawStateEnd, changeDrawStateMiddle } from "./toolsAction";
 
@@ -23,6 +23,10 @@ export const batch = (...actions: BallenAction[]): BatchAction => {
       actions
     }
   };
+};
+
+export const batchNewFile = (): BatchAction => {
+  return batch(initLayers({ x: 580, y: 580 }), clearHistory(`New file`));
 };
 
 export const batchLoad = (loadData: SaveData, filename: string): BatchAction => {

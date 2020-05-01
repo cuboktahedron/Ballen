@@ -1,9 +1,10 @@
 import { AppBar, Button, Menu, MenuItem } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
+import { batchNewFile } from "actions/batchAction";
+import { load, save } from "actions/fileAction";
+import { quit } from "actions/processAction";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { quit } from "actions/processAction";
-import { load, save } from "actions/fileAction";
 
 const MainMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,11 @@ const MainMenu: React.FC = () => {
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleNew = (): void => {
+    dispatch(batchNewFile());
+    setAnchorEl(null);
   };
 
   const handleSave = (): void => {
@@ -38,12 +44,12 @@ const MainMenu: React.FC = () => {
           File
         </Button>
         <Menu
-          id="simple-menu"
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
+          <MenuItem onClick={handleNew}>New</MenuItem>
           <MenuItem onClick={handleSave}>Save</MenuItem>
           <MenuItem onClick={handleLoad}>Load</MenuItem>
           <MenuItem onClick={handleQuit}>Quit</MenuItem>

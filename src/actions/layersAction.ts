@@ -10,7 +10,8 @@ export type LayersActions =
   | MoveLayerAction
   | CompleteMovingLayerAction
   | EndMovingLayerAction
-  | LoadLayersAction;
+  | LoadLayersAction
+  | InitLayersAction;
 
 export const CHANGE_ACTIVE_LAYER = "layers/changeActiveLayer";
 export const ADD_LAYER = "layers/addLayer";
@@ -20,6 +21,7 @@ export const MOVE_LAYER = "layers/moveLayer";
 export const COMPLETE_MOVING_LAYER = "layers/endMovigLayer";
 export const END_MOVING_LAYER = "layers/endMovingLayer";
 export const LOAD_LAYERS = "layers/loadLayers";
+export const INIT_LAYERS = "layers/initLayers";
 
 export type LayersSaveData = {
   layers: LayerSaveData[];
@@ -185,3 +187,17 @@ export const loadLayers = (layers: LayersSaveData): LoadLayersAction => {
     }
   };
 };
+
+export type InitLayersAction = {
+  type: typeof INIT_LAYERS;
+  payload: {
+    size: Vector2D;
+  };
+} & BallenAction;
+
+export const initLayers = (size: Vector2D): InitLayersAction => ({
+  type: INIT_LAYERS,
+  payload: {
+    size
+  }
+});

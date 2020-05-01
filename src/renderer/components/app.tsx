@@ -1,24 +1,24 @@
 import {
+  Box,
   Container,
   createStyles,
   Grid,
   makeStyles,
-  Paper,
-  Box
+  Paper
 } from "@material-ui/core";
-import { addLayer } from "actions/layersAction";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
 import BuildCanvas from "./BuildCanvas";
-import KeyShortcut from "./KeyShortcut";
 import File from "./File";
+import Histories from "./Histories";
+import KeyShortcut from "./KeyShortcut";
 import LayerCanvases from "./LayerCanvases";
 import Layers from "./Layers";
-import ToolBar from "./ToolBar";
-import Histories from "./Histories";
 import MainMenu from "./MainMenu";
 import Process from "./Process";
+import ToolBar from "./ToolBar";
+import { batchNewFile } from "actions/batchAction";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -37,7 +37,7 @@ const App: React.FC = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(addLayer());
+    dispatch(batchNewFile());
   }, []);
 
   const classes = useStyles();

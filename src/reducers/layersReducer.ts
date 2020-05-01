@@ -8,7 +8,8 @@ import {
   END_MOVING_LAYER,
   BEGIN_MOVING_LAYER,
   COMPLETE_MOVING_LAYER,
-  LOAD_LAYERS
+  LOAD_LAYERS,
+  INIT_LAYERS
 } from "actions/layersAction";
 import { InitialLayersState, LayersState } from "stores/layersState";
 import layerReducer from "./layerReducer";
@@ -101,6 +102,20 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
         };
       });
 
+      newState.activeLayerId = newState.layers[0].id;
+      return newState;
+    }
+    case INIT_LAYERS: {
+      const newState = { ...InitialLayersState, size: { ...action.payload.size } };
+      newState.layers = [
+        {
+          id: newState.layerIdSequence++,
+          color: "#000000",
+          name: `layer-${newState.layerIdSequence}`,
+          visible: true,
+          imageData: new ImageData(newState.size.x, newState.size.y)
+        }
+      ];
       newState.activeLayerId = newState.layers[0].id;
       return newState;
     }
