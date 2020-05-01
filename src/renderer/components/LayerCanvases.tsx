@@ -79,10 +79,11 @@ const LayerCanvases: React.FC = () => {
     if (div === null) {
       return;
     }
+
     const rect = div.getBoundingClientRect();
     const coords = {
-      x: e.pageX - rect.left,
-      y: e.pageY - rect.top
+      x: e.pageX - (rect.left + window.pageXOffset),
+      y: e.pageY - (rect.top + window.pageYOffset)
     };
 
     dispatch(
@@ -107,10 +108,11 @@ const LayerCanvases: React.FC = () => {
     if (div === null) {
       return;
     }
+
     const rect = div.getBoundingClientRect();
     const coords = {
-      x: e.pageX - rect.left,
-      y: e.pageY - rect.top
+      x: e.pageX - (rect.left + window.pageXOffset),
+      y: e.pageY - (rect.top + window.pageYOffset)
     };
 
     dispatch(
