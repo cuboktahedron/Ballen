@@ -1,7 +1,5 @@
-import { Vector2D } from "ballen-core";
-import { LayersState } from "stores/layersState";
-import { ToolsState } from "stores/toolsState";
 import { BallenAction } from "./actionTypes";
+import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "./batchAction";
 import { drawBeginEllipse, drawEndEllipse, drawMiddleEllipse, ELLIPSE } from "./tool/ellipse";
 import { drawBeginFiller, drawEndFiller, drawMiddleFiller, FILLER } from "./tool/filler";
 import { drawBeginLine, drawEndLine, drawMiddleLine, LINE } from "./tool/line";
@@ -76,14 +74,6 @@ export type DrawAction = {
   };
 } & BallenAction;
 
-export type DrawBeginProps = {
-  tools: ToolsState;
-  layers: LayersState;
-  event: {
-    coords: Vector2D;
-  };
-};
-
 export const drawBegin = (props: DrawBeginProps): DrawAction => {
   switch (props.tools.selectedType) {
     case PENCIL:
@@ -101,14 +91,6 @@ export const drawBegin = (props: DrawBeginProps): DrawAction => {
   }
 };
 
-export type DrawMiddleProps = {
-  tools: ToolsState;
-  layers: LayersState;
-  event: {
-    coords: Vector2D;
-  };
-};
-
 export const drawMiddle = (props: DrawMiddleProps): DrawAction => {
   switch (props.tools.selectedType) {
     case PENCIL:
@@ -124,14 +106,6 @@ export const drawMiddle = (props: DrawMiddleProps): DrawAction => {
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
-};
-
-export type DrawEndProps = {
-  tools: ToolsState;
-  layers: LayersState;
-  event: {
-    coords: Vector2D;
-  };
 };
 
 export const drawEnd = (props: DrawEndProps): DrawAction => {

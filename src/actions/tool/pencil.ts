@@ -1,14 +1,9 @@
+import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchAction";
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layerAction";
+import { DRAW, DrawAction } from "actions/layerAction";
 import Color from "actions/lib/Color";
 import Graphics from "actions/lib/Graphics";
-import {
-  ChangeDrawStateAction,
-  ChangeDrawStateBeginProps,
-  ChangeDrawStateEndProps,
-  ChangeDrawStateMiddleProps,
-  CHANGE_DRAW_STATE
-} from "actions/toolsAction";
+import { ChangeDrawStateAction, CHANGE_DRAW_STATE } from "actions/toolsAction";
 import { PencilProperty, ToolDrawStatePencil } from "stores/tool/pencilState";
 
 export const PENCIL = "tool/pencil";
@@ -100,9 +95,9 @@ export type ChangeDrawStatePencilAction = {
   };
 };
 
-export const changeDrawStateBeginPencil = (props: ChangeDrawStateBeginProps): ChangeDrawStateAction => {
+export const changeDrawStateBeginPencil = (props: DrawBeginProps): ChangeDrawStateAction => {
   const drawState: ToolDrawStatePencil = {
-    prevCoords: props.coords
+    prevCoords: props.event.coords
   };
 
   return {
@@ -114,9 +109,9 @@ export const changeDrawStateBeginPencil = (props: ChangeDrawStateBeginProps): Ch
   };
 };
 
-export const changeDrawStateMiddlePencil = (props: ChangeDrawStateMiddleProps): ChangeDrawStateAction => {
+export const changeDrawStateMiddlePencil = (props: DrawMiddleProps): ChangeDrawStateAction => {
   const drawState = { ...(props.tools.drawState as ToolDrawStatePencil) };
-  drawState.prevCoords = props.coords;
+  drawState.prevCoords = props.event.coords;
 
   return {
     type: CHANGE_DRAW_STATE,
@@ -128,7 +123,7 @@ export const changeDrawStateMiddlePencil = (props: ChangeDrawStateMiddleProps): 
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateEndPencil = (_props: ChangeDrawStateEndProps): ChangeDrawStateAction => ({
+export const changeDrawStateEndPencil = (_props: DrawEndProps): ChangeDrawStateAction => ({
   type: CHANGE_DRAW_STATE,
   payload: {
     type: PENCIL,

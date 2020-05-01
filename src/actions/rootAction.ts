@@ -1,27 +1,11 @@
 import { BallenAction } from "./actionTypes";
+import { BatchAction } from "./batchAction";
 
 export type RootActions = BatchAction | UndoAction | RedoAction | ClearHistoryAction;
 
-export const BATCH = "batch";
 export const UNDO = "undo";
 export const REDO = "redo";
 export const CLEAR_HISTORY = "clearHistory";
-
-export type BatchAction = {
-  type: typeof BATCH;
-  payload: {
-    actions: BallenAction[];
-  };
-} & BallenAction;
-
-export const batch = (...actions: BallenAction[]): BatchAction => {
-  return {
-    type: BATCH,
-    payload: {
-      actions
-    }
-  };
-};
 
 export type UndoAction = {
   type: typeof UNDO;

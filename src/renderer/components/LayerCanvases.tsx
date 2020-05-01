@@ -1,10 +1,8 @@
-import { drawBegin, drawEnd, drawMiddle } from "actions/layerAction";
-import { batch } from "actions/rootAction";
 import {
-  changeDrawStateBegin,
-  changeDrawStateEnd,
-  changeDrawStateMiddle
-} from "actions/toolsAction";
+  batchDrawBegin,
+  batchDrawEnd,
+  batchDrawMiddle
+} from "actions/batchAction";
 import React, {
   createRef,
   RefObject,
@@ -59,25 +57,16 @@ const LayerCanvases: React.FC = () => {
     setMouseDowned(true);
 
     dispatch(
-      batch(
-        drawBegin({
-          tools: state.tools,
-          layers: state.layers,
-          event: {
-            coords: {
-              x: e.nativeEvent.offsetX,
-              y: e.nativeEvent.offsetY
-            }
-          }
-        }),
-        changeDrawStateBegin({
-          tools: state.tools,
+      batchDrawBegin({
+        tools: state.tools,
+        layers: state.layers,
+        event: {
           coords: {
             x: e.nativeEvent.offsetX,
             y: e.nativeEvent.offsetY
           }
-        })
-      )
+        }
+      })
     );
   };
 
@@ -97,19 +86,13 @@ const LayerCanvases: React.FC = () => {
     };
 
     dispatch(
-      batch(
-        drawMiddle({
-          tools: state.tools,
-          layers: state.layers,
-          event: {
-            coords
-          }
-        }),
-        changeDrawStateMiddle({
-          tools: state.tools,
+      batchDrawMiddle({
+        tools: state.tools,
+        layers: state.layers,
+        event: {
           coords
-        })
-      )
+        }
+      })
     );
   };
 
@@ -131,19 +114,13 @@ const LayerCanvases: React.FC = () => {
     };
 
     dispatch(
-      batch(
-        drawEnd({
-          tools: state.tools,
-          layers: state.layers,
-          event: {
-            coords
-          }
-        }),
-        changeDrawStateEnd({
-          tools: state.tools,
+      batchDrawEnd({
+        tools: state.tools,
+        layers: state.layers,
+        event: {
           coords
-        })
-      )
+        }
+      })
     );
   };
 

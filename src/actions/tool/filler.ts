@@ -1,14 +1,9 @@
+import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchAction";
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layerAction";
+import { DRAW, DrawAction } from "actions/layerAction";
 import Color from "actions/lib/Color";
 import Graphics from "actions/lib/Graphics";
-import {
-  ChangeDrawStateAction,
-  ChangeDrawStateBeginProps,
-  ChangeDrawStateEndProps,
-  ChangeDrawStateMiddleProps,
-  CHANGE_DRAW_STATE
-} from "actions/toolsAction";
+import { ChangeDrawStateAction, CHANGE_DRAW_STATE } from "actions/toolsAction";
 import { FillerProperty, ToolDrawStateFiller } from "stores/tool/fillerState";
 
 export const FILLER = "tool/filler";
@@ -84,7 +79,7 @@ export type ChangeDrawStateFillerAction = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateBeginFiller = (_props: ChangeDrawStateBeginProps): ChangeDrawStateAction => {
+export const changeDrawStateBeginFiller = (_props: DrawBeginProps): ChangeDrawStateAction => {
   return {
     type: CHANGE_DRAW_STATE,
     payload: {
@@ -95,7 +90,7 @@ export const changeDrawStateBeginFiller = (_props: ChangeDrawStateBeginProps): C
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateMiddleFiller = (_props: ChangeDrawStateMiddleProps): ChangeDrawStateAction => {
+export const changeDrawStateMiddleFiller = (_props: DrawMiddleProps): ChangeDrawStateAction => {
   return {
     type: CHANGE_DRAW_STATE,
     payload: {
@@ -106,7 +101,7 @@ export const changeDrawStateMiddleFiller = (_props: ChangeDrawStateMiddleProps):
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateEndFiller = (_props: ChangeDrawStateEndProps): ChangeDrawStateAction => ({
+export const changeDrawStateEndFiller = (_props: DrawEndProps): ChangeDrawStateAction => ({
   type: CHANGE_DRAW_STATE,
   payload: {
     type: FILLER,

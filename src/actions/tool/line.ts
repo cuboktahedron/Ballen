@@ -1,15 +1,9 @@
+import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchAction";
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layerAction";
+import { DRAW, DrawAction } from "actions/layerAction";
 import Color from "actions/lib/Color";
 import Graphics from "actions/lib/Graphics";
-import {
-  ChangeDrawStateAction,
-  ChangeDrawStateBeginProps,
-  ChangeDrawStateEndProps,
-  ChangeDrawStateMiddleProps,
-  CHANGE_DRAW_STATE,
-  GUIDE_LINE_COLOR
-} from "actions/toolsAction";
+import { ChangeDrawStateAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
 import { LineProperty, ToolDrawStateLine } from "stores/tool/lineState";
 
 export const LINE = "tool/line";
@@ -90,9 +84,9 @@ export type ChangeDrawStateLineAction = {
   };
 };
 
-export const changeDrawStateBeginLine = (props: ChangeDrawStateBeginProps): ChangeDrawStateAction => {
+export const changeDrawStateBeginLine = (props: DrawBeginProps): ChangeDrawStateAction => {
   const drawState: ToolDrawStateLine = {
-    origin: props.coords
+    origin: props.event.coords
   };
 
   return {
@@ -104,7 +98,7 @@ export const changeDrawStateBeginLine = (props: ChangeDrawStateBeginProps): Chan
   };
 };
 
-export const changeDrawStateMiddleLine = (props: ChangeDrawStateMiddleProps): ChangeDrawStateAction => {
+export const changeDrawStateMiddleLine = (props: DrawMiddleProps): ChangeDrawStateAction => {
   const state = props.tools.drawState as ToolDrawStateLine;
 
   return {
@@ -113,14 +107,14 @@ export const changeDrawStateMiddleLine = (props: ChangeDrawStateMiddleProps): Ch
       type: LINE,
       state: {
         ...state,
-        to: props.coords
+        to: props.event.coords
       }
     }
   };
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateEndLine = (_props: ChangeDrawStateEndProps): ChangeDrawStateAction => ({
+export const changeDrawStateEndLine = (_props: DrawEndProps): ChangeDrawStateAction => ({
   type: CHANGE_DRAW_STATE,
   payload: {
     type: LINE,

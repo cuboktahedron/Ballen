@@ -1,6 +1,5 @@
+import { batchLoad } from "actions/batchAction";
 import { SaveData } from "actions/fileAction";
-import { loadLayers } from "actions/layersAction";
-import { batch, clearHistory } from "actions/rootAction";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
@@ -32,9 +31,7 @@ const Load: React.FC = () => {
       const loadJsonString = target.result as string;
       const loadData = JSON.parse(loadJsonString) as SaveData;
 
-      dispatch(
-        batch(loadLayers(loadData.layers), clearHistory(`Load ${file.name}`))
-      );
+      dispatch(batchLoad(loadData, file.name));
     });
 
     reader.readAsText(file);

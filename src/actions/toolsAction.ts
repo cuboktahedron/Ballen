@@ -1,5 +1,6 @@
-import { Vector2D } from "ballen-core";
-import { ToolProperty, ToolsState } from "stores/toolsState";
+import { ToolProperty } from "stores/toolsState";
+import { BallenAction } from "./actionTypes";
+import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "./batchAction";
 import Color from "./lib/Color";
 import {
   changeDrawStateBeginEllipse,
@@ -36,7 +37,6 @@ import {
   ChangeDrawStateRectangleAction,
   RECTANGLE
 } from "./tool/rectangle";
-import { BallenAction } from "./actionTypes";
 
 export type ToolsActions = ChangeToolAction | ChangeToolPropertyAction | ChangeDrawStateAction;
 
@@ -78,21 +78,6 @@ export const changeToolProperty = (type: ToolType, property: ToolProperty): Chan
   }
 });
 
-export type ChangeDrawStateBeginProps = {
-  tools: ToolsState;
-  coords: Vector2D;
-};
-
-export type ChangeDrawStateMiddleProps = {
-  tools: ToolsState;
-  coords: Vector2D;
-};
-
-export type ChangeDrawStateEndProps = {
-  tools: ToolsState;
-  coords: Vector2D;
-};
-
 export type ChangeDrawStateAction = { type: typeof CHANGE_DRAW_STATE } & (
   | ChangeDrawStatePencilAction
   | ChangeDrawStateFillerAction
@@ -102,7 +87,7 @@ export type ChangeDrawStateAction = { type: typeof CHANGE_DRAW_STATE } & (
 ) &
   BallenAction;
 
-export const changeDrawStateBegin = (props: ChangeDrawStateBeginProps): ChangeDrawStateAction => {
+export const changeDrawStateBegin = (props: DrawBeginProps): ChangeDrawStateAction => {
   switch (props.tools.selectedType) {
     case PENCIL:
       return changeDrawStateBeginPencil(props);
@@ -119,7 +104,7 @@ export const changeDrawStateBegin = (props: ChangeDrawStateBeginProps): ChangeDr
   }
 };
 
-export const changeDrawStateMiddle = (props: ChangeDrawStateMiddleProps): ChangeDrawStateAction => {
+export const changeDrawStateMiddle = (props: DrawMiddleProps): ChangeDrawStateAction => {
   switch (props.tools.selectedType) {
     case PENCIL:
       return changeDrawStateMiddlePencil(props);
@@ -136,7 +121,7 @@ export const changeDrawStateMiddle = (props: ChangeDrawStateMiddleProps): Change
   }
 };
 
-export const changeDrawStateEnd = (props: ChangeDrawStateEndProps): ChangeDrawStateAction => {
+export const changeDrawStateEnd = (props: DrawEndProps): ChangeDrawStateAction => {
   switch (props.tools.selectedType) {
     case PENCIL:
       return changeDrawStateEndPencil(props);

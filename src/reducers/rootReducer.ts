@@ -1,6 +1,6 @@
 import { BallenAction } from "actions/actionTypes";
 import { backward, forward, push } from "actions/historyAction";
-import { BATCH, REDO, RootActions, UNDO, CLEAR_HISTORY } from "actions/rootAction";
+import { REDO, RootActions, UNDO, CLEAR_HISTORY } from "actions/rootAction";
 import { Action } from "redux";
 import { InitialRootState, RootState } from "stores/rootState";
 import buildReducer from "./buildReducer";
@@ -12,6 +12,7 @@ import processReducer from "./processReducer";
 import toolsReducer from "./toolsReducer";
 import { InitialHistoryState } from "stores/historyState";
 import { InitialFileState } from "stores/fileState";
+import { BATCH } from "actions/batchAction";
 
 export default function reducer(state: RootState = InitialRootState, action: Action): RootState {
   const rootAction = action as RootActions;

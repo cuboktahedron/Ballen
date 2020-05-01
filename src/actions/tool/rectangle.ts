@@ -1,16 +1,10 @@
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
-import { DRAW, DrawAction, DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/layerAction";
+import { DRAW, DrawAction } from "actions/layerAction";
 import Color from "actions/lib/Color";
 import Graphics from "actions/lib/Graphics";
-import {
-  ChangeDrawStateAction,
-  ChangeDrawStateBeginProps,
-  ChangeDrawStateEndProps,
-  ChangeDrawStateMiddleProps,
-  CHANGE_DRAW_STATE,
-  GUIDE_LINE_COLOR
-} from "actions/toolsAction";
+import { ChangeDrawStateAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
 import { RectangleProperty, ToolDrawStateRectangle } from "stores/tool/rectangleState";
+import { DrawBeginProps, DrawMiddleProps, DrawEndProps } from "actions/batchAction";
 
 export const RECTANGLE = "tool/rectangle";
 
@@ -90,9 +84,9 @@ export type ChangeDrawStateRectangleAction = {
   };
 };
 
-export const changeDrawStateBeginRectangle = (props: ChangeDrawStateBeginProps): ChangeDrawStateAction => {
+export const changeDrawStateBeginRectangle = (props: DrawBeginProps): ChangeDrawStateAction => {
   const drawState: ToolDrawStateRectangle = {
-    origin: props.coords
+    origin: props.event.coords
   };
 
   return {
@@ -104,7 +98,7 @@ export const changeDrawStateBeginRectangle = (props: ChangeDrawStateBeginProps):
   };
 };
 
-export const changeDrawStateMiddleRectangle = (props: ChangeDrawStateMiddleProps): ChangeDrawStateAction => {
+export const changeDrawStateMiddleRectangle = (props: DrawMiddleProps): ChangeDrawStateAction => {
   const state = props.tools.drawState as ToolDrawStateRectangle;
 
   return {
@@ -113,14 +107,14 @@ export const changeDrawStateMiddleRectangle = (props: ChangeDrawStateMiddleProps
       type: RECTANGLE,
       state: {
         ...state,
-        to: props.coords
+        to: props.event.coords
       }
     }
   };
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateEndRectangle = (_props: ChangeDrawStateEndProps): ChangeDrawStateAction => ({
+export const changeDrawStateEndRectangle = (_props: DrawEndProps): ChangeDrawStateAction => ({
   type: CHANGE_DRAW_STATE,
   payload: {
     type: RECTANGLE,
