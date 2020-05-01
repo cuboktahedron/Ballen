@@ -11,11 +11,11 @@ import React, {
   useState
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useActiveLayer } from "renderer/hooks/useActiveLayer";
 import { LayerState } from "stores/layerState";
 import { RootState } from "stores/rootState";
 import GuideLayerCanvas from "./GuideLayerCanvas";
 import LayerCanvas, { LayerCanvasMethods } from "./LayerCanvas";
-import { useActiveLayer } from "./Layers";
 
 const LayerCanvases: React.FC = () => {
   const state = useSelector((state: RootState) => state);

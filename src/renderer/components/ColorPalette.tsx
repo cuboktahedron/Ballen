@@ -2,7 +2,7 @@ import { Button, createStyles, makeStyles } from "@material-ui/core";
 import { changeColor } from "actions/layerAction";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useActiveLayer } from "./Layers";
+import { useActiveLayer } from "renderer/hooks/useActiveLayer";
 
 const useStyles = makeStyles(() =>
   createStyles({

@@ -26,10 +26,10 @@ import {
   useDrop
 } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
+import { useActiveLayer } from "renderer/hooks/useActiveLayer";
 import { DndItemTypes } from "renderer/lib/dndTypes";
 import { LayerState } from "stores/layerState";
 import { RootState } from "stores/rootState";
-import { useActiveLayer } from "./Layers";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
