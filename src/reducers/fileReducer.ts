@@ -1,11 +1,16 @@
 import { BallenAction } from "actions/actionTypes";
-import { EXPORT_AS_IMAGE, FileActions, LOAD, SAVE } from "actions/fileAction";
-import { FileState, FS_EXPORT_AS_IMAGE, FS_LOAD, FS_SAVE, InitialFileState } from "stores/fileState";
+import { END_FILE, EXPORT_AS_IMAGE, FileActions, LOAD, SAVE } from "actions/fileAction";
+import { FileState, FS_EXPORT_AS_IMAGE, FS_LOAD, FS_NONE, FS_SAVE, InitialFileState } from "stores/fileState";
 
 export default function reducer(state: FileState = InitialFileState, anyAction: BallenAction): FileState {
   const action = anyAction as FileActions;
 
   switch (action.type) {
+    case END_FILE:
+      return {
+        ...state,
+        type: FS_NONE
+      };
     case LOAD:
       return {
         ...state,

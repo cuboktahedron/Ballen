@@ -1,8 +1,10 @@
+import { endFile } from "actions/fileAction";
 import React, { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
 
 const ExportAsImage: React.FC = () => {
+  const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state);
   const file = state.file;
   const build = state.build;
@@ -29,6 +31,8 @@ const ExportAsImage: React.FC = () => {
     ref.current.href = href;
     ref.current.download = download;
     ref.current.click();
+
+    dispatch(endFile());
   }, [file]);
 
   return (
