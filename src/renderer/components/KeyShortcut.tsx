@@ -1,3 +1,4 @@
+import { build } from "actions/buildAction";
 import { addLayer } from "actions/layersAction";
 import { redo, undo } from "actions/rootAction";
 import { ELLIPSE } from "actions/tool/ellipse";
@@ -8,10 +9,12 @@ import { RECTANGLE } from "actions/tool/rectangle";
 import { changeTool } from "actions/toolsAction";
 import React from "react";
 import { useHotkeys } from "react-hotkeys-hook";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "stores/rootState";
 
 const KeyShortcut: React.FC = () => {
   const dispatch = useDispatch();
+  const state = useSelector((state: RootState) => state);
 
   useHotkeys("p", () => {
     dispatch(changeTool(PENCIL));
@@ -44,6 +47,14 @@ const KeyShortcut: React.FC = () => {
   useHotkeys("ctrl + shift + Z", () => {
     dispatch(redo());
   });
+
+  useHotkeys(
+    "F5",
+    () => {
+      dispatch(build(state.layers));
+    },
+    [state.layers]
+  );
 
   return <div />;
 };

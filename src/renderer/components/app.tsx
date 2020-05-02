@@ -15,7 +15,7 @@ import Histories from "./Histories";
 import KeyShortcut from "./KeyShortcut";
 import LayerCanvases from "./LayerCanvases";
 import Layers from "./Layers";
-import MainMenu from "./MainMenu";
+import MainMenu from "./menu/MainMenu";
 import Process from "./Process";
 import ToolBar from "./ToolBar";
 import { batchNewFile } from "actions/batchAction";

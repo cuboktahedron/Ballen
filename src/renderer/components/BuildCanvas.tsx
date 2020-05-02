@@ -1,7 +1,6 @@
 import { createStyles, makeStyles } from "@material-ui/core";
-import { build as doBuild } from "actions/buildAction";
 import React, { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
 
 const useStyles = makeStyles(() =>
@@ -12,9 +11,7 @@ const useStyles = makeStyles(() =>
 
 const BuildCanvas: React.FC = () => {
   const build = useSelector((state: RootState) => state.build);
-  const layers = useSelector((state: RootState) => state.layers);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const dispatch = useDispatch();
 
   const getCanvas = (): HTMLCanvasElement => {
     const canvas = canvasRef.current;
@@ -36,10 +33,6 @@ const BuildCanvas: React.FC = () => {
   };
 
   const classes = useStyles();
-
-  useEffect(() => {
-    dispatch(doBuild(layers));
-  }, [layers]);
 
   useEffect(() => {
     const ctx = getContext();
