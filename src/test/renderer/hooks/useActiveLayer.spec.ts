@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useActiveLayer } from "renderer/hooks/useActiveLayer";
 import { InitialLayersState, LayersState } from "stores/layersState";
+import { LB_MULTIPLY, LB_NORMAL } from "stores/layerState";
 
 jest.mock("react-redux");
 
@@ -13,28 +14,31 @@ describe("useActiveLayer", () => {
       activeLayerId: 1,
       layers: [
         {
-          color: "010203",
           id: 0,
+          blend: LB_NORMAL,
+          color: "010203",
+          imageData: new ImageData(1, 1),
           name: "layer-0",
-          visible: true,
-          imageData: new ImageData(1, 1)
+          visible: true
         },
         {
-          color: "000000ff",
           id: 1,
+          blend: LB_MULTIPLY,
+          color: "000000ff",
+          imageData: new ImageData(1, 1),
           name: "layer-1",
-          visible: false,
-          imageData: new ImageData(1, 1)
+          visible: false
         }
       ]
     });
 
     const expected = {
-      color: "000000ff",
       id: 1,
+      blend: LB_MULTIPLY,
+      color: "000000ff",
+      imageData: new ImageData(1, 1),
       name: "layer-1",
-      visible: false,
-      imageData: new ImageData(1, 1)
+      visible: false
     };
 
     const actual = useActiveLayer();

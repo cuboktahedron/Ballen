@@ -1,6 +1,6 @@
-import { LayerState } from "stores/layerState";
-import { BallenAction } from "./actionTypes";
 import { Vector2D } from "ballen-core";
+import { LayerBlend, LayerState } from "stores/layerState";
+import { BallenAction } from "./actionTypes";
 
 export type LayersActions =
   | ChangeActiveLayerAction
@@ -29,6 +29,7 @@ export type LayersSaveData = {
 };
 
 export type LayerSaveData = {
+  blend: LayerBlend;
   color: string;
   imageDataBase64: string;
   name: string;
@@ -152,8 +153,9 @@ export type LoadLayersAction = {
   payload: {
     layers: {
       color: string;
-      name: string;
+      blend: LayerBlend;
       imageData: ImageData;
+      name: string;
     }[];
     size: Vector2D;
   };
@@ -171,9 +173,10 @@ export const loadLayers = (layers: LayersSaveData): LoadLayersAction => {
     imageData.data.set(rawImageData);
 
     const data = {
+      blend: layer.blend,
       color: layer.color,
-      name: layer.name,
-      imageData
+      imageData,
+      name: layer.name
     };
 
     return data;

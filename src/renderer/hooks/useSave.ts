@@ -21,6 +21,7 @@ const useSave = (): string => {
         const base64String = btoa(fromCharCode(layer.imageData.data));
 
         return {
+          blend: layer.blend,
           color: layer.color,
           imageDataBase64: base64String,
           name: layer.name

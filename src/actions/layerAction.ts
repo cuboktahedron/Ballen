@@ -1,3 +1,4 @@
+import { LayerBlend } from "stores/layerState";
 import { BallenAction } from "./actionTypes";
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "./batchAction";
 import { drawBeginEllipse, drawEndEllipse, drawMiddleEllipse, ELLIPSE } from "./tool/ellipse";
@@ -12,12 +13,29 @@ export type LayerAction = {
   };
 } & BallenAction;
 
-export type LayerActions = ChangeColorAction | ChangeNameAction | ToggleVisibleAction | DrawAction;
+export type LayerActions = ChangeBlendAction | ChangeColorAction | ChangeNameAction | ToggleVisibleAction | DrawAction;
 
+export const CHANGE_BLEND = "layers/layer/changeBlend";
 export const CHANGE_COLOR = "layers/layer/changeColor";
 export const CHANGE_NAME = "layers/layer/changeName";
 export const TOGGLE_VISIBLE = "layers/layer/toggleVisible";
 export const DRAW = "layers/layer/draw";
+
+export type ChangeBlendAction = {
+  type: typeof CHANGE_BLEND;
+  payload: {
+    blend: LayerBlend;
+  };
+} & LayerAction;
+
+export const changeBlend = (layerId: number, blend: LayerBlend): ChangeBlendAction => ({
+  type: CHANGE_BLEND,
+  payload: {
+    layerId,
+    blend,
+    recordDescription: "Change layer blend"
+  }
+});
 
 export type ChangeColorAction = {
   type: typeof CHANGE_COLOR;

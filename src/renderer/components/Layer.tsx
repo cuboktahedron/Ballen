@@ -2,15 +2,17 @@ import {
   Box,
   Button,
   createStyles,
+  FormControl,
   IconButton,
   ListItem,
   makeStyles,
+  NativeSelect,
   TextField,
   Theme
 } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { changeName, toggleVisible } from "actions/layerAction";
+import { changeBlend, changeName, toggleVisible } from "actions/layerAction";
 import {
   beginMovingLayer,
   changeActiveLayer,
@@ -28,7 +30,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useActiveLayer } from "renderer/hooks/useActiveLayer";
 import { DndItemTypes } from "renderer/lib/dndTypes";
-import { LayerState } from "stores/layerState";
+import {
+  LayerBlend,
+  LayerState,
+  LB_MULTIPLY,
+  LB_NORMAL
+} from "stores/layerState";
 import { RootState } from "stores/rootState";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -173,6 +180,14 @@ const Layer: React.FC<LayerProps> = props => {
     }
   };
 
+  const handleChangeBlend = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    const value = e.currentTarget.value as LayerBlend;
+
+    if (props.blend !== value) {
+      dispatch(changeBlend(activeLayer.id, value));
+    }
+  };
+
   const classes = useStyles(props);
 
   let visibilityButton: JSX.Element;
@@ -208,6 +223,17 @@ const Layer: React.FC<LayerProps> = props => {
           inputProps={{ maxLength: 32 }}
           onBlur={handleBlurName}
         />
+        <FormControl>
+          <NativeSelect
+            name="blend"
+            value={props.blend}
+            onChange={handleChangeBlend}
+            style={{ marginLeft: "8px" }}
+          >
+            <option value={LB_NORMAL}>normal</option>
+            <option value={LB_MULTIPLY}>multiply</option>
+          </NativeSelect>
+        </FormControl>
       </ListItem>
     </div>
   );

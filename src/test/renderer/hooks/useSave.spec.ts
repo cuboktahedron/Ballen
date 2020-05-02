@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import useSave from "renderer/hooks/useSave";
+import { LB_MULTIPLY, LB_NORMAL } from "stores/layerState";
 import { InitialRootState, RootState } from "stores/rootState";
 
 jest.mock("react-redux");
@@ -14,18 +15,20 @@ describe("useSave", () => {
         activeLayerId: 2,
         layers: [
           {
-            color: "010203",
             id: 0,
+            blend: LB_NORMAL,
+            color: "010203",
+            imageData: new ImageData(1, 1),
             name: "layer-0",
-            visible: true,
-            imageData: new ImageData(1, 1)
+            visible: true
           },
           {
-            color: "000000ff",
             id: 1,
+            blend: LB_MULTIPLY,
+            color: "000000ff",
+            imageData: new ImageData(1, 1),
             name: "layer-1",
-            visible: false,
-            imageData: new ImageData(1, 1)
+            visible: false
           }
         ],
         unsettledLayers: null,
@@ -47,11 +50,13 @@ describe("useSave", () => {
         size: { x: 1, y: 1 },
         layers: [
           {
+            blend: LB_NORMAL,
             color: "010203",
             imageDataBase64: btoa(String.fromCharCode(...new ImageData(1, 1).data)),
             name: "layer-0"
           },
           {
+            blend: LB_MULTIPLY,
             color: "000000ff",
             imageDataBase64: btoa(String.fromCharCode(...new ImageData(1, 1).data)),
             name: "layer-1"

@@ -13,6 +13,7 @@ import {
 } from "actions/layersAction";
 import { InitialLayersState, LayersState } from "stores/layersState";
 import layerReducer from "./layerReducer";
+import { LB_NORMAL } from "stores/layerState";
 
 export default function reducer(state: LayersState = InitialLayersState, anyAction: BallenAction): LayersState {
   const action = anyAction as LayersActions;
@@ -47,10 +48,11 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
         ...newState.layers,
         {
           id: newState.layerIdSequence,
+          blend: LB_NORMAL,
           color: "#000000",
+          imageData: new ImageData(newState.size.x, newState.size.y),
           name: `layer-${newState.layerIdSequence}`,
-          visible: true,
-          imageData: new ImageData(newState.size.x, newState.size.y)
+          visible: true
         }
       ];
 
@@ -110,10 +112,11 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
       newState.layers = [
         {
           id: newState.layerIdSequence++,
+          blend: LB_NORMAL,
           color: "#000000",
+          imageData: new ImageData(newState.size.x, newState.size.y),
           name: `layer-${newState.layerIdSequence}`,
-          visible: true,
-          imageData: new ImageData(newState.size.x, newState.size.y)
+          visible: true
         }
       ];
       newState.activeLayerId = newState.layers[0].id;

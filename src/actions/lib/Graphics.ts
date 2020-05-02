@@ -4,6 +4,14 @@ import { Vector2D } from "ballen-core";
 export default class Graphics {
   constructor(private imageData: ImageData) {}
 
+  get height(): number {
+    return this.imageData.height;
+  }
+
+  get width(): number {
+    return this.imageData.width;
+  }
+
   isInBounds(x: number, y: number): boolean {
     return 0 <= x && x < this.imageData.width && 0 <= y && y < this.imageData.height;
   }
