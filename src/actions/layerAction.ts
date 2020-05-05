@@ -13,11 +13,18 @@ export type LayerAction = {
   };
 } & BallenAction;
 
-export type LayerActions = ChangeBlendAction | ChangeColorAction | ChangeNameAction | ToggleVisibleAction | DrawAction;
+export type LayerActions =
+  | ChangeBlendAction
+  | ChangeColorAction
+  | ChangeNameAction
+  | ChangeOpacityAction
+  | ToggleVisibleAction
+  | DrawAction;
 
 export const CHANGE_BLEND = "layers/layer/changeBlend";
 export const CHANGE_COLOR = "layers/layer/changeColor";
 export const CHANGE_NAME = "layers/layer/changeName";
+export const CHANGE_OPACITY = "layers/layer/changeOpacity";
 export const TOGGLE_VISIBLE = "layers/layer/toggleVisible";
 export const DRAW = "layers/layer/draw";
 
@@ -66,6 +73,22 @@ export const changeName = (layerId: number, name: string): ChangeNameAction => (
     layerId,
     name,
     recordDescription: "Change layer name"
+  }
+});
+
+export type ChangeOpacityAction = {
+  type: typeof CHANGE_OPACITY;
+  payload: {
+    opacity: number;
+  };
+} & LayerAction;
+
+export const changeOpacity = (layerId: number, opacity: number): ChangeOpacityAction => ({
+  type: CHANGE_OPACITY,
+  payload: {
+    layerId,
+    opacity,
+    recordDescription: "Change layer opacity"
   }
 });
 

@@ -33,6 +33,7 @@ export type LayerSaveData = {
   color: string;
   imageDataBase64: string;
   name: string;
+  opacity: number;
 };
 
 export type ChangeActiveLayerAction = {
@@ -156,6 +157,7 @@ export type LoadLayersAction = {
       blend: LayerBlend;
       imageData: ImageData;
       name: string;
+      opacity: number;
     }[];
     size: Vector2D;
   };
@@ -176,7 +178,8 @@ export const loadLayers = (layers: LayersSaveData): LoadLayersAction => {
       blend: layer.blend,
       color: layer.color,
       imageData,
-      name: layer.name
+      name: layer.name,
+      opacity: layer.opacity
     };
 
     return data;

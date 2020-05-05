@@ -1,5 +1,13 @@
 import { BallenAction } from "actions/actionTypes";
-import { CHANGE_BLEND, CHANGE_COLOR, CHANGE_NAME, DRAW, LayerActions, TOGGLE_VISIBLE } from "actions/layerAction";
+import {
+  CHANGE_BLEND,
+  CHANGE_COLOR,
+  CHANGE_NAME,
+  CHANGE_OPACITY,
+  DRAW,
+  LayerActions,
+  TOGGLE_VISIBLE
+} from "actions/layerAction";
 import { LayerState } from "stores/layerState";
 
 export default function reducer(state: LayerState, anyAction: BallenAction): LayerState {
@@ -24,6 +32,11 @@ export default function reducer(state: LayerState, anyAction: BallenAction): Lay
       return {
         ...state,
         name: action.payload.name
+      };
+    case CHANGE_OPACITY:
+      return {
+        ...state,
+        opacity: action.payload.opacity
       };
     case TOGGLE_VISIBLE:
       return {

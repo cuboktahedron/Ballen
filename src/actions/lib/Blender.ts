@@ -21,10 +21,10 @@ export default class Blender {
     const a = ar + at + ab;
     const blendColor = new Color();
     if (a !== 0) {
-      blendColor.r = Math.trunc((rColor.r * ar + tColor.r * at + bColor.r * ab) / a);
-      blendColor.g = Math.trunc((rColor.g * ar + tColor.g * at + bColor.g * ab) / a);
-      blendColor.b = Math.trunc((rColor.b * ar + tColor.b * at + bColor.b * ab) / a);
-      blendColor.a = a;
+      blendColor.r = Math.round((rColor.r * ar + tColor.r * at + bColor.r * ab) / a);
+      blendColor.g = Math.round((rColor.g * ar + tColor.g * at + bColor.g * ab) / a);
+      blendColor.b = Math.round((rColor.b * ar + tColor.b * at + bColor.b * ab) / a);
+      blendColor.a = Math.round(a);
     }
 
     return blendColor;

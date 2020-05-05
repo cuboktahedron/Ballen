@@ -12,7 +12,12 @@ import {
 } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { changeBlend, changeName, toggleVisible } from "actions/layerAction";
+import {
+  changeBlend,
+  changeName,
+  changeOpacity,
+  toggleVisible
+} from "actions/layerAction";
 import {
   beginMovingLayer,
   changeActiveLayer,
@@ -166,7 +171,6 @@ const Layer: React.FC<LayerProps> = props => {
   };
 
   const toggleVisibleHandler = (e: SyntheticEvent<HTMLElement>): void => {
-    selectLayerHandler();
     dispatch(toggleVisible(props.id));
 
     e.stopPropagation();
@@ -176,7 +180,7 @@ const Layer: React.FC<LayerProps> = props => {
     const value = e.currentTarget.value;
 
     if (props.name !== value) {
-      dispatch(changeName(activeLayer.id, value));
+      dispatch(changeName(props.id, value));
     }
   };
 
@@ -184,7 +188,25 @@ const Layer: React.FC<LayerProps> = props => {
     const value = e.currentTarget.value as LayerBlend;
 
     if (props.blend !== value) {
-      dispatch(changeBlend(activeLayer.id, value));
+      dispatch(changeBlend(props.id, value));
+    }
+  };
+
+  const handleChangeOpacity = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const strValue = e.currentTarget.value;
+    let value = parseInt(strValue);
+    if (Number.isNaN(value)) {
+      value = 0;
+    } else if (value < 0) {
+      value = 0;
+    } else if (value > 100) {
+      value = 100;
+    }
+
+    if (props.opacity !== value) {
+      dispatch(changeOpacity(props.id, value));
     }
   };
 
@@ -234,6 +256,13 @@ const Layer: React.FC<LayerProps> = props => {
             <option value={LB_MULTIPLY}>multiply</option>
           </NativeSelect>
         </FormControl>
+        <TextField
+          type="number"
+          value={props.opacity.toString()}
+          onChange={handleChangeOpacity}
+          style={{ marginLeft: "8px", width: "4rem" }}
+        />
+        {"%"}
       </ListItem>
     </div>
   );

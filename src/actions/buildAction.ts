@@ -27,11 +27,14 @@ export const build = (layers: LayersState): BuildAction => {
     .reverse()
     .forEach(layer => {
       const color = new Color(layer.color.substring(1));
+      color.a = Math.trunc((layer.opacity / 100) * 255);
+
       targetImageData.data.set(layer.imageData.data);
 
       for (let y = 0; y < layers.size.y; y++) {
         for (let x = 0; x < layers.size.x; x++) {
-          if (targetG.color(x, y)?.a === 0xff) {
+          const a = targetG.color(x, y)?.a;
+          if (a === 0xff) {
             targetG.dot(x, y, color);
           }
         }

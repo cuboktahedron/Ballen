@@ -16,13 +16,15 @@ describe("layersAction", () => {
               "blend":"normal",
               "color":"010203",
               "imageDataBase64":"AAAAAA==",
-              "name":"layer-0"
+              "name":"layer-0",
+              "opacity": 100
             },
             {
               "blend":"multiply",
               "color":"000000ff",
               "imageDataBase64":"AAAAAA==",
-              "name":"layer-1"
+              "name":"layer-1",
+              "opacity": 50
             }
           ]
         }
@@ -36,13 +38,15 @@ describe("layersAction", () => {
               blend: LB_NORMAL,
               color: "010203",
               imageData: new ImageData(1, 1),
-              name: "layer-0"
+              name: "layer-0",
+              opacity: 100
             },
             {
               blend: LB_MULTIPLY,
               color: "000000ff",
               imageData: new ImageData(1, 1),
-              name: "layer-1"
+              name: "layer-1",
+              opacity: 50
             }
           ],
           size: { x: 1, y: 1 }

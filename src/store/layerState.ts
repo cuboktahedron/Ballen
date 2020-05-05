@@ -9,5 +9,6 @@ export type LayerState = {
   color: string;
   imageData: ImageData;
   name: string;
+  opacity: number;
   visible: boolean;
 };

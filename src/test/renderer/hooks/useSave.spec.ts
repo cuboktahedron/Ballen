@@ -20,6 +20,7 @@ describe("useSave", () => {
             color: "010203",
             imageData: new ImageData(1, 1),
             name: "layer-0",
+            opacity: 100,
             visible: true
           },
           {
@@ -28,6 +29,7 @@ describe("useSave", () => {
             color: "000000ff",
             imageData: new ImageData(1, 1),
             name: "layer-1",
+            opacity: 50,
             visible: false
           }
         ],
@@ -53,13 +55,15 @@ describe("useSave", () => {
             blend: LB_NORMAL,
             color: "010203",
             imageDataBase64: btoa(String.fromCharCode(...new ImageData(1, 1).data)),
-            name: "layer-0"
+            name: "layer-0",
+            opacity: 100
           },
           {
             blend: LB_MULTIPLY,
             color: "000000ff",
             imageDataBase64: btoa(String.fromCharCode(...new ImageData(1, 1).data)),
-            name: "layer-1"
+            name: "layer-1",
+            opacity: 50
           }
         ]
       }

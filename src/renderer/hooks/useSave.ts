@@ -24,7 +24,8 @@ const useSave = (): string => {
           blend: layer.blend,
           color: layer.color,
           imageDataBase64: base64String,
-          name: layer.name
+          name: layer.name,
+          opacity: layer.opacity
         };
       })
     }
