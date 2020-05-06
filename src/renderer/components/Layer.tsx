@@ -1,18 +1,24 @@
 import {
   Box,
   Button,
+  Collapse,
   createStyles,
   FormControl,
   IconButton,
+  List,
   ListItem,
   makeStyles,
   NativeSelect,
   TextField,
   Theme
 } from "@material-ui/core";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import {
+  addFilter,
   changeBlend,
   changeName,
   changeOpacity,
@@ -25,7 +31,7 @@ import {
   endMovingLayer,
   moveLayer
 } from "actions/layersAction";
-import React, { SyntheticEvent, useRef } from "react";
+import React, { SyntheticEvent, useRef, useState, useEffect } from "react";
 import {
   DragObjectWithType,
   DropTargetMonitor,
@@ -42,6 +48,7 @@ import {
   LB_NORMAL
 } from "stores/layerState";
 import { RootState } from "stores/rootState";
+import Filter from "./Filter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,10 +82,15 @@ type DragItem = DragObjectWithType & {
 };
 
 const Layer: React.FC<LayerProps> = props => {
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const layers = useSelector((state: RootState) => state.layers);
   const activeLayer = useActiveLayer();
   const dispatch = useDispatch();
+
+  const filterItems = props.filters.map(filter => {
+    return <Filter key={filter.id} {...filter} layerId={props.id}></Filter>;
+  });
 
   const checkWhetherMoveOrNotMove = (
     item: DragItem,
@@ -210,6 +222,21 @@ const Layer: React.FC<LayerProps> = props => {
     }
   };
 
+  const addFilterHander = (): void => {
+    dispatch(addFilter(props.id));
+    setFiltersOpen(true);
+  };
+
+  const handleFiltersOpenerClick = (): void => {
+    setFiltersOpen(!filtersOpen);
+  };
+
+  useEffect(() => {
+    if (props.filters.length === 0) {
+      setFiltersOpen(false);
+    }
+  }, [props.filters]);
+
   const classes = useStyles(props);
 
   let visibilityButton: JSX.Element;
@@ -230,7 +257,7 @@ const Layer: React.FC<LayerProps> = props => {
   drag(drop(ref));
 
   return (
-    <div ref={ref}>
+    <List ref={ref} component="div" disablePadding>
       <ListItem
         className={props.active ? classes.active : ""}
         onClick={selectLayerHandler}
@@ -263,8 +290,21 @@ const Layer: React.FC<LayerProps> = props => {
           style={{ marginLeft: "8px", width: "4rem" }}
         />
         {"%"}
+        <IconButton onClick={addFilterHander}>
+          <AddCircleOutlineIcon />
+        </IconButton>
+        {filtersOpen ? (
+          <ExpandLessIcon onClick={handleFiltersOpenerClick} />
+        ) : (
+          <ExpandMoreIcon onClick={handleFiltersOpenerClick} />
+        )}
       </ListItem>
-    </div>
+      <Collapse in={filtersOpen} timeout="auto">
+        <List component="div" disablePadding>
+          {filterItems}
+        </List>
+      </Collapse>
+    </List>
   );
 };
 

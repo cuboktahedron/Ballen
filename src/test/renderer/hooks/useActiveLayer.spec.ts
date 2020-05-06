@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { useActiveLayer } from "renderer/hooks/useActiveLayer";
 import { InitialLayersState, LayersState } from "stores/layersState";
 import { LB_MULTIPLY, LB_NORMAL } from "stores/layerState";
+import { LFT_ID } from "stores/filter/id";
+import { LFT_OPACITY } from "stores/filter/opacity";
 
 jest.mock("react-redux");
 
@@ -17,6 +19,16 @@ describe("useActiveLayer", () => {
           id: 0,
           blend: LB_NORMAL,
           color: "010203",
+          filterIdSequence: 0,
+          filters: [
+            {
+              id: 0,
+              name: "filter0-0",
+              property: {
+                type: LFT_ID
+              }
+            }
+          ],
           imageData: new ImageData(1, 1),
           name: "layer-0",
           opacity: 100,
@@ -26,6 +38,26 @@ describe("useActiveLayer", () => {
           id: 1,
           blend: LB_MULTIPLY,
           color: "000000ff",
+          filterIdSequence: 1,
+          filters: [
+            {
+              id: 0,
+              name: "filter1-0",
+              property: {
+                type: LFT_OPACITY,
+                option: {
+                  opacity: 50
+                }
+              }
+            },
+            {
+              id: 1,
+              name: "filter1-1",
+              property: {
+                type: LFT_ID
+              }
+            }
+          ],
           imageData: new ImageData(1, 1),
           name: "layer-1",
           opacity: 50,
@@ -38,6 +70,26 @@ describe("useActiveLayer", () => {
       id: 1,
       blend: LB_MULTIPLY,
       color: "000000ff",
+      filterIdSequence: 1,
+      filters: [
+        {
+          id: 0,
+          name: "filter1-0",
+          property: {
+            type: LFT_OPACITY,
+            option: {
+              opacity: 50
+            }
+          }
+        },
+        {
+          id: 1,
+          name: "filter1-1",
+          property: {
+            type: LFT_ID
+          }
+        }
+      ],
       imageData: new ImageData(1, 1),
       name: "layer-1",
       opacity: 50,

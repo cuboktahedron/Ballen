@@ -4,6 +4,7 @@ import { BallenAction } from "./actionTypes";
 import Blender from "./lib/Blender";
 import Color from "./lib/Color";
 import Graphics from "./lib/Graphics";
+import { throughFilter } from "./lib/LayerFilter";
 
 export type BuildActions = BuildAction;
 
@@ -39,6 +40,8 @@ export const build = (layers: LayersState): BuildAction => {
           }
         }
       }
+
+      throughFilter(targetImageData, layer.filters);
 
       const blend = blender[layer.blend] || blender[LB_NORMAL];
       blend.call(blender, targetImageData);

@@ -1,6 +1,7 @@
 import { Vector2D } from "ballen-core";
 import { LayerBlend, LayerState } from "stores/layerState";
 import { BallenAction } from "./actionTypes";
+import { FilterProperties } from "stores/filterState";
 
 export type LayersActions =
   | ChangeActiveLayerAction
@@ -31,9 +32,15 @@ export type LayersSaveData = {
 export type LayerSaveData = {
   blend: LayerBlend;
   color: string;
+  filters: FilterSaveData[];
   imageDataBase64: string;
   name: string;
   opacity: number;
+};
+
+export type FilterSaveData = {
+  name: string;
+  property: FilterProperties;
 };
 
 export type ChangeActiveLayerAction = {
@@ -155,6 +162,10 @@ export type LoadLayersAction = {
     layers: {
       color: string;
       blend: LayerBlend;
+      filters: {
+        name: string;
+        property: FilterProperties;
+      }[];
       imageData: ImageData;
       name: string;
       opacity: number;
@@ -177,6 +188,7 @@ export const loadLayers = (layers: LayersSaveData): LoadLayersAction => {
     const data = {
       blend: layer.blend,
       color: layer.color,
+      filters: layer.filters,
       imageData,
       name: layer.name,
       opacity: layer.opacity

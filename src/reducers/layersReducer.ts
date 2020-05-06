@@ -50,6 +50,8 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
           id: newState.layerIdSequence,
           blend: LB_NORMAL,
           color: "#000000",
+          filterIdSequence: 0,
+          filters: [],
           imageData: new ImageData(newState.size.x, newState.size.y),
           name: `layer-${newState.layerIdSequence}`,
           opacity: 100,
@@ -98,9 +100,18 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
       newState.layers = action.payload.layers.map(layer => {
         newState.layerIdSequence++;
 
+        let filterIdSequence = -1;
+        const filters = layer.filters.map(filter => {
+          filterIdSequence++;
+
+          return { ...filter, id: filterIdSequence };
+        });
+
         return {
           ...layer,
           id: newState.layerIdSequence,
+          filterIdSequence: filterIdSequence,
+          filters,
           visible: true
         };
       });
@@ -115,6 +126,8 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
           id: newState.layerIdSequence++,
           blend: LB_NORMAL,
           color: "#000000",
+          filterIdSequence: 0,
+          filters: [],
           imageData: new ImageData(newState.size.x, newState.size.y),
           name: `layer-${newState.layerIdSequence}`,
           opacity: 100,

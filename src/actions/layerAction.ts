@@ -14,19 +14,35 @@ export type LayerAction = {
 } & BallenAction;
 
 export type LayerActions =
+  | AddFilterAction
   | ChangeBlendAction
   | ChangeColorAction
   | ChangeNameAction
   | ChangeOpacityAction
+  | DeleteFilterAction
   | ToggleVisibleAction
   | DrawAction;
 
+export const ADD_FILTER = "layers/layer/addFilter";
 export const CHANGE_BLEND = "layers/layer/changeBlend";
 export const CHANGE_COLOR = "layers/layer/changeColor";
 export const CHANGE_NAME = "layers/layer/changeName";
 export const CHANGE_OPACITY = "layers/layer/changeOpacity";
+export const DELETE_FILTER = "layers/layer/deleteFilter";
 export const TOGGLE_VISIBLE = "layers/layer/toggleVisible";
 export const DRAW = "layers/layer/draw";
+
+export type AddFilterAction = {
+  type: typeof ADD_FILTER;
+} & LayerAction;
+
+export const addFilter = (layerId: number): AddFilterAction => ({
+  type: ADD_FILTER,
+  payload: {
+    layerId,
+    recordDescription: "Add filter"
+  }
+});
 
 export type ChangeBlendAction = {
   type: typeof CHANGE_BLEND;
@@ -89,6 +105,23 @@ export const changeOpacity = (layerId: number, opacity: number): ChangeOpacityAc
     layerId,
     opacity,
     recordDescription: "Change layer opacity"
+  }
+});
+
+export type DeleteFilterAction = {
+  type: typeof DELETE_FILTER;
+  payload: {
+    layerId: number;
+    filterId: number;
+  };
+} & LayerAction;
+
+export const deleteFilter = (layerId: number, filterId: number): DeleteFilterAction => ({
+  type: DELETE_FILTER,
+  payload: {
+    layerId,
+    filterId,
+    recordDescription: "Delete layer filter"
   }
 });
 

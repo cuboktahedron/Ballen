@@ -19,10 +19,15 @@ const useSave = (): string => {
       size: state.layers.size,
       layers: state.layers.layers.map(layer => {
         const base64String = btoa(fromCharCode(layer.imageData.data));
+        const filters = layer.filters.map(filter => ({
+          name: filter.name,
+          property: { ...filter.property }
+        }));
 
         return {
           blend: layer.blend,
           color: layer.color,
+          filters,
           imageDataBase64: base64String,
           name: layer.name,
           opacity: layer.opacity

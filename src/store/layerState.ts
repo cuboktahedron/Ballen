@@ -1,3 +1,5 @@
+import { FilterState } from "./filterState";
+
 export const LB_NORMAL = "normal";
 export const LB_MULTIPLY = "multiply";
 
@@ -7,6 +9,8 @@ export type LayerState = {
   id: number;
   blend: LayerBlend;
   color: string;
+  filterIdSequence: number;
+  filters: FilterState[];
   imageData: ImageData;
   name: string;
   opacity: number;
