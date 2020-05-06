@@ -39,7 +39,7 @@ export const ToolPropertyEllipse: React.FC = () => {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={property.positive}
+              checked={property.positive}
               value="secondary"
               color="primary"
               onChange={handleChangePositive}
@@ -50,9 +50,9 @@ export const ToolPropertyEllipse: React.FC = () => {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={property.fill}
-              value="secondary"
+              checked={property.fill}
               color="primary"
+              value="secondary"
               onChange={handleChangeFill}
             />
           }

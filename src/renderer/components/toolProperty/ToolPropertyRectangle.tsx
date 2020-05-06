@@ -39,7 +39,7 @@ export const ToolPropertyRectangle: React.FC = () => {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={property.positive}
+              checked={property.positive}
               value="secondary"
               color="primary"
               onChange={handleChangePositive}
@@ -50,7 +50,7 @@ export const ToolPropertyRectangle: React.FC = () => {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={property.fill}
+              checked={property.fill}
               value="secondary"
               color="primary"
               onChange={handleChangeFill}

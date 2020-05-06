@@ -52,7 +52,7 @@ export const ToolPropertyPencil: React.FC = () => {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={property.positive}
+              checked={property.positive}
               color="primary"
               onChange={handleChangePositive}
             />

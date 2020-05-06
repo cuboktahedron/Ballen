@@ -31,7 +31,7 @@ export const ToolPropertyFiller: React.FC = () => {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={property.positive}
+              checked={property.positive}
               value="secondary"
               color="primary"
               onChange={handleChangePositive}
