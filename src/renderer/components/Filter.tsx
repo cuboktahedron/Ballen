@@ -31,14 +31,13 @@ const Filter: React.FC<FilterProps> = props => {
       return;
     }
 
-    // TODO: パラメータの設定方法は別途考える
     if (value === LFT_ID) {
       dispatch(changeFilter(props.layerId, props.id, { type: LFT_ID }));
     } else if (value == LFT_OPACITY) {
       dispatch(
         changeFilter(props.layerId, props.id, {
           type: LFT_OPACITY,
-          option: { opacity: 50 }
+          option: { opacity: 100 }
         })
       );
     }

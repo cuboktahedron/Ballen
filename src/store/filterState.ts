@@ -11,6 +11,5 @@ export type FilterProperties = IdProperty | OpacityProperty;
 
 export type FilterState = {
   id: number;
-  name: string;
   property: FilterProperties;
 };

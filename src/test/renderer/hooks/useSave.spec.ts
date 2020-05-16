@@ -24,7 +24,6 @@ describe("useSave", () => {
             filters: [
               {
                 id: 0,
-                name: "filter0-0",
                 property: {
                   type: LFT_ID
                 }
@@ -43,7 +42,6 @@ describe("useSave", () => {
             filters: [
               {
                 id: 0,
-                name: "filter1-0",
                 property: {
                   type: LFT_OPACITY,
                   option: {
@@ -53,7 +51,6 @@ describe("useSave", () => {
               },
               {
                 id: 1,
-                name: "filter1-1",
                 property: {
                   type: LFT_ID
                 }
@@ -88,7 +85,6 @@ describe("useSave", () => {
             color: "010203",
             filters: [
               {
-                name: "filter0-0",
                 property: {
                   type: LFT_ID
                 }
@@ -103,7 +99,6 @@ describe("useSave", () => {
             color: "000000ff",
             filters: [
               {
-                name: "filter1-0",
                 property: {
                   type: LFT_OPACITY,
                   option: {
@@ -112,7 +107,6 @@ describe("useSave", () => {
                 }
               },
               {
-                name: "filter1-1",
                 property: {
                   type: LFT_ID
                 }

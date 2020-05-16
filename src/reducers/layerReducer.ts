@@ -49,7 +49,6 @@ export default function reducer(state: LayerState, anyAction: BallenAction): Lay
         ...newState.filters,
         {
           id: newState.filterIdSequence,
-          name: `filter-${newState.filterIdSequence}`,
           property: InitialIdProperty
         }
       ];

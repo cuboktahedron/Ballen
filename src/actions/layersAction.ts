@@ -39,7 +39,6 @@ export type LayerSaveData = {
 };
 
 export type FilterSaveData = {
-  name: string;
   property: FilterProperties;
 };
 
@@ -163,7 +162,6 @@ export type LoadLayersAction = {
       color: string;
       blend: LayerBlend;
       filters: {
-        name: string;
         property: FilterProperties;
       }[];
       imageData: ImageData;

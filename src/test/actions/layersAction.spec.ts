@@ -19,7 +19,6 @@ describe("layersAction", () => {
                 "color":"010203",
                 "filters":[
                   {
-                    "name":"filter0-0",
                     "property": {
                       "type": "id"
                     }
@@ -34,7 +33,6 @@ describe("layersAction", () => {
                 "color":"000000ff",
                 "filters":[
                   {
-                    "name":"filter1-0",
                     "property": {
                       "type": "opacity",
                       "option": {
@@ -43,7 +41,6 @@ describe("layersAction", () => {
                     }
                   },
                   {
-                    "name":"filter1-1",
                     "property": {
                       "type": "id"
                     }
@@ -66,7 +63,6 @@ describe("layersAction", () => {
               color: "010203",
               filters: [
                 {
-                  name: "filter0-0",
                   property: {
                     type: LFT_ID
                   }
@@ -81,7 +77,6 @@ describe("layersAction", () => {
               color: "000000ff",
               filters: [
                 {
-                  name: "filter1-0",
                   property: {
                     type: LFT_OPACITY,
                     option: {
@@ -90,7 +85,6 @@ describe("layersAction", () => {
                   }
                 },
                 {
-                  name: "filter1-1",
                   property: {
                     type: LFT_ID
                   }

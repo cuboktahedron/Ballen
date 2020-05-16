@@ -23,7 +23,6 @@ describe("useActiveLayer", () => {
           filters: [
             {
               id: 0,
-              name: "filter0-0",
               property: {
                 type: LFT_ID
               }
@@ -42,7 +41,6 @@ describe("useActiveLayer", () => {
           filters: [
             {
               id: 0,
-              name: "filter1-0",
               property: {
                 type: LFT_OPACITY,
                 option: {
@@ -52,7 +50,6 @@ describe("useActiveLayer", () => {
             },
             {
               id: 1,
-              name: "filter1-1",
               property: {
                 type: LFT_ID
               }
@@ -74,7 +71,6 @@ describe("useActiveLayer", () => {
       filters: [
         {
           id: 0,
-          name: "filter1-0",
           property: {
             type: LFT_OPACITY,
             option: {
@@ -84,7 +80,6 @@ describe("useActiveLayer", () => {
         },
         {
           id: 1,
-          name: "filter1-1",
           property: {
             type: LFT_ID
           }
