@@ -4,20 +4,19 @@ import {
   IconButton,
   ListItem,
   MuiThemeProvider,
-  NativeSelect,
-  TextField,
-  Tooltip
+  NativeSelect
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { changeFilter } from "actions/filterAction";
 import { deleteFilter } from "actions/layerAction";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { LFT_ID } from "stores/filter/id";
 import { LFT_OPACITY } from "stores/filter/opacity";
 import { FilterState, FilterType } from "stores/filterState";
 import FilterProperty from "./filterProperty/FilterProperty";
+import FilterPropertyName from "./FIlterPropertyName";
 
 type FilterProps = FilterState & {
   layerId: number;
@@ -42,10 +41,6 @@ const theme = createMuiTheme({
 const Filter: React.FC<FilterProps> = props => {
   const dispatch = useDispatch();
   const [settingsOpened, setSettingsOpened] = React.useState(false);
-  const [disableParamsToolTip, setDisableParamsToolTip] = useState<boolean>(
-    true
-  );
-  let paramsRef: HTMLInputElement | null = null;
 
   const changeTypeHandler = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const value = e.currentTarget.value as FilterType;
@@ -79,15 +74,6 @@ const Filter: React.FC<FilterProps> = props => {
     dispatch(deleteFilter(props.layerId, props.id));
   };
 
-  const handleParamsMouseEnter = (): void => {
-    if (paramsRef === null) {
-      setDisableParamsToolTip(false);
-      return;
-    }
-
-    setDisableParamsToolTip(paramsRef.scrollWidth <= paramsRef.clientWidth);
-  };
-
   return (
     <MuiThemeProvider theme={theme}>
       <FilterProperty
@@ -108,24 +94,7 @@ const Filter: React.FC<FilterProps> = props => {
             <option value={LFT_OPACITY}>opacity</option>
           </NativeSelect>
         </FormControl>
-        <Tooltip
-          disableHoverListener={disableParamsToolTip}
-          title={JSON.stringify(props.property)}
-          style={{ fontSize: "2rem", color: "red" }}
-        >
-          <div style={{ marginLeft: "8px" }}>
-            <TextField
-              onMouseEnter={handleParamsMouseEnter}
-              inputRef={(ref): void => {
-                paramsRef = ref;
-              }}
-              InputProps={{
-                readOnly: true
-              }}
-              value={props.property}
-            ></TextField>
-          </div>
-        </Tooltip>
+        <FilterPropertyName {...props.property} />
         <IconButton onClick={openSettingsHandler}>
           <SettingsIcon />
         </IconButton>
