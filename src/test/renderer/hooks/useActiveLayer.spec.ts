@@ -30,7 +30,6 @@ describe("useActiveLayer", () => {
           ],
           imageData: new ImageData(1, 1),
           name: "layer-0",
-          opacity: 100,
           visible: true
         },
         {
@@ -57,7 +56,6 @@ describe("useActiveLayer", () => {
           ],
           imageData: new ImageData(1, 1),
           name: "layer-1",
-          opacity: 50,
           visible: false
         }
       ]
@@ -87,7 +85,6 @@ describe("useActiveLayer", () => {
       ],
       imageData: new ImageData(1, 1),
       name: "layer-1",
-      opacity: 50,
       visible: false
     };
 

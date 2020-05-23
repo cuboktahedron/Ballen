@@ -4,11 +4,10 @@ import {
   CHANGE_BLEND,
   CHANGE_COLOR,
   CHANGE_NAME,
-  CHANGE_OPACITY,
+  DELETE_FILTER,
   DRAW,
   LayerActions,
-  TOGGLE_VISIBLE,
-  DELETE_FILTER
+  TOGGLE_VISIBLE
 } from "actions/layerAction";
 import { InitialIdProperty } from "stores/filter/id";
 import { LayerState } from "stores/layerState";
@@ -69,11 +68,6 @@ export default function reducer(state: LayerState, anyAction: BallenAction): Lay
       return {
         ...state,
         name: action.payload.name
-      };
-    case CHANGE_OPACITY:
-      return {
-        ...state,
-        opacity: action.payload.opacity
       };
     case DELETE_FILTER: {
       const index = state.filters.findIndex(filter => filter.id === action.payload.filterId);

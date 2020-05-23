@@ -13,6 +13,5 @@ export type LayerState = {
   filters: FilterState[];
   imageData: ImageData;
   name: string;
-  opacity: number;
   visible: boolean;
 };

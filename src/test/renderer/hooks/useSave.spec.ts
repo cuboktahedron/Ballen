@@ -31,7 +31,6 @@ describe("useSave", () => {
             ],
             imageData: new ImageData(1, 1),
             name: "layer-0",
-            opacity: 100,
             visible: true
           },
           {
@@ -58,7 +57,6 @@ describe("useSave", () => {
             ],
             imageData: new ImageData(1, 1),
             name: "layer-1",
-            opacity: 50,
             visible: false
           }
         ],
@@ -91,8 +89,7 @@ describe("useSave", () => {
               }
             ],
             imageDataBase64: btoa(String.fromCharCode(...new ImageData(1, 1).data)),
-            name: "layer-0",
-            opacity: 100
+            name: "layer-0"
           },
           {
             blend: LB_MULTIPLY,
@@ -113,8 +110,7 @@ describe("useSave", () => {
               }
             ],
             imageDataBase64: btoa(String.fromCharCode(...new ImageData(1, 1).data)),
-            name: "layer-1",
-            opacity: 50
+            name: "layer-1"
           }
         ]
       }

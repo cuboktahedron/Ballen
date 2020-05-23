@@ -28,8 +28,6 @@ export const build = (layers: LayersState): BuildAction => {
     .reverse()
     .forEach(layer => {
       const color = new Color(layer.color.substring(1));
-      color.a = Math.trunc((layer.opacity / 100) * 255);
-
       targetImageData.data.set(layer.imageData.data);
 
       for (let y = 0; y < layers.size.y; y++) {

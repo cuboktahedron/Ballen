@@ -35,7 +35,6 @@ export type LayerSaveData = {
   filters: FilterSaveData[];
   imageDataBase64: string;
   name: string;
-  opacity: number;
 };
 
 export type FilterSaveData = {
@@ -166,7 +165,6 @@ export type LoadLayersAction = {
       }[];
       imageData: ImageData;
       name: string;
-      opacity: number;
     }[];
     size: Vector2D;
   };
@@ -188,8 +186,7 @@ export const loadLayers = (layers: LayersSaveData): LoadLayersAction => {
       color: layer.color,
       filters: layer.filters,
       imageData,
-      name: layer.name,
-      opacity: layer.opacity
+      name: layer.name
     };
 
     return data;

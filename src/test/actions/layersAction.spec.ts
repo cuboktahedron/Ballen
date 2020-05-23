@@ -25,8 +25,7 @@ describe("layersAction", () => {
                   }
                 ],
                 "imageDataBase64":"AAAAAA==",
-                "name":"layer-0",
-                "opacity": 100
+                "name":"layer-0"
               },
               {
                 "blend":"multiply",
@@ -47,8 +46,7 @@ describe("layersAction", () => {
                   }
                 ],
                 "imageDataBase64":"AAAAAA==",
-                "name":"layer-1",
-                "opacity": 50
+                "name":"layer-1"
               }
             ]
           }
@@ -69,8 +67,7 @@ describe("layersAction", () => {
                 }
               ],
               imageData: new ImageData(1, 1),
-              name: "layer-0",
-              opacity: 100
+              name: "layer-0"
             },
             {
               blend: LB_MULTIPLY,
@@ -91,8 +88,7 @@ describe("layersAction", () => {
                 }
               ],
               imageData: new ImageData(1, 1),
-              name: "layer-1",
-              opacity: 50
+              name: "layer-1"
             }
           ],
           size: { x: 1, y: 1 }

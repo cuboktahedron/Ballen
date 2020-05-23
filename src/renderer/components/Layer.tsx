@@ -21,7 +21,6 @@ import {
   addFilter,
   changeBlend,
   changeName,
-  changeOpacity,
   toggleVisible
 } from "actions/layerAction";
 import {
@@ -31,7 +30,7 @@ import {
   endMovingLayer,
   moveLayer
 } from "actions/layersAction";
-import React, { SyntheticEvent, useRef, useState, useEffect } from "react";
+import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import {
   DragObjectWithType,
   DropTargetMonitor,
@@ -204,24 +203,6 @@ const Layer: React.FC<LayerProps> = props => {
     }
   };
 
-  const handleChangeOpacity = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    const strValue = e.currentTarget.value;
-    let value = parseInt(strValue);
-    if (Number.isNaN(value)) {
-      value = 0;
-    } else if (value < 0) {
-      value = 0;
-    } else if (value > 100) {
-      value = 100;
-    }
-
-    if (props.opacity !== value) {
-      dispatch(changeOpacity(props.id, value));
-    }
-  };
-
   const addFilterHander = (): void => {
     dispatch(addFilter(props.id));
     setFiltersOpen(true);
@@ -283,13 +264,6 @@ const Layer: React.FC<LayerProps> = props => {
             <option value={LB_MULTIPLY}>multiply</option>
           </NativeSelect>
         </FormControl>
-        <TextField
-          type="number"
-          value={props.opacity.toString()}
-          onChange={handleChangeOpacity}
-          style={{ marginLeft: "8px", width: "4rem" }}
-        />
-        {"%"}
         <IconButton onClick={addFilterHander}>
           <AddCircleOutlineIcon />
         </IconButton>

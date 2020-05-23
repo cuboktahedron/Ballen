@@ -54,7 +54,6 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
           filters: [],
           imageData: new ImageData(newState.size.x, newState.size.y),
           name: `layer-${newState.layerIdSequence}`,
-          opacity: 100,
           visible: true
         }
       ];
@@ -130,7 +129,6 @@ export default function reducer(state: LayersState = InitialLayersState, anyActi
           filters: [],
           imageData: new ImageData(newState.size.x, newState.size.y),
           name: `layer-${newState.layerIdSequence}`,
-          opacity: 100,
           visible: true
         }
       ];
