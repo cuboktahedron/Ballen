@@ -10,7 +10,8 @@ import {
   makeStyles,
   NativeSelect,
   TextField,
-  Theme
+  Theme,
+  ListItemSecondaryAction
 } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
@@ -264,14 +265,14 @@ const Layer: React.FC<LayerProps> = props => {
             <option value={LB_MULTIPLY}>multiply</option>
           </NativeSelect>
         </FormControl>
-        <IconButton onClick={addFilterHander}>
-          <AddCircleOutlineIcon />
-        </IconButton>
-        {filtersOpen ? (
-          <ExpandLessIcon onClick={handleFiltersOpenerClick} />
-        ) : (
-          <ExpandMoreIcon onClick={handleFiltersOpenerClick} />
-        )}
+        <ListItemSecondaryAction>
+          <IconButton onClick={addFilterHander}>
+            <AddCircleOutlineIcon />
+          </IconButton>
+          <IconButton onClick={handleFiltersOpenerClick}>
+            {filtersOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </IconButton>
+        </ListItemSecondaryAction>
       </ListItem>
       <Collapse in={filtersOpen} timeout="auto">
         <List component="div" disablePadding>

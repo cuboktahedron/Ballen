@@ -4,7 +4,8 @@ import {
   IconButton,
   ListItem,
   MuiThemeProvider,
-  NativeSelect
+  NativeSelect,
+  ListItemSecondaryAction
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -95,12 +96,14 @@ const Filter: React.FC<FilterProps> = props => {
           </NativeSelect>
         </FormControl>
         <FilterPropertyName {...props.property} />
-        <IconButton onClick={openSettingsHandler}>
-          <SettingsIcon />
-        </IconButton>
-        <IconButton onClick={deleteHandler}>
-          <DeleteIcon />
-        </IconButton>
+        <ListItemSecondaryAction>
+          <IconButton onClick={openSettingsHandler}>
+            <SettingsIcon />
+          </IconButton>
+          <IconButton onClick={deleteHandler}>
+            <DeleteIcon />
+          </IconButton>
+        </ListItemSecondaryAction>
       </ListItem>
     </MuiThemeProvider>
   );
