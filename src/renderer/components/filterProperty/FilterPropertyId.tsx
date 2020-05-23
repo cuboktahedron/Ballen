@@ -19,9 +19,7 @@ const FilterPropertyId: React.FC<FilterPropertyIdProps> = props => {
       <Dialog open={true} aria-labelledby="form-dialog-title">
         <DialogTitle>Id filter settings</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            <DialogContentText>No Settings</DialogContentText>
-          </DialogContentText>
+          <DialogContentText>No Settings</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={props.onClose} color="primary">
