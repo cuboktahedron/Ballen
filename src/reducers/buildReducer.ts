@@ -1,5 +1,5 @@
 import { BallenAction } from "actions/actionTypes";
-import { BUILD, BuildActions } from "actions/buildAction";
+import { BUILD, BuildActions, CLOSE_BUILD, OPEN_BUILD } from "actions/buildAction";
 import { BuildState, InitialBuildState } from "stores/buildState";
 
 export default function reducer(state: BuildState = InitialBuildState, anyAction: BallenAction): BuildState {
@@ -10,6 +10,16 @@ export default function reducer(state: BuildState = InitialBuildState, anyAction
       return {
         ...state,
         imageData: action.payload.imageData
+      };
+    case CLOSE_BUILD:
+      return {
+        ...state,
+        isOpened: false
+      };
+    case OPEN_BUILD:
+      return {
+        ...state,
+        isOpened: true
       };
     default:
       return state;

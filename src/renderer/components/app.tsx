@@ -6,10 +6,10 @@ import {
   makeStyles,
   Paper
 } from "@material-ui/core";
+import { batchNewFile } from "actions/batchAction";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
-import BuildCanvas from "./BuildCanvas";
 import File from "./File";
 import Histories from "./Histories";
 import KeyShortcut from "./KeyShortcut";
@@ -18,7 +18,7 @@ import Layers from "./Layers";
 import MainMenu from "./menu/MainMenu";
 import Process from "./Process";
 import ToolBar from "./ToolBar";
-import { batchNewFile } from "actions/batchAction";
+import Build from "./Build";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -49,11 +49,6 @@ const App: React.FC = () => {
           <LayerCanvases />
         </Paper>
       </Grid>
-      <Grid item xs={6}>
-        <Paper className={classes.paper}>
-          <BuildCanvas />
-        </Paper>
-      </Grid>
     </Grid>
   );
 
@@ -62,6 +57,7 @@ const App: React.FC = () => {
       <KeyShortcut />
       <File />
       <Process />
+      <Build />
     </Container>
   );
 

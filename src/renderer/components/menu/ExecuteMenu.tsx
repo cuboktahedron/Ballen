@@ -1,11 +1,9 @@
 import { Button, Menu, MenuItem } from "@material-ui/core";
-import { build } from "actions/buildAction";
+import { openBuild } from "actions/buildAction";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "stores/rootState";
+import { useDispatch } from "react-redux";
 
 const ExecuteMenu: React.FC = () => {
-  const layers = useSelector((state: RootState) => state.layers);
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -14,7 +12,7 @@ const ExecuteMenu: React.FC = () => {
   };
 
   const handleBuild = (): void => {
-    dispatch(build(layers));
+    dispatch(openBuild());
     setAnchorEl(null);
   };
 
