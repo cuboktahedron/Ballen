@@ -9,6 +9,7 @@ export default function reducer(state: BuildState = InitialBuildState, anyAction
     case BUILD:
       return {
         ...state,
+        buildTexts: [...state.buildTexts, action.payload.text],
         imageData: action.payload.imageData
       };
     case CLOSE_BUILD:

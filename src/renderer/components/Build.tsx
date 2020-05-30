@@ -22,16 +22,16 @@ const Build: React.FC = () => {
     dispatch(closeBuild());
   };
 
-  const onEnterHandler = (): void => {
+  const onEnteredHandler = (): void => {
     dispatch(doBuild(layers));
   };
 
   const buildTexts = build.buildTexts.map((text, index) => {
-    <p key={index}>{text}</p>;
+    return <p key={index}>{text}</p>;
   });
 
   return (
-    <Dialog open={build.isOpened} maxWidth={false} onEnter={onEnterHandler}>
+    <Dialog open={build.isOpened} maxWidth={false} onEntered={onEnteredHandler}>
       <DialogTitle>Build</DialogTitle>
       <DialogContent>
         <Box display="flex" flexDirection="column" p={1} m={1}>
