@@ -1,6 +1,6 @@
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import { batchNewFile } from "actions/batchAction";
-import { exportAsImage, load, save } from "actions/fileAction";
+import { load, save } from "actions/fileAction";
 import { quit } from "actions/processAction";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -28,11 +28,6 @@ const FileMenu: React.FC = () => {
     setAnchorEl(null);
   };
 
-  const handleExportAsImage = (): void => {
-    dispatch(exportAsImage());
-    setAnchorEl(null);
-  };
-
   const handleQuit = (): void => {
     dispatch(quit());
   };
@@ -55,7 +50,6 @@ const FileMenu: React.FC = () => {
         <MenuItem onClick={handleNew}>New</MenuItem>
         <MenuItem onClick={handleSave}>Save</MenuItem>
         <MenuItem onClick={handleLoad}>Load</MenuItem>
-        <MenuItem onClick={handleExportAsImage}>Export as image</MenuItem>
         <MenuItem onClick={handleQuit}>Quit</MenuItem>
       </Menu>
     </div>

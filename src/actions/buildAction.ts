@@ -1,3 +1,4 @@
+import { BS_BUILDING, BS_COMPLETED, BuildStatus } from "stores/buildState";
 import { LayersState } from "stores/layersState";
 import { LB_NORMAL } from "stores/layerState";
 import { BallenAction } from "./actionTypes";
@@ -16,6 +17,7 @@ export const OPEN_BUILD = "build/buildOpen";
 export type BuildAction = {
   type: typeof BUILD;
   payload: {
+    buildStatus: BuildStatus;
     imageData: ImageData;
     text: string;
   };
@@ -24,10 +26,11 @@ export type BuildAction = {
 // TODO: 共通でまとめる
 const sleep = (msec: number): Promise<void> => new Promise(resolve => setTimeout(resolve, msec));
 
-const buildStatusUpdated = (text: string, imageData: ImageData): BuildAction => {
+const buildStatusUpdated = (buildStatus: BuildStatus, text: string, imageData: ImageData): BuildAction => {
   return {
     type: BUILD,
     payload: {
+      buildStatus,
       imageData,
       text
     }
@@ -41,11 +44,11 @@ export const build = (layers: LayersState) => async (dispatch: (arg: unknown) =>
   const blender = new Blender(buildImageData);
 
   const buildStartTime = new Date();
-  dispatch(buildStatusUpdated(`Build started`, buildImageData));
+  dispatch(buildStatusUpdated(BS_BUILDING, `Build started`, buildImageData));
 
   const reverseLayers = layers.layers.concat().reverse();
   for (const layer of reverseLayers) {
-    dispatch(buildStatusUpdated(`"${layer.name}" Rendering started.`, buildImageData));
+    dispatch(buildStatusUpdated(BS_BUILDING, `"${layer.name}" Rendering started.`, buildImageData));
 
     // TODO: canvasのレンダリングが追いつかないのでsleepしているが、他にいい方法はないか？
     await sleep(100);
@@ -62,19 +65,19 @@ export const build = (layers: LayersState) => async (dispatch: (arg: unknown) =>
       }
     }
 
-    dispatch(buildStatusUpdated(`Applying filter started`, buildImageData));
+    dispatch(buildStatusUpdated(BS_BUILDING, `Applying filter started`, buildImageData));
     throughFilter(targetImageData, layer.filters);
-    dispatch(buildStatusUpdated(`Applying filter finished`, buildImageData));
+    dispatch(buildStatusUpdated(BS_BUILDING, `Applying filter finished`, buildImageData));
 
     const blend = blender[layer.blend] || blender[LB_NORMAL];
     blend.call(blender, targetImageData);
 
-    dispatch(buildStatusUpdated(`"${layer.name}" Rendering finished.`, buildImageData));
+    dispatch(buildStatusUpdated(BS_BUILDING, `"${layer.name}" Rendering finished.`, buildImageData));
   }
 
   const buildFinishedTime = new Date();
   const elapsedTIme = buildFinishedTime.getTime() - buildStartTime.getTime();
-  dispatch(buildStatusUpdated(`Build completed. (Elapsed Time: ${elapsedTIme} ms)`, buildImageData));
+  dispatch(buildStatusUpdated(BS_COMPLETED, `Build completed. (Elapsed Time: ${elapsedTIme} ms)`, buildImageData));
 };
 
 export type CloseBuildAction = {

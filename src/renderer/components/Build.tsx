@@ -10,6 +10,8 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
 import BuildCanvas from "./BuildCanvas";
+import { exportAsImage } from "actions/fileAction";
+import { BS_COMPLETED } from "stores/buildState";
 
 const Build: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,6 +20,10 @@ const Build: React.FC = () => {
   const layers = state.layers;
 
   const textsRef = useRef<HTMLDivElement>(null);
+
+  const onSaveHandler = (): void => {
+    dispatch(exportAsImage());
+  };
 
   const onCloseHandler = (): void => {
     dispatch(clearBuild());
@@ -71,6 +77,13 @@ const Build: React.FC = () => {
         </Box>
       </DialogContent>
       <DialogActions>
+        <Button
+          onClick={onSaveHandler}
+          color="primary"
+          disabled={build.buildStatus !== BS_COMPLETED}
+        >
+          Save
+        </Button>
         <Button onClick={onCloseHandler} color="primary">
           Close
         </Button>
