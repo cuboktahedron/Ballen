@@ -1,6 +1,6 @@
 import { BallenAction } from "actions/actionTypes";
-import { BUILD, BuildActions, CLOSE_BUILD, OPEN_BUILD, CLEAR_BUILD } from "actions/buildAction";
-import { BuildState, InitialBuildState, BS_READY } from "stores/buildState";
+import { BUILD, BuildActions, CLOSE_BUILD, OPEN_BUILD, CLEAR_BUILD, CANCEL_BUILD } from "actions/buildAction";
+import { BuildState, InitialBuildState, BS_READY, BS_CANCELING, BS_CANCELED } from "stores/buildState";
 
 export default function reducer(state: BuildState = InitialBuildState, anyAction: BallenAction): BuildState {
   const action = anyAction as BuildActions;
@@ -12,6 +12,12 @@ export default function reducer(state: BuildState = InitialBuildState, anyAction
         buildStatus: action.payload.buildStatus,
         buildTexts: [...state.buildTexts, action.payload.text],
         imageData: action.payload.imageData
+      };
+    case CANCEL_BUILD:
+      return {
+        ...state,
+        buildStatus: action.payload.done ? BS_CANCELED : BS_CANCELING,
+        buildTexts: [...state.buildTexts, action.payload.text]
       };
     case CLEAR_BUILD:
       return {

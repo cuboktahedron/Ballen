@@ -5,13 +5,18 @@ import {
   DialogActions,
   DialogContent
 } from "@material-ui/core";
-import { build as doBuild, clearBuild, closeBuild } from "actions/buildAction";
-import React, { useEffect, useRef } from "react";
+import {
+  clearBuild,
+  closeBuild,
+  makeBuild,
+  cancelBuild
+} from "actions/buildAction";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
 import BuildCanvas from "./BuildCanvas";
 import { exportAsImage } from "actions/fileAction";
-import { BS_COMPLETED } from "stores/buildState";
+import { BS_COMPLETED, BS_BUILDING } from "stores/buildState";
 
 const Build: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,8 +26,21 @@ const Build: React.FC = () => {
 
   const textsRef = useRef<HTMLDivElement>(null);
 
+  const makeBuildCallback = useCallback(() => makeBuild(layers), [
+    build.isOpened
+  ]);
+  const [doBuild, doCancelBuild] = useMemo(() => makeBuildCallback(), [
+    makeBuildCallback
+  ]);
+
   const onSaveHandler = (): void => {
     dispatch(exportAsImage());
+  };
+
+  const onCancelHandler = (): void => {
+    doCancelBuild();
+
+    dispatch(cancelBuild(false));
   };
 
   const onCloseHandler = (): void => {
@@ -31,7 +49,7 @@ const Build: React.FC = () => {
   };
 
   const onEnteredHandler = (): void => {
-    dispatch(doBuild(layers));
+    dispatch(doBuild());
   };
 
   useEffect(() => {
@@ -83,6 +101,13 @@ const Build: React.FC = () => {
           disabled={build.buildStatus !== BS_COMPLETED}
         >
           Save
+        </Button>
+        <Button
+          onClick={onCancelHandler}
+          color="primary"
+          disabled={build.buildStatus !== BS_BUILDING}
+        >
+          Cancel
         </Button>
         <Button onClick={onCloseHandler} color="primary">
           Close
