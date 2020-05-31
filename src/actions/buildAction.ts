@@ -6,9 +6,10 @@ import Color from "./lib/Color";
 import Graphics from "./lib/Graphics";
 import { throughFilter } from "./lib/LayerFilter";
 
-export type BuildActions = BuildAction | CloseBuildAction | OpenBuildAction;
+export type BuildActions = BuildAction | CloseBuildAction | ClearBuildAction | OpenBuildAction;
 
 export const BUILD = "build/build";
+export const CLEAR_BUILD = "build/init";
 export const CLOSE_BUILD = "build/buildClose";
 export const OPEN_BUILD = "build/buildOpen";
 
@@ -83,6 +84,17 @@ export type CloseBuildAction = {
 export const closeBuild = (): CloseBuildAction => {
   return {
     type: CLOSE_BUILD,
+    payload: {}
+  };
+};
+
+export type ClearBuildAction = {
+  type: typeof CLEAR_BUILD;
+} & BallenAction;
+
+export const clearBuild = (): ClearBuildAction => {
+  return {
+    type: CLEAR_BUILD,
     payload: {}
   };
 };

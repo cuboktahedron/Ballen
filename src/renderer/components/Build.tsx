@@ -3,11 +3,10 @@ import {
   Button,
   Dialog,
   DialogActions,
-  DialogContent,
-  DialogTitle
+  DialogContent
 } from "@material-ui/core";
-import { build as doBuild, closeBuild } from "actions/buildAction";
-import React from "react";
+import { build as doBuild, clearBuild, closeBuild } from "actions/buildAction";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
 import BuildCanvas from "./BuildCanvas";
@@ -18,7 +17,10 @@ const Build: React.FC = () => {
   const build = state.build;
   const layers = state.layers;
 
+  const textsRef = useRef<HTMLDivElement>(null);
+
   const onCloseHandler = (): void => {
+    dispatch(clearBuild());
     dispatch(closeBuild());
   };
 
@@ -26,23 +28,46 @@ const Build: React.FC = () => {
     dispatch(doBuild(layers));
   };
 
+  useEffect(() => {
+    const target = textsRef?.current;
+    if (!target) {
+      return;
+    }
+
+    target.scrollTop = target.scrollHeight;
+  }, [build.buildTexts]);
+
   const buildTexts = build.buildTexts.map((text, index) => {
     return <p key={index}>{text}</p>;
   });
 
   return (
-    <Dialog open={build.isOpened} maxWidth={false} onEntered={onEnteredHandler}>
-      <DialogTitle>Build</DialogTitle>
+    <Dialog
+      fullScreen={true}
+      open={build.isOpened}
+      onEntered={onEnteredHandler}
+    >
       <DialogContent>
-        <Box display="flex" flexDirection="column" p={1} m={1}>
+        <Box
+          display="flex"
+          flexDirection="column"
+          p={1}
+          m={1}
+          style={{ border: "solid black 4px", borderRadius: "8px" }}
+        >
           <Box>
             <BuildCanvas />
           </Box>
-          <Box
-            style={{ maxHeight: "200px", width: "100%", overflowY: "scroll" }}
+          <div
+            ref={textsRef}
+            style={{
+              maxHeight: "200px",
+              overflowY: "scroll",
+              width: "100%"
+            }}
           >
             {buildTexts}
-          </Box>
+          </div>
         </Box>
       </DialogContent>
       <DialogActions>
