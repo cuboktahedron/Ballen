@@ -6,7 +6,7 @@ import FileMenu from "./FileMenu";
 
 const MainMenu: React.FC = () => {
   return (
-    <AppBar style={{ background: "grey" }}>
+    <AppBar elevation={0} style={{ background: "grey" }}>
       <Toolbar style={{ minHeight: "32px" }}>
         <FileMenu />
         <ExecuteMenu />

@@ -24,7 +24,9 @@ const Histories: React.FC = () => {
 
   return (
     <div>
-      <List style={{ maxHeight: "300px", overflow: "auto" }}>
+      <List
+        style={{ maxHeight: "300px", minHeight: "150px", overflow: "auto" }}
+      >
         {historyItems}
       </List>
     </div>

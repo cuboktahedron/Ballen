@@ -1,4 +1,4 @@
-import { Box, Grid } from "@material-ui/core";
+import { Box, createStyles, makeStyles, Theme } from "@material-ui/core";
 import React from "react";
 import { ColorPalettes } from "./ColorPalettes";
 import Ellipse from "./tool/Ellipse";
@@ -7,11 +7,24 @@ import Line from "./tool/Line";
 import Pencil from "./tool/Pencil";
 import Rectangle from "./tool/Rectangle";
 import { ToolProperty } from "./ToolProperty";
+import ToolPanel from "./ToolPanel";
+import Layers from "./Layers";
+import Histories from "./Histories";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      padding: theme.spacing(0)
+    }
+  })
+);
 
 const ToolBar: React.FC = () => {
+  const classes = useStyles();
+
   return (
-    <Grid container alignItems="flex-start">
-      <Grid item xs={6}>
+    <Box className={classes.root}>
+      <ToolPanel title="Tool">
         <Box>
           <Pencil />
           <Filler />
@@ -19,14 +32,18 @@ const ToolBar: React.FC = () => {
           <Rectangle />
           <Line />
         </Box>
-        <Box>
-          <ToolProperty />
-        </Box>
-      </Grid>
-      <Grid item xs={6}>
+        <ToolProperty />
+      </ToolPanel>
+      <ToolPanel title="Color">
         <ColorPalettes />
-      </Grid>
-    </Grid>
+      </ToolPanel>
+      <ToolPanel title="Layer">
+        <Layers />
+      </ToolPanel>
+      <ToolPanel title="History">
+        <Histories />
+      </ToolPanel>
+    </Box>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Box, makeStyles, createStyles } from "@material-ui/core";
+import { Box, makeStyles, createStyles, Theme } from "@material-ui/core";
 import React from "react";
 import {
   amber,
@@ -16,10 +16,10 @@ import {
 } from "@material-ui/core/colors";
 import { ColorPalette } from "./ColorPalette";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     box: {
-      paddingTop: 8
+      padding: theme.spacing(0.5)
     }
   })
 );

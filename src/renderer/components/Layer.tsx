@@ -52,8 +52,9 @@ import Filter from "./Filter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    active: {
-      background: theme.palette.grey[200]
+    layerItem: {
+      background: (props: LayerProps): string =>
+        props.active ? theme.palette.grey[200] : "default"
     },
 
     btnColor: (props: LayerProps) => ({
@@ -61,11 +62,9 @@ const useStyles = makeStyles((theme: Theme) =>
       borderColor: "#000",
       borderStyle: "solid",
       borderWidth: 1,
-      height: 32,
-      marginLeft: 4,
-      marginRight: 4,
-      minWidth: 32,
-      width: 32
+      height: 24,
+      minWidth: 24,
+      width: 24
     })
   })
 );
@@ -224,13 +223,13 @@ const Layer: React.FC<LayerProps> = props => {
   let visibilityButton: JSX.Element;
   if (props.visible) {
     visibilityButton = (
-      <IconButton onClick={toggleVisibleHandler}>
+      <IconButton onClick={toggleVisibleHandler} size="small">
         <VisibilityIcon />
       </IconButton>
     );
   } else {
     visibilityButton = (
-      <IconButton onClick={toggleVisibleHandler}>
+      <IconButton onClick={toggleVisibleHandler} size="small">
         <VisibilityOffIcon />
       </IconButton>
     );
@@ -241,9 +240,10 @@ const Layer: React.FC<LayerProps> = props => {
   return (
     <List ref={ref} component="div" disablePadding>
       <ListItem
-        className={props.active ? classes.active : ""}
+        className={classes.layerItem}
         onClick={selectLayerHandler}
         style={dragStyle}
+        disableGutters={true}
       >
         <Box>
           {visibilityButton}
@@ -251,7 +251,9 @@ const Layer: React.FC<LayerProps> = props => {
         </Box>
         <TextField
           defaultValue={props.name}
-          inputProps={{ maxLength: 32 }}
+          inputProps={{ maxLength: 16 }}
+          size="small"
+          style={{ marginLeft: "4px", maxWidth: "112px" }}
           onBlur={handleBlurName}
         />
         <FormControl>
@@ -259,17 +261,17 @@ const Layer: React.FC<LayerProps> = props => {
             name="blend"
             value={props.blend}
             onChange={handleChangeBlend}
-            style={{ marginLeft: "8px" }}
+            style={{ marginLeft: "4px" }}
           >
             <option value={LB_NORMAL}>normal</option>
             <option value={LB_MULTIPLY}>multiply</option>
           </NativeSelect>
         </FormControl>
         <ListItemSecondaryAction>
-          <IconButton onClick={addFilterHander}>
+          <IconButton size="small" onClick={addFilterHander}>
             <AddCircleOutlineIcon />
           </IconButton>
-          <IconButton onClick={handleFiltersOpenerClick}>
+          <IconButton size="small" onClick={handleFiltersOpenerClick}>
             {filtersOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </IconButton>
         </ListItemSecondaryAction>

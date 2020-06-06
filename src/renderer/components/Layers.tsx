@@ -1,4 +1,11 @@
-import { IconButton, List } from "@material-ui/core";
+import {
+  IconButton,
+  List,
+  createStyles,
+  makeStyles,
+  Theme,
+  Box
+} from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { addLayer, deleteLayer } from "actions/layersAction";
@@ -7,6 +14,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { LayerState } from "stores/layerState";
 import { RootState } from "stores/rootState";
 import Layer from "./Layer";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    body: {
+      minHeight: "150px",
+      maxHeight: "300px",
+      overflow: "auto"
+    },
+
+    footer: {
+      background: theme.palette.primary.light
+    },
+
+    icon: {
+      color: theme.palette.primary.contrastText
+    }
+  })
+);
 
 const Layers: React.FC = () => {
   const dispatch = useDispatch();
@@ -34,19 +59,31 @@ const Layers: React.FC = () => {
     dispatch(deleteLayer(layers.activeLayerId));
   };
 
+  const classes = useStyles();
+
   return (
-    <div style={{ maxHeight: "300px", overflow: "auto" }}>
-      <List>{layerItems}</List>
-      <IconButton onClick={addLayerHander}>
-        <AddCircleOutlineIcon />
-      </IconButton>
-      <IconButton
-        onClick={deleteLayerHandler}
-        disabled={layers.layers.length <= 1}
-      >
-        <DeleteIcon />
-      </IconButton>
-    </div>
+    <Box>
+      <Box className={classes.body}>
+        <List>{layerItems}</List>
+      </Box>
+      <Box className={classes.footer}>
+        <IconButton
+          className={classes.icon}
+          size="small"
+          onClick={addLayerHander}
+        >
+          <AddCircleOutlineIcon />
+        </IconButton>
+        <IconButton
+          className={classes.icon}
+          size="small"
+          disabled={layers.layers.length <= 1}
+          onClick={deleteLayerHandler}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </Box>
+    </Box>
   );
 };
 
