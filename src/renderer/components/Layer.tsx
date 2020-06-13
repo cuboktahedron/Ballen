@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     layerItem: {
       background: (props: LayerProps): string =>
-        props.active ? theme.palette.grey[200] : "default"
+        props.active ? theme.palette.grey[200] : "inherit"
     },
 
     btnColor: (props: LayerProps) => ({
