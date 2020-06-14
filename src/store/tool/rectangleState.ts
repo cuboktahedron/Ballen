@@ -1,5 +1,6 @@
 import { RECTANGLE } from "actions/tool/rectangle";
 import { Vector2D } from "ballen-core";
+import { DrawStateWithRect } from "actions/toolsAction";
 
 export type RectangleProperty = {
   positive: boolean;
@@ -9,7 +10,7 @@ export type RectangleProperty = {
 export type ToolDrawStateRectangle = {
   origin?: Vector2D;
   to?: Vector2D;
-};
+} & DrawStateWithRect;
 
 export const InitialRectangleProperty: RectangleProperty = {
   positive: false,

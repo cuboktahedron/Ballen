@@ -6,7 +6,7 @@ import { SaveData } from "./fileAction";
 import { drawBegin, drawEnd, drawMiddle } from "./layerAction";
 import { loadLayers, initLayers } from "./layersAction";
 import { clearHistory } from "./rootAction";
-import { changeDrawStateBegin, changeDrawStateEnd, changeDrawStateMiddle } from "./toolsAction";
+import { changeDrawStateBegin, changeDrawStateEnd, changeDrawStateMiddle, moveCursor } from "./toolsAction";
 
 export const BATCH = "batch";
 export type BatchAction = {
@@ -54,7 +54,7 @@ export type DrawMiddleProps = {
 };
 
 export const batchDrawMiddle = (drawProps: DrawMiddleProps): BatchAction => {
-  return batch(drawMiddle(drawProps), changeDrawStateMiddle(drawProps));
+  return batch(drawMiddle(drawProps), changeDrawStateMiddle(drawProps), moveCursor(drawProps.event.coords));
 };
 
 export type DrawEndProps = {

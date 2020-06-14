@@ -3,6 +3,7 @@ import {
   batchDrawEnd,
   batchDrawMiddle
 } from "actions/batchAction";
+import { moveCursor } from "actions/toolsAction";
 import React, {
   createRef,
   RefObject,
@@ -21,6 +22,7 @@ const LayerCanvases: React.FC = () => {
   const state = useSelector((state: RootState) => state);
   const layers = state.layers;
   const guideLayer = state.guideLayer;
+  const tools = state.tools;
   const activeLayer = useActiveLayer();
   const dispatch = useDispatch();
 
@@ -46,6 +48,7 @@ const LayerCanvases: React.FC = () => {
   });
 
   const [mouseDowned, setMouseDowned] = useState<boolean>(false);
+  const [mouseHovered, setMouseHovered] = useState<boolean>(false);
 
   const handleMouseDown = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -71,10 +74,6 @@ const LayerCanvases: React.FC = () => {
   };
 
   const handleMouseMove = (e: MouseEvent): void => {
-    if (!mouseDowned) {
-      return;
-    }
-
     const div = divRef.current;
     if (div === null) {
       return;
@@ -86,15 +85,25 @@ const LayerCanvases: React.FC = () => {
       y: e.pageY - (rect.top + window.pageYOffset)
     };
 
-    dispatch(
-      batchDrawMiddle({
-        tools: state.tools,
-        layers: state.layers,
-        event: {
-          coords
-        }
-      })
-    );
+    if (!mouseDowned) {
+      if (mouseHovered) {
+        dispatch(moveCursor(coords));
+      } else if (tools.coords !== null) {
+        dispatch(moveCursor(null));
+      }
+    } else if (!mouseDowned) {
+      dispatch(moveCursor(coords));
+    } else {
+      dispatch(
+        batchDrawMiddle({
+          tools: state.tools,
+          layers: state.layers,
+          event: {
+            coords
+          }
+        })
+      );
+    }
   };
 
   const handleMouseUp = (e: MouseEvent): void => {
@@ -141,7 +150,12 @@ const LayerCanvases: React.FC = () => {
   }, [handleMouseUp]);
 
   return (
-    <div ref={divRef} onMouseDown={handleMouseDown}>
+    <div
+      ref={divRef}
+      onMouseEnter={(): void => setMouseHovered(true)}
+      onMouseLeave={(): void => setMouseHovered(false)}
+      onMouseDown={handleMouseDown}
+    >
       <GuideLayerCanvas zIndex={layers.layers.length + 1} {...guideLayer} />
       {layerCanvasItems}
     </div>

@@ -37,14 +37,16 @@ import {
   ChangeDrawStateRectangleAction,
   RECTANGLE
 } from "./tool/rectangle";
+import { Vector2D } from "ballen-core";
 
-export type ToolsActions = ChangeToolAction | ChangeToolPropertyAction | ChangeDrawStateAction;
+export type ToolsActions = ChangeToolAction | ChangeToolPropertyAction | ChangeDrawStateAction | MoveCursorAction;
 
 export const GUIDE_LINE_COLOR = new Color("ff000080");
 
 export const CHANGE_TOOL = "tools/changeTool";
 export const CHANGE_DRAW_STATE = "tools/changeDrawState";
 export const CHANGE_TOOL_PROPERTY = "tools/changeToolProperty";
+export const MOVE_CURSOR = "tools/moveCursor";
 
 export type ToolType = string;
 
@@ -77,6 +79,11 @@ export const changeToolProperty = (type: ToolType, property: ToolProperty): Chan
     property
   }
 });
+
+export type DrawStateWithRect = {
+  origin?: Vector2D;
+  to?: Vector2D;
+};
 
 export type ChangeDrawStateAction = { type: typeof CHANGE_DRAW_STATE } & (
   | ChangeDrawStatePencilAction
@@ -137,3 +144,17 @@ export const changeDrawStateEnd = (props: DrawEndProps): ChangeDrawStateAction =
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
 };
+
+export type MoveCursorAction = {
+  type: typeof MOVE_CURSOR;
+  payload: {
+    coords: Vector2D | null;
+  };
+} & BallenAction;
+
+export const moveCursor = (coords: Vector2D | null): MoveCursorAction => ({
+  type: MOVE_CURSOR,
+  payload: {
+    coords: coords ? { ...coords } : null
+  }
+});

@@ -10,6 +10,7 @@ import { ToolProperty } from "./ToolProperty";
 import ToolPanel from "./ToolPanel";
 import Layers from "./Layers";
 import Histories from "./Histories";
+import { Information } from "./Information";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +25,9 @@ const ToolBar: React.FC = () => {
 
   return (
     <Box className={classes.root}>
+      <ToolPanel title="Info">
+        <Information />
+      </ToolPanel>
       <ToolPanel title="Tool">
         <Box>
           <Pencil />

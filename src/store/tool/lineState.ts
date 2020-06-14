@@ -1,4 +1,5 @@
 import { LINE } from "actions/tool/line";
+import { DrawStateWithRect } from "actions/toolsAction";
 import { Vector2D } from "ballen-core";
 
 export type LineProperty = {
@@ -9,7 +10,7 @@ export type LineProperty = {
 export type ToolDrawStateLine = {
   origin?: Vector2D;
   to?: Vector2D;
-};
+} & DrawStateWithRect;
 
 export const InitialLineProperty: LineProperty = {
   positive: false,
