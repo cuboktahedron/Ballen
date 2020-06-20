@@ -1,8 +1,8 @@
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchAction";
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
 import { DRAW, DrawAction } from "actions/layerAction";
-import Color from "actions/lib/Color";
-import Graphics from "actions/lib/Graphics";
+import Color from "utils/graphics/Color";
+import Graphics from "utils/graphics/Graphics";
 import { ChangeDrawStateAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
 import { EllipseProperty, ToolDrawStateEllipse } from "stores/tool/ellipseState";
 

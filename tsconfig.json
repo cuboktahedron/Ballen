@@ -44,6 +44,7 @@
     "paths": {
       "*": ["src/@types/*"],
       "actions/*": ["src/actions/*"],
+      "utils/*": ["src/utils/*"],
       "reducers/*": ["src/reducers/*"],
       "renderer/*": ["src/renderer/*"],
       "stores/*": ["src/store/*"]

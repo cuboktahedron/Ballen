@@ -2,9 +2,9 @@ import { BS_BUILDING, BS_COMPLETED, BuildStatus } from "stores/buildState";
 import { LayersState } from "stores/layersState";
 import { LB_NORMAL } from "stores/layerState";
 import { BallenAction } from "./actionTypes";
-import Blender from "./lib/Blender";
-import Color from "./lib/Color";
-import Graphics from "./lib/Graphics";
+import Blender from "../utils/graphics/Blender";
+import Color from "../utils/graphics/Color";
+import Graphics from "../utils/graphics/Graphics";
 import { throughFilter } from "./lib/LayerFilter";
 
 export type BuildActions = BuildAction | CancelBuildAction | CloseBuildAction | ClearBuildAction | OpenBuildAction;

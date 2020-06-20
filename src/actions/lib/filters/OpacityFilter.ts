@@ -1,6 +1,6 @@
 import { OpacityProperty } from "stores/filter/opacity";
-import Color from "../Color";
-import Graphics from "../Graphics";
+import Color from "../../../utils/graphics/Color";
+import Graphics from "../../../utils/graphics/Graphics";
 
 export const filterOpacity = (g: Graphics, prop: OpacityProperty): void => {
   const alphaWeight = prop.option.opacity / 100;

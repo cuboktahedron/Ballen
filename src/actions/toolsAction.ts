@@ -1,7 +1,7 @@
 import { ToolProperty } from "stores/toolsState";
 import { BallenAction } from "./actionTypes";
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "./batchAction";
-import Color from "./lib/Color";
+import Color from "../utils/graphics/Color";
 import {
   changeDrawStateBeginEllipse,
   ChangeDrawStateEllipseAction,

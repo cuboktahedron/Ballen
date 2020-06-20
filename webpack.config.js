@@ -46,6 +46,7 @@ const renderer = {
   resolve: {
     alias: {
       actions: path.resolve(__dirname, "src", "actions"),
+      utils: path.resolve(__dirname, "src", "utils"),
       reducers: path.resolve(__dirname, "src", "reducers"),
       renderer: path.resolve(__dirname, "src", "renderer"),
       stores: path.resolve(__dirname, "src", "store")

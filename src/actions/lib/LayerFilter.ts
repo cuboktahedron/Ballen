@@ -3,7 +3,7 @@ import { LFT_OPACITY } from "stores/filter/opacity";
 import { FilterState } from "stores/filterState";
 import { filterId } from "./filters/IdFilter";
 import { filterOpacity } from "./filters/OpacityFilter";
-import Graphics from "./Graphics";
+import Graphics from "../../utils/graphics/Graphics";
 
 export const throughFilter = (base: ImageData, filters: FilterState[]): void => {
   const g = new Graphics(base);

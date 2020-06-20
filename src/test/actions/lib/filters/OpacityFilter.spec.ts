@@ -1,6 +1,6 @@
-import Color from "actions/lib/Color";
 import { filterOpacity } from "actions/lib/filters/OpacityFilter";
-import Graphics from "actions/lib/Graphics";
+import Color from "utils/graphics/Color";
+import Graphics from "utils/graphics/Graphics";
 import { LFT_OPACITY } from "stores/filter/opacity";
 
 describe("filterOpacity", () => {

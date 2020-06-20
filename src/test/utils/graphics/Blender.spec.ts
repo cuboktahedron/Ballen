@@ -1,6 +1,6 @@
-import Blender from "actions/lib/Blender";
-import Color from "actions/lib/Color";
-import Graphics from "actions/lib/Graphics";
+import Blender from "utils/graphics/Blender";
+import Color from "utils/graphics/Color";
+import Graphics from "utils/graphics/Graphics";
 
 describe("Blender", () => {
   const c1 = new Color("5078A0"); // RGB(80, 120, 160)

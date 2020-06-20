@@ -1,6 +1,6 @@
-import Color from "actions/lib/Color";
 import { filterId } from "actions/lib/filters/IdFilter";
-import Graphics from "actions/lib/Graphics";
+import Color from "utils/graphics/Color";
+import Graphics from "utils/graphics/Graphics";
 import { LFT_ID } from "stores/filter/id";
 
 describe("filterid", () => {
