@@ -4,6 +4,7 @@ import { LFT_ID } from "stores/filter/id";
 import { LB_MULTIPLY, LB_NORMAL } from "stores/layerState";
 import { InitialRootState, RootState } from "stores/rootState";
 import { LFT_OPACITY } from "stores/filter/opacity";
+import { SaveData } from "actions/fileAction";
 
 jest.mock("react-redux");
 const useSelectorMock = useSelector as jest.Mock<RootState>;
@@ -29,7 +30,15 @@ describe("useSave", () => {
                 }
               }
             ],
-            imageData: new ImageData(1, 1),
+            imageData: ((): ImageData => {
+              const imageData = new ImageData(1, 1);
+              const data = imageData.data;
+              data[0] = 0;
+              data[1] = 0;
+              data[2] = 0;
+              data[3] = 0xff;
+              return imageData;
+            })(),
             name: "layer-0",
             visible: true
           },
@@ -74,7 +83,7 @@ describe("useSave", () => {
   });
 
   it("should make json", () => {
-    const expected = {
+    const expected: SaveData = {
       layers: {
         size: { x: 1, y: 1 },
         layers: [
@@ -88,7 +97,7 @@ describe("useSave", () => {
                 }
               }
             ],
-            imageDataBase64: btoa(String.fromCharCode(...new ImageData(1, 1).data)),
+            imageData: [0, 1],
             name: "layer-0"
           },
           {
@@ -109,7 +118,7 @@ describe("useSave", () => {
                 }
               }
             ],
-            imageDataBase64: btoa(String.fromCharCode(...new ImageData(1, 1).data)),
+            imageData: [1],
             name: "layer-1"
           }
         ]

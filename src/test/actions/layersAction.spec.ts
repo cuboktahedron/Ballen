@@ -24,7 +24,7 @@ describe("layersAction", () => {
                     }
                   }
                 ],
-                "imageDataBase64":"AAAAAA==",
+                "imageData":[0,1],
                 "name":"layer-0"
               },
               {
@@ -45,7 +45,7 @@ describe("layersAction", () => {
                     }
                   }
                 ],
-                "imageDataBase64":"AAAAAA==",
+                "imageData":[1],
                 "name":"layer-1"
               }
             ]
@@ -66,7 +66,15 @@ describe("layersAction", () => {
                   }
                 }
               ],
-              imageData: new ImageData(1, 1),
+              imageData: ((): ImageData => {
+                const imageData = new ImageData(1, 1);
+                const data = imageData.data;
+                data[0] = 0;
+                data[1] = 0;
+                data[2] = 0;
+                data[3] = 0xff;
+                return imageData;
+              })(),
               name: "layer-0"
             },
             {

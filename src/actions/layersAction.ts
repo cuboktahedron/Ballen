@@ -1,7 +1,8 @@
 import { Vector2D } from "ballen-core";
-import { LayerBlend, LayerState } from "stores/layerState";
-import { BallenAction } from "./actionTypes";
 import { FilterProperties } from "stores/filterState";
+import { LayerBlend, LayerState } from "stores/layerState";
+import { BinaryImageRunLength } from "utils/graphics/compress/BinaryImageRunLength";
+import { BallenAction } from "./actionTypes";
 
 export type LayersActions =
   | ChangeActiveLayerAction
@@ -33,7 +34,7 @@ export type LayerSaveData = {
   blend: LayerBlend;
   color: string;
   filters: FilterSaveData[];
-  imageDataBase64: string;
+  imageData: number[];
   name: string;
 };
 
@@ -171,14 +172,10 @@ export type LoadLayersAction = {
 } & BallenAction;
 
 export const loadLayers = (layers: LayersSaveData): LoadLayersAction => {
+  const birl = new BinaryImageRunLength();
   const loadLayers = layers.layers.map(layer => {
     const imageData = new ImageData(layers.size.x, layers.size.y);
-    const raw = atob(layer.imageDataBase64);
-    const rawImageData = new Uint8ClampedArray(new ArrayBuffer(raw.length));
-
-    for (let i = 0; i < raw.length; i++) {
-      rawImageData[i] = raw.charCodeAt(i);
-    }
+    const rawImageData = birl.decompress(new Uint8ClampedArray(layer.imageData));
     imageData.data.set(rawImageData);
 
     const data = {

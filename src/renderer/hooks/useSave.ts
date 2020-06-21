@@ -1,24 +1,17 @@
 import { SaveData } from "actions/fileAction";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
+import { BinaryImageRunLength } from "utils/graphics/compress/BinaryImageRunLength";
 
 const useSave = (): string => {
   const state = useSelector((state: RootState) => state);
 
-  const fromCharCode = (data: Uint8ClampedArray): string => {
-    const charCodes: string[] = [];
-    for (let i = 0; i < data.length; i++) {
-      charCodes[i] = String.fromCharCode(data[i]);
-    }
-
-    return charCodes.join("");
-  };
+  const birl = new BinaryImageRunLength();
 
   const saveData: SaveData = {
     layers: {
       size: state.layers.size,
       layers: state.layers.layers.map(layer => {
-        const base64String = btoa(fromCharCode(layer.imageData.data));
         const filters = layer.filters.map(filter => ({
           property: { ...filter.property }
         }));
@@ -27,7 +20,7 @@ const useSave = (): string => {
           blend: layer.blend,
           color: layer.color,
           filters,
-          imageDataBase64: base64String,
+          imageData: Array.from(birl.compress(layer.imageData.data)),
           name: layer.name
         };
       })
