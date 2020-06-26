@@ -8,6 +8,7 @@
     "build": "webpack --progress --mode=development",
     "watch": "webpack --progress --mode=development --watch",
     "build-production": "webpack --progress --mode=production",
+    "watch-production": "webpack --progress --mode=production --watch",
     "package": "electron-packager . Ballen --platform=win32 --arch=x64 --electron-version=7.1.8 --out=build",
     "test": "jest",
     "watch-test": "jest --watch",
