@@ -62,6 +62,7 @@ const FilterPropertyOpacity: React.FC<FilterPropertyOpacityProps> = props => {
               }
 
               input.value = "" + props.option.opacity;
+              input.select();
             }}
             type="number"
             onChange={handleChangeOpacity}
