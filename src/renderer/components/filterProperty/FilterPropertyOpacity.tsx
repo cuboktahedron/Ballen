@@ -49,7 +49,12 @@ const FilterPropertyOpacity: React.FC<FilterPropertyOpacityProps> = props => {
 
   return (
     <div>
-      <Dialog open={true} aria-labelledby="form-dialog-title">
+      <Dialog
+        disableBackdropClick={true}
+        open={true}
+        onClose={props.onClose}
+        aria-labelledby="form-dialog-title"
+      >
         <DialogTitle>Opacity filter settings</DialogTitle>
         <DialogContent>
           <TextField

@@ -16,7 +16,12 @@ export type FilterPropertyIdProps = IdProperty & {
 const FilterPropertyId: React.FC<FilterPropertyIdProps> = props => {
   return (
     <div>
-      <Dialog open={true} aria-labelledby="form-dialog-title">
+      <Dialog
+        disableBackdropClick={true}
+        open={true}
+        onClose={props.onClose}
+        aria-labelledby="form-dialog-title"
+      >
         <DialogTitle>Id filter settings</DialogTitle>
         <DialogContent>
           <DialogContentText>No Settings</DialogContentText>

@@ -20,9 +20,9 @@ const FilterProperty: React.FC<FilterPropertyProps> = props => {
 
     switch (props.type) {
       case LFT_ID:
-        return <FilterPropertyId onClose={props.onClose} {...props} />;
+        return <FilterPropertyId {...props} />;
       case LFT_OPACITY:
-        return <FilterPropertyOpacity onClose={props.onClose} {...props} />;
+        return <FilterPropertyOpacity {...props} />;
       default:
         return null;
     }
