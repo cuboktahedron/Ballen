@@ -12,7 +12,6 @@ import fileReducer from "./fileReducer";
 import guideLayerReducer from "./guideLayerReducer";
 import historyReducer from "./historyReducer";
 import layersReducer from "./layersReducer";
-import processReducer from "./processReducer";
 import toolsReducer from "./toolsReducer";
 
 export default function reducer(state: RootState = InitialRootState, action: Action): RootState {
@@ -59,22 +58,6 @@ export default function reducer(state: RootState = InitialRootState, action: Act
   const bAction = action as BallenAction;
 
   switch (reducerName) {
-    case "process": {
-      const newState = processReducer(state.process, bAction);
-      if (newState !== state.process) {
-        if (bAction.payload.recordDescription) {
-          return {
-            ...state,
-            process: newState,
-            history: historyReducer(state.history, push({ process: newState }, bAction.payload.recordDescription))
-          };
-        } else {
-          return { ...state, process: newState };
-        }
-      } else {
-        return state;
-      }
-    }
     case "build": {
       const newState = buildReducer(state.build, bAction);
       if (newState !== state.build) {

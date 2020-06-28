@@ -15,7 +15,6 @@ import File from "./File";
 import HotKeyMain from "./hotkey/HotKeyMain";
 import LayerCanvases from "./LayerCanvases";
 import MainMenu from "./menu/MainMenu";
-import Process from "./Process";
 import ToolBar from "./ToolBar";
 
 const useStyles = makeStyles(() =>
@@ -71,7 +70,6 @@ const App: React.FC = () => {
     <Container>
       {hotKey}
       <File />
-      <Process />
       <Build />
     </Container>
   );

@@ -3,7 +3,6 @@ import { DialogState } from "./dialogState";
 import { FileState } from "./fileState";
 import { GuideLayerState } from "./guideLayerState";
 import { LayersState } from "./layersState";
-import { ProcessState } from "./processState";
 import { ToolsState } from "./toolsState";
 
 export type HistoriesState = {
@@ -18,7 +17,6 @@ export type StatesOfHistory = {
   file?: FileState;
   guideLayer?: GuideLayerState;
   layers?: LayersState;
-  process?: ProcessState;
   tools?: ToolsState;
 };
 

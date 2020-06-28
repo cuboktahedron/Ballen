@@ -4,7 +4,6 @@ import { FileState, InitialFileState } from "./fileState";
 import { GuideLayerState, InitialGuideLayerState } from "./guideLayerState";
 import { HistoriesState, InitialHistoryState } from "./historyState";
 import { InitialLayersState, LayersState } from "./layersState";
-import { InitialProcessState, ProcessState } from "./processState";
 import { InitialToolsState, ToolsState } from "./toolsState";
 
 export type RootState = {
@@ -14,7 +13,6 @@ export type RootState = {
   guideLayer: GuideLayerState;
   history: HistoriesState;
   layers: LayersState;
-  process: ProcessState;
   tools: ToolsState;
 };
 
@@ -25,6 +23,5 @@ export const InitialRootState: RootState = {
   guideLayer: InitialGuideLayerState,
   history: InitialHistoryState,
   layers: InitialLayersState,
-  process: InitialProcessState,
   tools: InitialToolsState
 };
