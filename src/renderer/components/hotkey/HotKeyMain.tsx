@@ -7,48 +7,57 @@ import { LINE } from "actions/tool/line";
 import { PENCIL } from "actions/tool/pencil";
 import { RECTANGLE } from "actions/tool/rectangle";
 import { changeTool } from "actions/toolsAction";
-import React from "react";
+import React, { useCallback } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useDispatch } from "react-redux";
 
 const HotKeyMain: React.FC = () => {
   const dispatch = useDispatch();
 
-  useHotkeys("p", () => {
+  const changeToolPencil = useCallback(() => {
     dispatch(changeTool(PENCIL));
-  });
+  }, []);
+  useHotkeys("p", changeToolPencil);
 
-  useHotkeys("F", () => {
+  const changeToolFiller = useCallback(() => {
     dispatch(changeTool(FILLER));
-  });
+  }, []);
+  useHotkeys("F", changeToolFiller);
 
-  useHotkeys("E", () => {
+  const changeToolEllipse = useCallback(() => {
     dispatch(changeTool(ELLIPSE));
-  });
+  }, []);
+  useHotkeys("E", changeToolEllipse);
 
-  useHotkeys("R", () => {
+  const changeToolRectangle = useCallback(() => {
     dispatch(changeTool(RECTANGLE));
-  });
+  }, []);
+  useHotkeys("R", changeToolRectangle);
 
-  useHotkeys("L", () => {
+  const changeToolLine = useCallback(() => {
     dispatch(changeTool(LINE));
-  });
+  }, []);
+  useHotkeys("L", changeToolLine);
 
-  useHotkeys("ctrl + shift + N", () => {
+  const newLayer = useCallback(() => {
     dispatch(addLayer());
-  });
+  }, []);
+  useHotkeys("ctrl + shift + N", newLayer);
 
-  useHotkeys("ctrl + Z", () => {
+  const undoHistory = useCallback(() => {
     dispatch(undo());
-  });
+  }, []);
+  useHotkeys("ctrl + Z", undoHistory);
 
-  useHotkeys("ctrl + shift + Z", () => {
+  const redoHistory = useCallback(() => {
     dispatch(redo());
-  });
+  }, []);
+  useHotkeys("ctrl + shift + Z", redoHistory);
 
-  useHotkeys("F5", () => {
+  const build = useCallback(() => {
     dispatch(openBuild());
-  });
+  }, []);
+  useHotkeys("F5", build);
 
   return <div />;
 };
