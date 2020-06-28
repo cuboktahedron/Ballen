@@ -36,6 +36,7 @@ const FilterPropertyName: React.FC<FilterProperties> = props => {
             readOnly: true
           }}
           value={name}
+          style={{ width: "155px" }}
         ></TextField>
       </div>
     </Tooltip>

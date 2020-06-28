@@ -89,7 +89,6 @@ const Filter: React.FC<FilterProps> = props => {
           <NativeSelect
             value={props.property.type}
             onChange={changeTypeHandler}
-            style={{ marginLeft: "8px" }}
           >
             <option value={LFT_ID}>id</option>
             <option value={LFT_OPACITY}>opacity</option>
@@ -97,10 +96,10 @@ const Filter: React.FC<FilterProps> = props => {
         </FormControl>
         <FilterPropertyName {...props.property} />
         <ListItemSecondaryAction>
-          <IconButton onClick={openSettingsHandler}>
+          <IconButton size="small" onClick={openSettingsHandler}>
             <SettingsIcon />
           </IconButton>
-          <IconButton onClick={deleteHandler}>
+          <IconButton size="small" onClick={deleteHandler}>
             <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>
