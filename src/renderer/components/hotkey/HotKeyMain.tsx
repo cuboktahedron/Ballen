@@ -54,7 +54,8 @@ const HotKeyMain: React.FC = () => {
   }, []);
   useHotkeys("ctrl + shift + Z", redoHistory);
 
-  const build = useCallback(() => {
+  const build = useCallback((event: KeyboardEvent) => {
+    event.preventDefault();
     dispatch(openBuild());
   }, []);
   useHotkeys("F5", build);
