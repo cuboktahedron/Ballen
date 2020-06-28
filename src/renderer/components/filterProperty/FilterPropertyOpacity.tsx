@@ -1,5 +1,4 @@
 import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -8,6 +7,7 @@ import { changeFilter } from "actions/filterAction";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { LFT_OPACITY, OpacityProperty } from "stores/filter/opacity";
+import BallenDialog from "../BallenDialog";
 
 export type FilterPropertyOpacityProps = OpacityProperty & {
   layerId: number;
@@ -49,7 +49,7 @@ const FilterPropertyOpacity: React.FC<FilterPropertyOpacityProps> = props => {
 
   return (
     <div>
-      <Dialog
+      <BallenDialog
         disableBackdropClick={true}
         open={true}
         onClose={props.onClose}
@@ -83,7 +83,7 @@ const FilterPropertyOpacity: React.FC<FilterPropertyOpacityProps> = props => {
             Done
           </Button>
         </DialogActions>
-      </Dialog>
+      </BallenDialog>
     </div>
   );
 };

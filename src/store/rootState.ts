@@ -1,27 +1,30 @@
 import { BuildState, InitialBuildState } from "./buildState";
+import { DialogState, InitialDialogState } from "./dialogState";
+import { FileState, InitialFileState } from "./fileState";
 import { GuideLayerState, InitialGuideLayerState } from "./guideLayerState";
 import { HistoriesState, InitialHistoryState } from "./historyState";
 import { InitialLayersState, LayersState } from "./layersState";
 import { InitialProcessState, ProcessState } from "./processState";
 import { InitialToolsState, ToolsState } from "./toolsState";
-import { InitialFileState, FileState } from "./fileState";
 
 export type RootState = {
-  layers: LayersState;
-  tools: ToolsState;
   build: BuildState;
+  dialog: DialogState;
   file: FileState;
   guideLayer: GuideLayerState;
   history: HistoriesState;
+  layers: LayersState;
   process: ProcessState;
+  tools: ToolsState;
 };
 
 export const InitialRootState: RootState = {
   build: InitialBuildState,
-  guideLayer: InitialGuideLayerState,
+  dialog: InitialDialogState,
   file: InitialFileState,
-  layers: InitialLayersState,
-  tools: InitialToolsState,
+  guideLayer: InitialGuideLayerState,
   history: InitialHistoryState,
-  process: InitialProcessState
+  layers: InitialLayersState,
+  process: InitialProcessState,
+  tools: InitialToolsState
 };

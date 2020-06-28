@@ -1,22 +1,17 @@
+import { Box, Button, DialogActions, DialogContent } from "@material-ui/core";
 import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent
-} from "@material-ui/core";
-import {
+  cancelBuild,
   clearBuild,
   closeBuild,
-  makeBuild,
-  cancelBuild
+  makeBuild
 } from "actions/buildAction";
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "stores/rootState";
-import BuildCanvas from "./BuildCanvas";
 import { exportAsImage } from "actions/fileAction";
-import { BS_COMPLETED, BS_BUILDING } from "stores/buildState";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BS_BUILDING, BS_COMPLETED } from "stores/buildState";
+import { RootState } from "stores/rootState";
+import BallenDialog from "./BallenDialog";
+import BuildCanvas from "./BuildCanvas";
 
 const Build: React.FC = () => {
   const dispatch = useDispatch();
@@ -66,7 +61,7 @@ const Build: React.FC = () => {
   });
 
   return (
-    <Dialog
+    <BallenDialog
       fullScreen={true}
       open={build.isOpened}
       onEntered={onEnteredHandler}
@@ -113,7 +108,7 @@ const Build: React.FC = () => {
           Close
         </Button>
       </DialogActions>
-    </Dialog>
+    </BallenDialog>
   );
 };
 

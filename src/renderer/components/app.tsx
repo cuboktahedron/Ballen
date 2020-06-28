@@ -7,12 +7,12 @@ import {
 } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import { batchNewFile } from "actions/batchAction";
-import React, { useEffect } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
 import Build from "./Build";
 import File from "./File";
-import KeyShortcut from "./KeyShortcut";
+import HotKeyMain from "./hotkey/HotKeyMain";
 import LayerCanvases from "./LayerCanvases";
 import MainMenu from "./menu/MainMenu";
 import Process from "./Process";
@@ -48,18 +48,28 @@ const useStyles = makeStyles(() =>
 );
 
 const App: React.FC = () => {
-  const layers = useSelector((state: RootState) => state.layers);
+  const state = useSelector((state: RootState) => state);
+  const layers = state.layers;
+  const dialog = state.dialog;
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(batchNewFile());
   }, []);
 
+  const hotKey = ((): ReactNode => {
+    if (dialog.isOpen) {
+      return <div />;
+    } else {
+      return <HotKeyMain />;
+    }
+  })();
+
   const classes = useStyles();
 
   const controllers = (
     <Container>
-      <KeyShortcut />
+      {hotKey}
       <File />
       <Process />
       <Build />

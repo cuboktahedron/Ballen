@@ -1,18 +1,19 @@
 import { BallenAction } from "actions/actionTypes";
+import { BATCH } from "actions/batchAction";
 import { backward, forward, push } from "actions/historyAction";
-import { REDO, RootActions, UNDO, CLEAR_HISTORY } from "actions/rootAction";
+import { CLEAR_HISTORY, REDO, RootActions, UNDO } from "actions/rootAction";
 import { Action } from "redux";
+import { InitialFileState } from "stores/fileState";
+import { InitialHistoryState } from "stores/historyState";
 import { InitialRootState, RootState } from "stores/rootState";
 import buildReducer from "./buildReducer";
+import dialogReducer from "./dialogReducer";
 import fileReducer from "./fileReducer";
 import guideLayerReducer from "./guideLayerReducer";
 import historyReducer from "./historyReducer";
 import layersReducer from "./layersReducer";
 import processReducer from "./processReducer";
 import toolsReducer from "./toolsReducer";
-import { InitialHistoryState } from "stores/historyState";
-import { InitialFileState } from "stores/fileState";
-import { BATCH } from "actions/batchAction";
 
 export default function reducer(state: RootState = InitialRootState, action: Action): RootState {
   const rootAction = action as RootActions;
@@ -85,6 +86,22 @@ export default function reducer(state: RootState = InitialRootState, action: Act
           };
         } else {
           return { ...state, build: newState };
+        }
+      } else {
+        return state;
+      }
+    }
+    case "dialog": {
+      const newState = dialogReducer(state.dialog, bAction);
+      if (newState !== state.dialog) {
+        if (bAction.payload.recordDescription) {
+          return {
+            ...state,
+            dialog: newState,
+            history: historyReducer(state.history, push({ dialog: newState }, bAction.payload.recordDescription))
+          };
+        } else {
+          return { ...state, dialog: newState };
         }
       } else {
         return state;

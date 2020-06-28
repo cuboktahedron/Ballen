@@ -1,9 +1,10 @@
 import { BuildState } from "./buildState";
+import { DialogState } from "./dialogState";
+import { FileState } from "./fileState";
 import { GuideLayerState } from "./guideLayerState";
 import { LayersState } from "./layersState";
 import { ProcessState } from "./processState";
 import { ToolsState } from "./toolsState";
-import { FileState } from "./fileState";
 
 export type HistoriesState = {
   histories: HistoryState[];
@@ -12,12 +13,13 @@ export type HistoriesState = {
 };
 
 export type StatesOfHistory = {
-  layers?: LayersState;
-  tools?: ToolsState;
   build?: BuildState;
-  guideLayer?: GuideLayerState;
+  dialog?: DialogState;
   file?: FileState;
+  guideLayer?: GuideLayerState;
+  layers?: LayersState;
   process?: ProcessState;
+  tools?: ToolsState;
 };
 
 export type HistoryState = {

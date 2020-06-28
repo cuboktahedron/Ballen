@@ -11,7 +11,7 @@ import React from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useDispatch } from "react-redux";
 
-const KeyShortcut: React.FC = () => {
+const HotKeyMain: React.FC = () => {
   const dispatch = useDispatch();
 
   useHotkeys("p", () => {
@@ -53,4 +53,4 @@ const KeyShortcut: React.FC = () => {
   return <div />;
 };
 
-export default KeyShortcut;
+export default HotKeyMain;
