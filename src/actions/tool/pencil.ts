@@ -1,20 +1,16 @@
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchAction";
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
 import { DRAW, DrawAction } from "actions/layerAction";
-import Color from "utils/graphics/Color";
-import Graphics from "utils/graphics/Graphics";
 import { ChangeDrawStateAction, CHANGE_DRAW_STATE } from "actions/toolsAction";
 import { PencilProperty, ToolDrawStatePencil } from "stores/tool/pencilState";
+import Color from "utils/graphics/Color";
+import Graphics from "utils/graphics/Graphics";
+import { getActiveLayer } from "./functions";
 
 export const PENCIL = "tool/pencil";
 
 export const drawBeginPencil = (props: DrawBeginProps): DrawAction => {
-  // TODO: method化する
-  const activeLayer = props.layers.layers.find(layer => layer.id === props.layers.activeLayerId);
-  if (activeLayer === undefined) {
-    throw new Error("can't find activeLayer");
-  }
-
+  const activeLayer = getActiveLayer(props.layers);
   const newImageData = new ImageData(activeLayer.imageData.width, activeLayer.imageData.height);
   newImageData.data.set(activeLayer.imageData.data);
 
@@ -38,11 +34,7 @@ export const drawBeginPencil = (props: DrawBeginProps): DrawAction => {
 };
 
 export const drawMiddlePencil = (props: DrawMiddleProps): DrawAction => {
-  const activeLayer = props.layers.layers.find(layer => layer.id === props.layers.activeLayerId);
-  if (activeLayer === undefined) {
-    throw new Error("can't find activeLayer");
-  }
-
+  const activeLayer = getActiveLayer(props.layers);
   const drawState = props.tools.drawState as ToolDrawStatePencil;
   let prevCoords = drawState.prevCoords;
   if (prevCoords === undefined) {
@@ -73,10 +65,7 @@ export const drawMiddlePencil = (props: DrawMiddleProps): DrawAction => {
 };
 
 export const drawEndPencil = (props: DrawEndProps): DrawAction => {
-  const activeLayer = props.layers.layers.find(layer => layer.id === props.layers.activeLayerId);
-  if (activeLayer === undefined) {
-    throw new Error("can't find activeLayer");
-  }
+  const activeLayer = getActiveLayer(props.layers);
 
   return {
     type: DRAW,

@@ -6,6 +6,7 @@ import Blender from "../utils/graphics/Blender";
 import Color from "../utils/graphics/Color";
 import Graphics from "../utils/graphics/Graphics";
 import { throughFilter } from "./lib/LayerFilter";
+import { sleep } from "utils/functions";
 
 export type BuildActions = BuildAction | CancelBuildAction | CloseBuildAction | ClearBuildAction | OpenBuildAction;
 
@@ -49,9 +50,6 @@ export type BuildAction = {
   };
 } & BallenAction;
 
-// TODO: 共通でまとめる
-const sleep = (msec: number): Promise<void> => new Promise(resolve => setTimeout(resolve, msec));
-
 class BuildCanceled {}
 
 export const makeBuild = (layers: LayersState): [typeof build, typeof cancel] => {
@@ -91,7 +89,6 @@ export const makeBuild = (layers: LayersState): [typeof build, typeof cancel] =>
       for (const layer of reverseLayers) {
         dispatch(buildStatusUpdated(BS_BUILDING, `"${layer.name}" Rendering started.`, buildImageData));
 
-        // TODO: canvasのレンダリングが追いつかないのでsleepしているが、他にいい方法はないか？
         await sleep(1000);
 
         const color = new Color(layer.color.substring(1));

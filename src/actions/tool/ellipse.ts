@@ -1,19 +1,16 @@
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchAction";
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
 import { DRAW, DrawAction } from "actions/layerAction";
-import Color from "utils/graphics/Color";
-import Graphics from "utils/graphics/Graphics";
 import { ChangeDrawStateAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
 import { EllipseProperty, ToolDrawStateEllipse } from "stores/tool/ellipseState";
+import Color from "utils/graphics/Color";
+import Graphics from "utils/graphics/Graphics";
+import { getActiveLayer } from "./functions";
 
 export const ELLIPSE = "tool/ellipse";
 
 export const drawBeginEllipse = (props: DrawBeginProps): DrawAction => {
-  // TODO: method化する
-  const activeLayer = props.layers.layers.find(layer => layer.id === props.layers.activeLayerId);
-  if (activeLayer === undefined) {
-    throw new Error("can't find activeLayer");
-  }
+  const activeLayer = getActiveLayer(props.layers);
 
   return {
     type: DRAW,
@@ -25,10 +22,7 @@ export const drawBeginEllipse = (props: DrawBeginProps): DrawAction => {
 };
 
 export const drawMiddleEllipse = (props: DrawMiddleProps): DrawAction => {
-  const activeLayer = props.layers.layers.find(layer => layer.id === props.layers.activeLayerId);
-  if (activeLayer === undefined) {
-    throw new Error("can't find activeLayer");
-  }
+  const activeLayer = getActiveLayer(props.layers);
 
   return {
     type: DRAW,
@@ -40,10 +34,7 @@ export const drawMiddleEllipse = (props: DrawMiddleProps): DrawAction => {
 };
 
 export const drawEndEllipse = (props: DrawEndProps): DrawAction => {
-  const activeLayer = props.layers.layers.find(layer => layer.id === props.layers.activeLayerId);
-  if (activeLayer === undefined) {
-    throw new Error("can't find activeLayer");
-  }
+  const activeLayer = getActiveLayer(props.layers);
 
   const drawState = props.tools.drawState as ToolDrawStateEllipse;
   let origin = drawState.origin;
