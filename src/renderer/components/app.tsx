@@ -37,6 +37,7 @@ const useStyles = makeStyles(() =>
       width: "600px"
     },
     paper: {
+      margin: "8px",
       maxHeight: 580,
       minHeight: 580,
       maxWidth: 580,
