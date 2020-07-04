@@ -6,16 +6,26 @@ import React, {
   useRef
 } from "react";
 import { LFT_OPACITY, OpacityProperty } from "stores/filter/opacity";
-import { LayerState } from "stores/layerState";
+import { LayerState, LB_MULTIPLY } from "stores/layerState";
 import Color from "utils/graphics/Color";
 
 type LayerCanvasProps = LayerState & {
   zIndex: number;
 };
 
+const blendMode = (props: LayerCanvasProps): "multiply" | "normal" => {
+  switch (props.blend) {
+    case LB_MULTIPLY:
+      return "multiply";
+    default:
+      return "normal";
+  }
+};
+
 const useStyles = makeStyles(() =>
   createStyles({
     canvas: {
+      mixBlendMode: blendMode,
       position: "absolute",
       visibility: (props: LayerCanvasProps): "hidden" | "visible" =>
         props.visible ? "visible" : "hidden",
