@@ -5,7 +5,9 @@ import React, {
   useImperativeHandle,
   useRef
 } from "react";
+import { LFT_OPACITY, OpacityProperty } from "stores/filter/opacity";
 import { LayerState } from "stores/layerState";
+import Color from "utils/graphics/Color";
 
 type LayerCanvasProps = LayerState & {
   zIndex: number;
@@ -59,8 +61,19 @@ const LayerCanvasBase: React.RefForwardingComponent<
     const ctx = getContext();
     ctx.putImageData(props.imageData, 0, 0);
 
+    const alphaRatio = props.filters
+      .filter(filter => filter.property.type === LFT_OPACITY)
+      .map(filter => {
+        const property = filter.property as OpacityProperty;
+        return property.option.opacity / 100;
+      })
+      .reduce((acc, cur) => acc * cur, 1);
+    const alpha = Math.round(alphaRatio * 255);
+    const fillColor = new Color(props.color.substring(1));
+    fillColor.a = alpha;
+
     ctx.globalCompositeOperation = "source-in";
-    ctx.fillStyle = props.color + "80";
+    ctx.fillStyle = `#${fillColor.rgba}`;
     ctx.fillRect(0, 0, props.imageData.width, props.imageData.height);
   }, [props]);
 
