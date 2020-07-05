@@ -14,13 +14,13 @@ export class BinaryImageRunLength {
       {
         color1: Color.Transparent,
         color2: Color.Black,
-        chunkMax: 255
+        chunkMax: 0xffffffff
       },
       option
     );
   }
 
-  compress(data: Uint8ClampedArray): Uint8ClampedArray {
+  compress(data: Uint8ClampedArray): Uint32Array {
     const buffer: number[] = [];
     const or = this.option.color1.r;
     const og = this.option.color1.g;
@@ -58,10 +58,10 @@ export class BinaryImageRunLength {
       buffer.push(times);
     }
 
-    return Uint8ClampedArray.from(buffer);
+    return Uint32Array.from(buffer);
   }
 
-  decompress(data: Uint8ClampedArray): Uint8ClampedArray {
+  decompress(data: Uint32Array): Uint8ClampedArray {
     const buffer: number[] = [];
     const length = data.length;
 

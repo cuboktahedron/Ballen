@@ -175,7 +175,7 @@ export const loadLayers = (layers: LayersSaveData): LoadLayersAction => {
   const birl = new BinaryImageRunLength();
   const loadLayers = layers.layers.map(layer => {
     const imageData = new ImageData(layers.size.x, layers.size.y);
-    const rawImageData = birl.decompress(new Uint8ClampedArray(layer.imageData));
+    const rawImageData = birl.decompress(new Uint32Array(layer.imageData));
     imageData.data.set(rawImageData);
 
     const data = {

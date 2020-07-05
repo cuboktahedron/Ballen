@@ -13,7 +13,7 @@ describe("BinaryImageRunLength", () => {
     });
     const compressed = brl.compress(base.data);
 
-    const expected = Uint8ClampedArray.from([4, 0, 4, 0, 4, 0, 4]);
+    const expected = Uint32Array.from([4, 0, 4, 0, 4, 0, 4]);
     expect(compressed).toEqual(expected);
   });
 
@@ -25,7 +25,7 @@ describe("BinaryImageRunLength", () => {
       color2: Color.Black,
       chunkMax: 4
     });
-    const actual = brl.decompress(Uint8ClampedArray.from([4, 0, 4, 0, 4, 0, 4]));
+    const actual = brl.decompress(Uint32Array.from([4, 0, 4, 0, 4, 0, 4]));
 
     const expected = Uint8ClampedArray.from(base.data);
     expect(expected).toEqual(actual);
@@ -55,6 +55,23 @@ describe("BinaryImageRunLength", () => {
     const compressed = brl.compress(base.data);
     const decompressed = brl.decompress(compressed);
     const actual = new ImageData(4, 4);
+    actual.data.set(decompressed);
+
+    const expected = base;
+    expect(expected).toEqual(actual);
+  });
+
+  it("can handle more than 255", () => {
+    const base = new ImageData(130, 2);
+    const g = new Graphics(base);
+    g.dot(129, 1, Color.Black);
+
+    const brl = new BinaryImageRunLength();
+    const compressed = brl.compress(base.data);
+    expect(Uint32Array.from([259, 1])).toEqual(compressed);
+
+    const decompressed = brl.decompress(compressed);
+    const actual = new ImageData(130, 2);
     actual.data.set(decompressed);
 
     const expected = base;
