@@ -89,7 +89,8 @@ export const makeBuild = (layers: LayersState): [typeof build, typeof cancel] =>
       for (const layer of reverseLayers) {
         dispatch(buildStatusUpdated(BS_BUILDING, `"${layer.name}" Rendering started.`, buildImageData));
 
-        await sleep(1000);
+        // for rendering
+        await sleep(0);
 
         const color = new Color(layer.color.substring(1));
         targetImageData.data.set(layer.imageData.data);
