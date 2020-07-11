@@ -191,8 +191,8 @@ export default class Graphics {
 
     const dx = x2 - x1;
     const dy = y2 - y1;
-    const a = Math.round(dx / 2);
-    const b = Math.round(dy / 2);
+    const a = dx / 2;
+    const b = dy / 2;
     if (a === 0) {
       return;
     }
@@ -204,7 +204,7 @@ export default class Graphics {
     const cx = x1 + a;
     const cy = y1 + b;
     let x = a;
-    let y = 0;
+    let y = Math.round(b) === b ? 0 : 0.5;
     const a2 = a * a;
     const b2 = b * b;
 
