@@ -4,7 +4,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
-import { IdProperty } from "stores/filter/id";
+import { IdProperty } from "types/filters";
 import BallenDialog from "../BallenDialog";
 
 export type FilterPropertyIdProps = IdProperty & {

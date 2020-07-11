@@ -2,12 +2,10 @@ import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchActi
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
 import { DRAW, DrawAction } from "actions/layerAction";
 import { ChangeDrawStateAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
-import { EllipseProperty, ToolDrawStateEllipse } from "stores/tool/ellipseState";
+import { ELLIPSE, EllipseProperty, ToolDrawStateEllipse } from "types/tools/ellipse";
 import Color from "utils/graphics/Color";
 import Graphics from "utils/graphics/Graphics";
 import { getActiveLayer } from "./functions";
-
-export const ELLIPSE = "tool/ellipse";
 
 export const drawBeginEllipse = (props: DrawBeginProps): DrawAction => {
   const activeLayer = getActiveLayer(props.layers);

@@ -1,7 +1,7 @@
 import { TextField, Tooltip } from "@material-ui/core";
 import React, { useState } from "react";
 import { filterPropertyToName } from "renderer/lib/filerPropertyName/filterPropertyToName";
-import { FilterProperties } from "stores/filterState";
+import { FilterProperties } from "types/filters";
 
 const FilterPropertyName: React.FC<FilterProperties> = props => {
   let paramsRef: HTMLInputElement | null = null;

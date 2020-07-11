@@ -1,7 +1,6 @@
 import { loadLayers, LoadLayersAction, LOAD_LAYERS } from "actions/layersAction";
-import { LB_NORMAL, LB_MULTIPLY } from "stores/layerState";
-import { LFT_ID } from "stores/filter/id";
-import { LFT_OPACITY } from "stores/filter/opacity";
+import { LFT_ID, LFT_OPACITY } from "types/filters";
+import { LB_MULTIPLY, LB_NORMAL } from "types/layerBlend";
 
 describe("layersAction", () => {
   describe("loadLayers", () => {

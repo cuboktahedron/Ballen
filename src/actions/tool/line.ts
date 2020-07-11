@@ -2,12 +2,11 @@ import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchActi
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
 import { DRAW, DrawAction } from "actions/layerAction";
 import { ChangeDrawStateAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
-import { LineProperty, ToolDrawStateLine } from "stores/tool/lineState";
+import { LINE, LineProperty } from "types/tools/line";
+import { ToolDrawStateLine } from "types/tools/tools";
 import Color from "utils/graphics/Color";
 import Graphics from "utils/graphics/Graphics";
 import { getActiveLayer } from "./functions";
-
-export const LINE = "tool/line";
 
 export const drawBeginLine = (props: DrawBeginProps): DrawAction => {
   const activeLayer = getActiveLayer(props.layers);

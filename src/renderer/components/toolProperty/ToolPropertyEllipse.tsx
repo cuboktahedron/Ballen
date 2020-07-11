@@ -1,13 +1,10 @@
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
-import { ELLIPSE } from "actions/tool/ellipse";
 import { changeToolProperty } from "actions/toolsAction";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
-import {
-  EllipseProperty,
-  InitialEllipseProperty
-} from "stores/tool/ellipseState";
+import { InitialEllipseProperty } from "stores/tool/ellipseState";
+import { ELLIPSE, EllipseProperty } from "types/tools/ellipse";
 
 export const ToolPropertyEllipse: React.FC = () => {
   const dispatch = useDispatch();

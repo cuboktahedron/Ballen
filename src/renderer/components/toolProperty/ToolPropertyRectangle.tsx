@@ -1,13 +1,10 @@
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
-import { RECTANGLE } from "actions/tool/rectangle";
 import { changeToolProperty } from "actions/toolsAction";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
-import {
-  InitialRectangleProperty,
-  RectangleProperty
-} from "stores/tool/rectangleState";
+import { InitialRectangleProperty } from "stores/tool/rectangleState";
+import { RECTANGLE, RectangleProperty } from "types/tools/rectangle";
 
 export const ToolPropertyRectangle: React.FC = () => {
   const dispatch = useDispatch();

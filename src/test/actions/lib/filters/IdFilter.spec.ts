@@ -1,7 +1,7 @@
 import { filterId } from "actions/lib/filters/IdFilter";
+import { LFT_ID } from "types/filters";
 import Color from "utils/graphics/Color";
 import Graphics from "utils/graphics/Graphics";
-import { LFT_ID } from "stores/filter/id";
 
 describe("filterid", () => {
   const c1 = new Color("5078A0"); // RGB(80, 120, 160)

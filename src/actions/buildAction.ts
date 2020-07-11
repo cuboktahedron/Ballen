@@ -1,6 +1,6 @@
-import { BS_BUILDING, BS_COMPLETED, BuildStatus } from "stores/buildState";
 import { LayersState } from "stores/layersState";
-import { LB_NORMAL } from "stores/layerState";
+import { BS_BUILDING, BS_COMPLETED, BuildStatus } from "types/build";
+import { LB_NORMAL } from "types/layerBlend";
 import { sleep } from "utils/ballen-core";
 import Blender from "../utils/graphics/Blender";
 import Color from "../utils/graphics/Color";

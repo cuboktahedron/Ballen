@@ -1,10 +1,10 @@
 import { createStyles, IconButton, makeStyles, Theme } from "@material-ui/core";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-import { ELLIPSE as ToolTypeEllipse } from "actions/tool/ellipse";
 import { changeTool } from "actions/toolsAction";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
+import { ELLIPSE as ToolTypeEllipse } from "types/tools/ellipse";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

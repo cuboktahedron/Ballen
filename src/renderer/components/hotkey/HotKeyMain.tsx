@@ -1,15 +1,15 @@
 import { openBuild } from "actions/buildAction";
 import { addLayer } from "actions/layersAction";
 import { redo, undo } from "actions/rootAction";
-import { ELLIPSE } from "actions/tool/ellipse";
-import { FILLER } from "actions/tool/filler";
-import { LINE } from "actions/tool/line";
-import { PENCIL } from "actions/tool/pencil";
-import { RECTANGLE } from "actions/tool/rectangle";
 import { changeTool } from "actions/toolsAction";
 import React, { useCallback } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useDispatch } from "react-redux";
+import { ELLIPSE } from "types/tools/ellipse";
+import { FILLER } from "types/tools/filler";
+import { LINE } from "types/tools/line";
+import { PENCIL } from "types/tools/pencil";
+import { RECTANGLE } from "types/tools/rectangle";
 
 const HotKeyMain: React.FC = () => {
   const dispatch = useDispatch();

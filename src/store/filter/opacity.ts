@@ -1,13 +1,4 @@
-import { FilterProperty } from "stores/filterState";
-
-export const LFT_OPACITY = "opacity";
-
-export type OpacityProperty = {
-  type: typeof LFT_OPACITY;
-  option: {
-    opacity: number;
-  };
-} & FilterProperty;
+import { LFT_OPACITY, OpacityProperty } from "types/filters";
 
 export const InitialOpacityProperty: OpacityProperty = {
   type: LFT_OPACITY,

@@ -1,10 +1,10 @@
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
-import { LINE } from "actions/tool/line";
 import { changeToolProperty } from "actions/toolsAction";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
-import { InitialLineProperty, LineProperty } from "stores/tool/lineState";
+import { InitialLineProperty } from "stores/tool/lineState";
+import { LINE, LineProperty } from "types/tools/line";
 
 export const ToolPropertyLine: React.FC = () => {
   const dispatch = useDispatch();

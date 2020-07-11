@@ -1,43 +1,43 @@
-import { ToolProperty } from "stores/toolsState";
+import { ELLIPSE } from "types/tools/ellipse";
+import { FILLER } from "types/tools/filler";
+import { LINE } from "types/tools/line";
+import { PENCIL } from "types/tools/pencil";
+import { RECTANGLE } from "types/tools/rectangle";
+import { ToolProperty } from "types/tools/tools";
+import { Vector2D } from "utils/ballen-core";
+import Color from "../utils/graphics/Color";
 import { BallenAction } from "./actionTypes";
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "./batchAction";
-import Color from "../utils/graphics/Color";
 import {
   changeDrawStateBeginEllipse,
   ChangeDrawStateEllipseAction,
   changeDrawStateEndEllipse,
-  changeDrawStateMiddleEllipse,
-  ELLIPSE
+  changeDrawStateMiddleEllipse
 } from "./tool/ellipse";
 import {
   changeDrawStateBeginFiller,
   changeDrawStateEndFiller,
   ChangeDrawStateFillerAction,
-  changeDrawStateMiddleFiller,
-  FILLER
+  changeDrawStateMiddleFiller
 } from "./tool/filler";
 import {
   changeDrawStateBeginLine,
   changeDrawStateEndLine,
   ChangeDrawStateLineAction,
-  changeDrawStateMiddleLine,
-  LINE
+  changeDrawStateMiddleLine
 } from "./tool/line";
 import {
   changeDrawStateBeginPencil,
   changeDrawStateEndPencil,
   changeDrawStateMiddlePencil,
-  ChangeDrawStatePencilAction,
-  PENCIL
+  ChangeDrawStatePencilAction
 } from "./tool/pencil";
 import {
   changeDrawStateBeginRectangle,
   changeDrawStateEndRectangle,
   changeDrawStateMiddleRectangle,
-  ChangeDrawStateRectangleAction,
-  RECTANGLE
+  ChangeDrawStateRectangleAction
 } from "./tool/rectangle";
-import { Vector2D } from "utils/ballen-core";
 
 export type ToolsActions = ChangeToolAction | ChangeToolPropertyAction | ChangeDrawStateAction | MoveCursorAction;
 
@@ -79,11 +79,6 @@ export const changeToolProperty = (type: ToolType, property: ToolProperty): Chan
     property
   }
 });
-
-export type DrawStateWithRect = {
-  origin?: Vector2D;
-  to?: Vector2D;
-};
 
 export type ChangeDrawStateAction = { type: typeof CHANGE_DRAW_STATE } & (
   | ChangeDrawStatePencilAction

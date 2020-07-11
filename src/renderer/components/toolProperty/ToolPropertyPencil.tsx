@@ -5,13 +5,13 @@ import {
   FormGroup,
   TextField
 } from "@material-ui/core";
-import { PENCIL } from "actions/tool/pencil";
 import { changeToolProperty } from "actions/toolsAction";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "stores/rootState";
-import { InitialPencilProperty, PencilProperty } from "stores/tool/pencilState";
 import { validateNumber } from "renderer/lib/validator";
+import { RootState } from "stores/rootState";
+import { InitialPencilProperty } from "stores/tool/pencilState";
+import { PENCIL, PencilProperty } from "types/tools/pencil";
 
 export const ToolPropertyPencil: React.FC = () => {
   const dispatch = useDispatch();

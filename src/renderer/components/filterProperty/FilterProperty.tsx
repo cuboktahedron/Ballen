@@ -1,7 +1,5 @@
 import React, { ReactNode } from "react";
-import { LFT_ID } from "stores/filter/id";
-import { LFT_OPACITY } from "stores/filter/opacity";
-import { FilterProperties } from "stores/filterState";
+import { FilterProperties, LFT_ID, LFT_OPACITY } from "types/filters";
 import FilterPropertyId from "./FilterPropertyId";
 import FilterPropertyOpacity from "./FilterPropertyOpacity";
 

@@ -6,7 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import { changeFilter } from "actions/filterAction";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { LFT_OPACITY, OpacityProperty } from "stores/filter/opacity";
+import { LFT_OPACITY, OpacityProperty } from "types/filters";
 import BallenDialog from "../BallenDialog";
 
 export type FilterPropertyOpacityProps = OpacityProperty & {

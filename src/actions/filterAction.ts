@@ -1,4 +1,4 @@
-import { FilterProperties } from "stores/filterState";
+import { FilterProperties } from "types/filters";
 import { LayerAction } from "./layerAction";
 
 export type FilterAction = {

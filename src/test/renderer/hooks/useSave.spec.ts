@@ -1,10 +1,9 @@
+import { SaveData } from "actions/fileAction";
 import { useSelector } from "react-redux";
 import useSave from "renderer/hooks/useSave";
-import { LFT_ID } from "stores/filter/id";
-import { LB_MULTIPLY, LB_NORMAL } from "stores/layerState";
 import { InitialRootState, RootState } from "stores/rootState";
-import { LFT_OPACITY } from "stores/filter/opacity";
-import { SaveData } from "actions/fileAction";
+import { LFT_ID, LFT_OPACITY } from "types/filters";
+import { LB_MULTIPLY, LB_NORMAL } from "types/layerBlend";
 
 jest.mock("react-redux");
 const useSelectorMock = useSelector as jest.Mock<RootState>;

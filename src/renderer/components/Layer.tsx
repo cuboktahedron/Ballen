@@ -7,11 +7,11 @@ import {
   IconButton,
   List,
   ListItem,
+  ListItemSecondaryAction,
   makeStyles,
   NativeSelect,
   TextField,
-  Theme,
-  ListItemSecondaryAction
+  Theme
 } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
@@ -41,13 +41,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useActiveLayer } from "renderer/hooks/useActiveLayer";
 import { DndItemTypes } from "renderer/lib/dndTypes";
-import {
-  LayerBlend,
-  LayerState,
-  LB_MULTIPLY,
-  LB_NORMAL
-} from "stores/layerState";
+import { LayerState } from "stores/layerState";
 import { RootState } from "stores/rootState";
+import { LayerBlend, LB_MULTIPLY, LB_NORMAL } from "types/layerBlend";
 import Filter from "./Filter";
 
 const useStyles = makeStyles((theme: Theme) =>

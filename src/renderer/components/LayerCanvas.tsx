@@ -5,8 +5,9 @@ import React, {
   useImperativeHandle,
   useRef
 } from "react";
-import { LFT_OPACITY, OpacityProperty } from "stores/filter/opacity";
-import { LayerState, LB_MULTIPLY } from "stores/layerState";
+import { LayerState } from "stores/layerState";
+import { LFT_OPACITY, OpacityProperty } from "types/filters";
+import { LB_MULTIPLY } from "types/layerBlend";
 import Color from "utils/graphics/Color";
 
 type LayerCanvasProps = LayerState & {

@@ -1,13 +1,4 @@
-import { IdProperty } from "./filter/id";
-import { OpacityProperty } from "./filter/opacity";
-
-export type FilterType = string;
-
-export type FilterProperty = {
-  type: FilterType;
-};
-
-export type FilterProperties = IdProperty | OpacityProperty;
+import { FilterProperties } from "types/filters";
 
 export type FilterState = {
   id: number;

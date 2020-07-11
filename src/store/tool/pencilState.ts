@@ -1,23 +1,8 @@
-import { PENCIL } from "actions/tool/pencil";
-import { Vector2D } from "utils/ballen-core";
-
-export type PencilProperty = {
-  thickness: number;
-  positive: boolean;
-};
+import { PENCIL, PencilProperty, ToolStatePencil } from "types/tools/pencil";
 
 export const InitialPencilProperty: PencilProperty = {
   thickness: 1,
   positive: false
-};
-
-export type ToolDrawStatePencil = {
-  prevCoords?: Vector2D;
-};
-
-export type ToolStatePencil = {
-  type: typeof PENCIL;
-  property: PencilProperty;
 };
 
 export const InitialPencilState: ToolStatePencil = {

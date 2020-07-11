@@ -1,18 +1,16 @@
-import { ELLIPSE } from "actions/tool/ellipse";
-import { FILLER } from "actions/tool/filler";
-import { LINE } from "actions/tool/line";
-import { PENCIL } from "actions/tool/pencil";
-import { RECTANGLE } from "actions/tool/rectangle";
 import { ToolType } from "actions/toolsAction";
-import { EllipseProperty, InitialEllipseProperty, ToolDrawStateEllipse } from "./tool/ellipseState";
-import { FillerProperty, InitialFillerProperty, ToolDrawStateFiller } from "./tool/fillerState";
-import { InitialLineProperty, LineProperty, ToolDrawStateLine } from "./tool/lineState";
-import { InitialPencilProperty, PencilProperty, ToolDrawStatePencil } from "./tool/pencilState";
-import { InitialRectangleProperty } from "./tool/rectangleState";
+import { ELLIPSE } from "types/tools/ellipse";
+import { FILLER } from "types/tools/filler";
+import { LINE } from "types/tools/line";
+import { PENCIL } from "types/tools/pencil";
+import { RECTANGLE } from "types/tools/rectangle";
+import { ToolDrawState, ToolProperty } from "types/tools/tools";
 import { Vector2D } from "utils/ballen-core";
-
-export type ToolProperty = PencilProperty | FillerProperty | EllipseProperty | LineProperty;
-export type ToolDrawState = ToolDrawStatePencil | ToolDrawStateFiller | ToolDrawStateEllipse | ToolDrawStateLine;
+import { InitialEllipseProperty } from "./tool/ellipseState";
+import { InitialFillerProperty } from "./tool/fillerState";
+import { InitialLineProperty } from "./tool/lineState";
+import { InitialPencilProperty } from "./tool/pencilState";
+import { InitialRectangleProperty } from "./tool/rectangleState";
 
 export type ToolsState = {
   coords: Vector2D | null;

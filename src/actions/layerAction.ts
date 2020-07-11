@@ -1,11 +1,16 @@
-import { LayerBlend } from "stores/layerState";
+import { LayerBlend } from "types/layerBlend";
+import { ELLIPSE } from "types/tools/ellipse";
+import { FILLER } from "types/tools/filler";
+import { LINE } from "types/tools/line";
+import { PENCIL } from "types/tools/pencil";
+import { RECTANGLE } from "types/tools/rectangle";
 import { BallenAction } from "./actionTypes";
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "./batchAction";
-import { drawBeginEllipse, drawEndEllipse, drawMiddleEllipse, ELLIPSE } from "./tool/ellipse";
-import { drawBeginFiller, drawEndFiller, drawMiddleFiller, FILLER } from "./tool/filler";
-import { drawBeginLine, drawEndLine, drawMiddleLine, LINE } from "./tool/line";
-import { drawBeginPencil, drawEndPencil, drawMiddlePencil, PENCIL } from "./tool/pencil";
-import { drawBeginRectangle, drawEndRectangle, drawMiddleRectangle, RECTANGLE } from "./tool/rectangle";
+import { drawBeginEllipse, drawEndEllipse, drawMiddleEllipse } from "./tool/ellipse";
+import { drawBeginFiller, drawEndFiller, drawMiddleFiller } from "./tool/filler";
+import { drawBeginLine, drawEndLine, drawMiddleLine } from "./tool/line";
+import { drawBeginPencil, drawEndPencil, drawMiddlePencil } from "./tool/pencil";
+import { drawBeginRectangle, drawEndRectangle, drawMiddleRectangle } from "./tool/rectangle";
 
 export type LayerAction = {
   payload: {

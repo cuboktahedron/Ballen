@@ -2,12 +2,10 @@ import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchActi
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
 import { DRAW, DrawAction } from "actions/layerAction";
 import { ChangeDrawStateAction, CHANGE_DRAW_STATE } from "actions/toolsAction";
-import { FillerProperty, ToolDrawStateFiller } from "stores/tool/fillerState";
+import { FILLER, FillerProperty, ToolDrawStateFiller } from "types/tools/filler";
 import Color from "utils/graphics/Color";
 import Graphics from "utils/graphics/Graphics";
 import { getActiveLayer } from "./functions";
-
-export const FILLER = "tool/filler";
 
 export const drawBeginFiller = (props: DrawBeginProps): DrawAction => {
   const activeLayer = getActiveLayer(props.layers);

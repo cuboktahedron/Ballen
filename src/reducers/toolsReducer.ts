@@ -1,12 +1,6 @@
 import { BallenAction } from "actions/actionTypes";
-import {
-  CHANGE_DRAW_STATE,
-  CHANGE_TOOL,
-  CHANGE_TOOL_PROPERTY,
-  DrawStateWithRect,
-  MOVE_CURSOR,
-  ToolsActions
-} from "actions/toolsAction";
+import { CHANGE_DRAW_STATE, CHANGE_TOOL, CHANGE_TOOL_PROPERTY, MOVE_CURSOR, ToolsActions } from "actions/toolsAction";
+import { DrawStateWithRect } from "types/tools/tools";
 import { InitialToolsState, ToolsState } from "stores/toolsState";
 
 export default function reducer(state: ToolsState = InitialToolsState, anyAction: BallenAction): ToolsState {

@@ -1,6 +1,5 @@
 import { filterPropertyToName } from "renderer/lib/filerPropertyName/filterPropertyToName";
-import { IdProperty, LFT_ID } from "stores/filter/id";
-import { LFT_OPACITY, OpacityProperty } from "stores/filter/opacity";
+import { IdProperty, LFT_ID, LFT_OPACITY, OpacityProperty } from "types/filters";
 
 describe("filterPropertyToName", () => {
   it("should return id prop name", () => {

@@ -2,12 +2,10 @@ import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchActi
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
 import { DRAW, DrawAction } from "actions/layerAction";
 import { ChangeDrawStateAction, CHANGE_DRAW_STATE } from "actions/toolsAction";
-import { PencilProperty, ToolDrawStatePencil } from "stores/tool/pencilState";
+import { PENCIL, PencilProperty, ToolDrawStatePencil } from "types/tools/pencil";
 import Color from "utils/graphics/Color";
 import Graphics from "utils/graphics/Graphics";
 import { getActiveLayer } from "./functions";
-
-export const PENCIL = "tool/pencil";
 
 export const drawBeginPencil = (props: DrawBeginProps): DrawAction => {
   const activeLayer = getActiveLayer(props.layers);

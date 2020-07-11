@@ -13,7 +13,7 @@ import {
 } from "actions/layersAction";
 import { InitialLayersState, LayersState } from "stores/layersState";
 import layerReducer from "./layerReducer";
-import { LB_NORMAL } from "stores/layerState";
+import { LB_NORMAL } from "types/layerBlend";
 
 export default function reducer(state: LayersState = InitialLayersState, anyAction: BallenAction): LayersState {
   const action = anyAction as LayersActions;

@@ -1,10 +1,10 @@
 import { createStyles, IconButton, makeStyles, Theme } from "@material-ui/core";
 import FormatColorFillIcon from "@material-ui/icons/FormatColorFill";
-import { FILLER as ToolTypeFiller } from "actions/tool/filler";
 import { changeTool } from "actions/toolsAction";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
+import { FILLER as ToolTypeFiller } from "types/tools/filler";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

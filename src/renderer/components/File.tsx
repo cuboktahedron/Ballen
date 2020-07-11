@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { FS_EXPORT_AS_IMAGE, FS_LOAD, FS_SAVE } from "stores/fileState";
 import { RootState } from "stores/rootState";
+import { FS_EXPORT_AS_IMAGE, FS_LOAD, FS_SAVE } from "types/file";
 import ExportAsImage from "./file/ExportAsImage";
 import Load from "./file/Load";
 import Save from "./file/Save";

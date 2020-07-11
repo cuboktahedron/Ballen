@@ -1,6 +1,7 @@
 import { BallenAction } from "actions/actionTypes";
 import { END_FILE, EXPORT_AS_IMAGE, FileActions, LOAD, SAVE } from "actions/fileAction";
-import { FileState, FS_EXPORT_AS_IMAGE, FS_LOAD, FS_NONE, FS_SAVE, InitialFileState } from "stores/fileState";
+import { FileState, InitialFileState } from "stores/fileState";
+import { FS_EXPORT_AS_IMAGE, FS_LOAD, FS_NONE, FS_SAVE } from "types/file";
 
 export default function reducer(state: FileState = InitialFileState, anyAction: BallenAction): FileState {
   const action = anyAction as FileActions;

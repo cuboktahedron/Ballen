@@ -3,9 +3,9 @@ import {
   FormControl,
   IconButton,
   ListItem,
+  ListItemSecondaryAction,
   MuiThemeProvider,
-  NativeSelect,
-  ListItemSecondaryAction
+  NativeSelect
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -13,11 +13,10 @@ import { changeFilter } from "actions/filterAction";
 import { deleteFilter } from "actions/layerAction";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { LFT_ID } from "stores/filter/id";
-import { LFT_OPACITY } from "stores/filter/opacity";
-import { FilterState, FilterType } from "stores/filterState";
+import { FilterState } from "stores/filterState";
+import { FilterType, LFT_ID, LFT_OPACITY } from "types/filters";
 import FilterProperty from "./filterProperty/FilterProperty";
-import FilterPropertyName from "./FIlterPropertyName";
+import FilterPropertyName from "./FilterPropertyName";
 
 type FilterProps = FilterState & {
   layerId: number;

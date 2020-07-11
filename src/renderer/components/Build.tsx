@@ -8,8 +8,8 @@ import {
 import { exportAsImage } from "actions/fileAction";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BS_BUILDING, BS_COMPLETED } from "stores/buildState";
 import { RootState } from "stores/rootState";
+import { BS_BUILDING, BS_COMPLETED } from "types/build";
 import BallenDialog from "./BallenDialog";
 import BuildCanvas from "./BuildCanvas";
 
