@@ -1,12 +1,12 @@
 import { BS_BUILDING, BS_COMPLETED, BuildStatus } from "stores/buildState";
 import { LayersState } from "stores/layersState";
 import { LB_NORMAL } from "stores/layerState";
-import { BallenAction } from "./actionTypes";
+import { sleep } from "utils/ballen-core";
 import Blender from "../utils/graphics/Blender";
 import Color from "../utils/graphics/Color";
 import Graphics from "../utils/graphics/Graphics";
+import { BallenAction } from "./actionTypes";
 import { throughFilter } from "./lib/LayerFilter";
-import { sleep } from "utils/functions";
 
 export type BuildActions = BuildAction | CancelBuildAction | CloseBuildAction | ClearBuildAction | OpenBuildAction;
 
