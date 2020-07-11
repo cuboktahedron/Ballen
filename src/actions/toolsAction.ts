@@ -37,7 +37,7 @@ import {
   ChangeDrawStateRectangleAction,
   RECTANGLE
 } from "./tool/rectangle";
-import { Vector2D } from "ballen-core";
+import { Vector2D } from "utils/ballen-core";
 
 export type ToolsActions = ChangeToolAction | ChangeToolPropertyAction | ChangeDrawStateAction | MoveCursorAction;
 

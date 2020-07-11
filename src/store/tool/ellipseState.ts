@@ -1,5 +1,5 @@
 import { ELLIPSE } from "actions/tool/ellipse";
-import { Vector2D } from "ballen-core";
+import { Vector2D } from "utils/ballen-core";
 import { DrawStateWithRect } from "actions/toolsAction";
 
 export type EllipseProperty = {

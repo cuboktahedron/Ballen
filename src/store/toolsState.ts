@@ -9,7 +9,7 @@ import { FillerProperty, InitialFillerProperty, ToolDrawStateFiller } from "./to
 import { InitialLineProperty, LineProperty, ToolDrawStateLine } from "./tool/lineState";
 import { InitialPencilProperty, PencilProperty, ToolDrawStatePencil } from "./tool/pencilState";
 import { InitialRectangleProperty } from "./tool/rectangleState";
-import { Vector2D } from "ballen-core";
+import { Vector2D } from "utils/ballen-core";
 
 export type ToolProperty = PencilProperty | FillerProperty | EllipseProperty | LineProperty;
 export type ToolDrawState = ToolDrawStatePencil | ToolDrawStateFiller | ToolDrawStateEllipse | ToolDrawStateLine;

@@ -1,4 +1,4 @@
-import { Vector2D } from "ballen-core";
+import { Vector2D } from "utils/ballen-core";
 import { FilterProperties } from "stores/filterState";
 import { LayerBlend, LayerState } from "stores/layerState";
 import { BinaryImageRunLength } from "utils/graphics/compress/BinaryImageRunLength";

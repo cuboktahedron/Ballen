@@ -1,6 +1,6 @@
 import { LINE } from "actions/tool/line";
 import { DrawStateWithRect } from "actions/toolsAction";
-import { Vector2D } from "ballen-core";
+import { Vector2D } from "utils/ballen-core";
 
 export type LineProperty = {
   positive: boolean;

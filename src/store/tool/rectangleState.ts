@@ -1,5 +1,5 @@
 import { RECTANGLE } from "actions/tool/rectangle";
-import { Vector2D } from "ballen-core";
+import { Vector2D } from "utils/ballen-core";
 import { DrawStateWithRect } from "actions/toolsAction";
 
 export type RectangleProperty = {

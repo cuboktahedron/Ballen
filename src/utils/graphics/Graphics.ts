@@ -1,5 +1,5 @@
 import Color from "./Color";
-import { Vector2D } from "ballen-core";
+import { Vector2D } from "utils/ballen-core";
 
 export default class Graphics {
   constructor(private imageData: ImageData) {}
