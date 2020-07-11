@@ -1,8 +1,8 @@
 import { LayerState } from "stores/layerState";
 import { FilterProperties } from "types/filters";
 import { LayerBlend } from "types/layerBlend";
-import { Vector2D } from "utils/ballen-core";
-import { BinaryImageRunLength } from "utils/graphics/compress/BinaryImageRunLength";
+import { Vector2D } from "utils/ballenCore";
+import { BinaryImageRunLength } from "utils/graphics/compress/binaryImageRunLength";
 import { BallenAction } from "./actionTypes";
 
 export type LayersActions =

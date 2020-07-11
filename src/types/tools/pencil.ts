@@ -1,4 +1,4 @@
-import { Vector2D } from "utils/ballen-core";
+import { Vector2D } from "utils/ballenCore";
 
 export const PENCIL = "tool/pencil";
 

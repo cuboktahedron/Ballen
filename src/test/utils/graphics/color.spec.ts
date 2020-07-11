@@ -1,4 +1,4 @@
-import Color from "utils/graphics/Color";
+import Color from "utils/graphics/color";
 
 describe("Color", () => {
   describe("constructor", () => {

@@ -5,7 +5,7 @@ import { LINE } from "types/tools/line";
 import { PENCIL } from "types/tools/pencil";
 import { RECTANGLE } from "types/tools/rectangle";
 import { ToolDrawState, ToolProperty } from "types/tools/tools";
-import { Vector2D } from "utils/ballen-core";
+import { Vector2D } from "utils/ballenCore";
 import { InitialEllipseProperty } from "./tool/ellipseState";
 import { InitialFillerProperty } from "./tool/fillerState";
 import { InitialLineProperty } from "./tool/lineState";

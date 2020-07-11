@@ -1,4 +1,4 @@
-import { Vector2D } from "utils/ballen-core";
+import { Vector2D } from "utils/ballenCore";
 import { LayersState } from "stores/layersState";
 import { ToolsState } from "stores/toolsState";
 import { BallenAction } from "./actionTypes";

@@ -1,5 +1,5 @@
-import Color from "utils/graphics/Color";
-import Graphics from "utils/graphics/Graphics";
+import Color from "utils/graphics/color";
+import Graphics from "utils/graphics/graphics";
 
 const T = Color.Transparent;
 const B = Color.Black;

@@ -1,4 +1,4 @@
-import { Vector2D } from "utils/ballen-core";
+import { Vector2D } from "utils/ballenCore";
 import { EllipseProperty, ToolDrawStateEllipse } from "./ellipse";
 import { FillerProperty, ToolDrawStateFiller } from "./filler";
 import { LineProperty } from "./line";

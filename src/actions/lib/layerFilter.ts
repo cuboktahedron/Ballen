@@ -1,8 +1,8 @@
 import { LFT_ID, LFT_OPACITY } from "types/filters";
 import { FilterState } from "stores/filterState";
-import Graphics from "utils/graphics/Graphics";
-import { filterId } from "./filters/IdFilter";
-import { filterOpacity } from "./filters/OpacityFilter";
+import Graphics from "utils/graphics/graphics";
+import { filterId } from "./filters/idFilter";
+import { filterOpacity } from "./filters/opacityFilter";
 
 export const throughFilter = (base: ImageData, filters: FilterState[]): void => {
   const g = new Graphics(base);

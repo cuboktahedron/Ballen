@@ -1,7 +1,7 @@
-import { filterOpacity } from "actions/lib/filters/OpacityFilter";
+import { filterOpacity } from "actions/lib/filters/opacityFilter";
 import { LFT_OPACITY } from "types/filters";
-import Color from "utils/graphics/Color";
-import Graphics from "utils/graphics/Graphics";
+import Color from "utils/graphics/color";
+import Graphics from "utils/graphics/graphics";
 
 describe("filterOpacity", () => {
   const c1 = new Color("5078A0"); // RGB(80, 120, 160)

@@ -1,6 +1,6 @@
-import Color from "utils/graphics/Color";
-import { BinaryImageRunLength } from "utils/graphics/compress/BinaryImageRunLength";
-import Graphics from "utils/graphics/Graphics";
+import Color from "utils/graphics/color";
+import { BinaryImageRunLength } from "utils/graphics/compress/binaryImageRunLength";
+import Graphics from "utils/graphics/graphics";
 
 describe("BinaryImageRunLength", () => {
   it("should compress", () => {

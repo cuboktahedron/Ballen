@@ -4,8 +4,8 @@ import { LINE } from "types/tools/line";
 import { PENCIL } from "types/tools/pencil";
 import { RECTANGLE } from "types/tools/rectangle";
 import { ToolProperty } from "types/tools/tools";
-import { Vector2D } from "utils/ballen-core";
-import Color from "../utils/graphics/Color";
+import { Vector2D } from "utils/ballenCore";
+import Color from "../utils/graphics/color";
 import { BallenAction } from "./actionTypes";
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "./batchAction";
 import {

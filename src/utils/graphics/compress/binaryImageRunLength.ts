@@ -1,4 +1,4 @@
-import Color from "../Color";
+import Color from "../color";
 
 export type BinaryImageRunLengthOption = {
   color1: Color;

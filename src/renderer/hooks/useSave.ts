@@ -1,7 +1,7 @@
 import { SaveData } from "actions/fileAction";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
-import { BinaryImageRunLength } from "utils/graphics/compress/BinaryImageRunLength";
+import { BinaryImageRunLength } from "utils/graphics/compress/binaryImageRunLength";
 
 const useSave = (): string => {
   const state = useSelector((state: RootState) => state);

@@ -3,8 +3,8 @@ import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerA
 import { DRAW, DrawAction } from "actions/layerAction";
 import { ChangeDrawStateAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
 import { RECTANGLE, RectangleProperty, ToolDrawStateRectangle } from "types/tools/rectangle";
-import Color from "utils/graphics/Color";
-import Graphics from "utils/graphics/Graphics";
+import Color from "utils/graphics/color";
+import Graphics from "utils/graphics/graphics";
 import { getActiveLayer } from "./functions";
 
 export const drawBeginRectangle = (props: DrawBeginProps): DrawAction => {

@@ -1,5 +1,5 @@
-import Graphics from "./Graphics";
-import Color from "./Color";
+import Graphics from "./graphics";
+import Color from "./color";
 
 export default class Blender {
   private bg: Graphics;

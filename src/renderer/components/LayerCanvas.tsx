@@ -8,7 +8,7 @@ import React, {
 import { LayerState } from "stores/layerState";
 import { LFT_OPACITY, OpacityProperty } from "types/filters";
 import { LB_MULTIPLY } from "types/layerBlend";
-import Color from "utils/graphics/Color";
+import Color from "utils/graphics/color";
 
 type LayerCanvasProps = LayerState & {
   zIndex: number;

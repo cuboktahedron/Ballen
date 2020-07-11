@@ -1,4 +1,4 @@
-import { Vector2D } from "utils/ballen-core";
+import { Vector2D } from "utils/ballenCore";
 import { DrawStateWithRect } from "./tools";
 
 export const ELLIPSE = "tool/ellipse";
