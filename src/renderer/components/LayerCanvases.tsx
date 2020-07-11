@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useActiveLayer } from "renderer/hooks/useActiveLayer";
 import { LayerState } from "stores/layerState";
 import { RootState } from "stores/rootState";
+import { ToolProperty } from "types/tools/tools";
 import GuideLayerCanvas from "./GuideLayerCanvas";
 import LayerCanvas, { LayerCanvasMethods } from "./LayerCanvas";
 
@@ -61,8 +62,12 @@ const LayerCanvases: React.FC = () => {
 
     dispatch(
       batchDrawBegin({
-        tools: state.tools,
-        layers: state.layers,
+        tools: {
+          selectedType: tools.selectedType,
+          drawInfo: tools.drawInfo,
+          property: tools.properties.get(tools.selectedType) as ToolProperty
+        },
+        layer: activeLayer,
         event: {
           coords: {
             x: e.nativeEvent.offsetX,
@@ -96,8 +101,12 @@ const LayerCanvases: React.FC = () => {
     } else {
       dispatch(
         batchDrawMiddle({
-          tools: state.tools,
-          layers: state.layers,
+          tools: {
+            selectedType: tools.selectedType,
+            drawInfo: tools.drawInfo,
+            property: tools.properties.get(tools.selectedType) as ToolProperty
+          },
+          layer: activeLayer,
           event: {
             coords
           }
@@ -126,8 +135,12 @@ const LayerCanvases: React.FC = () => {
 
     dispatch(
       batchDrawEnd({
-        tools: state.tools,
-        layers: state.layers,
+        tools: {
+          selectedType: tools.selectedType,
+          drawInfo: tools.drawInfo,
+          property: tools.properties.get(tools.selectedType) as ToolProperty
+        },
+        layer: activeLayer,
         event: {
           coords
         }

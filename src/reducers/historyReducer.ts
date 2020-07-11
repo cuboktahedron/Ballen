@@ -1,11 +1,11 @@
-import { BACKWARD, FORWARD, HistoryActions, PUSH } from "actions/historyAction";
+import { BACKWARD, CombinedHistoryActions, FORWARD, PUSH } from "reducers/actions/historyReducerAction";
 import { AnyAction } from "redux";
-import { HistoriesState, InitialHistoryState, HistoryState } from "stores/historyState";
+import { HistoriesState, HistoryState, InitialHistoryState } from "stores/historyState";
 
 const HISTORY_MAX = 256;
 
 export default function reducer(state: HistoriesState = InitialHistoryState, anyAction: AnyAction): HistoriesState {
-  const action = anyAction as HistoryActions;
+  const action = anyAction as CombinedHistoryActions;
 
   switch (action.type) {
     case FORWARD:

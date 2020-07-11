@@ -9,42 +9,42 @@ import Color from "../utils/graphics/color";
 import { BallenAction } from "./actionTypes";
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "./batchAction";
 import {
-  changeDrawStateBeginEllipse,
-  ChangeDrawStateEllipseAction,
-  changeDrawStateEndEllipse,
-  changeDrawStateMiddleEllipse
+  changeDrawInfoBeginEllipse,
+  ChangeDrawInfoEllipseAction,
+  changeDrawInfoEndEllipse,
+  changeDrawInfoMiddleEllipse
 } from "./tool/ellipse";
 import {
-  changeDrawStateBeginFiller,
-  changeDrawStateEndFiller,
-  ChangeDrawStateFillerAction,
-  changeDrawStateMiddleFiller
+  changeDrawInfoBeginFiller,
+  changeDrawInfoEndFiller,
+  ChangeDrawInfoFillerAction,
+  changeDrawInfoMiddleFiller
 } from "./tool/filler";
 import {
-  changeDrawStateBeginLine,
-  changeDrawStateEndLine,
-  ChangeDrawStateLineAction,
-  changeDrawStateMiddleLine
+  changeDrawInfoBeginLine,
+  changeDrawInfoEndLine,
+  ChangeDrawInfoLineAction,
+  changeDrawInfoMiddleLine
 } from "./tool/line";
 import {
-  changeDrawStateBeginPencil,
-  changeDrawStateEndPencil,
-  changeDrawStateMiddlePencil,
-  ChangeDrawStatePencilAction
+  changeDrawInfoBeginPencil,
+  changeDrawInfoEndPencil,
+  changeDrawInfoMiddlePencil,
+  ChangeDrawInfoPencilAction
 } from "./tool/pencil";
 import {
-  changeDrawStateBeginRectangle,
-  changeDrawStateEndRectangle,
-  changeDrawStateMiddleRectangle,
-  ChangeDrawStateRectangleAction
+  changeDrawInfoBeginRectangle,
+  changeDrawInfoEndRectangle,
+  changeDrawInfoMiddleRectangle,
+  ChangeDrawInfoRectangleAction
 } from "./tool/rectangle";
 
-export type ToolsActions = ChangeToolAction | ChangeToolPropertyAction | ChangeDrawStateAction | MoveCursorAction;
+export type ToolsActions = ChangeToolAction | ChangeToolPropertyAction | ChangeDrawInfoAction | MoveCursorAction;
 
 export const GUIDE_LINE_COLOR = new Color("ff000080");
 
 export const CHANGE_TOOL = "tools/changeTool";
-export const CHANGE_DRAW_STATE = "tools/changeDrawState";
+export const CHANGE_DRAW_STATE = "tools/changeDrawInfo";
 export const CHANGE_TOOL_PROPERTY = "tools/changeToolProperty";
 export const MOVE_CURSOR = "tools/moveCursor";
 
@@ -80,61 +80,61 @@ export const changeToolProperty = (type: ToolType, property: ToolProperty): Chan
   }
 });
 
-export type ChangeDrawStateAction = { type: typeof CHANGE_DRAW_STATE } & (
-  | ChangeDrawStatePencilAction
-  | ChangeDrawStateFillerAction
-  | ChangeDrawStateEllipseAction
-  | ChangeDrawStateRectangleAction
-  | ChangeDrawStateLineAction
+export type ChangeDrawInfoAction = { type: typeof CHANGE_DRAW_STATE } & (
+  | ChangeDrawInfoPencilAction
+  | ChangeDrawInfoFillerAction
+  | ChangeDrawInfoEllipseAction
+  | ChangeDrawInfoRectangleAction
+  | ChangeDrawInfoLineAction
 ) &
   BallenAction;
 
-export const changeDrawStateBegin = (props: DrawBeginProps): ChangeDrawStateAction => {
+export const changeDrawInfoBegin = (props: DrawBeginProps): ChangeDrawInfoAction => {
   switch (props.tools.selectedType) {
     case PENCIL:
-      return changeDrawStateBeginPencil(props);
+      return changeDrawInfoBeginPencil(props);
     case FILLER:
-      return changeDrawStateBeginFiller(props);
+      return changeDrawInfoBeginFiller(props);
     case ELLIPSE:
-      return changeDrawStateBeginEllipse(props);
+      return changeDrawInfoBeginEllipse(props);
     case RECTANGLE:
-      return changeDrawStateBeginRectangle(props);
+      return changeDrawInfoBeginRectangle(props);
     case LINE:
-      return changeDrawStateBeginLine(props);
+      return changeDrawInfoBeginLine(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
 };
 
-export const changeDrawStateMiddle = (props: DrawMiddleProps): ChangeDrawStateAction => {
+export const changeDrawInfoMiddle = (props: DrawMiddleProps): ChangeDrawInfoAction => {
   switch (props.tools.selectedType) {
     case PENCIL:
-      return changeDrawStateMiddlePencil(props);
+      return changeDrawInfoMiddlePencil(props);
     case FILLER:
-      return changeDrawStateMiddleFiller(props);
+      return changeDrawInfoMiddleFiller(props);
     case ELLIPSE:
-      return changeDrawStateMiddleEllipse(props);
+      return changeDrawInfoMiddleEllipse(props);
     case RECTANGLE:
-      return changeDrawStateMiddleRectangle(props);
+      return changeDrawInfoMiddleRectangle(props);
     case LINE:
-      return changeDrawStateMiddleLine(props);
+      return changeDrawInfoMiddleLine(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }
 };
 
-export const changeDrawStateEnd = (props: DrawEndProps): ChangeDrawStateAction => {
+export const changeDrawInfoEnd = (props: DrawEndProps): ChangeDrawInfoAction => {
   switch (props.tools.selectedType) {
     case PENCIL:
-      return changeDrawStateEndPencil(props);
+      return changeDrawInfoEndPencil(props);
     case FILLER:
-      return changeDrawStateEndFiller(props);
+      return changeDrawInfoEndFiller(props);
     case ELLIPSE:
-      return changeDrawStateEndEllipse(props);
+      return changeDrawInfoEndEllipse(props);
     case RECTANGLE:
-      return changeDrawStateEndRectangle(props);
+      return changeDrawInfoEndRectangle(props);
     case LINE:
-      return changeDrawStateEndLine(props);
+      return changeDrawInfoEndLine(props);
     default:
       throw new Error(`undefined tool type specified ${props.tools.selectedType}`);
   }

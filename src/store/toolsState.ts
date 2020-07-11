@@ -4,7 +4,7 @@ import { FILLER } from "types/tools/filler";
 import { LINE } from "types/tools/line";
 import { PENCIL } from "types/tools/pencil";
 import { RECTANGLE } from "types/tools/rectangle";
-import { ToolDrawState, ToolProperty } from "types/tools/tools";
+import { ToolDrawInfo, ToolProperty } from "types/tools/tools";
 import { Vector2D } from "utils/ballenCore";
 import { InitialEllipseProperty } from "./tool/ellipseState";
 import { InitialFillerProperty } from "./tool/fillerState";
@@ -14,7 +14,7 @@ import { InitialRectangleProperty } from "./tool/rectangleState";
 
 export type ToolsState = {
   coords: Vector2D | null;
-  drawState: ToolDrawState;
+  drawInfo: ToolDrawInfo;
   properties: Map<ToolType, ToolProperty>;
   rect: [Vector2D, Vector2D] | null;
   selectedType: ToolType;
@@ -22,7 +22,7 @@ export type ToolsState = {
 
 export const InitialToolsState: ToolsState = {
   coords: null,
-  drawState: {},
+  drawInfo: {},
   properties: new Map([
     [PENCIL, InitialPencilProperty],
     [FILLER, InitialFillerProperty],

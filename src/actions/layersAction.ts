@@ -1,6 +1,6 @@
-import { LayerState } from "stores/layerState";
-import { FilterProperties } from "types/filters";
+import { FilterInfo, FilterProperties } from "types/filters";
 import { LayerBlend } from "types/layerBlend";
+import { LayerInfo } from "types/layers";
 import { Vector2D } from "utils/ballenCore";
 import { BinaryImageRunLength } from "utils/graphics/compress/binaryImageRunLength";
 import { BallenAction } from "./actionTypes";
@@ -86,11 +86,11 @@ export const deleteLayer = (layerId: number): DeleteLayerAction => ({
 export type BeginMovingLayerAction = {
   type: typeof BEGIN_MOVING_LAYER;
   payload: {
-    layers: LayerState[];
+    layers: LayerInfo<FilterInfo>[];
   };
 } & BallenAction;
 
-export const beginMovingLayer = (layers: LayerState[]): BeginMovingLayerAction => ({
+export const beginMovingLayer = (layers: LayerInfo<FilterInfo>[]): BeginMovingLayerAction => ({
   type: BEGIN_MOVING_LAYER,
   payload: {
     layers: [...layers]
@@ -100,12 +100,12 @@ export const beginMovingLayer = (layers: LayerState[]): BeginMovingLayerAction =
 export type MoveLayerAction = {
   type: typeof MOVE_LAYER;
   payload: {
-    layers: LayerState[];
+    layers: LayerInfo<FilterInfo>[];
   };
 } & BallenAction;
 
-export const moveLayer = (fromIndex: number, toIndex: number, layers: LayerState[]): MoveLayerAction => {
-  const newLayers: LayerState[] = [...layers];
+export const moveLayer = (fromIndex: number, toIndex: number, layers: LayerInfo<FilterInfo>[]): MoveLayerAction => {
+  const newLayers = [...layers];
 
   const fromLayer = layers[fromIndex];
   newLayers.splice(fromIndex, 1);
@@ -122,16 +122,16 @@ export const moveLayer = (fromIndex: number, toIndex: number, layers: LayerState
 export type CompleteMovingLayerAction = {
   type: typeof COMPLETE_MOVING_LAYER;
   payload: {
-    layers: LayerState[];
+    layers: LayerInfo<FilterInfo>[];
   };
 } & BallenAction;
 
 export const completeMovingLayer = (
   fromIndex: number,
   toIndex: number,
-  layers: LayerState[]
+  layers: LayerInfo<FilterInfo>[]
 ): CompleteMovingLayerAction => {
-  const newLayers: LayerState[] = [...layers];
+  const newLayers = [...layers];
 
   const fromLayer = layers[fromIndex];
   newLayers.splice(fromIndex, 1);

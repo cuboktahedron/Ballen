@@ -1,19 +1,19 @@
 import { BallenAction } from "actions/actionTypes";
 import {
   ADD_LAYER,
-  CHANGE_ACTIVE_LAYER,
-  DELETE_LAYER,
-  LayersActions,
-  MOVE_LAYER,
-  END_MOVING_LAYER,
   BEGIN_MOVING_LAYER,
+  CHANGE_ACTIVE_LAYER,
   COMPLETE_MOVING_LAYER,
+  DELETE_LAYER,
+  END_MOVING_LAYER,
+  INIT_LAYERS,
+  LayersActions,
   LOAD_LAYERS,
-  INIT_LAYERS
+  MOVE_LAYER
 } from "actions/layersAction";
 import { InitialLayersState, LayersState } from "stores/layersState";
-import layerReducer from "./layerReducer";
 import { LB_NORMAL } from "types/layerBlend";
+import layerReducer from "./layerReducer";
 
 export default function reducer(state: LayersState = InitialLayersState, anyAction: BallenAction): LayersState {
   const action = anyAction as LayersActions;

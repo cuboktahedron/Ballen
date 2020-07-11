@@ -1,8 +1,13 @@
-import { RECTANGLE, RectangleProperty, ToolStateRectangle } from "types/tools/rectangle";
+import { RECTANGLE, RectangleProperty } from "types/tools/rectangle";
 
 export const InitialRectangleProperty: RectangleProperty = {
   positive: false,
   fill: false
+};
+
+export type ToolStateRectangle = {
+  type: typeof RECTANGLE;
+  property: RectangleProperty;
 };
 
 export const InitialRectangleState: ToolStateRectangle = {

@@ -1,3 +1,6 @@
+import { Vector2D } from "utils/ballenCore";
+import { DrawStateWithRect } from "./tools";
+
 export const LINE = "tool/line";
 
 export type LineProperty = {
@@ -5,7 +8,7 @@ export type LineProperty = {
   fill: boolean;
 };
 
-export type ToolStateLine = {
-  type: typeof LINE;
-  property: LineProperty;
-};
+export type ToolDrawInfoLine = {
+  origin?: Vector2D;
+  to?: Vector2D;
+} & DrawStateWithRect;

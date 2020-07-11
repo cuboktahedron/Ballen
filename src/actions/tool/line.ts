@@ -1,42 +1,34 @@
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchAction";
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
 import { DRAW, DrawAction } from "actions/layerAction";
-import { ChangeDrawStateAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
-import { LINE, LineProperty } from "types/tools/line";
-import { ToolDrawStateLine } from "types/tools/tools";
+import { ChangeDrawInfoAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
+import { LINE, LineProperty, ToolDrawInfoLine } from "types/tools/line";
 import Color from "utils/graphics/color";
 import Graphics from "utils/graphics/graphics";
-import { getActiveLayer } from "./functions";
 
 export const drawBeginLine = (props: DrawBeginProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: null
     }
   };
 };
 
 export const drawMiddleLine = (props: DrawMiddleProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: null
     }
   };
 };
 
 export const drawEndLine = (props: DrawEndProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-
-  const drawState = props.tools.drawState as ToolDrawStateLine;
-  let origin = drawState.origin;
+  const drawInfo = props.tools.drawInfo as ToolDrawInfoLine;
+  let origin = drawInfo.origin;
   if (origin === undefined) {
     origin = props.event.coords;
   }
@@ -44,10 +36,10 @@ export const drawEndLine = (props: DrawEndProps): DrawAction => {
   const { x: x1, y: y1 } = origin;
   const { x: x2, y: y2 } = props.event.coords;
 
-  const toolProperty = props.tools.properties.get(LINE) as LineProperty;
+  const toolProperty = props.tools.property as LineProperty;
 
-  const newImageData = new ImageData(activeLayer.imageData.width, activeLayer.imageData.height);
-  newImageData.data.set(activeLayer.imageData.data);
+  const newImageData = new ImageData(props.layer.imageData.width, props.layer.imageData.height);
+  newImageData.data.set(props.layer.imageData.data);
 
   const g = new Graphics(newImageData);
 
@@ -60,22 +52,22 @@ export const drawEndLine = (props: DrawEndProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: newImageData,
       recordDescription: "Draw line"
     }
   };
 };
 
-export type ChangeDrawStateLineAction = {
+export type ChangeDrawInfoLineAction = {
   payload: {
     type: typeof LINE;
-    state: ToolDrawStateLine;
+    drawInfo: ToolDrawInfoLine;
   };
 };
 
-export const changeDrawStateBeginLine = (props: DrawBeginProps): ChangeDrawStateAction => {
-  const drawState: ToolDrawStateLine = {
+export const changeDrawInfoBeginLine = (props: DrawBeginProps): ChangeDrawInfoAction => {
+  const drawInfo: ToolDrawInfoLine = {
     origin: props.event.coords
   };
 
@@ -83,20 +75,20 @@ export const changeDrawStateBeginLine = (props: DrawBeginProps): ChangeDrawState
     type: CHANGE_DRAW_STATE,
     payload: {
       type: LINE,
-      state: drawState
+      drawInfo: drawInfo
     }
   };
 };
 
-export const changeDrawStateMiddleLine = (props: DrawMiddleProps): ChangeDrawStateAction => {
-  const state = props.tools.drawState as ToolDrawStateLine;
+export const changeDrawInfoMiddleLine = (props: DrawMiddleProps): ChangeDrawInfoAction => {
+  const drawInfo = props.tools.drawInfo as ToolDrawInfoLine;
 
   return {
     type: CHANGE_DRAW_STATE,
     payload: {
       type: LINE,
-      state: {
-        ...state,
+      drawInfo: {
+        ...drawInfo,
         to: props.event.coords
       }
     }
@@ -104,11 +96,11 @@ export const changeDrawStateMiddleLine = (props: DrawMiddleProps): ChangeDrawSta
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateEndLine = (_props: DrawEndProps): ChangeDrawStateAction => ({
+export const changeDrawInfoEndLine = (_props: DrawEndProps): ChangeDrawInfoAction => ({
   type: CHANGE_DRAW_STATE,
   payload: {
     type: LINE,
-    state: {}
+    drawInfo: {}
   }
 });
 
@@ -116,12 +108,12 @@ export const drawGuideLine = (props: DrawGuideProps): DrawGuideAction => {
   const guideLayer = props.guideLayer;
   const newImageData = new ImageData(guideLayer.imageData.width, guideLayer.imageData.height);
 
-  const drawState = props.tools.drawState as ToolDrawStateLine;
+  const drawInfo = props.tools.drawInfo as ToolDrawInfoLine;
 
   const g = new Graphics(newImageData);
 
-  const origin = drawState.origin;
-  const to = drawState.to;
+  const origin = drawInfo.origin;
+  const to = drawInfo.to;
   if (origin !== undefined && to !== undefined) {
     g.line(origin.x, origin.y, to.x, to.y, GUIDE_LINE_COLOR);
   }

@@ -1,16 +1,16 @@
-import { GuideLayerState } from "stores/guideLayerState";
-import { ToolsState } from "stores/toolsState";
 import { ELLIPSE } from "types/tools/ellipse";
 import { FILLER } from "types/tools/filler";
 import { LINE } from "types/tools/line";
 import { PENCIL } from "types/tools/pencil";
 import { RECTANGLE } from "types/tools/rectangle";
+import { ToolDrawInfo, ToolProperty } from "types/tools/tools";
 import { BallenAction } from "./actionTypes";
 import { drawGuideEllipse } from "./tool/ellipse";
 import { drawGuideFiller } from "./tool/filler";
 import { drawGuideLine } from "./tool/line";
 import { drawGuidePencil } from "./tool/pencil";
 import { drawGuideRectangle } from "./tool/rectangle";
+import { ToolType } from "./toolsAction";
 
 export type GuideLayerActions = ClearGuideAction | DrawGuideAction;
 
@@ -36,8 +36,14 @@ export type DrawGuideAction = {
 } & BallenAction;
 
 export type DrawGuideProps = {
-  tools: ToolsState;
-  guideLayer: GuideLayerState;
+  tools: {
+    selectedType: ToolType;
+    drawInfo: ToolDrawInfo;
+    property: ToolProperty;
+  };
+  guideLayer: {
+    imageData: ImageData;
+  };
 };
 
 export const drawGuide = (props: DrawGuideProps): DrawGuideAction => {

@@ -1,12 +1,11 @@
+import { ToolDrawInfo, ToolProperty } from "types/tools/tools";
 import { Vector2D } from "utils/ballenCore";
-import { LayersState } from "stores/layersState";
-import { ToolsState } from "stores/toolsState";
 import { BallenAction } from "./actionTypes";
 import { SaveData } from "./fileAction";
 import { drawBegin, drawEnd, drawMiddle } from "./layerAction";
-import { loadLayers, initLayers } from "./layersAction";
+import { initLayers, loadLayers } from "./layersAction";
 import { clearHistory } from "./rootAction";
-import { changeDrawStateBegin, changeDrawStateEnd, changeDrawStateMiddle, moveCursor } from "./toolsAction";
+import { changeDrawInfoBegin, changeDrawInfoEnd, changeDrawInfoMiddle, moveCursor, ToolType } from "./toolsAction";
 
 export const BATCH = "batch";
 export type BatchAction = {
@@ -34,37 +33,58 @@ export const batchLoad = (loadData: SaveData, filename: string): BatchAction => 
 };
 
 export type DrawBeginProps = {
-  tools: ToolsState;
-  layers: LayersState;
+  tools: {
+    selectedType: ToolType;
+    drawInfo: ToolDrawInfo;
+    property: ToolProperty;
+  };
+  layer: {
+    id: number;
+    imageData: ImageData;
+  };
   event: {
     coords: Vector2D;
   };
 };
 
 export const batchDrawBegin = (drawProps: DrawBeginProps): BatchAction => {
-  return batch(drawBegin(drawProps), changeDrawStateBegin(drawProps));
+  return batch(drawBegin(drawProps), changeDrawInfoBegin(drawProps));
 };
 
 export type DrawMiddleProps = {
-  tools: ToolsState;
-  layers: LayersState;
+  tools: {
+    selectedType: ToolType;
+    drawInfo: ToolDrawInfo;
+    property: ToolProperty;
+  };
+  layer: {
+    id: number;
+    imageData: ImageData;
+  };
   event: {
     coords: Vector2D;
   };
 };
 
 export const batchDrawMiddle = (drawProps: DrawMiddleProps): BatchAction => {
-  return batch(drawMiddle(drawProps), changeDrawStateMiddle(drawProps), moveCursor(drawProps.event.coords));
+  return batch(drawMiddle(drawProps), changeDrawInfoMiddle(drawProps), moveCursor(drawProps.event.coords));
 };
 
 export type DrawEndProps = {
-  tools: ToolsState;
-  layers: LayersState;
+  tools: {
+    selectedType: ToolType;
+    drawInfo: ToolDrawInfo;
+    property: ToolProperty;
+  };
+  layer: {
+    id: number;
+    imageData: ImageData;
+  };
   event: {
     coords: Vector2D;
   };
 };
 
 export const batchDrawEnd = (drawProps: DrawEndProps): BatchAction => {
-  return batch(drawEnd(drawProps), changeDrawStateEnd(drawProps));
+  return batch(drawEnd(drawProps), changeDrawInfoEnd(drawProps));
 };

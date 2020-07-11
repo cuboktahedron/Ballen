@@ -4,9 +4,4 @@ export type FillerProperty = {
   positive: boolean;
 };
 
-export type ToolStateFiller = {
-  type: typeof FILLER;
-  property: FillerProperty;
-};
-
-export type ToolDrawStateFiller = {};
+export type ToolDrawInfoFiller = {};

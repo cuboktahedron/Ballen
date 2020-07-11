@@ -1,6 +1,6 @@
-import { LayersState } from "stores/layersState";
 import { BS_BUILDING, BS_COMPLETED, BuildStatus } from "types/build";
 import { LB_NORMAL } from "types/layerBlend";
+import { LayersInfo } from "types/layers";
 import { sleep } from "utils/ballenCore";
 import Blender from "../utils/graphics/blender";
 import Color from "../utils/graphics/color";
@@ -52,7 +52,7 @@ export type BuildAction = {
 
 class BuildCanceled {}
 
-export const makeBuild = (layers: LayersState): [typeof build, typeof cancel] => {
+export const makeBuild = (layers: LayersInfo): [typeof build, typeof cancel] => {
   let canceled = false;
 
   const cancel = (): void => {

@@ -8,12 +8,7 @@ export type EllipseProperty = {
   fill: boolean;
 };
 
-export type ToolStateEllipse = {
-  type: typeof ELLIPSE;
-  property: EllipseProperty;
-};
-
-export type ToolDrawStateEllipse = {
+export type ToolDrawInfoEllipse = {
   origin?: Vector2D;
   to?: Vector2D;
 } & DrawStateWithRect;

@@ -7,11 +7,6 @@ export type PencilProperty = {
   positive: boolean;
 };
 
-export type ToolStatePencil = {
-  type: typeof PENCIL;
-  property: PencilProperty;
-};
-
-export type ToolDrawStatePencil = {
+export type ToolDrawInfoPencil = {
   prevCoords?: Vector2D;
 };

@@ -13,17 +13,17 @@ export default function reducer(state: ToolsState = InitialToolsState, anyAction
         selectedType: action.payload.type
       };
     case CHANGE_DRAW_STATE: {
-      const rect = action.payload.state as DrawStateWithRect;
+      const rect = action.payload.drawInfo as DrawStateWithRect;
       if (rect && rect.origin != null && rect.to != null) {
         return {
           ...state,
-          drawState: { ...action.payload.state },
+          drawInfo: { ...action.payload.drawInfo },
           rect: [rect.origin, rect.to]
         };
       } else {
         return {
           ...state,
-          drawState: { ...action.payload.state },
+          drawInfo: { ...action.payload.drawInfo },
           rect: null
         };
       }

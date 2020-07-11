@@ -1,21 +1,18 @@
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchAction";
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
 import { DRAW, DrawAction } from "actions/layerAction";
-import { ChangeDrawStateAction, CHANGE_DRAW_STATE } from "actions/toolsAction";
-import { FILLER, FillerProperty, ToolDrawStateFiller } from "types/tools/filler";
+import { ChangeDrawInfoAction, CHANGE_DRAW_STATE } from "actions/toolsAction";
+import { FILLER, FillerProperty, ToolDrawInfoFiller } from "types/tools/filler";
 import Color from "utils/graphics/color";
 import Graphics from "utils/graphics/graphics";
-import { getActiveLayer } from "./functions";
 
 export const drawBeginFiller = (props: DrawBeginProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-
-  const newImageData = new ImageData(activeLayer.imageData.width, activeLayer.imageData.height);
-  newImageData.data.set(activeLayer.imageData.data);
+  const newImageData = new ImageData(props.layer.imageData.width, props.layer.imageData.height);
+  newImageData.data.set(props.layer.imageData.data);
 
   const g = new Graphics(newImageData);
   const { x, y } = props.event.coords;
-  const toolProperty = props.tools.properties.get(FILLER) as FillerProperty;
+  const toolProperty = props.tools.property as FillerProperty;
 
   if (toolProperty.positive) {
     g.fill(x, y, Color.Transparent);
@@ -26,7 +23,7 @@ export const drawBeginFiller = (props: DrawBeginProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: newImageData,
       recordDescription: "Draw by filler"
     }
@@ -34,66 +31,63 @@ export const drawBeginFiller = (props: DrawBeginProps): DrawAction => {
 };
 
 export const drawMiddleFiller = (props: DrawMiddleProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-  const newImageData = new ImageData(activeLayer.imageData.width, activeLayer.imageData.height);
-  newImageData.data.set(activeLayer.imageData.data);
+  const newImageData = new ImageData(props.layer.imageData.width, props.layer.imageData.height);
+  newImageData.data.set(props.layer.imageData.data);
 
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: null
     }
   };
 };
 
 export const drawEndFiller = (props: DrawEndProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: null
     }
   };
 };
 
-export type ChangeDrawStateFillerAction = {
+export type ChangeDrawInfoFillerAction = {
   payload: {
     type: typeof FILLER;
-    state: ToolDrawStateFiller;
+    drawInfo: ToolDrawInfoFiller;
   };
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateBeginFiller = (_props: DrawBeginProps): ChangeDrawStateAction => {
+export const changeDrawInfoBeginFiller = (_props: DrawBeginProps): ChangeDrawInfoAction => {
   return {
     type: CHANGE_DRAW_STATE,
     payload: {
       type: FILLER,
-      state: {}
+      drawInfo: {}
     }
   };
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateMiddleFiller = (_props: DrawMiddleProps): ChangeDrawStateAction => {
+export const changeDrawInfoMiddleFiller = (_props: DrawMiddleProps): ChangeDrawInfoAction => {
   return {
     type: CHANGE_DRAW_STATE,
     payload: {
       type: FILLER,
-      state: {}
+      drawInfo: {}
     }
   };
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateEndFiller = (_props: DrawEndProps): ChangeDrawStateAction => ({
+export const changeDrawInfoEndFiller = (_props: DrawEndProps): ChangeDrawInfoAction => ({
   type: CHANGE_DRAW_STATE,
   payload: {
     type: FILLER,
-    state: {}
+    drawInfo: {}
   }
 });
 

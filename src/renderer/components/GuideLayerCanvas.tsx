@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GuideLayerState } from "stores/guideLayerState";
 import { RootState } from "stores/rootState";
+import { ToolProperty } from "types/tools/tools";
 
 type GuideLayerCanvasProps = GuideLayerState & {
   zIndex: number;
@@ -48,11 +49,17 @@ const GuideLayerCanvas: React.FC<GuideLayerCanvasProps> = props => {
   useEffect(() => {
     dispatch(
       drawGuide({
-        tools,
-        guideLayer
+        tools: {
+          selectedType: tools.selectedType,
+          drawInfo: tools.drawInfo,
+          property: tools.properties.get(tools.selectedType) as ToolProperty
+        },
+        guideLayer: {
+          imageData: guideLayer.imageData
+        }
       })
     );
-  }, [tools.drawState]);
+  }, [tools.drawInfo]);
 
   useEffect(() => {
     const ctx = getContext();

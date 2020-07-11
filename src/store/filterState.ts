@@ -1,6 +1,3 @@
-import { FilterProperties } from "types/filters";
+import { FilterInfo } from "types/filters";
 
-export type FilterState = {
-  id: number;
-  property: FilterProperties;
-};
+export type FilterState = FilterInfo;

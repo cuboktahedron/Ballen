@@ -1,41 +1,34 @@
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchAction";
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
 import { DRAW, DrawAction } from "actions/layerAction";
-import { ChangeDrawStateAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
-import { ELLIPSE, EllipseProperty, ToolDrawStateEllipse } from "types/tools/ellipse";
+import { ChangeDrawInfoAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
+import { ELLIPSE, EllipseProperty, ToolDrawInfoEllipse } from "types/tools/ellipse";
 import Color from "utils/graphics/color";
 import Graphics from "utils/graphics/graphics";
-import { getActiveLayer } from "./functions";
 
 export const drawBeginEllipse = (props: DrawBeginProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: null
     }
   };
 };
 
 export const drawMiddleEllipse = (props: DrawMiddleProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: null
     }
   };
 };
 
 export const drawEndEllipse = (props: DrawEndProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-
-  const drawState = props.tools.drawState as ToolDrawStateEllipse;
-  let origin = drawState.origin;
+  const drawInfo = props.tools.drawInfo as ToolDrawInfoEllipse;
+  let origin = drawInfo.origin;
   if (origin === undefined) {
     origin = props.event.coords;
   }
@@ -43,10 +36,10 @@ export const drawEndEllipse = (props: DrawEndProps): DrawAction => {
   const { x: x1, y: y1 } = origin;
   const { x: x2, y: y2 } = props.event.coords;
 
-  const toolProperty = props.tools.properties.get(ELLIPSE) as EllipseProperty;
+  const toolProperty = props.tools.property as EllipseProperty;
 
-  const newImageData = new ImageData(activeLayer.imageData.width, activeLayer.imageData.height);
-  newImageData.data.set(activeLayer.imageData.data);
+  const newImageData = new ImageData(props.layer.imageData.width, props.layer.imageData.height);
+  newImageData.data.set(props.layer.imageData.data);
 
   const g = new Graphics(newImageData);
 
@@ -59,22 +52,22 @@ export const drawEndEllipse = (props: DrawEndProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: newImageData,
       recordDescription: "Draw ellipse"
     }
   };
 };
 
-export type ChangeDrawStateEllipseAction = {
+export type ChangeDrawInfoEllipseAction = {
   payload: {
     type: typeof ELLIPSE;
-    state: ToolDrawStateEllipse;
+    drawInfo: ToolDrawInfoEllipse;
   };
 };
 
-export const changeDrawStateBeginEllipse = (props: DrawBeginProps): ChangeDrawStateAction => {
-  const drawState: ToolDrawStateEllipse = {
+export const changeDrawInfoBeginEllipse = (props: DrawBeginProps): ChangeDrawInfoAction => {
+  const drawInfo: ToolDrawInfoEllipse = {
     origin: props.event.coords
   };
 
@@ -82,20 +75,20 @@ export const changeDrawStateBeginEllipse = (props: DrawBeginProps): ChangeDrawSt
     type: CHANGE_DRAW_STATE,
     payload: {
       type: ELLIPSE,
-      state: drawState
+      drawInfo: drawInfo
     }
   };
 };
 
-export const changeDrawStateMiddleEllipse = (props: DrawMiddleProps): ChangeDrawStateAction => {
-  const state = props.tools.drawState as ToolDrawStateEllipse;
+export const changeDrawInfoMiddleEllipse = (props: DrawMiddleProps): ChangeDrawInfoAction => {
+  const drawInfo = props.tools.drawInfo as ToolDrawInfoEllipse;
 
   return {
     type: CHANGE_DRAW_STATE,
     payload: {
       type: ELLIPSE,
-      state: {
-        ...state,
+      drawInfo: {
+        ...drawInfo,
         to: props.event.coords
       }
     }
@@ -103,11 +96,11 @@ export const changeDrawStateMiddleEllipse = (props: DrawMiddleProps): ChangeDraw
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateEndEllipse = (_props: DrawEndProps): ChangeDrawStateAction => ({
+export const changeDrawInfoEndEllipse = (_props: DrawEndProps): ChangeDrawInfoAction => ({
   type: CHANGE_DRAW_STATE,
   payload: {
     type: ELLIPSE,
-    state: {}
+    drawInfo: {}
   }
 });
 
@@ -115,13 +108,13 @@ export const drawGuideEllipse = (props: DrawGuideProps): DrawGuideAction => {
   const guideLayer = props.guideLayer;
   const newImageData = new ImageData(guideLayer.imageData.width, guideLayer.imageData.height);
 
-  const drawState = props.tools.drawState as ToolDrawStateEllipse;
-  const toolProperty = props.tools.properties.get(ELLIPSE) as EllipseProperty;
+  const drawInfo = props.tools.drawInfo as ToolDrawInfoEllipse;
+  const toolProperty = props.tools.property as EllipseProperty;
 
   const g = new Graphics(newImageData);
 
-  const origin = drawState.origin;
-  const to = drawState.to;
+  const origin = drawInfo.origin;
+  const to = drawInfo.to;
   if (origin !== undefined && to !== undefined) {
     g.rectangle(origin.x, origin.y, to.x, to.y, GUIDE_LINE_COLOR, { fill: false });
     g.ellipse(origin.x, origin.y, to.x, to.y, GUIDE_LINE_COLOR, { fill: toolProperty.fill });

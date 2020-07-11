@@ -21,7 +21,7 @@ const Build: React.FC = () => {
 
   const textsRef = useRef<HTMLDivElement>(null);
 
-  const makeBuildCallback = useCallback(() => makeBuild(layers), [
+  const makeBuildCallback = useCallback(() => makeBuild({ ...layers }), [
     build.isOpened
   ]);
   const [doBuild, doCancelBuild] = useMemo(() => makeBuildCallback(), [

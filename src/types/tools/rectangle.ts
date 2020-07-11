@@ -8,12 +8,7 @@ export type RectangleProperty = {
   fill: boolean;
 };
 
-export type ToolStateRectangle = {
-  type: typeof RECTANGLE;
-  property: RectangleProperty;
-};
-
-export type ToolDrawStateRectangle = {
+export type ToolDrawInfoRectangle = {
   origin?: Vector2D;
   to?: Vector2D;
 } & DrawStateWithRect;

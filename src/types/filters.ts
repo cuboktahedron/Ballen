@@ -19,3 +19,8 @@ export type FilterProperty = {
 };
 
 export type FilterProperties = IdProperty | OpacityProperty;
+
+export type FilterInfo = {
+  id: number;
+  property: FilterProperties;
+};

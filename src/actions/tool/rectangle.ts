@@ -1,41 +1,34 @@
 import { DrawBeginProps, DrawEndProps, DrawMiddleProps } from "actions/batchAction";
 import { DrawGuideAction, DrawGuideProps, DRAW_GUIDE } from "actions/guideLayerAction";
 import { DRAW, DrawAction } from "actions/layerAction";
-import { ChangeDrawStateAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
-import { RECTANGLE, RectangleProperty, ToolDrawStateRectangle } from "types/tools/rectangle";
+import { ChangeDrawInfoAction, CHANGE_DRAW_STATE, GUIDE_LINE_COLOR } from "actions/toolsAction";
+import { RECTANGLE, RectangleProperty, ToolDrawInfoRectangle } from "types/tools/rectangle";
 import Color from "utils/graphics/color";
 import Graphics from "utils/graphics/graphics";
-import { getActiveLayer } from "./functions";
 
 export const drawBeginRectangle = (props: DrawBeginProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: null
     }
   };
 };
 
 export const drawMiddleRectangle = (props: DrawMiddleProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: null
     }
   };
 };
 
 export const drawEndRectangle = (props: DrawEndProps): DrawAction => {
-  const activeLayer = getActiveLayer(props.layers);
-
-  const drawState = props.tools.drawState as ToolDrawStateRectangle;
-  let origin = drawState.origin;
+  const drawInfo = props.tools.drawInfo as ToolDrawInfoRectangle;
+  let origin = drawInfo.origin;
   if (origin === undefined) {
     origin = props.event.coords;
   }
@@ -43,10 +36,10 @@ export const drawEndRectangle = (props: DrawEndProps): DrawAction => {
   const { x: x1, y: y1 } = origin;
   const { x: x2, y: y2 } = props.event.coords;
 
-  const toolProperty = props.tools.properties.get(RECTANGLE) as RectangleProperty;
+  const toolProperty = props.tools.property as RectangleProperty;
 
-  const newImageData = new ImageData(activeLayer.imageData.width, activeLayer.imageData.height);
-  newImageData.data.set(activeLayer.imageData.data);
+  const newImageData = new ImageData(props.layer.imageData.width, props.layer.imageData.height);
+  newImageData.data.set(props.layer.imageData.data);
 
   const g = new Graphics(newImageData);
 
@@ -59,22 +52,22 @@ export const drawEndRectangle = (props: DrawEndProps): DrawAction => {
   return {
     type: DRAW,
     payload: {
-      layerId: activeLayer.id,
+      layerId: props.layer.id,
       imageData: newImageData,
       recordDescription: "Draw rectangle"
     }
   };
 };
 
-export type ChangeDrawStateRectangleAction = {
+export type ChangeDrawInfoRectangleAction = {
   payload: {
     type: typeof RECTANGLE;
-    state: ToolDrawStateRectangle;
+    drawInfo: ToolDrawInfoRectangle;
   };
 };
 
-export const changeDrawStateBeginRectangle = (props: DrawBeginProps): ChangeDrawStateAction => {
-  const drawState: ToolDrawStateRectangle = {
+export const changeDrawInfoBeginRectangle = (props: DrawBeginProps): ChangeDrawInfoAction => {
+  const drawInfo: ToolDrawInfoRectangle = {
     origin: props.event.coords
   };
 
@@ -82,20 +75,20 @@ export const changeDrawStateBeginRectangle = (props: DrawBeginProps): ChangeDraw
     type: CHANGE_DRAW_STATE,
     payload: {
       type: RECTANGLE,
-      state: drawState
+      drawInfo: drawInfo
     }
   };
 };
 
-export const changeDrawStateMiddleRectangle = (props: DrawMiddleProps): ChangeDrawStateAction => {
-  const state = props.tools.drawState as ToolDrawStateRectangle;
+export const changeDrawInfoMiddleRectangle = (props: DrawMiddleProps): ChangeDrawInfoAction => {
+  const drawInfo = props.tools.drawInfo as ToolDrawInfoRectangle;
 
   return {
     type: CHANGE_DRAW_STATE,
     payload: {
       type: RECTANGLE,
-      state: {
-        ...state,
+      drawInfo: {
+        ...drawInfo,
         to: props.event.coords
       }
     }
@@ -103,11 +96,11 @@ export const changeDrawStateMiddleRectangle = (props: DrawMiddleProps): ChangeDr
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const changeDrawStateEndRectangle = (_props: DrawEndProps): ChangeDrawStateAction => ({
+export const changeDrawInfoEndRectangle = (_props: DrawEndProps): ChangeDrawInfoAction => ({
   type: CHANGE_DRAW_STATE,
   payload: {
     type: RECTANGLE,
-    state: {}
+    drawInfo: {}
   }
 });
 
@@ -115,13 +108,13 @@ export const drawGuideRectangle = (props: DrawGuideProps): DrawGuideAction => {
   const guideLayer = props.guideLayer;
   const newImageData = new ImageData(guideLayer.imageData.width, guideLayer.imageData.height);
 
-  const drawState = props.tools.drawState as ToolDrawStateRectangle;
-  const toolProperty = props.tools.properties.get(RECTANGLE) as RectangleProperty;
+  const drawInfo = props.tools.drawInfo as ToolDrawInfoRectangle;
+  const toolProperty = props.tools.property as RectangleProperty;
 
   const g = new Graphics(newImageData);
 
-  const origin = drawState.origin;
-  const to = drawState.to;
+  const origin = drawInfo.origin;
+  const to = drawInfo.to;
   if (origin !== undefined && to !== undefined) {
     g.rectangle(origin.x, origin.y, to.x, to.y, GUIDE_LINE_COLOR, { fill: toolProperty.fill });
   }

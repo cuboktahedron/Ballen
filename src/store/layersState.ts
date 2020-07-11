@@ -1,5 +1,6 @@
-import { LayerState } from "./layerState";
 import { Vector2D } from "utils/ballenCore";
+import { LayerState } from "./layerState";
+
 export type LayersState = {
   layerIdSequence: number;
   activeLayerId: number;
