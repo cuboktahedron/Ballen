@@ -5,17 +5,15 @@
   "main": "dist/main.js",
   "scripts": {
     "start": "electron .",
-    "build": "webpack --progress --mode=development",
-    "watch": "webpack --progress --mode=development --watch",
-    "build-production": "webpack --progress --mode=production",
-    "watch-production": "webpack --progress --mode=production --watch",
+    "watch": "webpack --progress --mode=development --config webpack.dev.js --watch",
+    "build": "webpack --progress --mode=production --config webpack.prod.js",
     "package": "electron-packager . Ballen --platform=win32 --arch=x64 --electron-version=7.1.8 --out=build",
     "test": "jest",
     "watch-test": "jest --watch",
     "test-cov": "jest --coverage"
   },
   "keywords": [],
-  "author": "",
+  "author": "cuboktahedron",
   "license": "MIT",
   "jest": {
     "transform": {
@@ -74,7 +72,8 @@
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.4",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^5.0.9"
   },
   "dependencies": {
     "react-dnd": "^10.0.2",

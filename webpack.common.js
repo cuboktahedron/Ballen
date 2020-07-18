@@ -1,13 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
-const createElectronReloadWebpackPlugin = require("electron-reload-webpack-plugin");
-
-const ElectronReloadWebpackPlugin = createElectronReloadWebpackPlugin({
-  path: path.join(__dirname, "dist", "main.js")
-});
 
 const main = {
-  mode: "development",
   target: "electron-main",
   entry: path.join(__dirname, "src", "main"),
   output: {
@@ -24,7 +18,7 @@ const main = {
       }
     ]
   },
-  plugins: [ElectronReloadWebpackPlugin()],
+  plugins: [],
   node: {
     __dirname: false,
     __filename: false
@@ -35,9 +29,7 @@ const main = {
 };
 
 const renderer = {
-  mode: "development",
   target: "electron-renderer",
-  devtool: "inline-source-map",
   entry: path.join(__dirname, "src", "renderer", "index"),
   output: {
     filename: "index.js",
@@ -66,7 +58,7 @@ const renderer = {
       }
     ]
   },
-  plugins: [ElectronReloadWebpackPlugin()]
+  plugins: []
 };
 
-module.exports = [main, renderer];
+module.exports = { main, renderer };
