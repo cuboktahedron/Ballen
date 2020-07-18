@@ -14,11 +14,14 @@ const createWindow = (): void => {
     height: 450,
     webPreferences: { nodeIntegration: true }
   });
-  // mainWindow.setMenu(null);
 
-  mainWindow.loadURL(mainURL);
-  // 開発者ツールも同時に開く
-  mainWindow.webContents.openDevTools();
+  if (process.env.NODE_ENV === "production") {
+    mainWindow.setMenu(null);
+    mainWindow.loadURL(mainURL);
+    mainWindow.webContents.openDevTools();
+  } else {
+    mainWindow.loadURL(mainURL);
+  }
 
   mainWindow.on("closed", () => {
     mainWindow = null;
