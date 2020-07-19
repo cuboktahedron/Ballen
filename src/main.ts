@@ -18,16 +18,14 @@ const createWindow = (): void => {
   if (process.env.NODE_ENV === "production") {
     mainWindow.setMenu(null);
     mainWindow.loadURL(mainURL);
-    mainWindow.webContents.openDevTools();
   } else {
     mainWindow.loadURL(mainURL);
+    client.create(mainWindow);
   }
 
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
-
-  client.create(mainWindow);
 };
 
 // アプリの起動と終了
