@@ -7,7 +7,7 @@
     "start": "electron .",
     "watch": "webpack --progress --mode=development --config webpack.dev.js --watch",
     "build": "webpack --progress --mode=production --config webpack.prod.js",
-    "package": "electron-packager . Ballen --platform=win32 --arch=x64 --electron-version=7.1.8 --out=build",
+    "package": "electron-packager . Ballen --platform=win32 --arch=x64 --electron-version=7.1.8 --icon=ballen.icon --out=build",
     "test": "jest",
     "watch-test": "jest --watch",
     "test-cov": "jest --coverage"
