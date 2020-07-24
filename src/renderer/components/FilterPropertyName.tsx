@@ -1,7 +1,8 @@
-import { TextField, Tooltip } from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 import React, { useState } from "react";
 import { filterPropertyToName } from "renderer/lib/filerPropertyName/filterPropertyToName";
 import { FilterProperties } from "types/filters";
+import BallenTextField from "./lib/BallenTextField";
 
 const FilterPropertyName: React.FC<FilterProperties> = props => {
   let paramsRef: HTMLInputElement | null = null;
@@ -27,7 +28,7 @@ const FilterPropertyName: React.FC<FilterProperties> = props => {
       style={{ fontSize: "2rem", color: "red" }}
     >
       <div style={{ marginLeft: "8px" }}>
-        <TextField
+        <BallenTextField
           onMouseEnter={handleParamsMouseEnter}
           inputRef={(ref): void => {
             paramsRef = ref;
@@ -37,7 +38,7 @@ const FilterPropertyName: React.FC<FilterProperties> = props => {
           }}
           value={name}
           style={{ width: "155px" }}
-        ></TextField>
+        ></BallenTextField>
       </div>
     </Tooltip>
   );

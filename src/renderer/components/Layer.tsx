@@ -10,7 +10,6 @@ import {
   ListItemSecondaryAction,
   makeStyles,
   NativeSelect,
-  TextField,
   Theme
 } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -45,6 +44,7 @@ import { LayerState } from "stores/layerState";
 import { RootState } from "stores/rootState";
 import { LayerBlend, LB_MULTIPLY, LB_NORMAL } from "types/layerBlend";
 import Filter from "./Filter";
+import BallenTextField from "./lib/BallenTextField";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -245,7 +245,7 @@ const Layer: React.FC<LayerProps> = props => {
           {visibilityButton}
           <Button className={classes.btnColor}>{""}</Button>
         </Box>
-        <TextField
+        <BallenTextField
           key={props.name}
           defaultValue={props.name}
           inputProps={{ maxLength: 16 }}

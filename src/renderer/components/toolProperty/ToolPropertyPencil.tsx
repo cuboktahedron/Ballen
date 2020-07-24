@@ -1,10 +1,4 @@
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField
-} from "@material-ui/core";
+import { Box, Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
 import { changeToolProperty } from "actions/toolsAction";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +6,7 @@ import { validateNumber } from "renderer/lib/validator";
 import { RootState } from "stores/rootState";
 import { InitialPencilProperty } from "stores/tool/pencilState";
 import { PENCIL, PencilProperty } from "types/tools/pencil";
+import BallenTextField from "../lib/BallenTextField";
 
 export const ToolPropertyPencil: React.FC = () => {
   const dispatch = useDispatch();
@@ -60,7 +55,7 @@ export const ToolPropertyPencil: React.FC = () => {
           label="positive"
         />
       </FormGroup>
-      <TextField
+      <BallenTextField
         type="number"
         label="thickness"
         disabled={true}

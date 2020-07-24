@@ -2,12 +2,12 @@ import Button from "@material-ui/core/Button";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import TextField from "@material-ui/core/TextField";
 import { changeFilter } from "actions/filterAction";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { LFT_OPACITY, OpacityProperty } from "types/filters";
 import BallenDialog from "../lib/BallenDialog";
+import BallenTextField from "../lib/BallenTextField";
 
 export type FilterPropertyOpacityProps = OpacityProperty & {
   layerId: number;
@@ -57,7 +57,7 @@ const FilterPropertyOpacity: React.FC<FilterPropertyOpacityProps> = props => {
       >
         <DialogTitle>Opacity filter settings</DialogTitle>
         <DialogContent>
-          <TextField
+          <BallenTextField
             inputRef={(ref): void => {
               opacityInput = ref;
 
