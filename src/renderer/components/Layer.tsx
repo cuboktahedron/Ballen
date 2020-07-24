@@ -246,6 +246,7 @@ const Layer: React.FC<LayerProps> = props => {
           <Button className={classes.btnColor}>{""}</Button>
         </Box>
         <TextField
+          key={props.name}
           defaultValue={props.name}
           inputProps={{ maxLength: 16 }}
           size="small"
