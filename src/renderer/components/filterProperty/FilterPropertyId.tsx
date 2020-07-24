@@ -5,7 +5,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
 import { IdProperty } from "types/filters";
-import BallenDialog from "../BallenDialog";
+import BallenDialog from "../lib/BallenDialog";
 
 export type FilterPropertyIdProps = IdProperty & {
   layerId: number;

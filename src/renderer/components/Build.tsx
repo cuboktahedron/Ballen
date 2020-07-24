@@ -10,7 +10,7 @@ import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "stores/rootState";
 import { BS_BUILDING, BS_COMPLETED } from "types/build";
-import BallenDialog from "./BallenDialog";
+import BallenDialog from "./lib/BallenDialog";
 import BuildCanvas from "./BuildCanvas";
 
 const Build: React.FC = () => {

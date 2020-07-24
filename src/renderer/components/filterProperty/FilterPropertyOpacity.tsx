@@ -7,7 +7,7 @@ import { changeFilter } from "actions/filterAction";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { LFT_OPACITY, OpacityProperty } from "types/filters";
-import BallenDialog from "../BallenDialog";
+import BallenDialog from "../lib/BallenDialog";
 
 export type FilterPropertyOpacityProps = OpacityProperty & {
   layerId: number;
