@@ -53,7 +53,8 @@ export type ChangeActiveLayerAction = {
 export const changeActiveLayer = (layerId: number): ChangeActiveLayerAction => ({
   type: CHANGE_ACTIVE_LAYER,
   payload: {
-    layerId
+    layerId,
+    recordDescription: "Change active layer"
   }
 });
 
