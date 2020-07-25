@@ -3,14 +3,15 @@ Ballen
 
 「デジタルな木版画」をコンセプトとしたペイントツールです。
 
-
 ## Description
 
 本ツールはElectron + React + Material UIを使用して作成されています。
 
+![](files/sample.png)
+
 ## Demo
 
-まだ。
+https://cuboktahedron.github.io/q/ballen/
 
 ## Licence
 
